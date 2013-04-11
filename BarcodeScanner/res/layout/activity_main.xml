@@ -41,6 +41,7 @@
         android:layout_centerVertical="true"
         android:padding="@dimen/activity_button_padding"
         android:text="@string/welcome_button_message"
-        android:textSize="36sp" />
+        android:textSize="36sp" 
+        android:onClick="enterCamera" />
 
 </RelativeLayout>

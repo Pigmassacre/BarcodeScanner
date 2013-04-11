@@ -2,6 +2,7 @@ package com.github.barcodescanner;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
@@ -22,7 +23,9 @@ public class MainActivity extends Activity {
     }
     
     public void enterCamera(View view) {
-    	
+    	// TODO Start the camera activity when the button is pressed.
+    	Intent intent = new Intent(this, CameraActivity.class);
+		startActivity(intent);
     }
     
 }
