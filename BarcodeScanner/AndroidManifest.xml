@@ -28,6 +28,9 @@
             android:label="@string/title_activity_camera"
             android:theme="@style/FullscreenTheme" >
         </activity>
+        <activity
+            android:name="com.github.barcodescanner.CameraPreview"
+            android:label="@string/title_activity_camera_preview" >
+        </activity>
     </application>
-
 </manifest>
