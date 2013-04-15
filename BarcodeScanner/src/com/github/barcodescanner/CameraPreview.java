@@ -26,8 +26,10 @@ public class CameraPreview extends SurfaceView implements
 		mHolder = getHolder();
 		mHolder.addCallback(this);
 		// deprecated setting, but required on Android versions prior to 3.0
-		mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		//mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		surfaceCreated(mHolder);
 	}
+	
 
 	public void surfaceCreated(SurfaceHolder holder) {
 		// The Surface has been created, now tell the camera where to draw the

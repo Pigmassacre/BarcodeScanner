@@ -9,7 +9,7 @@
     <string name="admin_welcome_message">Welcome, admin!</string>
     <string name="welcome_button_message">Scan Barcode</string>
     <string name="title_activity_camera">CameraActivity</string>
-    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_button">Scan Barcode</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_camera_preview">CameraPreview</string>
     <string name="hello_world">Hello world!</string>

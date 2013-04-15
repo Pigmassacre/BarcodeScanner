@@ -19,7 +19,7 @@ public class CameraActivity extends Activity {
 		mCamera = getCameraInstance();
 		
 		// Set the orientation to portait mode
-		mCamera.setDisplayOrientation(90);
+		//mCamera.setDisplayOrientation(90);
 
 		// Create our Preview view and set it as the content of our activity.
 		mPreview = new CameraPreview(this, mCamera);
