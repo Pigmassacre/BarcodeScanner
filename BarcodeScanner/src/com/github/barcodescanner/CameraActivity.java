@@ -9,6 +9,8 @@ public class CameraActivity extends Activity {
 
 	private Camera mCamera;
 	private CameraPreview mPreview;
+	//DrawView object to draw lines on the camera preview
+	DrawView drawLines;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -18,13 +20,14 @@ public class CameraActivity extends Activity {
 		// Create an instance of Camera
 		mCamera = getCameraInstance();
 		
-		// Set the orientation to portait mode
-		//mCamera.setDisplayOrientation(90);
+		//Create an instance of DrawView
+		drawLines = new DrawView(this);
 
 		// Create our Preview view and set it as the content of our activity.
 		mPreview = new CameraPreview(this, mCamera);
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
 		preview.addView(mPreview);
+		preview.addView(drawLines);
 	}
 
 	/** A safe way to get an instance of the Camera object. */
