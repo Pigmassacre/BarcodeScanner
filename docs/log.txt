@@ -1,0 +1,19 @@
+19/3 - First meeting of the group. Decided to not use any specific meeting dates/times as we all have verry diffrent schedules and thus having a hard time deciding days where all of us can attend. We decided, however, that we will meet atleast two times each week and we will be using a facebook group to manage all the information regarding this project. 
+We sat down and started brainstorming som ideas for what we choose as project and came up with some diffrent ideas:
+
+    *Barcode scanner
+    *Crawler
+    *Visualizer
+    *Brainwave reader (some application using the hardware that we allready have)
+
+We also decided to use Github as our repo server for GIT.
+Futhermore, we decided to decide on the project after asking the tutee about his/her thoughts on the diffrent ideas.
+
+21/3 - After our meeting with the tutee we have decided to go for the barcode scanner. We will develop it as an Android application and started doing some background research. It seems like there is alot of work behind the analyzer that should analyze the image and we are still discussing whether we should use a library for that port or if we should do it all our selves. 
+We initiated the github repo and fixed everyone access to it.
+
+8/3 - Our third meeting. We havn't worked much during the easter break but decided to start on the class model and the RAD. We created a first version of the rad, using the monopolly example from the course page and created the class model using DIA. Realized that there is not so many classes needed but we managed to come up with a decent structure for the classes.
+
+11/4 - Second meeting with the tutee today. Didn't give us so much but to decide that we would start with using a package for the analyzer as we want to be dont with the gui, database and camera before putting down all that time on creating the analyzer oursleves; as we don't know ho much time will be needed.
+
+16/4 - Fourth meeting with the group. We have decided that Olof Karlsson will focus on getting a prototype of the GUI, Christian Svensson will focus on the usuage of the camera on the phone, Olle Andersson will be in charge of the analyzer and Rasmus Letterkrantz will be looking into the database. We also decided to change the order of the analyzer plan; we will try to implent our own analyzer first before using a package. We now work on getting a runnable version of the gui prototype before our next meeting with the tutee.
