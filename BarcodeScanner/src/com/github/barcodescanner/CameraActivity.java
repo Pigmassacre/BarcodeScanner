@@ -1,16 +1,21 @@
 package com.github.barcodescanner;
 
 import android.hardware.Camera;
+import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.app.Activity;
 
 public class CameraActivity extends Activity {
 
+	private BCanalyzer bcAnalyzer;
 	private Camera mCamera;
 	private CameraPreview mPreview;
 	//DrawView object to draw lines on the camera preview
 	DrawView drawLines;
+	Button scanButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,5 +44,28 @@ public class CameraActivity extends Activity {
 			// Camera is not available (in use or does not exist)
 		}
 		return c; // returns null if camera is unavailable
+	}
+	
+	
+	private PictureCallback picture = new PictureCallback(){
+		
+		@Override
+		public void onPictureTaken(byte[] data, Camera camera){
+			bcAnalyzer = new BCanalyzer(data);
+			System.out.println(bcAnalyzer.getWidth());
+		}
+		
+	};
+	
+	
+	public void addListener(){
+		scanButton = (Button) findViewById(R.id.button_capture);
+		scanButton.setOnClickListener(
+				new View.OnClickListener(){
+					@Override
+					public void onClick(View view){
+						mCamera.takePicture(null,null,picture);
+					}
+		});
 	}
 }
