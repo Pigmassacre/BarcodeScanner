@@ -13,7 +13,7 @@ public class CameraActivity extends Activity {
 	private BCanalyzer bcAnalyzer;
 	private Camera mCamera;
 	private CameraPreview mPreview;
-	//DrawView object to draw lines on the camera preview
+	// DrawView object to draw lines on the camera preview
 	DrawView drawLines;
 	Button scanButton;
 
@@ -24,8 +24,8 @@ public class CameraActivity extends Activity {
 
 		// Create an instance of Camera
 		mCamera = getCameraInstance();
-		
-		//Create an instance of DrawView
+
+		// Create an instance of DrawView
 		drawLines = new DrawView(this);
 
 		// Create our Preview view and set it as the content of our activity.
@@ -45,27 +45,27 @@ public class CameraActivity extends Activity {
 		}
 		return c; // returns null if camera is unavailable
 	}
-	
-	
-	private PictureCallback picture = new PictureCallback(){
-		
+
+	private PictureCallback picture = new PictureCallback() {
+
 		@Override
-		public void onPictureTaken(byte[] data, Camera camera){
+		public void onPictureTaken(byte[] data, Camera camera) {
 			bcAnalyzer = new BCanalyzer(data);
 			System.out.println(bcAnalyzer.getWidth());
 		}
-		
+
 	};
-	
-	
-	public void addListener(){
+
+	// instead of adding a listener we can add "android:onClick="methodName" to the activity_camera.xml file
+	// then we can just add the mCamera.takePicture(bla..) to that method. Saves us some code and I think that is
+	// the standard way of doing it.
+	public void addListener() {
 		scanButton = (Button) findViewById(R.id.button_capture);
-		scanButton.setOnClickListener(
-				new View.OnClickListener(){
-					@Override
-					public void onClick(View view){
-						mCamera.takePicture(null,null,picture);
-					}
+		scanButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mCamera.takePicture(null, null, picture);
+			}
 		});
 	}
 }
