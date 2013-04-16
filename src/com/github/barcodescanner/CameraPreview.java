@@ -74,5 +74,4 @@ public class CameraPreview extends SurfaceView implements
 			Log.d(TAG, "Error starting camera preview: " + e.getMessage());
 		}
 	}
-	
 }
