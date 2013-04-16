@@ -11,8 +11,9 @@
     <string name="title_activity_camera">CameraActivity</string>
     <string name="dummy_button">Scan Barcode</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_camera_preview">CameraPreview</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="camera_button_capture">Capture</string>
+    <string name="title_activity_camera_preview">Camera Preview</string>
+    <string name="camera_button_capture">Scan</string>
+    <string name="camera_button_database">Database</string>
+    <string name="camera_button_help">Help</string>
 
 </resources>
