@@ -38,8 +38,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class id {
         public static final int action_settings=0x7f090008;
         public static final int button1=0x7f090007;
-        public static final int button_capture=0x7f090001;
-        public static final int button_database=0x7f090002;
+        public static final int button_capture=0x7f090002;
+        public static final int button_database=0x7f090001;
         public static final int button_help=0x7f090003;
         public static final int camera_preview=0x7f090000;
         public static final int title=0x7f090004;

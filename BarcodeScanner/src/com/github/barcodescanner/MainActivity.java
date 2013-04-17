@@ -22,7 +22,6 @@ public class MainActivity extends Activity {
 	}
 
 	public void enterCamera(View view) {
-		// TODO Start the camera activity when the button is pressed.
 		Intent intent = new Intent(this, CameraActivity.class);
 		startActivity(intent);
 	}
