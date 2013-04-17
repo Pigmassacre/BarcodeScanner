@@ -40,13 +40,13 @@ public class BCanalyzer {
 	
 	/**
 	 * 
-	 * @param heightLine the horisontal line to be scanned
+	 * @param heightLine the horizontal line to be scanned
 	 * @param threshold the threshold for accepting bright and dark
 	 * @return array of line data, 1s represent dark pixel, 0 represent bright pixel, -1 for undefined
 	 *  
 	 */
 	@SuppressWarnings("null")
-	private int[] scanHorisontal(int heightLine, float threshold){
+	private int[] scanHorizontal(int heightLine, float threshold){
 		int[] lineData = new int[getWidth()]; 
 		int red,green,blue;
 
