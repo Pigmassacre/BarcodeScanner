@@ -4,6 +4,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.app.Activity;
@@ -20,6 +21,7 @@ public class CameraActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE); // hides the title from the camera view
 		setContentView(R.layout.activity_camera);
 
 		// Create an instance of Camera
