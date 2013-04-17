@@ -63,6 +63,8 @@ public class CameraPreview extends SurfaceView implements
 
 		// set preview size and make any resize, rotate or
 		// reformatting changes here
+		// sets the camera orientation to portrait
+		mCamera.setDisplayOrientation(90);
 
 		// start preview with new settings
 		try {
