@@ -8,6 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.app.Activity;
+import android.content.Intent;
 
 public class CameraActivity extends Activity {
 
@@ -51,8 +52,8 @@ public class CameraActivity extends Activity {
 
 		@Override
 		public void onPictureTaken(byte[] data, Camera camera) {
-			//bcAnalyzer = new BCanalyzer(data);
-			//System.out.println(bcAnalyzer.getWidth());
+			bcAnalyzer = new BCanalyzer(data);
+			System.out.println(bcAnalyzer.getWidth());
 			System.out.println("BILD SPARAD!!!");
 		}
 
@@ -63,6 +64,8 @@ public class CameraActivity extends Activity {
 	// the standard way of doing it.
 	public void scanPicture(View view) {
 		System.out.println("Bild Tagen");
-		mCamera.takePicture(null, null, picture);		
+		Intent intent = new Intent(this, ProductActivity.class);
+		startActivity(intent);
+		//mCamera.takePicture(null, null, picture);		
 	}
 }

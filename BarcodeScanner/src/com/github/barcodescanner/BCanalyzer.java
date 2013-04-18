@@ -19,7 +19,8 @@ public class BCanalyzer {
 	//constructor for BCanalyser with a byte array as paramter
 	public BCanalyzer(byte[] bitmapdata) {
 		this.bitmap = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata .length);
-		this.setCanvas(new Canvas(bitmap)); 
+		//this.setCanvas(new Canvas(bitmap)); 
+		System.out.println(scanHorizontal(getHeight()/2,0.3f));
 	}
 	
 	public void setCanvas(Canvas canvas) {

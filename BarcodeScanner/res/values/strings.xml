@@ -11,9 +11,11 @@
     <string name="welcome_button_database">Database</string>
     <string name="welcome_button_help">Help</string>
     <string name="title_activity_camera">CameraActivity</string>
+    <string name="title_activity_product">ProductActivity</string>
     <string name="title_activity_camera_preview">Camera Preview</string>
     <string name="camera_button_capture">Scan</string>
     <string name="camera_button_database">Database</string>
     <string name="camera_button_help">Help</string>
+    <string name="picture_taken">Picture Taken!</string>
 
 </resources>
