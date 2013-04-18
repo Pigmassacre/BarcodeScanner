@@ -123,6 +123,9 @@ public class CameraActivity extends Activity {
 		mCamera.takePicture(null, null, picture);		
 	}
 	
+	/**
+	 * Method to release the camera 
+	 * */
 	private void releaseCamera(){
 		if(mCamera != null){
 			//Release the camera 

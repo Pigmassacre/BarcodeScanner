@@ -37,9 +37,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int cell_header=0x7f020001;
         public static final int cell_normal=0x7f020002;
         public static final int ic_launcher=0x7f020003;
+        public static final int milk=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f090011;
+        public static final int action_settings=0x7f090015;
+        public static final int addToCart=0x7f090014;
         public static final int admin_button=0x7f090008;
         public static final int button_capture=0x7f090002;
         public static final int button_holder=0x7f090001;
@@ -47,9 +49,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int customer_button=0x7f090009;
         public static final int database_button=0x7f09000e;
         public static final int help_button=0x7f09000f;
+        public static final int imageMilk=0x7f090013;
         public static final int intro_message=0x7f090007;
         public static final int logotype_image=0x7f090006;
-        public static final int pictureTaken=0x7f090010;
+        public static final int productInfo=0x7f090011;
+        public static final int productName=0x7f090010;
+        public static final int productPrice=0x7f090012;
         public static final int products_table=0x7f090003;
         public static final int start_button=0x7f09000d;
         public static final int tableRow=0x7f090004;
@@ -72,23 +77,26 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
-        public static final int admin_button=0x7f060013;
+        public static final int add_to_cart=0x7f060012;
+        public static final int admin_button=0x7f060016;
         public static final int admin_welcome_message=0x7f060005;
         public static final int app_name=0x7f060000;
         public static final int camera_button_capture=0x7f06000c;
         public static final int camera_button_database=0x7f06000d;
         public static final int camera_button_help=0x7f06000e;
-        public static final int customer_button=0x7f060014;
-        public static final int db_table_caption=0x7f060015;
-        public static final int db_table_id=0x7f060018;
-        public static final int db_table_name=0x7f060016;
-        public static final int db_table_price=0x7f060017;
-        public static final int intro_message=0x7f060012;
-        public static final int logotype_description=0x7f060011;
-        public static final int picture_taken=0x7f06000f;
+        public static final int customer_button=0x7f060017;
+        public static final int db_table_caption=0x7f060018;
+        public static final int db_table_id=0x7f06001b;
+        public static final int db_table_name=0x7f060019;
+        public static final int db_table_price=0x7f06001a;
+        public static final int intro_message=0x7f060015;
+        public static final int logotype_description=0x7f060014;
+        public static final int product_info=0x7f06000f;
+        public static final int product_name=0x7f060010;
+        public static final int product_price=0x7f060011;
         public static final int title_activity_camera=0x7f060009;
         public static final int title_activity_camera_preview=0x7f06000b;
-        public static final int title_activity_introduction=0x7f060010;
+        public static final int title_activity_introduction=0x7f060013;
         public static final int title_activity_product=0x7f06000a;
         public static final int version_number=0x7f060003;
         public static final int welcome_button_database=0x7f060007;
