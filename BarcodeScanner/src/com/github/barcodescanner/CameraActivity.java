@@ -16,7 +16,6 @@ public class CameraActivity extends Activity {
 	private CameraPreview mPreview;
 	// DrawView object to draw lines on the camera preview
 	DrawView drawLines;
-	Button scanButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,8 +51,9 @@ public class CameraActivity extends Activity {
 
 		@Override
 		public void onPictureTaken(byte[] data, Camera camera) {
-			bcAnalyzer = new BCanalyzer(data);
-			System.out.println(bcAnalyzer.getWidth());
+			//bcAnalyzer = new BCanalyzer(data);
+			//System.out.println(bcAnalyzer.getWidth());
+			System.out.println("BILD SPARAD!!!");
 		}
 
 	};
@@ -61,13 +61,8 @@ public class CameraActivity extends Activity {
 	// instead of adding a listener we can add "android:onClick="methodName" to the activity_camera.xml file
 	// then we can just add the mCamera.takePicture(bla..) to that method. Saves us some code and I think that is
 	// the standard way of doing it.
-	public void addListener() {
-		scanButton = (Button) findViewById(R.id.button_capture);
-		scanButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				mCamera.takePicture(null, null, picture);
-			}
-		});
+	public void scanPicture(View view) {
+		System.out.println("Bild Tagen");
+		mCamera.takePicture(null, null, picture);		
 	}
 }
