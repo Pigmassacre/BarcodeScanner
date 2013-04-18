@@ -13,35 +13,60 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="24sp"
-        android:text="@string/welcome_title" />
-    
+        android:text="@string/welcome_title"
+        android:textSize="24sp" />
+
     <TextView
         android:id="@+id/version"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_below="@id/title"
-        android:textSize="12sp"
-        android:text="@string/version_number" />
-    
+        android:gravity="center"
+        android:text="@string/version_number"
+        android:textSize="12sp" />
+
     <TextView
         android:id="@+id/welcome_message"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_below="@id/version"
-        android:text="@string/customer_welcome_message" />
+        android:layout_marginTop="16dp"
+        android:text="@string/welcome_message" />
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:id="@+id/start_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:onClick="enterCamera"
         android:padding="@dimen/activity_button_padding"
-        android:text="@string/welcome_button_message"
-        android:textSize="36sp" 
-        android:onClick="enterCamera" />
+        android:text="@string/welcome_button_start"
+        android:textSize="36sp" />
+
+    <LinearLayout
+        android:id="@+id/button_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_button" >
+
+        <Button
+            android:id="@+id/database_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:text="@string/welcome_button_database"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/help_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:text="@string/welcome_button_help"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 </RelativeLayout>
