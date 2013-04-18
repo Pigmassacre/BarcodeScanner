@@ -22,5 +22,9 @@
     <string name="intro_message">Welcome! Please choose what type of user you are.</string>
     <string name="admin_button">Shop Owner</string>
     <string name="customer_button">Customer</string>
+    <string name="db_table_caption">Products</string>
+    <string name="db_table_name">Name</string>
+    <string name="db_table_price">Price</string>
+    <string name="db_table_id">ID</string>
 
 </resources>
