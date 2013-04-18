@@ -80,8 +80,9 @@ public class CameraActivity extends Activity {
 		        } catch (IOException e) {
 		            Log.d("TEST", "Error accessing file: " + e.getMessage());
 		        }
+		        
+		        Log.d("TEST", "Reached the end of the filemethod.");
 		    }
-
 	};
 	
 	/** Create a File for saving the image */
