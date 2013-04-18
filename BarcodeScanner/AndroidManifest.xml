@@ -22,11 +22,6 @@
             android:name="com.github.barcodescanner.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.github.barcodescanner.CameraActivity"
@@ -39,7 +34,17 @@
             android:name="com.github.barcodescanner.ProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_product"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.github.barcodescanner.IntroductionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_introduction"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
