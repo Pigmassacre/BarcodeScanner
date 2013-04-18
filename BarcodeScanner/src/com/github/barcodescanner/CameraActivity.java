@@ -1,5 +1,6 @@
 package com.github.barcodescanner;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,7 +15,6 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.app.Activity;
 import android.content.Intent;
@@ -44,6 +44,12 @@ public class CameraActivity extends Activity {
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
 		preview.addView(mPreview);
 		preview.addView(drawLines);
+	}
+	
+	@Override
+	public void onPause(){
+		super.onPause();
+		releaseCamera();
 	}
 
 	/** A safe way to get an instance of the Camera object. */
@@ -115,5 +121,13 @@ public class CameraActivity extends Activity {
 		Intent intent = new Intent(this, ProductActivity.class);
 		startActivity(intent);
 		mCamera.takePicture(null, null, picture);		
+	}
+	
+	private void releaseCamera(){
+		if(mCamera != null){
+			//Release the camera 
+			mCamera.release();
+			mCamera = null;
+		}
 	}
 }
