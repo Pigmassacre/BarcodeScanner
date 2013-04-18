@@ -65,10 +65,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class layout {
         public static final int activity_camera=0x7f030000;
-        public static final int activity_database=0x7f030001;
-        public static final int activity_introduction=0x7f030002;
-        public static final int activity_main=0x7f030003;
-        public static final int activity_product=0x7f030004;
+        public static final int activity_camera_preview=0x7f030001;
+        public static final int activity_database=0x7f030002;
+        public static final int activity_introduction=0x7f030003;
+        public static final int activity_main=0x7f030004;
+        public static final int activity_product=0x7f030005;
     }
     public static final class menu {
         public static final int camera_preview=0x7f080000;
