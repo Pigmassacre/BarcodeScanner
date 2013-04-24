@@ -16,7 +16,15 @@
     <string name="camera_button_capture">Scan</string>
     <string name="camera_button_database">Database</string>
     <string name="camera_button_help">Help</string>
-    <string name="picture_taken">Picture Taken!</string>
+    <string name="product_info">Product Info
+        Tex. bla blas Mjölk bla bla
+        Mjölk är bra bla bla Mjölk
+        Mjölk Mjölk bla bla bla
+        bla Mjölk bla Mjölk bla
+        </string>
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Product Price</string>
+    <string name="add_to_cart">Add To Cart</string>
     <string name="title_activity_introduction">IntroductionActivity</string>
     <string name="logotype_description">Barcode Scanner Logotype</string>
     <string name="intro_message">Welcome! Please choose what type of user you are.</string>

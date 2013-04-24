@@ -22,7 +22,6 @@ public class Product {
 		this.barcode = barcode;
 	}
 
-
 	public String getName() {
 		return name;
 	}
