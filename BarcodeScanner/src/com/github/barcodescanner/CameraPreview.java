@@ -5,6 +5,8 @@ import java.io.IOException;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.PreviewCallback;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -16,15 +18,21 @@ public class CameraPreview extends SurfaceView implements
 	private static final String TAG = "CameraPreview";
 	private SurfaceHolder mHolder;
 	private Camera mCamera;
+    private PreviewCallback previewCallback;
+    private AutoFocusCallback autoFocusCallback;
 
-	public CameraPreview(Context context, Camera camera) {
+	public CameraPreview(Context context, Camera camera,
+					PreviewCallback previewCallBack,
+						AutoFocusCallback autoFocusCallBack) {
 		super(context);
-		mCamera = camera;
+		this.mCamera = camera;
+		this.previewCallback = previewCallBack;
+        this.autoFocusCallback = autoFocusCallBack;	
 
 		// Install a SurfaceHolder.Callback so we get notified when the
 		// underlying surface is created and destroyed.
-		mHolder = getHolder();
-		mHolder.addCallback(this);
+		this.mHolder = getHolder();
+		this.mHolder.addCallback(this);
 		// deprecated setting, but required on Android versions prior to 3.0
 		// mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		surfaceCreated(mHolder);
@@ -69,7 +77,9 @@ public class CameraPreview extends SurfaceView implements
 		// start preview with new settings
 		try {
 			mCamera.setPreviewDisplay(mHolder);
+            mCamera.setPreviewCallback(previewCallback);
 			mCamera.startPreview();
+            mCamera.autoFocus(autoFocusCallback);
 
 		} catch (Exception e) {
 			Log.d(TAG, "Error starting camera preview: " + e.getMessage());
