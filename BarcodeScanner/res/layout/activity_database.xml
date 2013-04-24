@@ -36,12 +36,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:gravity="center_horizontal"
                 android:background="@drawable/cell_body"
+                android:gravity="center_horizontal"
                 android:text="@string/db_table_name"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000"
-                android:textStyle="bold"  />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView"
@@ -60,12 +60,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:gravity="center_horizontal"
                 android:background="@drawable/cell_body"
+                android:gravity="center_horizontal"
                 android:text="@string/db_table_id"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000"
-                android:textStyle="bold"  />
+                android:textStyle="bold" />
+
         </TableRow>
         
         <TableRow

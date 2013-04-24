@@ -7,7 +7,6 @@ public class Product {
 	 * The objects will therefor contain the values that are to be saved in the database.
 	 * */
 	
-	private int ID;
 	private String name;
 	private int price;
 	private int barcode;
@@ -17,20 +16,12 @@ public class Product {
 		
 	}
 	
-	public Product(int ID, String name, int price, int barcode){
-		this.ID = ID;
+	public Product(String name, int price, int barcode){
 		this.name = name;
 		this.price = price;
 		this.barcode = barcode;
 	}
 
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int iD) {
-		ID = iD;
-	}
 
 	public String getName() {
 		return name;
