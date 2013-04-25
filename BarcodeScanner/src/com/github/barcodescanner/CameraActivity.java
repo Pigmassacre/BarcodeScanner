@@ -29,7 +29,7 @@ public class CameraActivity extends Activity {
 	private Camera mCamera;
 	private CameraPreview mPreview;
 	// DrawView object to draw lines on the camera preview
-	DrawView drawLines;
+	//DrawView drawLines;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	private String barcodeInfo;
 	private ImageScanner scanner;
@@ -79,14 +79,14 @@ public class CameraActivity extends Activity {
 		popUp.setContentView(layout);
 
 		// Create an instance of DrawView
-		drawLines = new DrawView(this);
+		//drawLines = new DrawView(this);
 		System.out.println(mCamera);
 
 		// Create our Preview view and set it as the content of our activity.
 		mPreview = new CameraPreview(this, mCamera, previewCb, autoFocusCB);
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
 		preview.addView(mPreview);
-		preview.addView(drawLines);
+		//preview.addView(drawLines);
 	}
 
 	@Override
