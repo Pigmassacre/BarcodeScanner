@@ -129,10 +129,6 @@ public class CameraActivity extends Activity {
         }
     };
 	
-
-	// instead of adding a listener we can add "android:onClick="methodName" to the activity_camera.xml file
-	// then we can just add the mCamera.takePicture(bla..) to that method. Saves us some code and I think that is
-	// the standard way of doing it.
 	public void helpToScan(View view) {
         if (clicked) {
             popUp.showAtLocation(layout, Gravity.BOTTOM, 10, 50);

@@ -24,13 +24,13 @@ public class IntroductionActivity extends Activity {
 	}
 
 	public void enterAdmin(View view) {
-		// For now this will start the main activity, but it's supposed to launch into an admin specific activity
+		// TODO For now this will start the main activity, but it's supposed to launch into an admin specific activity
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}
 	
 	public void enterCustomer(View view) {
-		// For now this will start the main activity, but it's supposed to launch into a customer specific activity
+		// TODO For now this will start the main activity, but it's supposed to launch into a customer specific activity
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:contentDescription="@string/logotype_description"
+        android:contentDescription="@string/introduction_logotype_description"
         android:src="@drawable/ic_launcher" />
     <!-- This should be replaced with the logotype -->
 
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/logotype_image"
-        android:text="@string/intro_message" />
+        android:text="@string/introduction_intro_message" />
 
     <Button
         android:id="@+id/admin_button"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/customer_button"
         android:layout_alignLeft="@+id/customer_button"
-        android:text="@string/admin_button"
+        android:text="@string/introduction_admin_button"
         android:onClick="enterAdmin" />
 
     <Button
@@ -41,7 +41,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/customer_button"
+        android:text="@string/introduction_customer_button"
         android:onClick="enterCustomer" />
 
 </RelativeLayout>

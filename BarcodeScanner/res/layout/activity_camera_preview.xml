@@ -9,7 +9,7 @@
     tools:context=".CameraPreview" >
 
     <FrameLayout
-        android:id="@+id/camera_preview"
+        android:id="@+id/camera_preview_unused"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

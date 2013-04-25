@@ -7,83 +7,84 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    
-    	<TextView 
-    	    android:id="@+id/newProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="34dp"
-            android:text="Add new product:"
-            android:textSize="30sp"
-            android:textStyle="bold|italic" 
-    	    />
+    <TextView
+        android:id="@+id/new_product_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="34dp"
+        android:text="@string/new_product_title"
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
 
-        <TextView
-            android:id="@+id/ProductName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/d"
-            android:layout_below="@+id/d"
-            android:layout_marginTop="30dp"
-            android:text="Name:"
-            android:textSize="25sp"
-            android:textStyle="bold|italic" />
+    <TextView
+        android:id="@+id/new_product_id_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/new_product_title"
+        android:layout_below="@id/new_product_title"
+        android:layout_marginTop="20dp"
+        android:text="@string/new_product_id_title"
+        android:textSize="25sp"
+        android:textStyle="bold|italic" />
 
-        <EditText
-            android:id="@+id/name_text"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ProductName"
-            android:layout_below="@+id/ProductName"
-            android:ems="10" >
-			<requestFocus />
-        </EditText>
+    <TextView
+        android:id="@+id/new_product_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/new_product_id_title"
+        android:layout_alignParentRight="true"
+        android:text="@string/new_product_id"
+        android:textSize="20sp"
+        android:textStyle="italic" />
 
-          <TextView
-              android:id="@+id/ProductDescription"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignLeft="@+id/message_text"
-              android:layout_centerVertical="true"
-              android:text="Description"
-              android:textSize="25sp"
-              android:textStyle="bold|italic" />
+    <TextView
+        android:id="@+id/new_product_name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/new_product_id_title"
+        android:layout_below="@id/new_product_id_title"
+        android:layout_marginTop="30dp"
+        android:text="@string/new_product_name_title"
+        android:textSize="25sp"
+        android:textStyle="bold|italic" />
 
-         <EditText
-             android:id="@+id/description_text"
-             android:layout_width="fill_parent"
-             android:layout_height="140dp"
-             android:layout_alignLeft="@+id/ProductDescription"
-             android:layout_below="@+id/ProductDescription"
-             android:ems="10" />
-         
-         <Button        
-            android:id="@+id/add_new_button"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_below="@+id/description_text"
-        	android:text="Add product"
-        	android:onClick="enterAdmin"/>
+    <EditText
+        android:id="@+id/new_product_name_field"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/new_product_name_title"
+        android:layout_below="@id/new_product_name_title"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/new_product_name_hint" >
 
-         <TextView
-             android:id="@+id/ProductId"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignBottom="@+id/d"
-             android:layout_alignParentRight="true"
-             android:text="9007290555"
-             android:textSize="20sp"
-             android:textStyle="italic" />
+        <requestFocus />
+    </EditText>
 
-         <TextView
-             android:id="@+id/d"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignLeft="@+id/newProduct"
-             android:layout_below="@+id/newProduct"
-             android:layout_marginTop="20dp"
-             android:text="Product ID - "
-             android:textSize="25sp"
-             android:textStyle="bold|italic" />
+    <TextView
+        android:id="@+id/new_product_description_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="@string/new_product_description_title"
+        android:textSize="25sp"
+        android:textStyle="bold|italic" />
+
+    <EditText
+        android:id="@+id/new_product_description_field"
+        android:layout_width="fill_parent"
+        android:layout_height="140dp"
+        android:layout_alignLeft="@id/new_product_description_title"
+        android:layout_below="@id/new_product_description_title"
+        android:ems="10"
+        android:hint="@string/new_product_description_hint" />
+
+    <Button
+        android:id="@+id/new_product_add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/new_product_description_field"
+        android:onClick="addProduct"
+        android:text="@string/new_product_add_button" />
 
 </RelativeLayout>

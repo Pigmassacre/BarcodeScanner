@@ -3,36 +3,57 @@
 
     <string name="app_name">Barcode Scanner</string>
     <string name="action_settings">Settings</string>
+    
+    <!-- activity_introduction.xml -->
+    <string name="title_activity_introduction">IntroductionActivity</string>
+    <string name="introduction_logotype_description">Barcode Scanner Logotype</string>
+    <string name="introduction_intro_message">Welcome! Please choose what type of user you are.</string>
+    <string name="introduction_admin_button">Shop Owner</string>
+    <string name="introduction_customer_button">Customer</string>
+    
     <string name="welcome_title">Barcode Scanner</string>
     <string name="version_number">PRE ALPHA</string>
-    <string name="welcome_message">Welcome to our amazing Barcode Scanner. Touch the button below to start scanning!</string>
     <string name="admin_welcome_message">Welcome, admin!</string>
+    <string name="welcome_message">Welcome to our amazing Barcode Scanner. Touch the button below to start scanning!</string>
     <string name="welcome_button_start">Scan Barcode</string>
     <string name="welcome_button_database">Database</string>
     <string name="welcome_button_help">Help</string>
+
+    <!-- activity_camera.xml -->
     <string name="title_activity_camera">CameraActivity</string>
-    <string name="title_activity_product">ProductActivity</string>
-    <string name="title_activity_camera_preview">Camera Preview</string>
     <string name="camera_button_capture">Scan</string>
     <string name="camera_button_database">Database</string>
     <string name="camera_button_help">Help</string>
+
+    <!-- activity_camera_preview.xml -->
+    <string name="title_activity_camera_preview">Camera Preview</string>
+
+    <!-- activity_product.xml -->
+    <string name="title_activity_product">ProductActivity</string>
     <string name="product_info">Product Info
         Tex. bla blas Mjölk bla bla
         Mjölk är bra bla bla Mjölk
         Mjölk Mjölk bla bla bla
-        bla Mjölk bla Mjölk bla
-        </string>
+        bla Mjölk bla Mjölk bla	</string>
     <string name="product_name">Product Name</string>
     <string name="product_price">Product Price</string>
     <string name="add_to_cart">Add To Cart</string>
-    <string name="title_activity_introduction">IntroductionActivity</string>
-    <string name="logotype_description">Barcode Scanner Logotype</string>
-    <string name="intro_message">Welcome! Please choose what type of user you are.</string>
-    <string name="admin_button">Shop Owner</string>
-    <string name="customer_button">Customer</string>
+
+    <!-- activity_database.xml -->
     <string name="db_table_caption">Products</string>
     <string name="db_table_name">Name</string>
     <string name="db_table_price">Price</string>
     <string name="db_table_id">ID</string>
+
+    <!-- activity_addnew.xml -->
+    <string name="title_activity_addnew">AddNewActivity</string>
+    <string name="new_product_title">Add new product:</string>
+    <string name="new_product_id_title">Product ID - </string>
+    <string name="new_product_id">9007290555</string>
+    <string name="new_product_name_title">Name:</string>
+    <string name="new_product_name_hint">The name of the product.</string>
+    <string name="new_product_description_title">Description</string>
+    <string name="new_product_description_hint">A short description of the product.</string>
+    <string name="new_product_add_button">Add product</string>
 
 </resources>
