@@ -25,71 +25,75 @@ import android.content.Intent;
 
 public class CameraActivity extends Activity {
 
-	private BCanalyzer bcAnalyzer;
+	//private BCanalyzer bcAnalyzer;
 	private Camera mCamera;
 	private CameraPreview mPreview;
 	// DrawView object to draw lines on the camera preview
 	DrawView drawLines;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	private String barcodeInfo;
-    private ImageScanner scanner;
-    private boolean previewing = true;
-    private Handler autoFocusHandler;
-    private PopupWindow popUp;
-    private boolean clicked = true;
-    LinearLayout layout;
-    TextView tv;
-    LayoutParams params;
+	private ImageScanner scanner;
+	private boolean previewing = true;
+	private Handler autoFocusHandler;
+	private PopupWindow popUp;
+	private boolean clicked = true;
+	LinearLayout layout;
+	TextView tv;
+	LayoutParams params;
 
-    static {
-	    System.loadLibrary("iconv");
+	static {
+		System.loadLibrary("iconv");
 	}
-    
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
-		System.out.println(mCamera);
+		System.out.println("onCreate(): Creating camera. " + mCamera);
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); // hides the title from the camera view
+		requestWindowFeature(Window.FEATURE_NO_TITLE); // hides the title from
+														// the camera view
 		setContentView(R.layout.activity_camera);
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
 		// Create an instance of Camera
 		mCamera = getCameraInstance();
-		
-		autoFocusHandler = new Handler();
-		
-		
-        scanner = new ImageScanner();
-        scanner.setConfig(0, Config.X_DENSITY, 3);
-        scanner.setConfig(0, Config.Y_DENSITY, 3);
-        
-        popUp = new PopupWindow(this);
-        layout = new LinearLayout(this);
-        tv = new TextView(this);
-        
-        params = new LayoutParams(LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        tv.setText("To Scan a barcode hold it steady in the " +
-        		"camera view and wait for the application to scan");
-        layout.addView(tv, params);
-        popUp.setContentView(layout);
 
+		autoFocusHandler = new Handler();
+
+		scanner = new ImageScanner();
+		scanner.setConfig(0, Config.X_DENSITY, 3);
+		scanner.setConfig(0, Config.Y_DENSITY, 3);
+
+		popUp = new PopupWindow(this);
+		layout = new LinearLayout(this);
+		tv = new TextView(this);
+
+		params = new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT);
+		layout.setOrientation(LinearLayout.VERTICAL);
+		tv.setText("To Scan a barcode hold it steady in the "
+				+ "camera view and wait for the application to scan");
+		layout.addView(tv, params);
+		popUp.setContentView(layout);
 
 		// Create an instance of DrawView
 		drawLines = new DrawView(this);
 		System.out.println(mCamera);
-		
+
 		// Create our Preview view and set it as the content of our activity.
-		mPreview = new CameraPreview(this, mCamera,previewCb,autoFocusCB);
+		mPreview = new CameraPreview(this, mCamera, previewCb, autoFocusCB);
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
 		preview.addView(mPreview);
 		preview.addView(drawLines);
 	}
-	
+
 	@Override
-	public void onPause(){
+	public void onPause() {
 		super.onPause();
 		releaseCamera();
+		System.out.println("onPause(): Released camera.");
 	}
 
 	/** A safe way to get an instance of the Camera object. */
@@ -97,78 +101,80 @@ public class CameraActivity extends Activity {
 		Camera c = null;
 		try {
 			c = Camera.open(); // attempt to get a Camera instance
-			System.out.println(c);
+			System.out.println("getCameraInstance(): Opened camera. " + c);
 		} catch (Exception e) {
+			System.out.println("getCameraInstance(): Failed to open camera. "
+					+ c);
 			// Camera is not available (in use or does not exist)
 		}
 		return c; // returns null if camera is unavailable
 	}
-	
-    PreviewCallback previewCb = new PreviewCallback() {
-        public void onPreviewFrame(byte[] data, Camera camera) {
-            Camera.Parameters parameters = camera.getParameters();
-            Size size = parameters.getPreviewSize();
 
-            Image barcode = new Image(size.width, size.height, "Y800");
-            barcode.setData(data);
+	PreviewCallback previewCb = new PreviewCallback() {
+		public void onPreviewFrame(byte[] data, Camera camera) {
+			Camera.Parameters parameters = camera.getParameters();
+			Size size = parameters.getPreviewSize();
 
-            int result = scanner.scanImage(barcode);
-            barcodeInfo = "";
-            
-            if (result != 0) {
-                previewing = false;
-                mCamera.setPreviewCallback(null);
-                mCamera.stopPreview();
-                
-                SymbolSet syms = scanner.getResults();
-                for (Symbol sym : syms) {
-                	barcodeInfo = sym.getData();
-                	viewProduct();
-                }
-            }
-        }
-    };
-	
+			Image barcode = new Image(size.width, size.height, "Y800");
+			barcode.setData(data);
+
+			int result = scanner.scanImage(barcode);
+			barcodeInfo = "";
+
+			if (result != 0) {
+				previewing = false;
+				mCamera.setPreviewCallback(null);
+				mCamera.stopPreview();
+
+				SymbolSet syms = scanner.getResults();
+				for (Symbol sym : syms) {
+					barcodeInfo = sym.getData();
+					viewProduct();
+				}
+			}
+		}
+	};
+
 	public void helpToScan(View view) {
-        if (clicked) {
-            popUp.showAtLocation(layout, Gravity.BOTTOM, 10, 50);
-            popUp.update(50, 50, 300, 300);
-            clicked = false;
-           } else {
-            popUp.dismiss();
-            clicked = true;
-           }
+		if (clicked) {
+			popUp.showAtLocation(layout, Gravity.BOTTOM, 10, 50);
+			popUp.update(50, 50, 300, 300);
+			clicked = false;
+		} else {
+			popUp.dismiss();
+			clicked = true;
+		}
 	}
-	
-	private void viewProduct(){
+
+	private void viewProduct() {
 		Bundle productName = new Bundle();
-		productName.putString("product",barcodeInfo);
+		productName.putString("product", barcodeInfo);
 		Intent intent = new Intent(this, AddNewActivity.class);
 		intent.putExtras(productName);
 		startActivity(intent);
 	}
-	
-    private Runnable doAutoFocus = new Runnable() {
-        public void run() {
-            if (previewing)
-                mCamera.autoFocus(autoFocusCB);
-        }
-    };
-    
-    AutoFocusCallback autoFocusCB = new AutoFocusCallback() {
-        public void onAutoFocus(boolean success, Camera camera) {
-            autoFocusHandler.postDelayed(doAutoFocus, 1000);
-        }
-    };
-	
+
+	private Runnable doAutoFocus = new Runnable() {
+		public void run() {
+			if (previewing)
+				mCamera.autoFocus(autoFocusCB);
+		}
+	};
+
+	AutoFocusCallback autoFocusCB = new AutoFocusCallback() {
+		public void onAutoFocus(boolean success, Camera camera) {
+			autoFocusHandler.postDelayed(doAutoFocus, 1000);
+		}
+	};
+
 	/**
-	 * Method to release the camera 
+	 * Method to release the camera
 	 * */
-	private void releaseCamera(){
-		if(mCamera != null){
-			//Release the camera 
-            previewing = false;
-            mCamera.setPreviewCallback(null);
+	private void releaseCamera() {
+		if (mCamera != null) {
+			previewing = false;
+			mCamera.setPreviewCallback(null);
+			mPreview.getHolder().removeCallback(mPreview); // TEST
 			mCamera.release();
 			mCamera = null;
 		}

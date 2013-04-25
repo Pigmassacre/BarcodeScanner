@@ -2,6 +2,7 @@ package com.github.barcodescanner;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -17,8 +18,9 @@ public class AddNewActivity extends Activity{
     	view.setText(newText);
 	}
 	
-	public void addProduct() {
+	public void addProduct(View view) {
 		// TODO Stuff
+		System.out.println("addProduct(): Button pressed.");
 	}
 
 }
