@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/new_product_title"
         android:layout_below="@id/new_product_title"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="@string/new_product_id_title"
         android:textSize="25sp"
         android:textStyle="bold|italic" />
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/new_product_id_title"
         android:layout_below="@id/new_product_id_title"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:text="@string/new_product_name_title"
         android:textSize="25sp"
         android:textStyle="bold|italic" />
@@ -67,23 +67,45 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:text="@string/new_product_description_title"
+        android:layout_below="@id/new_product_name_field"
+        android:layout_marginTop="15dp"
         android:textSize="25sp"
         android:textStyle="bold|italic" />
-
+  
     <EditText
         android:id="@+id/new_product_description_field"
         android:layout_width="fill_parent"
-        android:layout_height="140dp"
-        android:layout_alignLeft="@id/new_product_description_title"
-        android:layout_below="@id/new_product_description_title"
+        android:layout_height="90dp"
+        android:layout_alignLeft="@+id/new_product_add_button"
+        android:layout_below="@+id/new_product_description_title"
         android:ems="10"
         android:hint="@string/new_product_description_hint" />
-
+    
+    <TextView
+        android:id="@+id/new_product_description_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="@string/new_product_title_price"
+        android:layout_below="@id/new_product_description_field"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"
+        android:textStyle="bold|italic" />
+    
+    <EditText
+       	android:id="@+id/new_product_price"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@id/new_product_description_title"
+        android:layout_below="@id/new_product_description_price"
+        android:ems="10"
+        android:hint="@string/new_product_price_hint" />
+    
     <Button
         android:id="@+id/new_product_add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/new_product_description_field"
+        android:layout_below="@id/new_product_price"
         android:onClick="addProduct"
         android:text="@string/new_product_add_button" />
 

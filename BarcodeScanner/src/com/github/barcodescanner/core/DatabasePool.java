@@ -6,7 +6,9 @@ public class DatabasePool {
 	public SQLiteDatabase db = null;
 	
 	public DatabasePool(){
-
+		
 	}
+	
+	
 
 }

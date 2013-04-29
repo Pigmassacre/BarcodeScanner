@@ -1,5 +1,8 @@
 package com.github.barcodescanner;
 
+import com.github.barcodescanner.core.DatabaseHelper;
+import com.github.barcodescanner.core.Product;
+
 import net.sourceforge.zbar.ImageScanner;
 import net.sourceforge.zbar.Image;
 import net.sourceforge.zbar.Symbol;
@@ -37,9 +40,11 @@ public class CameraActivity extends Activity {
 	private Handler autoFocusHandler;
 	private PopupWindow popUp;
 	private boolean clicked = true;
-	LinearLayout layout;
-	TextView tv;
-	LayoutParams params;
+	private LinearLayout layout;
+	private TextView tv;
+	private LayoutParams params;
+	private DatabaseHelper database;
+	
 
 	static {
 		System.loadLibrary("iconv");
@@ -69,6 +74,7 @@ public class CameraActivity extends Activity {
 		popUp = new PopupWindow(this);
 		layout = new LinearLayout(this);
 		tv = new TextView(this);
+		database = new DatabaseHelper(this);
 
 		params = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
@@ -78,12 +84,14 @@ public class CameraActivity extends Activity {
 		layout.addView(tv, params);
 		popUp.setContentView(layout);
 
+
 		// Create an instance of DrawView
 		//drawLines = new DrawView(this);
 		System.out.println(mCamera);
 
 		// Create our Preview view and set it as the content of our activity.
 		mPreview = new CameraPreview(this, mCamera, previewCb, autoFocusCB);
+
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
 		preview.addView(mPreview);
 		//preview.addView(drawLines);
@@ -147,11 +155,26 @@ public class CameraActivity extends Activity {
 	}
 
 	private void viewProduct() {
-		Bundle productName = new Bundle();
-		productName.putString("product", barcodeInfo);
-		Intent intent = new Intent(this, AddNewActivity.class);
-		intent.putExtras(productName);
-		startActivity(intent);
+		barcodeInfo = barcodeInfo.substring(3);
+		int barcode = (int) Integer.parseInt(barcodeInfo);
+		Product product = database.getProduct(barcode);
+		if(product != null){
+			String productName = product.getName();
+			int productPrice = product.getPrice();
+			Bundle productInfo = new Bundle();
+			productInfo.putString("productName",productName);
+			productInfo.putInt("productPrice", productPrice);
+			Intent productIntent = new Intent(this, ProductActivity.class);
+			productIntent.putExtras(productInfo);
+			startActivity(productIntent);
+		
+		}else{
+			Bundle productName = new Bundle();
+			productName.putString("product", barcodeInfo);
+			Intent newProductIntent = new Intent(this, AddNewActivity.class);
+			newProductIntent.putExtras(productName);
+			startActivity(newProductIntent);
+		}
 	}
 
 	private Runnable doAutoFocus = new Runnable() {
@@ -174,9 +197,14 @@ public class CameraActivity extends Activity {
 		if (mCamera != null) {
 			previewing = false;
 			mCamera.setPreviewCallback(null);
-			mPreview.getHolder().removeCallback(mPreview); // TEST
+			//mPreview.getHolder().removeCallback(mPreview); // TEST
 			mCamera.release();
 			mCamera = null;
 		}
+	}
+	
+	public void addProduct(View view) {
+		// TODO Stuff
+		System.out.println("addProduct(): Button pressed.");
 	}
 }

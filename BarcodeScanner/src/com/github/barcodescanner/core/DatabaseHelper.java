@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_BCODE = "ProductBarcode";
 	static final String KEY_NAME = "ProductName";
 	static final String KEY_PRICE = "Price";
-	static final String VIEW_PRODUCTS = "Products";
+	static final String VIEW_PRODUCTS = "ProductsView";
 
 	/*
 	 * change the number in the superconstructor to invoke the onUpgrade method;
@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		db.execSQL("CREATE TABLE " + TABLE_PRODUCTS + " (" + KEY_BCODE
 				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NAME + " TEXT, "
-				+ KEY_PRICE + " Integer");
+				+ KEY_PRICE + " INTEGER)");
 
 		db.execSQL("CREATE VIEW " + VIEW_PRODUCTS + " AS SELECT "
 				+ TABLE_PRODUCTS + "." + KEY_BCODE + " AS _id," + " "
@@ -55,11 +55,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor = db.query(TABLE_PRODUCTS, new String[] { KEY_BCODE,
 				KEY_NAME, KEY_PRICE}, KEY_BCODE + "=?",
 				new String[] { String.valueOf(ID) }, null, null, null, null);
-		if (cursor != null)
+		
+		Product product = null;
+		if(cursor.getCount() != 0){
 			cursor.moveToFirst();
+		}else{
+			return product;
+		}
+			
 
 		// read from the cursor to parse a possible Product from teh given ID
-		Product product = new Product(cursor.getString(1),
+		product = new Product(cursor.getString(1),
 				Integer.parseInt(cursor.getString(1)),
 				Integer.parseInt(cursor.getString(2)));
 		// return product
