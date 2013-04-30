@@ -66,8 +66,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		// read from the cursor to parse a possible Product from teh given ID
 		product = new Product(cursor.getString(1),
-				Integer.parseInt(cursor.getString(1)),
-				Integer.parseInt(cursor.getString(2)));
+				Integer.parseInt(cursor.getString(2)),
+				Integer.parseInt(cursor.getString(0)));
 		// return product
 		return product;
 	}

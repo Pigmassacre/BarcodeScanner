@@ -49,7 +49,7 @@
     <string name="title_activity_addnew">AddNewActivity</string>
     <string name="new_product_title">Add new product:</string>
     <string name="new_product_id_title">Product ID - </string>
-    <string name="new_product_id"></string>
+    <string name="new_product_id">123456</string>
     <string name="new_product_name_title">Name:</string>
     <string name="new_product_name_hint">The name of the product.</string>
     <string name="new_product_description_title">Description:</string>

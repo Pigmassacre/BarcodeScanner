@@ -1,6 +1,7 @@
 package com.github.barcodescanner;
 
 import com.github.barcodescanner.core.DatabaseHelper;
+import com.github.barcodescanner.core.DatabaseHelperFactory;
 import com.github.barcodescanner.core.Product;
 
 import net.sourceforge.zbar.ImageScanner;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 
 public class CameraActivity extends Activity {
 
@@ -74,7 +76,8 @@ public class CameraActivity extends Activity {
 		popUp = new PopupWindow(this);
 		layout = new LinearLayout(this);
 		tv = new TextView(this);
-		database = new DatabaseHelper(this);
+		//Get instance of DatabaseHelper class
+		database = DatabaseHelperFactory.getInstance();
 
 		params = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
@@ -155,22 +158,35 @@ public class CameraActivity extends Activity {
 	}
 
 	private void viewProduct() {
+		//Just for now we make barcode shorter before we change int to long in database
 		barcodeInfo = barcodeInfo.substring(3);
+		//Cast scanned barcode to an int
 		int barcode = (int) Integer.parseInt(barcodeInfo);
+		//Get product from database, returns null if nonexisting
 		Product product = database.getProduct(barcode);
+		//Check if database returned a product(it exists in database)
 		if(product != null){
+			//Get product name
 			String productName = product.getName();
+			//Get product price
 			int productPrice = product.getPrice();
+			//Create bundle to send values to other activity
 			Bundle productInfo = new Bundle();
+			//Put product name in bundle
 			productInfo.putString("productName",productName);
+			//Put product price in bundle
 			productInfo.putInt("productPrice", productPrice);
+			//Start ProductActivity and put the extra bundle 
 			Intent productIntent = new Intent(this, ProductActivity.class);
 			productIntent.putExtras(productInfo);
 			startActivity(productIntent);
 		
-		}else{
+		}else{ //Product don't exist in database
+			//Create bundle to send values to other activity
 			Bundle productName = new Bundle();
-			productName.putString("product", barcodeInfo);
+			//Put new product ID in bundle
+			productName.putString("productID", barcodeInfo);
+			//Start AddNewActivity and but the extra bundle
 			Intent newProductIntent = new Intent(this, AddNewActivity.class);
 			newProductIntent.putExtras(productName);
 			startActivity(newProductIntent);

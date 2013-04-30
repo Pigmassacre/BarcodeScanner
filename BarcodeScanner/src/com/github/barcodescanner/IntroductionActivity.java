@@ -1,5 +1,7 @@
 package com.github.barcodescanner;
 
+import com.github.barcodescanner.core.DatabaseHelperFactory;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -7,11 +9,14 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 
+
+
 public class IntroductionActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		DatabaseHelperFactory.init( getApplicationContext() ); 
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // hides the title from the camera view
 		setContentView(R.layout.activity_introduction);
 	}
