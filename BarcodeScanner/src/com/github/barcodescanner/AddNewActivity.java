@@ -20,7 +20,6 @@ public class AddNewActivity extends Activity{
 	private EditText editPrice;
 	private EditText editName;
 	private String productID;
-	//private int barCode;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,6 @@ public class AddNewActivity extends Activity{
 	}
 	
 	public void addProduct(View view) {
-		//
 		//String newText = getIntent().getExtras().getString("productID");
 		//Cast the productID to an int
 		int barCode = Integer.parseInt(this.productID);

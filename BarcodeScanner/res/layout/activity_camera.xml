@@ -6,46 +6,13 @@
 
     <FrameLayout
         android:id="@+id/camera_preview"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="15dp"
-        android:layout_weight="2" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp" />
 
     <LinearLayout
         android:id="@+id/button_holder"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal" >
-
-        <!--
-        <Button
-            android:id="@+id/button_database"
-            android:layout_width="65dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="@string/camera_button_database" />
-        -->
-
-        <Button
-            android:id="@+id/button_capture"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:onClick="helpToScan"
-            android:text="@string/camera_button_help" />
-
-        <!--
-        <Button
-            android:id="@+id/button_help"
-            android:layout_width="65dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="@string/camera_button_help" />
-        -->
-    </LinearLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

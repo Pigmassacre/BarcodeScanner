@@ -17,37 +17,22 @@ import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class CameraActivity extends Activity {
 
-	//private BCanalyzer bcAnalyzer;
 	private static final String TAG = "CameraActivity";
 	private Camera mCamera;
 	private CameraPreview mPreview;
-	//DrawView drawLines;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	private String barcodeInfo;
 	private ImageScanner scanner;
 	private boolean previewing = true;
 	private Handler autoFocusHandler;
-	private PopupWindow popUp;
-	private boolean clicked = true;
-	private LinearLayout layout;
-	private TextView tv;
-	private LayoutParams params;
 	private DatabaseHelper database;
-	
 
 	static {
 		System.loadLibrary("iconv");
@@ -55,16 +40,14 @@ public class CameraActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		System.out.println("onCreate(): Creating camera. " + mCamera);
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); // hides the title from
-														// the camera view
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_camera);
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
+	public void onResume() {
+		super.onResume();
 		// Create an instance of Camera
 		mCamera = getCameraInstance();
 
@@ -74,53 +57,35 @@ public class CameraActivity extends Activity {
 		scanner.setConfig(0, Config.X_DENSITY, 3);
 		scanner.setConfig(0, Config.Y_DENSITY, 3);
 
-		popUp = new PopupWindow(this);
-		layout = new LinearLayout(this);
-		tv = new TextView(this);
-		//Get instance of DatabaseHelper class
+		// Get instance of DatabaseHelper class
 		database = DatabaseHelperFactory.getInstance();
 
-		params = new LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT);
-		layout.setOrientation(LinearLayout.VERTICAL);
-		tv.setText("To Scan a barcode hold it steady in the "
-				+ "camera view and wait for the application to scan");
-		layout.addView(tv, params);
-		popUp.setContentView(layout);
-
-
-		// Create an instance of DrawView
-		//drawLines = new DrawView(this);
-		System.out.println(mCamera);
-
 		// Create our Preview view and set it as the content of our activity.
-		mPreview = new CameraPreview(this, mCamera, previewCb, autoFocusCB);
+		mPreview = new CameraPreview(this, mCamera, previewCallback,
+				autoFocusCallback);
 
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
 		preview.addView(mPreview);
-		//preview.addView(drawLines);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		releaseCamera();
-		System.out.println("onPause(): Released camera.");
 	}
 
-	/** A safe way to get an instance of the Camera object. */
 	public static Camera getCameraInstance() {
-		Camera c = null;
+		Camera camera = null;
+
 		try {
-			c = Camera.open(); // attempt to get a Camera instance
+			camera = Camera.open();
 		} catch (Exception e) {
-			Log.d(TAG, "Exception when starting getCameraInstance(): " + e.getMessage());
-			// Camera is not available (in use or does not exist)
+			Log.d(TAG, "Exception when opening the camera", e);
 		}
-		return c; // returns null if camera is unavailable
+		return camera;
 	}
 
-	PreviewCallback previewCb = new PreviewCallback() {
+	PreviewCallback previewCallback = new PreviewCallback() {
 		public void onPreviewFrame(byte[] data, Camera camera) {
 			Camera.Parameters parameters = camera.getParameters();
 			Size size = parameters.getPreviewSize();
@@ -129,7 +94,6 @@ public class CameraActivity extends Activity {
 			barcode.setData(data);
 
 			int result = scanner.scanImage(barcode);
-			barcodeInfo = "";
 
 			if (result != 0) {
 				previewing = false;
@@ -145,61 +109,58 @@ public class CameraActivity extends Activity {
 		}
 	};
 
-	public void helpToScan(View view) {
-		if (clicked) {
-			popUp.showAtLocation(layout, Gravity.BOTTOM, 10, 50);
-			popUp.update(50, 50, 300, 300);
-			clicked = false;
-		} else {
-			popUp.dismiss();
-			clicked = true;
-		}
-	}
-
 	private void viewProduct() {
-		//Just for now we make barcode shorter before we change int to long in database
-		barcodeInfo = barcodeInfo.substring(3);
-		//Cast scanned barcode to an int
-		int barcode = (int) Integer.parseInt(barcodeInfo);
-		//Get product from database, returns null if nonexisting
-		Product product = database.getProduct(barcode);
-		//Check if database returned a product(it exists in database)
-		if(product != null){
-			//Get product name
-			String productName = product.getName();
-			//Get product price
-			int productPrice = product.getPrice();
-			//Create bundle to send values to other activity
-			Bundle productInfo = new Bundle();
-			//Put product name in bundle
-			productInfo.putString("productName",productName);
-			//Put product price in bundle
-			productInfo.putInt("productPrice", productPrice);
-			//Start ProductActivity and put the extra bundle 
-			Intent productIntent = new Intent(this, ProductActivity.class);
-			productIntent.putExtras(productInfo);
-			startActivity(productIntent);
+		// Initialize the bundle that we will send to the productActivity
+		Bundle productBundle = new Bundle();
+		Intent productIntent;
 		
-		}else{ //Product don't exist in database
-			//Create bundle to send values to other activity
-			Bundle productName = new Bundle();
-			//Put new product ID in bundle
-			productName.putString("productID", barcodeInfo);
-			//Start AddNewActivity and but the extra bundle
-			Intent newProductIntent = new Intent(this, AddNewActivity.class);
-			newProductIntent.putExtras(productName);
-			startActivity(newProductIntent);
+		// Just for now we make barcode shorter before we change int to long in
+		// database
+		barcodeInfo = barcodeInfo.substring(0, 6);
+		
+		// Cast scanned barcode to an int
+		int barcode = (int) Integer.parseInt(barcodeInfo);
+		
+		// Get product from database, returns null if nonexisting
+		Product product = database.getProduct(barcode);
+		
+		// Check if database returned a product (it exists in database)
+		if (product != null) {
+			// Get product name
+			String productName = product.getName();
+			
+			// Get product price
+			int productPrice = product.getPrice();
+
+			// Put product name in bundle
+			productBundle.putString("productName", productName);
+			
+			// Put product price in bundle
+			productBundle.putInt("productPrice", productPrice);
+			
+			// Set ProductActivity as the intent
+			productIntent = new Intent(this, ProductActivity.class);
+		} else {
+			// Put new product ID in bundle
+			productBundle.putString("productID", barcodeInfo);
+			
+			// Set AddNewActivity as the intent
+			productIntent = new Intent(this, AddNewActivity.class);
 		}
+
+		// Add the bundle to the intent, and start the requested activity
+		productIntent.putExtras(productBundle);
+		startActivity(productIntent);
 	}
 
 	private Runnable doAutoFocus = new Runnable() {
 		public void run() {
 			if (previewing)
-				mCamera.autoFocus(autoFocusCB);
+				mCamera.autoFocus(autoFocusCallback);
 		}
 	};
 
-	AutoFocusCallback autoFocusCB = new AutoFocusCallback() {
+	AutoFocusCallback autoFocusCallback = new AutoFocusCallback() {
 		public void onAutoFocus(boolean success, Camera camera) {
 			autoFocusHandler.postDelayed(doAutoFocus, 1000);
 		}
@@ -212,14 +173,8 @@ public class CameraActivity extends Activity {
 		if (mCamera != null) {
 			previewing = false;
 			mCamera.setPreviewCallback(null);
-			//mPreview.getHolder().removeCallback(mPreview); // TEST
 			mCamera.release();
 			mCamera = null;
 		}
-	}
-	
-	public void addProduct(View view) {
-		// TODO Stuff
-		System.out.println("addProduct(): Button pressed.");
 	}
 }
