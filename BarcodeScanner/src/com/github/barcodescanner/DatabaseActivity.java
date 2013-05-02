@@ -10,13 +10,14 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 public class DatabaseActivity extends Activity{
 	
+	@SuppressWarnings("unused")
+	private static final String TAG = "DatabaseActivity";
 	DatabaseHelper db;
 	
 	@Override

@@ -16,6 +16,7 @@ import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -31,9 +32,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class CameraActivity extends Activity {
 
 	//private BCanalyzer bcAnalyzer;
+	private static final String TAG = "CameraActivity";
 	private Camera mCamera;
 	private CameraPreview mPreview;
-	// DrawView object to draw lines on the camera preview
 	//DrawView drawLines;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	private String barcodeInfo;
@@ -112,10 +113,8 @@ public class CameraActivity extends Activity {
 		Camera c = null;
 		try {
 			c = Camera.open(); // attempt to get a Camera instance
-			System.out.println("getCameraInstance(): Opened camera. " + c);
 		} catch (Exception e) {
-			System.out.println("getCameraInstance(): Failed to open camera. "
-					+ c);
+			Log.d(TAG, "Exception when starting getCameraInstance(): " + e.getMessage());
 			// Camera is not available (in use or does not exist)
 		}
 		return c; // returns null if camera is unavailable

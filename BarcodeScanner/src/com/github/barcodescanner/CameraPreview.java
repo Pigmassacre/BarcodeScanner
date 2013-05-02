@@ -15,19 +15,19 @@ import android.view.SurfaceView;
 @SuppressLint("ViewConstructor")
 public class CameraPreview extends SurfaceView implements
 		SurfaceHolder.Callback {
+
 	private static final String TAG = "CameraPreview";
 	private SurfaceHolder mHolder;
 	private Camera mCamera;
-    private PreviewCallback previewCallback;
-    private AutoFocusCallback autoFocusCallback;
+	private PreviewCallback previewCallback;
+	private AutoFocusCallback autoFocusCallback;
 
 	public CameraPreview(Context context, Camera camera,
-					PreviewCallback previewCallBack,
-						AutoFocusCallback autoFocusCallBack) {
+			PreviewCallback previewCallBack, AutoFocusCallback autoFocusCallBack) {
 		super(context);
 		this.mCamera = camera;
 		this.previewCallback = previewCallBack;
-        this.autoFocusCallback = autoFocusCallBack;	
+		this.autoFocusCallback = autoFocusCallBack;
 
 		// Install a SurfaceHolder.Callback so we get notified when the
 		// underlying surface is created and destroyed.
@@ -77,9 +77,9 @@ public class CameraPreview extends SurfaceView implements
 		// start preview with new settings
 		try {
 			mCamera.setPreviewDisplay(mHolder);
-            mCamera.setPreviewCallback(previewCallback);
+			mCamera.setPreviewCallback(previewCallback);
 			mCamera.startPreview();
-            mCamera.autoFocus(autoFocusCallback);
+			mCamera.autoFocus(autoFocusCallback);
 
 		} catch (Exception e) {
 			Log.d(TAG, "Error starting camera preview: " + e.getMessage());

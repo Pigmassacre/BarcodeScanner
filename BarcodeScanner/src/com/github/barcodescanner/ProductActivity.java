@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 public class ProductActivity extends Activity{
 	
-
+	@SuppressWarnings("unused")
+	private static final String TAG = "ProductActivity";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

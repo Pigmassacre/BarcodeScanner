@@ -9,15 +9,17 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 
-
-
 public class IntroductionActivity extends Activity {
 
+	@SuppressWarnings("unused")
+	private static final String TAG = "IntroductionActivity";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		DatabaseHelperFactory.init( getApplicationContext() ); 
-		requestWindowFeature(Window.FEATURE_NO_TITLE); // hides the title from the camera view
+		DatabaseHelperFactory.init(getApplicationContext());
+		requestWindowFeature(Window.FEATURE_NO_TITLE); // hides the title from
+														// the camera view
 		setContentView(R.layout.activity_introduction);
 	}
 
@@ -29,15 +31,17 @@ public class IntroductionActivity extends Activity {
 	}
 
 	public void enterAdmin(View view) {
-		// TODO For now this will start the main activity, but it's supposed to launch into an admin specific activity
+		// TODO For now this will start the main activity, but it's supposed to
+		// launch into an admin specific activity
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}
-	
+
 	public void enterCustomer(View view) {
-		// TODO For now this will start the main activity, but it's supposed to launch into a customer specific activity
+		// TODO For now this will start the main activity, but it's supposed to
+		// launch into a customer specific activity
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}
-	
+
 }
