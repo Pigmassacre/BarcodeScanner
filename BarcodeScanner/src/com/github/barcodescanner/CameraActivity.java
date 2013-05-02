@@ -25,13 +25,17 @@ import android.content.Intent;
 public class CameraActivity extends Activity {
 
 	private static final String TAG = "CameraActivity";
+	
+	public static final int MEDIA_TYPE_IMAGE = 1;
+	
 	private Camera mCamera;
 	private CameraPreview mPreview;
-	public static final int MEDIA_TYPE_IMAGE = 1;
+	private boolean mPreviewRunning = true;
+	private Handler autoFocusHandler;
+	
 	private String barcodeInfo;
 	private ImageScanner scanner;
-	private boolean previewing = true;
-	private Handler autoFocusHandler;
+	
 	private DatabaseHelper database;
 
 	static {
@@ -80,7 +84,7 @@ public class CameraActivity extends Activity {
 		try {
 			camera = Camera.open();
 		} catch (Exception e) {
-			Log.d(TAG, "Exception when opening the camera", e);
+			Log.e(TAG, "Exception when opening the camera", e);
 		}
 		return camera;
 	}
@@ -94,16 +98,13 @@ public class CameraActivity extends Activity {
 			barcode.setData(data);
 
 			int result = scanner.scanImage(barcode);
-
+			System.out.println("Scanned barcode! Result is: " + result);
 			if (result != 0) {
-				previewing = false;
-				mCamera.setPreviewCallback(null);
-				mCamera.stopPreview();
-
 				SymbolSet syms = scanner.getResults();
 				for (Symbol sym : syms) {
 					barcodeInfo = sym.getData();
 					viewProduct();
+					System.out.println("Starting viewProduct() for sym: " + sym);
 				}
 			}
 		}
@@ -113,37 +114,37 @@ public class CameraActivity extends Activity {
 		// Initialize the bundle that we will send to the productActivity
 		Bundle productBundle = new Bundle();
 		Intent productIntent;
-		
+
 		// Just for now we make barcode shorter before we change int to long in
 		// database
 		barcodeInfo = barcodeInfo.substring(0, 6);
-		
+
 		// Cast scanned barcode to an int
 		int barcode = (int) Integer.parseInt(barcodeInfo);
-		
-		// Get product from database, returns null if nonexisting
+
+		// Try to match the barcode with a product from the database
 		Product product = database.getProduct(barcode);
-		
-		// Check if database returned a product (it exists in database)
+
+		// Check if the database contained a matching product
 		if (product != null) {
 			// Get product name
 			String productName = product.getName();
-			
+
 			// Get product price
 			int productPrice = product.getPrice();
 
 			// Put product name in bundle
 			productBundle.putString("productName", productName);
-			
+
 			// Put product price in bundle
 			productBundle.putInt("productPrice", productPrice);
-			
+
 			// Set ProductActivity as the intent
 			productIntent = new Intent(this, ProductActivity.class);
 		} else {
 			// Put new product ID in bundle
 			productBundle.putString("productID", barcodeInfo);
-			
+
 			// Set AddNewActivity as the intent
 			productIntent = new Intent(this, AddNewActivity.class);
 		}
@@ -155,7 +156,7 @@ public class CameraActivity extends Activity {
 
 	private Runnable doAutoFocus = new Runnable() {
 		public void run() {
-			if (previewing)
+			if (mPreviewRunning)
 				mCamera.autoFocus(autoFocusCallback);
 		}
 	};
@@ -166,12 +167,10 @@ public class CameraActivity extends Activity {
 		}
 	};
 
-	/**
-	 * Method to release the camera
-	 * */
 	private void releaseCamera() {
 		if (mCamera != null) {
-			previewing = false;
+			mPreviewRunning = false;
+			mCamera.stopPreview();
 			mCamera.setPreviewCallback(null);
 			mCamera.release();
 			mCamera = null;
