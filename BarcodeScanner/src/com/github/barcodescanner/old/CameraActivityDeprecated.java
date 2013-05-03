@@ -1,23 +1,12 @@
-package com.github.barcodescanner.camera;
+package com.github.barcodescanner.old;
 
 import com.github.barcodescanner.AddNewActivity;
 import com.github.barcodescanner.ProductActivity;
+import com.github.barcodescanner.R;
+import com.github.barcodescanner.camera.Preview;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
 import com.github.barcodescanner.core.Product;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.hardware.Camera;
-import android.hardware.Camera.AutoFocusCallback;
-import android.hardware.Camera.CameraInfo;
-import android.hardware.Camera.PreviewCallback;
-import android.hardware.Camera.Size;
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
 
 import net.sourceforge.zbar.ImageScanner;
 import net.sourceforge.zbar.Image;
@@ -25,102 +14,78 @@ import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 import net.sourceforge.zbar.Config;
 
-// ----------------------------------------------------------------------
+import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.PreviewCallback;
+import android.hardware.Camera.Size;
+import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.app.Activity;
+import android.content.Intent;
 
-public class CameraActivity extends Activity {
+public class CameraActivityDeprecated extends Activity {
+	/*
 	private static final String TAG = "CameraActivity";
 
-	private Preview mPreview;
-	private boolean mPreviewRunning;
+	public static final int MEDIA_TYPE_IMAGE = 1;
+
 	private Camera mCamera;
-	private int numberOfCameras;
-	private int cameraCurrentlyLocked;
-
-	// The first rear facing camera
-	private int defaultCameraId;
-
+	private Preview mPreview;
+	private boolean mPreviewRunning = true;
 	private Handler autoFocusHandler;
 
-	private String barcodeData;
+	private String barcodeInfo;
 	private ImageScanner scanner;
 
 	private DatabaseHelper database;
 
-	// Load zbar library
 	static {
 		System.loadLibrary("iconv");
 	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		// Hide the window title.
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-		// Create a RelativeLayout container that will hold a SurfaceView,
-		// and set it as the content of our activity.
-		setupPreview();
-
-		// Find the ID of the default camera
-		findDefaultCameraId();
-
-		// Configure the ZBar scanner
-		setupScanner();
-
-		// Setup autofocus handler
-		setupAutoFocus();
-
-		// Setup the database
-		setupDatabase();
-	}
-
-	private void setupPreview() {
-		mPreview = new Preview(this);
-		setContentView(mPreview);
-		mPreviewRunning = true;
-		mPreview.setPreviewCallback(previewCallback);
-	}
-
-	private void findDefaultCameraId() {
-		numberOfCameras = Camera.getNumberOfCameras();
-
-		CameraInfo cameraInfo = new CameraInfo();
-		for (int i = 0; i < numberOfCameras; i++) {
-			Camera.getCameraInfo(i, cameraInfo);
-			if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
-				defaultCameraId = i;
-			}
-		}
-	}
-
-	private void setupScanner() {
-		scanner = new ImageScanner();
-		scanner.setConfig(0, Config.X_DENSITY, 3);
-		scanner.setConfig(0, Config.Y_DENSITY, 3);
-	}
-
-	private void setupAutoFocus() {
-		autoFocusHandler = new Handler();
-		mPreview.setAutoFocusCallback(autoFocusCallback);
-	}
-
-	private void setupDatabase() {
-		database = DatabaseHelperFactory.getInstance();
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.activity_camera);
 	}
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
-
-		// Open the default i.e. the first rear facing camera.
+		// Create an instance of Camera
 		mCamera = getCameraInstance();
-		cameraCurrentlyLocked = defaultCameraId;
-		mPreview.setCamera(mCamera);
+
+		autoFocusHandler = new Handler();
+
+		scanner = new ImageScanner();
+		scanner.setConfig(0, Config.X_DENSITY, 3);
+		scanner.setConfig(0, Config.Y_DENSITY, 3);
+
+		// Get instance of DatabaseHelper class
+		database = DatabaseHelperFactory.getInstance();
+
+		// Create our Preview view and set it as the content of our activity.
+		mPreview = new CameraPreview(this, mCamera, previewCallback,
+				autoFocusCallback);
+
+		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+		preview.addView(mPreview);
 	}
 
-	private static Camera getCameraInstance() {
+	@Override
+	public void onPause() {
+		super.onPause();
+		releaseCamera();
+	}
+
+	public static Camera getCameraInstance() {
 		Camera camera = null;
 
 		try {
@@ -131,27 +96,7 @@ public class CameraActivity extends Activity {
 		return camera;
 	}
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-
-		// Because the Camera object is a shared resource, it's very
-		// important to release it when the activity is paused.
-		releaseCamera();
-	}
-
-	private void releaseCamera() {
-		if (mCamera != null) {
-			mPreviewRunning = false;
-			mCamera.stopPreview();
-			mCamera.setPreviewCallback(null);
-			mPreview.setCamera(null);
-			mCamera.release();
-			mCamera = null;
-		}
-	}
-
-	private PreviewCallback previewCallback = new PreviewCallback() {
+	PreviewCallback previewCallback = new PreviewCallback() {
 		public void onPreviewFrame(byte[] data, Camera camera) {
 			Camera.Parameters parameters = camera.getParameters();
 			Size size = parameters.getPreviewSize();
@@ -164,24 +109,24 @@ public class CameraActivity extends Activity {
 			if (result != 0) {
 				SymbolSet syms = scanner.getResults();
 				for (Symbol sym : syms) {
-					barcodeData = sym.getData();
-					checkBarcode();
+					barcodeInfo = sym.getData();
+					viewProduct();
 				}
 			}
 		}
 	};
 
-	private void checkBarcode() {
+	private void viewProduct() {
 		// Initialize the bundle that we will send to the productActivity
 		Bundle productBundle = new Bundle();
 		Intent productIntent;
 
 		// Just for now we make barcode shorter before we change int to long in
 		// database
-		barcodeData = barcodeData.substring(0, 6);
+		barcodeInfo = barcodeInfo.substring(0, 6);
 
 		// Cast scanned barcode to an int
-		int barcode = (int) Integer.parseInt(barcodeData);
+		int barcode = (int) Integer.parseInt(barcodeInfo);
 
 		// Try to match the barcode with a product from the database
 		Product product = database.getProduct(barcode);
@@ -204,7 +149,7 @@ public class CameraActivity extends Activity {
 			productIntent = new Intent(this, ProductActivity.class);
 		} else {
 			// Put new product ID in bundle
-			productBundle.putString("productID", barcodeData);
+			productBundle.putString("productID", barcodeInfo);
 
 			// Set AddNewActivity as the intent
 			productIntent = new Intent(this, AddNewActivity.class);
@@ -222,9 +167,20 @@ public class CameraActivity extends Activity {
 		}
 	};
 
-	private AutoFocusCallback autoFocusCallback = new AutoFocusCallback() {
+	AutoFocusCallback autoFocusCallback = new AutoFocusCallback() {
 		public void onAutoFocus(boolean success, Camera camera) {
 			autoFocusHandler.postDelayed(doAutoFocus, 1000);
 		}
 	};
+
+	private void releaseCamera() {
+		if (mCamera != null) {
+			mPreviewRunning = false;
+			mCamera.stopPreview();
+			mCamera.setPreviewCallback(null);
+			mCamera.release();
+			mCamera = null;
+		}
+	}
+	*/
 }

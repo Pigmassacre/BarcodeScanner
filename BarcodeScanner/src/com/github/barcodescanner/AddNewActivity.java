@@ -17,6 +17,7 @@ public class AddNewActivity extends Activity{
 	
 	@SuppressWarnings("unused")
 	private static final String TAG = "AddNewActivity";
+	
 	private DatabaseHelper database;
 	private EditText editPrice;
 	private EditText editName;
@@ -40,6 +41,8 @@ public class AddNewActivity extends Activity{
     	editName = (EditText)findViewById(R.id.new_product_name_field);
     	//EditText instance to get new Price for product
     	editPrice = (EditText)findViewById(R.id.new_product_price);
+    	
+    	System.out.println("AddNewActivity: Started, received bundle: " + productID);
 	}
 	
 	public void addProduct(View view) {

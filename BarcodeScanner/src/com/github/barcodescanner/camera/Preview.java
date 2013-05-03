@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.content.Context;
 import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -21,11 +23,13 @@ import android.view.ViewGroup;
 public class Preview extends ViewGroup implements SurfaceHolder.Callback {
 	private final String TAG = "Preview";
 
-	SurfaceView mSurfaceView;
-	SurfaceHolder mHolder;
-	Size mPreviewSize;
-	List<Size> mSupportedPreviewSizes;
-	Camera mCamera;
+	private SurfaceView mSurfaceView;
+	private SurfaceHolder mHolder;
+	private Size mPreviewSize;
+	private List<Size> mSupportedPreviewSizes;
+	private Camera mCamera;
+	private PreviewCallback mPreviewCallback;
+	private AutoFocusCallback mAutoFocusCallback;
 
 	Preview(Context context) {
 		super(context);
@@ -47,6 +51,14 @@ public class Preview extends ViewGroup implements SurfaceHolder.Callback {
 					.getSupportedPreviewSizes();
 			requestLayout();
 		}
+	}
+
+	public void setPreviewCallback(PreviewCallback previewCallback) {
+		mPreviewCallback = previewCallback;
+	}
+
+	public void setAutoFocusCallback(AutoFocusCallback autoFocusCallback) {
+		mAutoFocusCallback = autoFocusCallback;
 	}
 
 	public void switchCamera(Camera camera) {
@@ -78,6 +90,41 @@ public class Preview extends ViewGroup implements SurfaceHolder.Callback {
 			mPreviewSize = getOptimalPreviewSize(mSupportedPreviewSizes, width,
 					height);
 		}
+	}
+
+	private Size getOptimalPreviewSize(List<Size> sizes, int w, int h) {
+		final double ASPECT_TOLERANCE = 0.1;
+		double targetRatio = (double) w / h;
+		if (sizes == null)
+			return null;
+
+		Size optimalSize = null;
+		double minDiff = Double.MAX_VALUE;
+
+		int targetHeight = h;
+
+		// Try to find an size match aspect ratio and size
+		for (Size size : sizes) {
+			double ratio = (double) size.width / size.height;
+			if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE)
+				continue;
+			if (Math.abs(size.height - targetHeight) < minDiff) {
+				optimalSize = size;
+				minDiff = Math.abs(size.height - targetHeight);
+			}
+		}
+
+		// Cannot find the one match the aspect ratio, ignore the requirement
+		if (optimalSize == null) {
+			minDiff = Double.MAX_VALUE;
+			for (Size size : sizes) {
+				if (Math.abs(size.height - targetHeight) < minDiff) {
+					optimalSize = size;
+					minDiff = Math.abs(size.height - targetHeight);
+				}
+			}
+		}
+		return optimalSize;
 	}
 
 	@Override
@@ -125,43 +172,8 @@ public class Preview extends ViewGroup implements SurfaceHolder.Callback {
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		// Surface will be destroyed when we return, so stop the preview.
 		if (mCamera != null) {
-			mCamera.stopPreview();
+			stopPreview();
 		}
-	}
-
-	private Size getOptimalPreviewSize(List<Size> sizes, int w, int h) {
-		final double ASPECT_TOLERANCE = 0.1;
-		double targetRatio = (double) w / h;
-		if (sizes == null)
-			return null;
-
-		Size optimalSize = null;
-		double minDiff = Double.MAX_VALUE;
-
-		int targetHeight = h;
-
-		// Try to find an size match aspect ratio and size
-		for (Size size : sizes) {
-			double ratio = (double) size.width / size.height;
-			if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE)
-				continue;
-			if (Math.abs(size.height - targetHeight) < minDiff) {
-				optimalSize = size;
-				minDiff = Math.abs(size.height - targetHeight);
-			}
-		}
-
-		// Cannot find the one match the aspect ratio, ignore the requirement
-		if (optimalSize == null) {
-			minDiff = Double.MAX_VALUE;
-			for (Size size : sizes) {
-				if (Math.abs(size.height - targetHeight) < minDiff) {
-					optimalSize = size;
-					minDiff = Math.abs(size.height - targetHeight);
-				}
-			}
-		}
-		return optimalSize;
 	}
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
@@ -172,7 +184,28 @@ public class Preview extends ViewGroup implements SurfaceHolder.Callback {
 		requestLayout();
 
 		mCamera.setParameters(parameters);
-		mCamera.startPreview();
+		startPreview();
+	}
+
+	private void startPreview() {
+		try {
+			mCamera.setPreviewDisplay(mHolder);
+			mCamera.setPreviewCallback(mPreviewCallback);
+			mCamera.startPreview();
+			mCamera.autoFocus(mAutoFocusCallback);
+		} catch (Exception e) {
+			Log.e(TAG, "Exception when starting camera preview", e);
+		}
+	}
+
+	private void stopPreview() {
+		try {
+			if (mCamera != null) {
+				mCamera.stopPreview();
+			}
+		} catch (Exception e) {
+			Log.e(TAG, "Exception when stopping camera preview", e);
+		}
 	}
 
 }
