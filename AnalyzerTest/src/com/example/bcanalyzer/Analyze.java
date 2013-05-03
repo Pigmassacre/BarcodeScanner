@@ -33,8 +33,7 @@ public class Analyze {
 		Bitmap temp = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata .length);
 		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
 		canvas.setBitmap(bitmap);
-		scanLines(10);
-		if (mostPlausibleBarcode[0] != null) drawRectToBitmap(mostPlausibleBarcode[0],mostPlausibleBarcode[1],mostPlausibleBarcode[2],mostPlausibleBarcode[3]);		
+		scanLines(20);	
 	}
 
 	/**
@@ -47,8 +46,7 @@ public class Analyze {
 		Bitmap temp = BitmapFactory.decodeFile(path);
 		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
 		canvas.setBitmap(bitmap);
-		scanLines(10);
-		if (mostPlausibleBarcode[0] != null) drawRectToBitmap(mostPlausibleBarcode[0],mostPlausibleBarcode[1],mostPlausibleBarcode[2],mostPlausibleBarcode[3]);
+		scanLines(30);
 	}
 	
 	public int getWidth() {
@@ -73,11 +71,11 @@ public class Analyze {
 		boolean found = false;
 		List<Integer> horizontalline = new ArrayList<Integer>();
 		for (int i = 1; i < iteration; i++){ 
-			Integer scanline = (getHeight() / 10) * i;
+			Integer scanline = (getHeight() / iteration) * i;
 
 			horizontalline = scanHorizontal(scanline, 0.5f);
 			List<Integer> switchPoints = plausibleBarcode(horizontalline);
-							
+			System.out.println(switchPoints.size());
 			if (switchPoints.size()>=30){ 
 				found = true;
 				Log.d("Value", "true");
@@ -161,19 +159,8 @@ public class Analyze {
 	 * @param switchPointsMain
 	 */
 	private void extendHeightSearch(Integer scanline, List<Integer> switchPointsMain){
-		int iteration = 1;
 		List<Integer> switchPoints = switchPointsMain;
-		
-		while (iteration <= 100) {
-			List<Integer> horizontalline = scanHorizontal(scanline - iteration, 0.5f);
-			List<Integer> temp = plausibleBarcode(horizontalline);
-			
-			if (temp.size()>=30) switchPoints = temp;
-			else break;
-			
-			iteration = iteration + 2;
-		}
-		
+
 		int mostLeft = switchPoints.get(0);
 		int mostRight = switchPoints.get(switchPoints.size()-1);
 		
@@ -183,19 +170,21 @@ public class Analyze {
 		System.out.println("Difference : " + (mostRight - mostLeft));
 		System.out.println("Switchpoints : " + switchPoints.toString());
 		
+		drawRectToBitmap(mostLeft,scanline,mostRight,scanline);
+
 		
-		if (mostPlausibleBarcode[0] != null){ 
+		if (mostPlausibleBarcode[0] != null){
 			if ((mostPlausibleBarcode[2] - mostPlausibleBarcode[0]) >= (mostRight - mostLeft)){
 				mostPlausibleBarcode[0] = mostLeft;
-				mostPlausibleBarcode[1] = scanline - iteration;
+				mostPlausibleBarcode[1] = scanline;
 				mostPlausibleBarcode[2] = mostRight;
 				mostPlausibleBarcode[3] = scanline;
 			}
 		}else {
 			mostPlausibleBarcode[0] = mostLeft;
-			mostPlausibleBarcode[1] = scanline - iteration;
+			mostPlausibleBarcode[1] = scanline;
 			mostPlausibleBarcode[2] = mostRight;
-			mostPlausibleBarcode[3] = scanline + iteration;
+			mostPlausibleBarcode[3] = scanline;
 		}
 	}
 }
