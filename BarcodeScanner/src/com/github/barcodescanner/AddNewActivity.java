@@ -1,5 +1,6 @@
 package com.github.barcodescanner;
 
+import com.github.barcodescanner.camera.CameraActivity;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
 import com.github.barcodescanner.core.Product;

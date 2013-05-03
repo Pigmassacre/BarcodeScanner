@@ -1,5 +1,7 @@
 package com.github.barcodescanner;
 
+import com.github.barcodescanner.camera.CameraActivity;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
