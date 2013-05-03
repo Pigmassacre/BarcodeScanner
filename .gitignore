@@ -96,4 +96,5 @@ proguard/
 .idea/
 
 
-
+# Added R.java to ignore
+BarcodeScanner/gen/com/github/barcodescanner/R.java
