@@ -33,7 +33,7 @@ public class Analyze {
 		Bitmap temp = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata .length);
 		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
 		canvas.setBitmap(bitmap);
-		scanLines(20);	
+		scanLines(10);	
 	}
 
 	/**
@@ -47,6 +47,10 @@ public class Analyze {
 		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
 		canvas.setBitmap(bitmap);
 		scanLines(30);
+		if (mostPlausibleBarcode[0]!=null){
+			drawRectToBitmap(mostPlausibleBarcode[0],mostPlausibleBarcode[1],mostPlausibleBarcode[2],mostPlausibleBarcode[3]);
+			System.out.println(mostPlausibleBarcode[0] + " : " + mostPlausibleBarcode[2]);
+		}else System.out.println("No barcode exist");
 	}
 	
 	public int getWidth() {
@@ -75,7 +79,7 @@ public class Analyze {
 
 			horizontalline = scanHorizontal(scanline, 0.5f);
 			List<Integer> switchPoints = plausibleBarcode(horizontalline);
-			System.out.println(switchPoints.size());
+
 			if (switchPoints.size()>=30){ 
 				found = true;
 				Log.d("Value", "true");
@@ -152,6 +156,7 @@ public class Analyze {
 		}		
 		return switches;
 	}
+	
 	/**
 	 * 
 	 * 
@@ -159,32 +164,95 @@ public class Analyze {
 	 * @param switchPointsMain
 	 */
 	private void extendHeightSearch(Integer scanline, List<Integer> switchPointsMain){
-		List<Integer> switchPoints = switchPointsMain;
+		List<Integer> switchPoints = getSmallestSubset(switchPointsMain);
 
-		int mostLeft = switchPoints.get(0);
-		int mostRight = switchPoints.get(switchPoints.size()-1);
+		int count = lookUpAndDown(scanline, switchPoints);
 		
-		System.out.println("Most left : " + mostLeft);
-		System.out.println("Most rigth : " + mostRight);
-		System.out.println("Length : " + switchPoints.size());
-		System.out.println("Difference : " + (mostRight - mostLeft));
-		System.out.println("Switchpoints : " + switchPoints.toString());
-		
-		drawRectToBitmap(mostLeft,scanline,mostRight,scanline);
-
-		
-		if (mostPlausibleBarcode[0] != null){
-			if ((mostPlausibleBarcode[2] - mostPlausibleBarcode[0]) >= (mostRight - mostLeft)){
+		if (count > 0){
+			int mostLeft = switchPoints.get(0);
+			int mostRight = switchPoints.get(switchPoints.size()-1);
+			
+			if (mostPlausibleBarcode[0] != null){
+				if ((mostPlausibleBarcode[2] - mostPlausibleBarcode[0]) >= (mostRight - mostLeft) && switchPoints.size()==30){
+					mostPlausibleBarcode[0] = mostLeft;
+					mostPlausibleBarcode[1] = scanline;
+					mostPlausibleBarcode[2] = mostRight;
+					mostPlausibleBarcode[3] = scanline;
+					drawRectToBitmap(mostLeft,scanline,mostRight,scanline);
+				}
+			}else {
 				mostPlausibleBarcode[0] = mostLeft;
 				mostPlausibleBarcode[1] = scanline;
 				mostPlausibleBarcode[2] = mostRight;
 				mostPlausibleBarcode[3] = scanline;
+				drawRectToBitmap(mostLeft,scanline,mostRight,scanline);
 			}
-		}else {
-			mostPlausibleBarcode[0] = mostLeft;
-			mostPlausibleBarcode[1] = scanline;
-			mostPlausibleBarcode[2] = mostRight;
-			mostPlausibleBarcode[3] = scanline;
 		}
+	}
+	
+	private int lookUpAndDown(Integer scanline,List<Integer> switchPointsMain){
+		int delta = getHeight() / 20;
+		int count = 0;
+		List <Integer> switchPoints;
+		List <Integer> horizontalline;
+		
+		//looks delta distance above scanline for similar pattern
+		horizontalline = scanHorizontal(scanline - delta, 0.5f);
+		switchPoints = getSmallestSubset(plausibleBarcode(horizontalline));
+		if (switchPoints.size() == switchPointsMain.size())
+			count++;
+
+		//looks delta distance below scanline for similar pattern
+			horizontalline = scanHorizontal(scanline + delta, 0.5f);
+			switchPoints = getSmallestSubset(plausibleBarcode(horizontalline));
+			if (switchPoints.size() == switchPointsMain.size())
+				count++;
+			
+		System.out.println("Both or sideways ? : " + count);
+		return count;
+	}
+	
+	private List<Integer> getSmallestSubset(List<Integer> switchPoints){
+		System.out.println("The size before was : " + switchPoints.size());
+		boolean cut;
+		int greatestDistance;
+		int location;
+		int tempDistance;		
+		List<Integer> tmpSwitchPoints;
+		do {
+			tmpSwitchPoints = switchPoints;
+			cut = false;
+			greatestDistance = 0;
+			location = 0;
+			tempDistance = 0;
+			
+			for (int i = 1; i < switchPoints.size(); i++){
+				tempDistance = switchPoints.get(i) - switchPoints.get(i-1);
+				if (tempDistance >= greatestDistance){
+					greatestDistance = tempDistance;
+					location = i;
+				}
+			}
+			
+			int subArrayRight = switchPoints.size() - location - 1;
+			int subArrayLeft = location;
+			
+			if (subArrayRight >= subArrayLeft && subArrayRight >= 30){
+				switchPoints = switchPoints.subList(location, switchPoints.size());
+				cut = true;
+			}
+			else if (subArrayRight <= subArrayLeft && subArrayLeft>=30){
+				switchPoints = switchPoints.subList(0, location);
+				cut = true;
+			}
+			
+		if (switchPoints.size() < 30)
+			switchPoints = tmpSwitchPoints;
+		
+		}while (switchPoints.size() > 30 && cut);
+		
+		System.out.println("The size after is : " + switchPoints.size());
+
+		return switchPoints;
 	}
 }

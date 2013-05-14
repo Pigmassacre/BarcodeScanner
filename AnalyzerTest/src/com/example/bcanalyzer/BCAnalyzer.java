@@ -34,19 +34,20 @@ public class BCAnalyzer extends Activity {
 		
 		image = new File(path.toString() + "/" + message);
 		
-		Bitmap bitmap = BitmapFactory.decodeFile(path.toString() + "/" + "test7" + ".jpg");
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		bitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos);
-		byte[] byte_image = baos.toByteArray();
+		//Bitmap bitmap = BitmapFactory.decodeFile(path.toString() + "/" + "test5" + ".jpg");
+		//ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		//bitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos);
+		//byte[] byte_image = baos.toByteArray();
 		
 		if (image.exists()){
-			analyze = new Analyze(path.toString() + "/" + "test16" + ".jpg");
+			analyze = new Analyze(path.toString() + "/" + "test7" + ".jpg");
 			//analyze = new Analyze(byte_image);
 			imgView.setImageBitmap(analyze.getBitmap());
 		}else
 			Log.d("Output","File does not exist");
 		
 		setContentView(imgView);
+		
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
