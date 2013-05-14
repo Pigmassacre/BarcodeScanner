@@ -5,19 +5,19 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
-public class BCAnalyzer {
+public class Analyzer {
 	private Bitmap bitmap;
 	@SuppressWarnings("unused") //yah whatever
 	private Canvas canvas;
 
 	//constructor for BCanalyser with a path as paramter
-	public BCAnalyzer(String path) {
+	public Analyzer(String path) {
 		this.bitmap = BitmapFactory.decodeFile(path);
 		this.setCanvas(new Canvas(bitmap)); 
 	}
 	
 	//constructor for BCanalyser with a byte array as paramter
-	public BCAnalyzer(byte[] bitmapdata) {
+	public Analyzer(byte[] bitmapdata) {
 		this.bitmap = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata .length);
 		//this.setCanvas(new Canvas(bitmap)); 
 		//System.out.println(scanHorizontal(getHeight()/2,0.3f));
