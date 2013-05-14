@@ -33,7 +33,7 @@ public class Analyze {
 		Bitmap temp = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata .length);
 		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
 		canvas.setBitmap(bitmap);
-		scanLines(10);	
+		scanLines(10);
 	}
 
 	/**
@@ -52,6 +52,8 @@ public class Analyze {
 			System.out.println(mostPlausibleBarcode[0] + " : " + mostPlausibleBarcode[2]);
 		}else System.out.println("No barcode exist");
 	}
+	
+
 	
 	public int getWidth() {
 		return bitmap.getWidth();
@@ -203,10 +205,10 @@ public class Analyze {
 			count++;
 
 		//looks delta distance below scanline for similar pattern
-			horizontalline = scanHorizontal(scanline + delta, 0.5f);
-			switchPoints = getSmallestSubset(plausibleBarcode(horizontalline));
-			if (switchPoints.size() == switchPointsMain.size())
-				count++;
+		horizontalline = scanHorizontal(scanline + delta, 0.5f);
+		switchPoints = getSmallestSubset(plausibleBarcode(horizontalline));
+		if (switchPoints.size() == switchPointsMain.size())
+			count++;
 			
 		System.out.println("Both or sideways ? : " + count);
 		return count;
