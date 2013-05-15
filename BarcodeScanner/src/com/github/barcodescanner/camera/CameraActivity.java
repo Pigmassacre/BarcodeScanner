@@ -1,13 +1,20 @@
 package com.github.barcodescanner.camera;
 
+import java.io.ByteArrayOutputStream;
+
 import com.github.barcodescanner.AddNewActivity;
+import com.github.barcodescanner.DrawView;
 import com.github.barcodescanner.ProductActivity;
+import com.github.barcodescanner.core.Analyze;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
 import com.github.barcodescanner.core.Product;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.CameraInfo;
@@ -45,6 +52,10 @@ public class CameraActivity extends Activity {
 	private ImageScanner scanner;
 
 	private DatabaseHelper database;
+	
+	private Analyze bcAnalyzer;
+	
+	private DrawView draw;
 
 	// Load zbar library
 	static {
@@ -74,11 +85,20 @@ public class CameraActivity extends Activity {
 
 		// Setup the database
 		setupDatabase();
+		
+		//barcode analyzer
+		bcAnalyzer = new Analyze();
+		
+		draw = new DrawView(this);
+		
+	
 	}
 
 	private void setupPreview() {
 		mPreview = new Preview(this);
 		setContentView(mPreview);
+		
+		setContentView(draw);
 		mPreviewRunning = true;
 		mPreview.setPreviewCallback(previewCallback);
 	}
@@ -153,7 +173,21 @@ public class CameraActivity extends Activity {
 
 	private PreviewCallback previewCallback = new PreviewCallback() {
 		public void onPreviewFrame(byte[] data, Camera camera) {
-			Camera.Parameters parameters = camera.getParameters();
+
+			
+			Size previewSize = camera.getParameters().getPreviewSize(); 
+			YuvImage yuvimage=new YuvImage(data, ImageFormat.NV21, previewSize.width, previewSize.height, null);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			yuvimage.compressToJpeg(new Rect(0, 0, previewSize.width, previewSize.height), 80, baos);
+			byte[] jdata = baos.toByteArray();
+			bcAnalyzer.setData(jdata);
+			Integer[] line = bcAnalyzer.getMostPlausible();
+			
+			/*if(line[0] != null){
+				draw.setLineArray(line);
+				setContentView(draw);
+			}*/
+			/*Camera.Parameters parameters = camera.getParameters();
 			Size size = parameters.getPreviewSize();
 
 			Image barcode = new Image(size.width, size.height, "Y800");
@@ -167,7 +201,7 @@ public class CameraActivity extends Activity {
 					barcodeData = sym.getData();
 					checkBarcode();
 				}
-			}
+			}*/
 		}
 	};
 

@@ -1,5 +1,6 @@
 package com.github.barcodescanner.core;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,9 +49,15 @@ public class Analyze {
 		}else System.out.println("No barcode exist");
 	}
 	
-	public void SetData(byte[] bitmapdata){
-		Bitmap temp = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata .length);
-		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
+	public void setData(byte[] bitmapdata){
+		if(bitmapdata == null)
+			System.out.println("BITMAPDATA NULL!!!!!!!!");
+		Bitmap temp = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata.length);
+		if(temp == null)
+			System.out.println(bitmapdata.length);
+		//bitmap = Bitmap.createBitmap(temp.getWidth(), temp.getHeight(), temp.getConfig());
+		bitmap = temp.copy(temp.getConfig(), true);
+		//bitmap = Bitmap.createBitmap(temp., 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());	
 		canvas.setBitmap(bitmap);
 		scanLines(10);	
 	}
@@ -67,6 +74,10 @@ public class Analyze {
 		return this.bitmap;
 	}
 	
+	public Integer[] getMostPlausible(){
+		return mostPlausibleBarcode;
+	}
+	
 	/**
 	 * This method is the first in the chain of methods looking for barcode.
 	 * 
@@ -81,7 +92,7 @@ public class Analyze {
 
 			horizontalline = scanHorizontal(scanline, 0.5f);
 			List<Integer> switchPoints = plausibleBarcode(horizontalline);
-
+			System.out.println(switchPoints.size());
 			if (switchPoints.size()>=30){ 
 				found = true;
 				Log.d("Value", "true");
@@ -129,7 +140,6 @@ public class Analyze {
 			red = (bitmap.getPixel(x, heightLine))&0xFF;
 			green = (bitmap.getPixel(x, heightLine)>>8)&0xFF;
 			blue = (bitmap.getPixel(x, heightLine)>>16)&0xFF;
-			
 			Color.RGBToHSV(red, green, blue, hsv);
 
 			if (hsv[2]>1.0-threshold) lineData.add(0);
@@ -256,5 +266,6 @@ public class Analyze {
 		System.out.println("The size after is : " + switchPoints.size());
 
 		return switchPoints;
-	}
+	}	
+	
 }

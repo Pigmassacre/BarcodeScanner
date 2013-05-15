@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
 import android.util.Log;
@@ -181,9 +183,16 @@ public class Preview extends ViewGroup implements SurfaceHolder.Callback {
 		// the preview.
 		Camera.Parameters parameters = mCamera.getParameters();
 		parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+		
+		
+		System.out.println(mCamera.getParameters().getPictureFormat());
+		ImageFormat image = new ImageFormat();
+		parameters.setPictureFormat(image.JPEG);
+
 		requestLayout();
 
 		mCamera.setParameters(parameters);
+		System.out.println(mCamera.getParameters().getPictureFormat());
 		startPreview();
 	}
 
