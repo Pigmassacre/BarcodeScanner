@@ -37,9 +37,9 @@ public class DrawView extends SurfaceView {
 	protected void onDraw(Canvas canvas) {
 		// Draws a straight horizontal line from x values 50 to 700 on y value
 		// 300
-		//canvas.drawLine(line[0], line[1], line[2], line[3], linePaint);
+		canvas.drawLine(line[0], line[1], line[2], line[3], linePaint);
 		// Draws a straight vertical line from x value 700 and y values 320 to
 		// 500
-		canvas.drawLine(700, 320, 700, 500, linePaint);
+		//canvas.drawLine(700, 320, 700, 500, linePaint);
 	}
 }

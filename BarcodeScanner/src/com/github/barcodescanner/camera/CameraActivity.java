@@ -59,7 +59,7 @@ public class CameraActivity extends Activity {
 
 	// Load zbar library
 	static {
-		System.loadLibrary("iconv");
+		//System.loadLibrary("iconv");
 	}
 
 	@Override
@@ -98,9 +98,11 @@ public class CameraActivity extends Activity {
 		mPreview = new Preview(this);
 		setContentView(mPreview);
 		
-		setContentView(draw);
+//		setContentView(draw);
 		mPreviewRunning = true;
+		System.out.println(previewCallback);
 		mPreview.setPreviewCallback(previewCallback);
+		System.out.println(previewCallback);
 	}
 
 	private void findDefaultCameraId() {
@@ -183,10 +185,10 @@ public class CameraActivity extends Activity {
 			bcAnalyzer.setData(jdata);
 			Integer[] line = bcAnalyzer.getMostPlausible();
 			
-			/*if(line[0] != null){
+			if(line[0] != null){
 				draw.setLineArray(line);
 				setContentView(draw);
-			}*/
+			}
 			/*Camera.Parameters parameters = camera.getParameters();
 			Size size = parameters.getPreviewSize();
 
