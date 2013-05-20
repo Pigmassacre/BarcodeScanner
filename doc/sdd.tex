@@ -1,0 +1,106 @@
+% sdd.tex
+
+\documentclass{report}
+\linespread{1.2}
+\renewcommand{\chaptername}{}
+\usepackage{times} %Times is nice
+\usepackage{url}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec, blindtext, color}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+
+\begin{document}
+
+\title{System Design Document for Barcode Scanner Project (SDD) - Group 30}
+\author{
+    Christian Svensson\\
+    \and
+    Olle Andreasson\\
+    \and
+    Olof Karlsson\\
+    \and
+    Rasmus Letterkrantz
+}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+
+\end{abstract}
+
+\chapter{Introduction}
+TODO
+
+\section{Design Goals}
+TODO
+
+\section{Definitions, Acronyms and Abbreviations}
+TODO
+
+\begin{itemize}
+    \item{GUI}, Graphical User Interface.
+\end{itemize}
+
+\chapter{System Design}
+TODO
+
+\section{Overview}
+TODO
+
+\subsection{The Model Functionality}
+TODO
+
+\section{Software Decomposition}
+TODO
+
+\subsection{General}
+TODO- What parts are our software split into? 
+
+\subsection{General}
+TODO
+
+\subsection{Layering}
+TODO
+
+\subsection{Dependency analysis}
+TODO
+
+
+\section{Concurrency Issues}
+TODO
+
+\section{Persistent data management}
+TODO
+
+\section{Access control and security}
+TODO
+
+\section{Boundary conditions}
+TODO
+
+
+\chapter{References}
+TODO
+
+\begin{enumerate}
+    \item Full Feature Extraction, Binary Word List
+\end{enumerate}
+
+
+\bibliographystyle{plain}
+\bibliography{references.bib}
+
+\nocite{*}
+
+\appendix
+
+
+\end{document}
