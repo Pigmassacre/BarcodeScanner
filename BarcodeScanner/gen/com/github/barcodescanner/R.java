@@ -67,7 +67,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int products_table=0x7f09000c;
         public static final int start_button=0x7f090016;
         public static final int tableRow=0x7f09000d;
-        public static final int takePictureButton=0x7f09000b;
+        public static final int take_picture_button=0x7f09000b;
         public static final int textView=0x7f09000e;
         public static final int title=0x7f090013;
         public static final int version=0x7f090014;
