@@ -6,7 +6,7 @@ import com.github.barcodescanner.AddNewActivity;
 import com.github.barcodescanner.DrawView;
 import com.github.barcodescanner.ProductActivity;
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.core.Analyze;
+import com.github.barcodescanner.core.BCLocator;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
 import com.github.barcodescanner.core.Product;
@@ -25,9 +25,11 @@ import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import net.sourceforge.zbar.ImageScanner;
 import net.sourceforge.zbar.Image;
@@ -56,9 +58,10 @@ public class CameraActivity extends Activity {
 
 	private DatabaseHelper database;
 	
-	private Analyze bcAnalyzer;
+	private BCLocator bcAnalyzer;
 	
 	private DrawView draw;
+	ImageView imageV;
 
 	// Load zbar library
 	static {
@@ -82,6 +85,11 @@ public class CameraActivity extends Activity {
 		// and set it as the content of our activity.
 		//setupPreview();
 
+		
+		
+		imageV = new ImageView(this);
+		
+		
 		// Find the ID of the default camera
 		findDefaultCameraId();
 
@@ -95,7 +103,7 @@ public class CameraActivity extends Activity {
 		setupDatabase();
 		
 		//barcode analyzer
-		bcAnalyzer = new Analyze();
+		bcAnalyzer = new BCLocator();
 		
 		//draw = new DrawView(this);
 		
@@ -199,11 +207,13 @@ public class CameraActivity extends Activity {
 			byte[] jdata = baos.toByteArray();
 			bcAnalyzer.setData(jdata);
 			Integer[] line = bcAnalyzer.getMostPlausible();
-			
-			if(line[0] != null){
+			imageV.setImageBitmap(bcAnalyzer.getBitmap());
+			setContentView(imageV);
+			/*if(line[0] != null){
+
 				draw.setLineArray(line);
 				setContentView(draw);
-			}
+			}*/
 			/*Camera.Parameters parameters = camera.getParameters();
 			Size size = parameters.getPreviewSize();
 
@@ -221,6 +231,12 @@ public class CameraActivity extends Activity {
 			}*/
 		}
 	};
+	
+	
+	public void takePicture(View view){
+		
+		mCamera.takePicture(null, null, pictureCallback);
+	}
 
 	private void checkBarcode() {
 		// Initialize the bundle that we will send to the productActivity
