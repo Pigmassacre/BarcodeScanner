@@ -1,4 +1,4 @@
-package com.github.barcodescanner;
+package com.github.barcodescanner.activities;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -2,10 +2,10 @@ package com.github.barcodescanner.camera;
 
 import java.io.ByteArrayOutputStream;
 
-import com.github.barcodescanner.AddNewActivity;
-import com.github.barcodescanner.DrawView;
-import com.github.barcodescanner.ProductActivity;
 import com.github.barcodescanner.R;
+import com.github.barcodescanner.activities.AddNewActivity;
+import com.github.barcodescanner.activities.DrawView;
+import com.github.barcodescanner.activities.ProductActivity;
 import com.github.barcodescanner.core.BCLocator;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
@@ -174,7 +174,7 @@ public class CameraActivity extends Activity {
 		//setupScanner();
 
 		// Setup autofocus handler
-		//setupAutoFocus();
+		setupAutoFocus();
 
 		// Setup the database
 		setupDatabase();

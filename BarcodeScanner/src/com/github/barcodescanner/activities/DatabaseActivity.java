@@ -1,7 +1,10 @@
-package com.github.barcodescanner;
+package com.github.barcodescanner.activities;
 
 import java.util.List;
 
+import com.github.barcodescanner.R;
+import com.github.barcodescanner.R.drawable;
+import com.github.barcodescanner.R.layout;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.Product;
 

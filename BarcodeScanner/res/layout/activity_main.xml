@@ -37,7 +37,7 @@
         android:id="@+id/start_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/button_holder"
+        android:layout_above="@+id/main_button_holder"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="enterCamera"
@@ -46,7 +46,7 @@
         android:textSize="36sp" />
 
     <LinearLayout
-        android:id="@+id/button_holder"
+        android:id="@id/main_button_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" >
