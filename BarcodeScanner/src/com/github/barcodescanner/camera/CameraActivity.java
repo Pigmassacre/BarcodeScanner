@@ -40,7 +40,84 @@ import net.sourceforge.zbar.Config;
 // ----------------------------------------------------------------------
 
 public class CameraActivity extends Activity {
-	private static final String TAG = "CameraActivity";
+	
+	
+	
+    private Camera mCamera;
+    private Preview mPreview;
+	private BCLocator bcAnalyzer;
+	ImageView imageV;
+    private static final String TAG = "CameraActivity"; 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camera);
+
+        // Create an instance of Camera
+        mCamera = getCameraInstance();
+        bcAnalyzer = new BCLocator();
+		imageV = new ImageView(this);
+        // Create our Preview view and set it as the content of our activity.
+        mPreview = new Preview(this, mCamera);
+        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+        preview.addView(mPreview);
+        
+    }
+    
+    
+	private static Camera getCameraInstance() {
+		Camera camera = null;
+
+		try {
+			camera = Camera.open();
+		} catch (Exception e) {
+			Log.e(TAG, "Exception when opening the camera", e);
+		}
+		return camera;
+	}
+	
+	
+	
+	private PictureCallback mPicture = new PictureCallback() {
+
+	    @Override
+	    public void onPictureTaken(byte[] data, Camera camera) {
+	    	System.out.println("BORJAN!!!");
+			bcAnalyzer.setData(data);
+			//Integer[] line = bcAnalyzer.getMostPlausible();
+	    	System.out.println("Analyzer!!!!!!");
+	    	
+	    }
+	};
+	
+	
+	public void takePicture(View view){
+		System.out.println("Tagen BILD!");
+		mCamera.takePicture(null, null, mPicture);
+	}
+	
+	
+    @Override
+    protected void onPause() {
+        super.onPause();
+        releaseCamera(); 
+    }
+	
+    private void releaseCamera(){
+        if (mCamera != null){
+            mCamera.release();        // release the camera for other applications
+            mCamera = null;
+        }
+    }
+	
+	
+	
+	
+	
+	
+	
+	/*private static final String TAG = "CameraActivity";
 
 	private Preview mPreview;
 	private boolean mPreviewRunning;
@@ -64,9 +141,9 @@ public class CameraActivity extends Activity {
 	ImageView imageV;
 
 	// Load zbar library
-	static {
+	//static {
 		//System.loadLibrary("iconv");
-	}
+	//}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +164,11 @@ public class CameraActivity extends Activity {
 
 		
 		
-		imageV = new ImageView(this);
+		//imageV = new ImageView(this);
 		
 		
 		// Find the ID of the default camera
-		findDefaultCameraId();
+		//findDefaultCameraId();
 
 		// Configure the ZBar scanner
 		//setupScanner();
@@ -106,7 +183,7 @@ public class CameraActivity extends Activity {
 		bcAnalyzer = new BCLocator();
 		
 		//draw = new DrawView(this);
-		
+		releaseCamera();
 		mCamera = getCameraInstance();
 		mPreview = new Preview(this,mCamera);
 		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
@@ -127,6 +204,8 @@ public class CameraActivity extends Activity {
 		//mPreview.setPreviewCallback(previewCallback);
 		//System.out.println(previewCallback);
 	}
+	
+	
 
 	private void findDefaultCameraId() {
 		numberOfCameras = Camera.getNumberOfCameras();
@@ -192,6 +271,7 @@ public class CameraActivity extends Activity {
 			mCamera.setPreviewCallback(null);
 			//mPreview.setCamera(null);
 			mCamera.release();
+			mCamera.unlock();
 			mCamera = null;
 		}
 	}
@@ -205,10 +285,11 @@ public class CameraActivity extends Activity {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			yuvimage.compressToJpeg(new Rect(0, 0, previewSize.width, previewSize.height), 80, baos);
 			byte[] jdata = baos.toByteArray();
-			bcAnalyzer.setData(jdata);
+			bcAnalyzer.setData(data);
 			Integer[] line = bcAnalyzer.getMostPlausible();
-			imageV.setImageBitmap(bcAnalyzer.getBitmap());
-			setContentView(imageV);
+			//imageV.setImageBitmap(bcAnalyzer.getBitmap());
+			//releaseCamera();
+			//setContentView(imageV);
 			/*if(line[0] != null){
 
 				draw.setLineArray(line);
@@ -228,7 +309,7 @@ public class CameraActivity extends Activity {
 					barcodeData = sym.getData();
 					checkBarcode();
 				}
-			}*/
+			}
 		}
 	};
 	
@@ -293,5 +374,5 @@ public class CameraActivity extends Activity {
 		public void onAutoFocus(boolean success, Camera camera) {
 			autoFocusHandler.postDelayed(doAutoFocus, 1000);
 		}
-	};
+	};*/
 }
