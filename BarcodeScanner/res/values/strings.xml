@@ -27,6 +27,7 @@
 
     <!-- activity_camera_preview.xml -->
     <string name="title_activity_camera_preview">Camera Preview</string>
+    <string name="take_picture">Take picture</string>
 
     <!-- activity_product.xml -->
     <string name="title_activity_product">ProductActivity</string>

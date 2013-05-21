@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import com.github.barcodescanner.AddNewActivity;
 import com.github.barcodescanner.DrawView;
 import com.github.barcodescanner.ProductActivity;
+import com.github.barcodescanner.R;
 import com.github.barcodescanner.core.Analyze;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
@@ -18,6 +19,7 @@ import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.CameraInfo;
+import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import net.sourceforge.zbar.ImageScanner;
 import net.sourceforge.zbar.Image;
@@ -66,22 +69,27 @@ public class CameraActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+
 		// Hide the window title.
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.activity_camera);
+		
+		//Set layout 
+
 
 		// Create a RelativeLayout container that will hold a SurfaceView,
 		// and set it as the content of our activity.
-		setupPreview();
+		//setupPreview();
 
 		// Find the ID of the default camera
 		findDefaultCameraId();
 
 		// Configure the ZBar scanner
-		setupScanner();
+		//setupScanner();
 
 		// Setup autofocus handler
-		setupAutoFocus();
+		//setupAutoFocus();
 
 		// Setup the database
 		setupDatabase();
@@ -89,20 +97,27 @@ public class CameraActivity extends Activity {
 		//barcode analyzer
 		bcAnalyzer = new Analyze();
 		
-		draw = new DrawView(this);
+		//draw = new DrawView(this);
+		
+		mCamera = getCameraInstance();
+		mPreview = new Preview(this,mCamera);
+		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
+		frameLayout.addView(mPreview);
 		
 	
 	}
 
 	private void setupPreview() {
-		mPreview = new Preview(this);
-		setContentView(mPreview);
-		
+		//setContentView(R.layout.activity_camera);
+		//mPreview = new Preview(this);
+
+		//setContentView(mPreview);
+
 //		setContentView(draw);
-		mPreviewRunning = true;
-		System.out.println(previewCallback);
-		mPreview.setPreviewCallback(previewCallback);
-		System.out.println(previewCallback);
+		//mPreviewRunning = true;
+		//System.out.println(previewCallback);
+		//mPreview.setPreviewCallback(previewCallback);
+		//System.out.println(previewCallback);
 	}
 
 	private void findDefaultCameraId() {
@@ -125,7 +140,7 @@ public class CameraActivity extends Activity {
 
 	private void setupAutoFocus() {
 		autoFocusHandler = new Handler();
-		mPreview.setAutoFocusCallback(autoFocusCallback);
+		//mPreview.setAutoFocusCallback(autoFocusCallback);
 	}
 
 	private void setupDatabase() {
@@ -139,7 +154,7 @@ public class CameraActivity extends Activity {
 		// Open the default i.e. the first rear facing camera.
 		mCamera = getCameraInstance();
 		cameraCurrentlyLocked = defaultCameraId;
-		mPreview.setCamera(mCamera);
+		//mPreview.setCamera(mCamera);
 	}
 
 	private static Camera getCameraInstance() {
@@ -167,14 +182,14 @@ public class CameraActivity extends Activity {
 			mPreviewRunning = false;
 			mCamera.stopPreview();
 			mCamera.setPreviewCallback(null);
-			mPreview.setCamera(null);
+			//mPreview.setCamera(null);
 			mCamera.release();
 			mCamera = null;
 		}
 	}
 
-	private PreviewCallback previewCallback = new PreviewCallback() {
-		public void onPreviewFrame(byte[] data, Camera camera) {
+	private PictureCallback pictureCallback = new PictureCallback() {
+		public void onPictureTaken(byte[] data, Camera camera) {
 
 			
 			Size previewSize = camera.getParameters().getPreviewSize(); 
