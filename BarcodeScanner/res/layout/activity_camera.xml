@@ -13,7 +13,7 @@
         android:layout_marginTop="0dp" />
 
     <Button
-        android:id="@+id/takePictureButton"
+        android:id="@+id/take_picture_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
