@@ -18,7 +18,7 @@
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.github.barcodescanner.view.MainActivity"
+            android:name="com.github.barcodescanner.activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
@@ -30,19 +30,19 @@
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
-            android:ncom.github.barcodescanner.view.ProductActivityivity"
+            android:name="com.github.barcodescanner.activities.ProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_product"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:ncom.github.barcodescanner.view.AddNewActivityivity"
+            android:name="com.github.barcodescanner.activities.AddNewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_product"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.github.barcodescanner.view.IntroductionActivity"
+            android:name="com.github.barcodescanner.activities.IntroductionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >

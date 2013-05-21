@@ -97,7 +97,7 @@ public class CameraActivity extends Activity {
 		//setupScanner();
 
 		// Setup autofocus handler
-		//setupAutoFocus();
+		setupAutoFocus();
 
 		// Setup the database
 		setupDatabase();
