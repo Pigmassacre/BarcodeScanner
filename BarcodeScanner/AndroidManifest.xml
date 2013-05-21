@@ -26,7 +26,7 @@
             android:name="com.github.barcodescanner.camera.CameraActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_camera"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
