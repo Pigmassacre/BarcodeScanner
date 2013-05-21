@@ -3,13 +3,13 @@ package com.github.barcodescanner.camera;
 import java.io.ByteArrayOutputStream;
 
 import com.github.barcodescanner.R;
+import com.github.barcodescanner.activities.AddNewActivity;
+import com.github.barcodescanner.activities.DrawView;
+import com.github.barcodescanner.activities.ProductActivity;
 import com.github.barcodescanner.core.BCLocator;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
 import com.github.barcodescanner.core.Product;
-import com.github.barcodescanner.view.AddNewActivity;
-import com.github.barcodescanner.view.DrawView;
-import com.github.barcodescanner.view.ProductActivity;
 
 import android.app.Activity;
 import android.content.Intent;

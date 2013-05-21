@@ -1,12 +1,12 @@
 package com.github.barcodescanner.old;
 
 import com.github.barcodescanner.R;
+import com.github.barcodescanner.activities.AddNewActivity;
+import com.github.barcodescanner.activities.ProductActivity;
 import com.github.barcodescanner.camera.Preview;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
 import com.github.barcodescanner.core.Product;
-import com.github.barcodescanner.view.AddNewActivity;
-import com.github.barcodescanner.view.ProductActivity;
 
 import net.sourceforge.zbar.ImageScanner;
 import net.sourceforge.zbar.Image;
