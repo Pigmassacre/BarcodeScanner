@@ -87,8 +87,13 @@ public class BCLocator {
 				System.out.println(switchPoints.size());
 				Log.d("Value", "true");
 				extendHeightSearch(scanline,switchPoints);
+<<<<<<< HEAD
 			}else{
 				System.out.println("Value false");
+=======
+			} else {
+				Log.d("Value", "false");
+>>>>>>> ab4575bec7137d815d5e889a2a590d97879b3a68
 			}
 
 		}

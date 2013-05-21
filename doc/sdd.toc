@@ -1,0 +1,15 @@
+\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}
+\contentsline {section}{\numberline {1.1}Design Goals}{2}{section.1.1}
+\contentsline {section}{\numberline {1.2}Definitions, Acronyms and Abbreviations}{3}{section.1.2}
+\contentsline {chapter}{\numberline {2}System Design}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}Overview}{4}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}The Model Functionality}{4}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Storage}{4}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}Software Decomposition}{5}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}General}{5}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Decomposition into subsystems}{5}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Layering}{5}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Dependency analysis}{5}{subsection.2.2.4}
+\contentsline {section}{\numberline {2.3}Concurrency Issues}{6}{section.2.3}
+\contentsline {section}{\numberline {2.4}Access control and security}{6}{section.2.4}
+\contentsline {section}{\numberline {2.5}Boundary conditions}{6}{section.2.5}

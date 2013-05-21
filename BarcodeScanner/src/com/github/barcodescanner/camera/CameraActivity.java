@@ -123,7 +123,6 @@ public class CameraActivity extends Activity {
 	private boolean mPreviewRunning;
 	private Camera mCamera;
 	private int numberOfCameras;
-	private int cameraCurrentlyLocked;
 
 	// The first rear facing camera
 	private int defaultCameraId;
@@ -134,53 +133,63 @@ public class CameraActivity extends Activity {
 	private ImageScanner scanner;
 
 	private DatabaseHelper database;
-	
+
 	private BCLocator bcAnalyzer;
-	
+
 	private DrawView draw;
 	ImageView imageV;
 
 	// Load zbar library
+<<<<<<< HEAD
 	//static {
 		//System.loadLibrary("iconv");
 	//}
+=======
+	static {
+		// System.loadLibrary("iconv");
+	}
+>>>>>>> ab4575bec7137d815d5e889a2a590d97879b3a68
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-
 		// Hide the window title.
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_camera);
-		
-		//Set layout 
 
+		// Set layout
 
 		// Create a RelativeLayout container that will hold a SurfaceView,
 		// and set it as the content of our activity.
-		//setupPreview();
+		// setupPreview();
 
+<<<<<<< HEAD
 		
 		
 		//imageV = new ImageView(this);
 		
 		
+=======
+		imageV = new ImageView(this);
+
+>>>>>>> ab4575bec7137d815d5e889a2a590d97879b3a68
 		// Find the ID of the default camera
 		//findDefaultCameraId();
 
 		// Configure the ZBar scanner
-		//setupScanner();
+		// setupScanner();
 
 		// Setup autofocus handler
-		setupAutoFocus();
+		// setupAutoFocus();
 
 		// Setup the database
-		setupDatabase();
-		
-		//barcode analyzer
+		getDatabase();
+
+		// barcode analyzer
 		bcAnalyzer = new BCLocator();
+<<<<<<< HEAD
 		
 		//draw = new DrawView(this);
 		releaseCamera();
@@ -190,19 +199,22 @@ public class CameraActivity extends Activity {
 		frameLayout.addView(mPreview);
 		
 	
+=======
+
+>>>>>>> ab4575bec7137d815d5e889a2a590d97879b3a68
 	}
 
 	private void setupPreview() {
-		//setContentView(R.layout.activity_camera);
-		//mPreview = new Preview(this);
+		// setContentView(R.layout.activity_camera);
+		// mPreview = new Preview(this);
 
-		//setContentView(mPreview);
+		// setContentView(mPreview);
 
-//		setContentView(draw);
-		//mPreviewRunning = true;
-		//System.out.println(previewCallback);
-		//mPreview.setPreviewCallback(previewCallback);
-		//System.out.println(previewCallback);
+		// setContentView(draw);
+		// mPreviewRunning = true;
+		// System.out.println(previewCallback);
+		// mPreview.setPreviewCallback(previewCallback);
+		// System.out.println(previewCallback);
 	}
 	
 	
@@ -227,10 +239,10 @@ public class CameraActivity extends Activity {
 
 	private void setupAutoFocus() {
 		autoFocusHandler = new Handler();
-		//mPreview.setAutoFocusCallback(autoFocusCallback);
+		// mPreview.setAutoFocusCallback(autoFocusCallback);
 	}
 
-	private void setupDatabase() {
+	private void getDatabase() {
 		database = DatabaseHelperFactory.getInstance();
 	}
 
@@ -240,8 +252,12 @@ public class CameraActivity extends Activity {
 
 		// Open the default i.e. the first rear facing camera.
 		mCamera = getCameraInstance();
-		cameraCurrentlyLocked = defaultCameraId;
-		//mPreview.setCamera(mCamera);
+		System.err.println("mCamera is: " + mCamera);
+		mPreview = new Preview(this, mCamera);
+		// gets the FrameLayout camera_preview in activity_camera.xml
+		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
+		// adds the mPreview view to that FrameLayout
+		frameLayout.addView(mPreview);
 	}
 
 	private static Camera getCameraInstance() {
@@ -269,7 +285,7 @@ public class CameraActivity extends Activity {
 			mPreviewRunning = false;
 			mCamera.stopPreview();
 			mCamera.setPreviewCallback(null);
-			//mPreview.setCamera(null);
+			// mPreview.setCamera(null);
 			mCamera.release();
 			mCamera.unlock();
 			mCamera = null;
@@ -278,6 +294,7 @@ public class CameraActivity extends Activity {
 
 	private PictureCallback pictureCallback = new PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
+<<<<<<< HEAD
 
 			
 			Size previewSize = camera.getParameters().getPreviewSize(); 
@@ -310,12 +327,47 @@ public class CameraActivity extends Activity {
 					checkBarcode();
 				}
 			}
+=======
+			System.err.println("data: " + data);
+			/*
+			 * Size previewSize = camera.getParameters().getPreviewSize();
+			 * YuvImage yuvimage=new YuvImage(data, ImageFormat.NV21,
+			 * previewSize.width, previewSize.height, null);
+			 * ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			 * yuvimage.compressToJpeg(new Rect(0, 0, previewSize.width,
+			 * previewSize.height), 80, baos); byte[] jdata =
+			 * baos.toByteArray();
+			 */
+			bcAnalyzer.setData(data);
+			/*
+			 * Integer[] line = bcAnalyzer.getMostPlausible();
+			 * imageV.setImageBitmap(bcAnalyzer.getBitmap());
+			 * setContentView(imageV);
+			 */
+			/*
+			 * if(line[0] != null){
+			 * 
+			 * draw.setLineArray(line); setContentView(draw); }
+			 */
+			/*
+			 * Camera.Parameters parameters = camera.getParameters(); Size size
+			 * = parameters.getPreviewSize();
+			 * 
+			 * Image barcode = new Image(size.width, size.height, "Y800");
+			 * barcode.setData(data);
+			 * 
+			 * int result = scanner.scanImage(barcode);
+			 * 
+			 * if (result != 0) { SymbolSet syms = scanner.getResults(); for
+			 * (Symbol sym : syms) { barcodeData = sym.getData();
+			 * checkBarcode(); } }
+			 */
+>>>>>>> ab4575bec7137d815d5e889a2a590d97879b3a68
 		}
 	};
-	
-	
-	public void takePicture(View view){
-		
+
+	public void takePicture(View view) {
+		System.err.println("mCamera is: " + mCamera);
 		mCamera.takePicture(null, null, pictureCallback);
 	}
 
