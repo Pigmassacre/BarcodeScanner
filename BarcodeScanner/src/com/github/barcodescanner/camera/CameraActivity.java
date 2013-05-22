@@ -191,6 +191,7 @@ public class CameraActivity extends Activity {
 			boolean foundBarcode = bcLocator.foundBarcode();
 
 			if (foundBarcode) {
+				
 				tempBarcode = bcGenerator.normalize();
 				System.err.println("bcGenerator: " + tempBarcode);
 
