@@ -57,6 +57,7 @@ public class BCGenerator {
 		StringBuffer tempStringBuffer = new StringBuffer();
 		StringBuffer finalStringBuffer = new StringBuffer();
 		String tempString = "";
+		int sumEven = 0, sumOdd = 0, checksumValue = 0, checksumDigit = 0;
 
 		if (unNormalized == null) {
 			return "No unnormalized data is set";
@@ -77,11 +78,9 @@ public class BCGenerator {
 			System.out.println("normalize: length of tempStringBuffer: "
 					+ tempStringBuffer.length());
 
-			tempStringBuffer.delete(28, 33); // delete middle part, there is
-												// five bars of length one that
-												// are used as guards between
-												// left and right part of
-												// barcodes
+			// we delete the five middle bars, they are not used for generating
+			// the numbers.
+			tempStringBuffer.delete(28, 33);
 
 			System.out.println("normalize: tempStringBuffer: "
 					+ tempStringBuffer);
@@ -89,18 +88,48 @@ public class BCGenerator {
 					+ tempStringBuffer.length());
 
 			for (int i = 3; i < tempStringBuffer.length() - 2; i += 4) {
-				tempString = tempStringBuffer.substring(i, i + 4); // each barcode number is composed by four bars
+				tempString = tempStringBuffer.substring(i, i + 4); // each
+																	// barcode
+																	// number is
+																	// composed
+																	// by four
+																	// bars
 				System.out.println("normalize: i: " + i);
 				System.out.println("normalize: tempString: " + tempString);
 				for (int j = 0; j < barcodeNumbers.length; j++) {
-					if (tempString.equals(barcodeNumbers[j])) { // does this segment match any barcode number?
-						finalStringBuffer.append(j); // then append it to final string
+					if (tempString.equals(barcodeNumbers[j])) { // does this
+																// segment match
+																// any barcode
+																// number?
+						finalStringBuffer.append(j); // then append it to final
+														// string
 						System.out.println("normalize: " + j + " found!");
 						// adds the matching barcode number to the final
 						// string
 					}
 				}
 			}
+
+			for (int i = 0; i < finalStringBuffer.length(); i++) {
+				if ((i % 2) == 0) { // even numbers
+					sumEven = sumEven + Character.getNumericValue(finalStringBuffer.charAt(i));
+				} else {
+					sumOdd = sumOdd + Character.getNumericValue(finalStringBuffer.charAt(i));
+				}
+			}
+			
+			sumEven = 3 * sumEven;
+			
+			checksumValue = sumEven + sumOdd;
+			System.out.println("normalize: checksumValue: " + checksumValue);
+			checksumDigit = (checksumValue % 10);
+			
+			if (checksumDigit == 10) {
+				checksumDigit = 0;
+			}
+			
+			System.out.println("normalize: checksumDigit is: " + checksumDigit);
+
 			System.out.println("normalize: finalStringBuffer: "
 					+ finalStringBuffer);
 			return finalStringBuffer.toString();

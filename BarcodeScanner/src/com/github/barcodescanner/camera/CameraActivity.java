@@ -247,7 +247,7 @@ public class CameraActivity extends Activity {
 
 	public void takePicture(View view) {
 		System.err.println("mCamera is: " + mCamera);
-		mCamera.autoFocus(autoFocusCallback);
+		//mCamera.autoFocus(autoFocusCallback);
 		mCamera.takePicture(null, null, pictureCallback);
 	}
 
