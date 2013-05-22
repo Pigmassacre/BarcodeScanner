@@ -1,6 +1,8 @@
 package com.github.barcodescanner.camera;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.AddNewActivity;
@@ -195,8 +197,10 @@ public class CameraActivity extends Activity {
 
 	private PictureCallback pictureCallback = new PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
+			List<Integer> tempList = new ArrayList<Integer>();
+			String temp = "";
 			System.err.println("data: " + data);
-			/*
+			/*s
 			 * Size previewSize = camera.getParameters().getPreviewSize();
 			 * YuvImage yuvimage=new YuvImage(data, ImageFormat.NV21,
 			 * previewSize.width, previewSize.height, null);
@@ -207,6 +211,14 @@ public class CameraActivity extends Activity {
 			 */
 			bcLocator.setData(data);
 			boolean foundBarcode = bcLocator.foundBarcode();
+			
+			if (foundBarcode) {
+				tempList = bcGenerator.generate(bcLocator.getSegment());
+				for (int i : tempList) {
+					temp = temp + i;
+				}
+				System.err.println("bcGenerator: " + temp);
+			}
 			
 			/*
 			 * Integer[] line = bcAnalyzer.getMostPlausible();
@@ -265,7 +277,7 @@ public class CameraActivity extends Activity {
 
 			// Put product name in bundle
 			productBundle.putString("productName", productName);
-
+			
 			// Put product price in bundle
 			productBundle.putInt("productPrice", productPrice);
 

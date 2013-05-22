@@ -3,18 +3,18 @@
 
     <string name="app_name">Barcode Scanner</string>
     <string name="action_settings">Settings</string>
-    
+
     <!-- activity_introduction.xml -->
     <string name="title_activity_introduction">IntroductionActivity</string>
     <string name="introduction_logotype_description">Barcode Scanner Logotype</string>
     <string name="introduction_intro_message">Welcome! Please choose what type of user you are.</string>
     <string name="introduction_admin_button">Shop Owner</string>
     <string name="introduction_customer_button">Customer</string>
-    
+
+    <!-- activity_main.xml -->
     <string name="welcome_title">Barcode Scanner</string>
     <string name="version_number">PRE ALPHA</string>
-    <string name="admin_welcome_message">Welcome, admin!</string>
-    <string name="welcome_message">Welcome to our amazing Barcode Scanner. Touch the button below to start scanning!</string>
+    <string name="welcome_message">Welcome to our amazing Barcode Scanner. Touch the button below to start scanning! If you need any help with how to use this app, press the "Help" button below.</string>
     <string name="welcome_button_start">Scan Barcode</string>
     <string name="welcome_button_database">Database</string>
     <string name="welcome_button_help">Help</string>
@@ -31,6 +31,7 @@
 
     <!-- activity_product.xml -->
     <string name="title_activity_product">ProductActivity</string>
+    <string name="default_image_description">An image of the product</string>
     <string name="product_info">Product Info
         Tex. bla blas Mjölk bla bla
         Mjölk är bra bla bla Mjölk
@@ -57,6 +58,12 @@
     <string name="new_product_description_hint">A short description of the product.</string>
     <string name="new_product_add_button">Add product</string>
     <string name="new_product_title_price">Price:</string>
-   	<string name="new_product_price_hint">The price of the product</string>
+    <string name="new_product_price_hint">The price of the product</string>
+    <string name="title_activity_barcode_view">BarcodeViewActivity</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <!-- activity_barcode_view.xml -->
+    <string name="barcode_view_description">Below is a bitmap representing the barcode that our algorithm has found.</string>
+    <string name="barcode_view_image_description">There is supposed to be a barcode bitmap here.</string>
 
 </resources>
