@@ -130,6 +130,8 @@ public class BCGenerator {
 			
 			System.out.println("normalize: checksumDigit is: " + checksumDigit);
 
+			// TODO the checksum digit should be used to find the most likely digit sequence that matches the data and satisfies the checksum digit
+			
 			System.out.println("normalize: finalStringBuffer: "
 					+ finalStringBuffer);
 			return finalStringBuffer.toString();
