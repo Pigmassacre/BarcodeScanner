@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 
 		db.execSQL("CREATE TABLE " + TABLE_PRODUCTS + " (" + KEY_BCODE
-				+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NAME + " TEXT, "
+				+ " TEXT PRIMARY KEY, " + KEY_NAME + " TEXT, "
 				+ KEY_PRICE + " INTEGER)");
 
 		db.execSQL("CREATE VIEW " + VIEW_PRODUCTS + " AS SELECT "

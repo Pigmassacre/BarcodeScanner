@@ -36,7 +36,8 @@
         Tex. bla blas Mjölk bla bla
         Mjölk är bra bla bla Mjölk
         Mjölk Mjölk bla bla bla
-        bla Mjölk bla Mjölk bla	</string>
+        bla Mjölk bla Mjölk bla
+	</string>
     <string name="product_name">Product Name</string>
     <string name="product_price">Product Price</string>
     <string name="add_to_cart">Add To Cart</string>
@@ -65,5 +66,4 @@
     <!-- activity_barcode_view.xml -->
     <string name="barcode_view_description">Below is a bitmap representing the barcode that our algorithm has found.</string>
     <string name="barcode_view_image_description">There is supposed to be a barcode bitmap here.</string>
-
 </resources>

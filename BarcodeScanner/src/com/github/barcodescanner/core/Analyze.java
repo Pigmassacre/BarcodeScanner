@@ -88,7 +88,6 @@ public class Analyze {
 				Log.d("Value", "true");
 				extendHeightSearch(scanline,switchPoints);
 			}
-
 		}
 		return found;
 	}
