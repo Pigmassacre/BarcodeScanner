@@ -76,7 +76,11 @@ public class BCLocator {
 		
 		return segment;
 	}
-	
+	/**
+	 * Used for debug purpose
+	 * 
+	 * @return a segmented bitmap according to mostPlausibleBarcode indexes
+	 */
 	public Bitmap getSegmentedBitmap(){
 		Bitmap segmentedBitmap = Bitmap.createBitmap(bitmap, mostPlausibleBarcode[0], mostPlausibleBarcode[1] - getHeight()/delta, 
 				mostPlausibleBarcode[2]-mostPlausibleBarcode[0], mostPlausibleBarcode[1]-mostPlausibleBarcode[3] + getHeight()/delta);
@@ -85,7 +89,7 @@ public class BCLocator {
 	}
 
 	/**
-	 * This method is the first in the chain of methods looking for barcode.
+	 * This method is the first in the chain of methods when locating a barcode.
 	 * 
 	 * @param iteration how many lines that should be scanned over the height
 	 * @return if any scanline had over 30 "swaps" 
@@ -178,15 +182,15 @@ public class BCLocator {
 	}
 
 	/**
+	 * Called from scanLines() when it returns true on a line
 	 * 
-	 * 
-	 * @param scanline
-	 * @param switchPointsMain
+	 * @param scanline the line containing over or equal to 30 switches
+	 * @param switchPointsMain the switchpoints between bright and dark
 	 */
 	private void extendHeightSearch(Integer scanline, List<Integer> switchPointsMain){
 		List<Integer> switchPoints = getSmallestSubset(switchPointsMain);
 
-		int count = lookUpAndDown(scanline, switchPoints);
+		int count = getSimilarPatterns(scanline, switchPoints);
 
 		if (count > 1){
 			Log.d("Output", "Barcode fucking found : " + count);
@@ -200,6 +204,13 @@ public class BCLocator {
 		}
 	}
 
+	/**
+	 * This method tries to cut away parts of the line that has switchpoints not within the barcode,
+	 * eg. if a line contains text and a barcode the text should be removed
+	 * 
+	 * @param switchPoints
+	 * @return a new switchpoints only containing the barcode or the parameter if the algorithm failed
+	 */
 	private List<Integer> getSmallestSubset(List<Integer> switchPoints){
 		boolean cut;
 		int greatestDistance;
@@ -242,8 +253,14 @@ public class BCLocator {
 
 		return switchPoints;
 	}	
-
-	private int lookUpAndDown(Integer scanline,List<Integer> switchPointsMain){
+	/**
+	 * Checks if the line on deltaheight above and under the current scanline has similar patterns
+	 * 
+	 * @param scanline
+	 * @param switchPointsMain
+	 * @return integer representing if above and below did or did not contain somilar patterns
+	 */
+	private int getSimilarPatterns(Integer scanline,List<Integer> switchPointsMain){
 		int distDelta = getHeight() / delta;
 		int count = 0;
 		List <Integer> switchPoints;

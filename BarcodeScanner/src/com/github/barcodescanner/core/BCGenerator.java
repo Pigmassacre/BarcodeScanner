@@ -5,8 +5,15 @@ import java.util.List;
 
 public class BCGenerator{
 	private List<Integer> unNormalized = null;
+	
 	public BCGenerator(){}
-
+	
+	/**
+	 * Generates a new array repesenting the length of each part in the barcode
+	 * 
+	 * @param line segment of 0s and 1s containing a barcode found in BCLocate
+	 * @return the new array
+	 */
 	public List<Integer> generate(List<Integer> line){
 		List<Integer> unNormalized = new ArrayList<Integer>();
 		int count = 1;
@@ -25,18 +32,20 @@ public class BCGenerator{
 		return unNormalized;
 	}
 	
+	/**
+	 * Normalizes the array given in the generate method
+	 * 
+	 * @return a string containing the normalized data, this string is used as key in the database
+	 */
 	public String normalize(){
-<<<<<<< HEAD
 		StringBuffer s = null;
-=======
-		StringBuffer s = new StringBuffer();
->>>>>>> 8fbcb9ce357e2afc5c55eb2fa7a13409eea1be8f
 		if (unNormalized==null){
 			return "No unnormalized data is set";
 		}
-		else {			
+		else {
+			List<Integer> normalized;
 			int lengths = unNormalized.get(0) + unNormalized.get(1) + unNormalized.get(unNormalized.size()-1) + unNormalized.get(unNormalized.size()-2);
-			float division = lengths / 5;
+			float division = lengths / 4;
 			
 			for (int i = 0; i < unNormalized.size(); i++){
 				int value = Math.round(unNormalized.get(i)/division);
@@ -46,6 +55,15 @@ public class BCGenerator{
 		}
 	}
 	
+	/**
+	 * compares two strings and decides if this is the same product
+	 * 
+	 * 
+	 * @param one
+	 * @param two
+	 * @param threshhold
+	 * @return
+	 */
 	public boolean compare(String one, String two, int threshhold){
 		if (one.length() == two.length()){
 		int distance = 0;
