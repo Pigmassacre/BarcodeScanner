@@ -64,8 +64,15 @@ public class BCLocator {
 		return this.bitmap;
 	}
 
-	public List<Integer> getFoundBarcode(){
-		return mostPlausibleBarcode;
+	public List<Integer> getSegment(){
+		List<Integer> segment = null;
+		
+		if (mostPlausibleBarcode[0]!=null){
+			List<Integer> horizontalline = scanHorizontal(mostPlausibleBarcode[1], 0.5f);	
+			segment = horizontalline.subList(mostPlausibleBarcode[0], mostPlausibleBarcode[2]);
+		}
+		
+		return segment;
 	}
 
 	/**

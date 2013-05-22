@@ -5,13 +5,10 @@ import java.util.List;
 
 public class BCGenerator{
 	
-	private List<Integer> unNormalized = new ArrayList<Integer>();
-	private List<Integer> normalized = new ArrayList<Integer>();
-	
 	public BCGenerator(){}
-	//11000
-	//23
-	public void generate(List<Integer> line){
+
+	public List<Integer> generate(List<Integer> line){
+		List<Integer> unNormalized = new ArrayList<Integer>();
 		int count = 1;
 		
 		for (int i = 0; i < line.size() - 1 ; i++){ 
@@ -24,10 +21,12 @@ public class BCGenerator{
 			}
 		}
 		unNormalized.add(count);
+		return unNormalized;
 	}
 	
-	private void normalize(){
-		
+	private void normalize(List<Integer> unNormalized){
+		Integer[] firstandlasttwobars = {unNormalized.get(0),unNormalized.get(1),unNormalized.get(28),unNormalized.get(29)};
+		System.out.println(firstandlasttwobars[0]);
 		
 	}
 
