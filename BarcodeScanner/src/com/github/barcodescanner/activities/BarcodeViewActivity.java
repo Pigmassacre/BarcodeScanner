@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.view.Menu;
+import android.widget.ImageView;
 
 public class BarcodeViewActivity extends Activity {
 
@@ -19,7 +20,10 @@ public class BarcodeViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_barcode_view);
 		
-		barcodeBitmap = (Bitmap) getIntent().getExtras().get("barcodeBitmap");
+		barcodeBitmap = (Bitmap) getIntent().getParcelableExtra("barcodeBitmap");
+		ImageView img = (ImageView) findViewById(R.id.barcode_bitmap_imageview);
+		
+		img.setImageBitmap(barcodeBitmap);
 	}
 
 	@Override

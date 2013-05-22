@@ -79,7 +79,7 @@ public class BCLocator {
 	
 	public Bitmap getSegmentedBitmap(){
 		Bitmap segmentedBitmap = Bitmap.createBitmap(bitmap, mostPlausibleBarcode[0], mostPlausibleBarcode[1] - getHeight()/delta, 
-				mostPlausibleBarcode[0]-mostPlausibleBarcode[2], mostPlausibleBarcode[1]-mostPlausibleBarcode[3] + getHeight()/delta);
+				mostPlausibleBarcode[2]-mostPlausibleBarcode[0], mostPlausibleBarcode[1]-mostPlausibleBarcode[3] + getHeight()/delta);
 		return segmentedBitmap;
 
 	}

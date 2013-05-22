@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.AddNewActivity;
+import com.github.barcodescanner.activities.BarcodeViewActivity;
 import com.github.barcodescanner.activities.DrawView;
 import com.github.barcodescanner.activities.ProductActivity;
 import com.github.barcodescanner.core.BCGenerator;
@@ -199,7 +200,7 @@ public class CameraActivity extends Activity {
 		public void onPictureTaken(byte[] data, Camera camera) {
 			List<Integer> tempList = new ArrayList<Integer>();
 			String temp = "";
-			System.err.println("data: " + data);
+			
 			/*s
 			 * Size previewSize = camera.getParameters().getPreviewSize();
 			 * YuvImage yuvimage=new YuvImage(data, ImageFormat.NV21,
@@ -218,6 +219,8 @@ public class CameraActivity extends Activity {
 					temp = temp + i;
 				}
 				System.err.println("bcGenerator: " + temp);
+				
+				startBarcodeViewActivity();
 			}
 			
 			/*
@@ -245,6 +248,12 @@ public class CameraActivity extends Activity {
 			 */
 		}
 	};
+	
+	public void startBarcodeViewActivity() {
+		Intent intent = new Intent(this, BarcodeViewActivity.class);
+		intent.putExtra("barcodeBitmap", bcLocator.getSegmentedBitmap());
+		startActivity(intent);
+	}
 
 	public void takePicture(View view) {
 		System.err.println("mCamera is: " + mCamera);
