@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BCGenerator{
-	private List<Integer> unNormalized = null;
+	//private List<Integer> unNormalized = null;
 	
 	public BCGenerator(){}
 	
@@ -28,7 +28,7 @@ public class BCGenerator{
 			}
 		}
 		unNormalized.add(count);
-		this.unNormalized = unNormalized;
+		//this.unNormalized = unNormalized;
 		return unNormalized;
 	}
 	
@@ -37,7 +37,7 @@ public class BCGenerator{
 	 * 
 	 * @return a string containing the normalized data, this string is used as key in the database
 	 */
-	public String normalize(){
+	public String normalize(List<Integer> unNormalized){
 		StringBuffer s = new StringBuffer();
 		if (unNormalized==null){
 			return "No unnormalized data is set";

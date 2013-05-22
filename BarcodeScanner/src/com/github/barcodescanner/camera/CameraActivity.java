@@ -177,6 +177,7 @@ public class CameraActivity extends Activity {
 	private PictureCallback pictureCallback = new PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
 			String tempBarcode = null;
+			List<Integer> tempList = new ArrayList<Integer>();
 
 			/*
 			 * s Size previewSize = camera.getParameters().getPreviewSize();
@@ -189,10 +190,11 @@ public class CameraActivity extends Activity {
 			 */
 			bcLocator.setData(data);
 			boolean foundBarcode = bcLocator.foundBarcode();
-
+			
 			if (foundBarcode) {
+				tempList = bcGenerator.generate(bcLocator.getSegment());
+				tempBarcode = bcGenerator.normalize(tempList);
 				
-				tempBarcode = bcGenerator.normalize();
 				System.err.println("bcGenerator: " + tempBarcode);
 
 				List<Product> products = database.getProducts();
