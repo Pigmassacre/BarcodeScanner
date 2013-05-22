@@ -13,14 +13,13 @@ import android.widget.ImageView;
 public class BarcodeViewActivity extends Activity {
 
 	private static final String TAG = "BarcodeViewActivity";
-	private Bitmap barcodeBitmap;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_barcode_view);
 		
-		barcodeBitmap = (Bitmap) getIntent().getParcelableExtra("barcodeBitmap");
+		Bitmap barcodeBitmap = (Bitmap) getIntent().getParcelableExtra("barcodeBitmap");
 		ImageView img = (ImageView) findViewById(R.id.barcode_bitmap_imageview);
 		
 		img.setImageBitmap(barcodeBitmap);
