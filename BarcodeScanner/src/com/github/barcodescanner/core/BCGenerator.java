@@ -25,7 +25,7 @@ public class BCGenerator{
 		return unNormalized;
 	}
 	
-	private String normalize(){
+	public String normalize(){
 		StringBuffer s = null;
 		if (unNormalized==null){
 			return "No unnormalized data is set";
@@ -42,4 +42,19 @@ public class BCGenerator{
 			return s.toString();
 		}
 	}
+	
+	public boolean compare(String one, String two, int threshhold){
+		if (one.length() == two.length()){
+		int distance = 0;
+			int current;
+			for (int i = 0; i < one.length();i++){
+				current = Integer.parseInt(one.charAt(i)+"") - Integer.parseInt(two.charAt(i)+"");
+				distance += Math.abs(current);
+			}
+			return distance <= threshhold;
+		}else {
+			return false;
+		}
+	}
+	
 }
