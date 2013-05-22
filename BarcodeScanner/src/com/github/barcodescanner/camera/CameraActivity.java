@@ -118,6 +118,7 @@ public class CameraActivity extends Activity {
 	 */
 
 	private void setupDatabase() {
+		DatabaseHelperFactory.init(this);
 		database = DatabaseHelperFactory.getInstance();
 	}
 
