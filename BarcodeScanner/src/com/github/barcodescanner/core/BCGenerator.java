@@ -38,7 +38,11 @@ public class BCGenerator{
 	 * @return a string containing the normalized data, this string is used as key in the database
 	 */
 	public String normalize(){
+<<<<<<< HEAD
 		StringBuffer s = null;
+=======
+		StringBuffer s = new StringBuffer();
+>>>>>>> 909c9d780dd0a5139650f3a79bac148ca4d2e59e
 		if (unNormalized==null){
 			return "No unnormalized data is set";
 		}

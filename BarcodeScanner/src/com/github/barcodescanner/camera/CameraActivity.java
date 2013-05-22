@@ -224,6 +224,8 @@ public class CameraActivity extends Activity {
 				}
 				System.err.println("bcGenerator: " + bcGenerator.normalize());
 				
+				System.err.println("compare:" + bcGenerator.compare("1", "2", 1));
+				
 				startBarcodeViewActivity();
 			}
 			
