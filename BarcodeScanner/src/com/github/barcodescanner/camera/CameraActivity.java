@@ -209,6 +209,7 @@ public class CameraActivity extends Activity {
 						}
 					}
 				}
+				//startBarcodeViewActivity();
 				checkBarcode(foundProduct, tempBarcode);
 			}
 
