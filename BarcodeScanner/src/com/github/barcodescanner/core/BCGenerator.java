@@ -31,7 +31,7 @@ public class BCGenerator{
 			return "No unnormalized data is set";
 		}
 		else {			
-			int lengths = unNormalized.get(0) + unNormalized.get(1) + unNormalized.get(unNormalized.size()-1) + unNormalized.get(unNormalized.size()-2) + unNormalized.get(unNormalized.size()/2);
+			int lengths = unNormalized.get(0) + unNormalized.get(1) + unNormalized.get(unNormalized.size()-1) + unNormalized.get(unNormalized.size()-2);
 			float division = lengths / 5;
 			
 			for (int i = 0; i < unNormalized.size(); i++){

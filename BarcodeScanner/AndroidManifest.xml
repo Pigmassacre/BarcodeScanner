@@ -61,6 +61,10 @@
             android:name="com.github.barcodescanner.activities.BarcodeViewActivity"
             android:label="@string/title_activity_barcode_view" >
         </activity>
+        <activity
+            android:name="com.github.barcodescanner.activities.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>
