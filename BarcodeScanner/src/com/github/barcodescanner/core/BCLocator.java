@@ -24,6 +24,8 @@ public class BCLocator {
 	private Bitmap bitmap;
 	private Canvas canvas = new Canvas();
 	private Integer[] mostPlausibleBarcode = new Integer[4];
+	int delta = 40;
+
 
 	public BCLocator() {}
 
@@ -73,6 +75,13 @@ public class BCLocator {
 		}
 		
 		return segment;
+	}
+	
+	public Bitmap getSegmentedBitmap(){
+		Bitmap segmentedBitmap = Bitmap.createBitmap(bitmap, mostPlausibleBarcode[0], mostPlausibleBarcode[1] - getHeight()/delta, 
+				mostPlausibleBarcode[0]-mostPlausibleBarcode[2], mostPlausibleBarcode[1]-mostPlausibleBarcode[3] + getHeight()/delta);
+		return segmentedBitmap;
+
 	}
 
 	/**
@@ -235,19 +244,19 @@ public class BCLocator {
 	}	
 
 	private int lookUpAndDown(Integer scanline,List<Integer> switchPointsMain){
-		int delta = getHeight() / 40;
+		int distDelta = getHeight() / delta;
 		int count = 0;
 		List <Integer> switchPoints;
 		List <Integer> horizontalline;
 
 		//looks delta distance above scanline for similar pattern
-		horizontalline = scanHorizontal(scanline - delta, 0.5f);
+		horizontalline = scanHorizontal(scanline - distDelta, 0.5f);
 		switchPoints = getSmallestSubset(plausibleBarcode(horizontalline));
 		if (switchPoints.size() == switchPointsMain.size())
 			count++;
 
 		//looks delta distance below scanline for similar pattern
-			horizontalline = scanHorizontal(scanline + delta, 0.5f);
+			horizontalline = scanHorizontal(scanline + distDelta, 0.5f);
 			switchPoints = getSmallestSubset(plausibleBarcode(horizontalline));
 			if (switchPoints.size() == switchPointsMain.size())
 				count++;
