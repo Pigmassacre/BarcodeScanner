@@ -29,6 +29,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	
     private SurfaceHolder mHolder;
     private Camera mCamera;
+	private AutoFocusCallback mAutoFocusCallback;
     private String TAG = "TEST";
 
     public Preview(Context context, Camera camera) {
@@ -41,6 +42,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
         mHolder.addCallback(this);
         // deprecated setting, but required on Android versions prior to 3.0
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        surfaceCreated(mHolder);
         
     }
 
@@ -49,6 +51,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
         try {
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
+            mCamera.autoFocus(mAutoFocusCallback);
         } catch (IOException e) {
             Log.d(TAG, "Error setting camera preview: " + e.getMessage());
         }
@@ -82,11 +85,17 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
         try {
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
-
+            mCamera.autoFocus(this.mAutoFocusCallback);
         } catch (Exception e){
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
     }
+    
+	public void setAutoFocusCallback(AutoFocusCallback autoFocusCallback) {
+		mAutoFocusCallback = autoFocusCallback;
+	}
+    
+    
 	/*private final String TAG = "Preview";
 
 	private SurfaceView mSurfaceView;

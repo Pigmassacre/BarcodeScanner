@@ -40,84 +40,7 @@ import net.sourceforge.zbar.Config;
 // ----------------------------------------------------------------------
 
 public class CameraActivity extends Activity {
-	
-	
-	
-    private Camera mCamera;
-    private Preview mPreview;
-	private BCLocator bcAnalyzer;
-	ImageView imageV;
-    private static final String TAG = "CameraActivity"; 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
-
-        // Create an instance of Camera
-        mCamera = getCameraInstance();
-        bcAnalyzer = new BCLocator();
-		imageV = new ImageView(this);
-        // Create our Preview view and set it as the content of our activity.
-        mPreview = new Preview(this, mCamera);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
-        
-    }
-    
-    
-	private static Camera getCameraInstance() {
-		Camera camera = null;
-
-		try {
-			camera = Camera.open();
-		} catch (Exception e) {
-			Log.e(TAG, "Exception when opening the camera", e);
-		}
-		return camera;
-	}
-	
-	
-	
-	private PictureCallback mPicture = new PictureCallback() {
-
-	    @Override
-	    public void onPictureTaken(byte[] data, Camera camera) {
-	    	System.out.println("BORJAN!!!");
-			bcAnalyzer.setData(data);
-			//Integer[] line = bcAnalyzer.getMostPlausible();
-	    	System.out.println("Analyzer!!!!!!");
-	    	
-	    }
-	};
-	
-	
-	public void takePicture(View view){
-		System.out.println("Tagen BILD!");
-		mCamera.takePicture(null, null, mPicture);
-	}
-	
-	
-    @Override
-    protected void onPause() {
-        super.onPause();
-        releaseCamera(); 
-    }
-	
-    private void releaseCamera(){
-        if (mCamera != null){
-            mCamera.release();        // release the camera for other applications
-            mCamera = null;
-        }
-    }
-	
-	
-	
-	
-	
-	
-	
-	/*private static final String TAG = "CameraActivity";
+	private static final String TAG = "CameraActivity";
 
 	private Preview mPreview;
 	private boolean mPreviewRunning;
@@ -140,15 +63,9 @@ public class CameraActivity extends Activity {
 	ImageView imageV;
 
 	// Load zbar library
-<<<<<<< HEAD
-	//static {
-		//System.loadLibrary("iconv");
-	//}
-=======
 	static {
 		// System.loadLibrary("iconv");
 	}
->>>>>>> ab4575bec7137d815d5e889a2a590d97879b3a68
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -165,43 +82,23 @@ public class CameraActivity extends Activity {
 		// and set it as the content of our activity.
 		// setupPreview();
 
-<<<<<<< HEAD
-		
-		
-		//imageV = new ImageView(this);
-		
-		
-=======
 		imageV = new ImageView(this);
 
->>>>>>> ab4575bec7137d815d5e889a2a590d97879b3a68
 		// Find the ID of the default camera
-		//findDefaultCameraId();
+		findDefaultCameraId();
 
 		// Configure the ZBar scanner
 		// setupScanner();
 
-		// Setup autofocus handler
-		// setupAutoFocus();
+		 //Setup autofocus handler
+		 //setupAutoFocus();
 
 		// Setup the database
 		getDatabase();
 
 		// barcode analyzer
 		bcAnalyzer = new BCLocator();
-<<<<<<< HEAD
-		
-		//draw = new DrawView(this);
-		releaseCamera();
-		mCamera = getCameraInstance();
-		mPreview = new Preview(this,mCamera);
-		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
-		frameLayout.addView(mPreview);
-		
-	
-=======
 
->>>>>>> ab4575bec7137d815d5e889a2a590d97879b3a68
 	}
 
 	private void setupPreview() {
@@ -216,8 +113,6 @@ public class CameraActivity extends Activity {
 		// mPreview.setPreviewCallback(previewCallback);
 		// System.out.println(previewCallback);
 	}
-	
-	
 
 	private void findDefaultCameraId() {
 		numberOfCameras = Camera.getNumberOfCameras();
@@ -237,10 +132,10 @@ public class CameraActivity extends Activity {
 		scanner.setConfig(0, Config.Y_DENSITY, 3);
 	}
 
-	private void setupAutoFocus() {
+	/*private void setupAutoFocus() {
 		autoFocusHandler = new Handler();
-		// mPreview.setAutoFocusCallback(autoFocusCallback);
-	}
+		mPreview.setAutoFocusCallback(autoFocusCallback);
+	}*/
 
 	private void getDatabase() {
 		database = DatabaseHelperFactory.getInstance();
@@ -254,6 +149,9 @@ public class CameraActivity extends Activity {
 		mCamera = getCameraInstance();
 		System.err.println("mCamera is: " + mCamera);
 		mPreview = new Preview(this, mCamera);
+		mPreviewRunning = true;
+		autoFocusHandler = new Handler();
+		mPreview.setAutoFocusCallback(autoFocusCallback);
 		// gets the FrameLayout camera_preview in activity_camera.xml
 		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
 		// adds the mPreview view to that FrameLayout
@@ -287,47 +185,12 @@ public class CameraActivity extends Activity {
 			mCamera.setPreviewCallback(null);
 			// mPreview.setCamera(null);
 			mCamera.release();
-			mCamera.unlock();
 			mCamera = null;
 		}
 	}
 
 	private PictureCallback pictureCallback = new PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
-<<<<<<< HEAD
-
-			
-			Size previewSize = camera.getParameters().getPreviewSize(); 
-			YuvImage yuvimage=new YuvImage(data, ImageFormat.NV21, previewSize.width, previewSize.height, null);
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			yuvimage.compressToJpeg(new Rect(0, 0, previewSize.width, previewSize.height), 80, baos);
-			byte[] jdata = baos.toByteArray();
-			bcAnalyzer.setData(data);
-			Integer[] line = bcAnalyzer.getMostPlausible();
-			//imageV.setImageBitmap(bcAnalyzer.getBitmap());
-			//releaseCamera();
-			//setContentView(imageV);
-			/*if(line[0] != null){
-
-				draw.setLineArray(line);
-				setContentView(draw);
-			}*/
-			/*Camera.Parameters parameters = camera.getParameters();
-			Size size = parameters.getPreviewSize();
-
-			Image barcode = new Image(size.width, size.height, "Y800");
-			barcode.setData(data);
-
-			int result = scanner.scanImage(barcode);
-
-			if (result != 0) {
-				SymbolSet syms = scanner.getResults();
-				for (Symbol sym : syms) {
-					barcodeData = sym.getData();
-					checkBarcode();
-				}
-			}
-=======
 			System.err.println("data: " + data);
 			/*
 			 * Size previewSize = camera.getParameters().getPreviewSize();
@@ -362,12 +225,12 @@ public class CameraActivity extends Activity {
 			 * (Symbol sym : syms) { barcodeData = sym.getData();
 			 * checkBarcode(); } }
 			 */
->>>>>>> ab4575bec7137d815d5e889a2a590d97879b3a68
 		}
 	};
 
 	public void takePicture(View view) {
 		System.err.println("mCamera is: " + mCamera);
+		mCamera.autoFocus(autoFocusCallback);
 		mCamera.takePicture(null, null, pictureCallback);
 	}
 
@@ -424,7 +287,7 @@ public class CameraActivity extends Activity {
 
 	private AutoFocusCallback autoFocusCallback = new AutoFocusCallback() {
 		public void onAutoFocus(boolean success, Camera camera) {
-			autoFocusHandler.postDelayed(doAutoFocus, 1000);
+			autoFocusHandler.postDelayed(doAutoFocus, 5000);
 		}
-	};*/
+	};
 }

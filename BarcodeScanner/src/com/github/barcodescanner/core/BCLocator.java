@@ -43,7 +43,7 @@ public class BCLocator {
 			System.out.println(mostPlausibleBarcode[0] + " : " + mostPlausibleBarcode[2]);
 		}else System.out.println("No barcode exist");
 	}
-	
+
 	public void setData(byte[] bitmapdata){
 		mostPlausibleBarcode = new Integer[4];
 		Bitmap temp = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata.length);
@@ -51,7 +51,7 @@ public class BCLocator {
 		canvas.setBitmap(bitmap);
 		scanLines(15);	
 	}
-	
+
 	public int getWidth() {
 		return bitmap.getWidth();
 	}
@@ -63,11 +63,11 @@ public class BCLocator {
 	public Bitmap getBitmap(){
 		return this.bitmap;
 	}
-	
+
 	public Integer[] getMostPlausible(){
 		return mostPlausibleBarcode;
 	}
-	
+
 	/**
 	 * This method is the first in the chain of methods looking for barcode.
 	 * 
@@ -87,19 +87,14 @@ public class BCLocator {
 				System.out.println(switchPoints.size());
 				Log.d("Value", "true");
 				extendHeightSearch(scanline,switchPoints);
-<<<<<<< HEAD
-			}else{
-				System.out.println("Value false");
-=======
 			} else {
 				Log.d("Value", "false");
->>>>>>> ab4575bec7137d815d5e889a2a590d97879b3a68
 			}
 
 		}
 		return found;
 	}
-	
+
 	/**
 	 * Draws a red rect around target position, used to debug result of the algorithm
 	 * 
@@ -117,7 +112,7 @@ public class BCLocator {
 		canvas.drawRect(r, p);
 		Log.d("Output", "Rect drawn");
 	}
-	
+
 	/**
 	 * replaces the value of each pixel with the brightness of this pixel, 
 	 * 1s represent dark pixel, 0 represent bright pixel, -1 for undefined
@@ -129,10 +124,10 @@ public class BCLocator {
 	 */
 	private List<Integer> scanHorizontal(int heightLine, float threshold){
 		List<Integer> lineData = new ArrayList<Integer>();
-		
+
 		int red,green,blue;
 		float[] hsv = new float[3];
-				
+
 		for (int x = 0; x < getWidth(); x++){	
 			red = (bitmap.getPixel(x, heightLine))&0xFF;
 			green = (bitmap.getPixel(x, heightLine)>>8)&0xFF;
@@ -145,7 +140,7 @@ public class BCLocator {
 		}
 		return lineData;
 	}
-	
+
 	/**
 	 * Looks for places where the value changes from light to dark and puts position into array 
 	 * 
@@ -155,17 +150,17 @@ public class BCLocator {
 	 */
 	private List<Integer> plausibleBarcode(List<Integer> horizontalline){
 		List<Integer> switches = new ArrayList<Integer>();
-		
+
 		for (int x = 1; x < horizontalline.size(); x++){
 			int lastValue = horizontalline.get(x-1);
-			
+
 			if (horizontalline.get(x) == 1 && lastValue == 0){			
 				switches.add(x);
 			}
 		}		
 		return switches;
 	}
-	
+
 	/**
 	 * 
 	 * 
@@ -176,19 +171,19 @@ public class BCLocator {
 		List<Integer> switchPoints = getSmallestSubset(switchPointsMain);
 
 		int count = lookUpAndDown(scanline, switchPoints);
-		
+
 		if (count > 1){
 			Log.d("Output", "Barcode fucking found : " + count);
 			int mostLeft = switchPoints.get(0);
 			int mostRight = switchPoints.get(switchPoints.size()-1);
-			
+
 			mostPlausibleBarcode[0] = mostLeft;
 			mostPlausibleBarcode[1] = scanline;
 			mostPlausibleBarcode[2] = mostRight;
 			mostPlausibleBarcode[3] = scanline;
 		}
 	}
-	
+
 	private List<Integer> getSmallestSubset(List<Integer> switchPoints){
 		boolean cut;
 		int greatestDistance;
@@ -201,7 +196,7 @@ public class BCLocator {
 			greatestDistance = 0;
 			location = 0;
 			tempDistance = 0;
-			
+
 			for (int i = 1; i < switchPoints.size(); i++){
 				tempDistance = switchPoints.get(i) - switchPoints.get(i-1);
 				if (tempDistance >= greatestDistance){
@@ -209,10 +204,10 @@ public class BCLocator {
 					location = i;
 				}
 			}
-			
+
 			int subArrayRight = switchPoints.size() - location - 1;
 			int subArrayLeft = location;
-			
+
 			if (subArrayRight > subArrayLeft && subArrayRight >= 30){
 				switchPoints = switchPoints.subList(location, switchPoints.size());
 				cut = true;
@@ -221,14 +216,14 @@ public class BCLocator {
 				switchPoints = switchPoints.subList(0, location);
 				cut = true;
 			}
-			
+
 		if (switchPoints.size() < 30){
 			switchPoints = tmpSwitchPoints;
 			cut = false;
 		}
-			
+
 		}while (switchPoints.size() > 30 && cut);
-				
+
 		return switchPoints;
 	}	
 
@@ -237,19 +232,19 @@ public class BCLocator {
 		int count = 0;
 		List <Integer> switchPoints;
 		List <Integer> horizontalline;
-		
+
 		//looks delta distance above scanline for similar pattern
 		horizontalline = scanHorizontal(scanline - delta, 0.5f);
 		switchPoints = getSmallestSubset(plausibleBarcode(horizontalline));
 		if (switchPoints.size() == switchPointsMain.size())
 			count++;
-	
+
 		//looks delta distance below scanline for similar pattern
 			horizontalline = scanHorizontal(scanline + delta, 0.5f);
 			switchPoints = getSmallestSubset(plausibleBarcode(horizontalline));
 			if (switchPoints.size() == switchPointsMain.size())
 				count++;
-	
+
 		return count;
 	}
 }
