@@ -222,7 +222,7 @@ public class CameraActivity extends Activity {
 				for (int i : tempList) {
 					temp = temp + i;
 				}
-				System.err.println("bcGenerator: " + temp);
+				System.err.println("bcGenerator: " + bcGenerator.normalize());
 				
 				startBarcodeViewActivity();
 			}
