@@ -178,11 +178,15 @@ public class CameraActivity extends Activity {
 
 	@Override
 	protected void onPause() {
-		super.onPause();
-
 		// Because the Camera object is a shared resource, it's very
 		// important to release it when the activity is paused.
 		releaseCamera();
+		
+		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
+		// adds the mPreview view to that FrameLayout
+		frameLayout.removeView(mPreview);
+		
+		super.onPause();
 	}
 
 	private void releaseCamera() {
@@ -190,7 +194,7 @@ public class CameraActivity extends Activity {
 			mPreviewRunning = false;
 			mCamera.stopPreview();
 			mCamera.setPreviewCallback(null);
-			// mPreview.setCamera(null);
+			//mPreview.setCamera(null);
 			mCamera.release();
 			mCamera = null;
 		}
