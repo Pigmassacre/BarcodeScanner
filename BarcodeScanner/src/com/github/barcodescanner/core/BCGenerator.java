@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BCGenerator{
-	
+	private List<Integer> unNormalized = null;
 	public BCGenerator(){}
 
 	public List<Integer> generate(List<Integer> line){
@@ -21,13 +21,25 @@ public class BCGenerator{
 			}
 		}
 		unNormalized.add(count);
+		this.unNormalized = unNormalized;
 		return unNormalized;
 	}
 	
-	private void normalize(List<Integer> unNormalized){
-		Integer[] firstandlasttwobars = {unNormalized.get(0),unNormalized.get(1),unNormalized.get(28),unNormalized.get(29)};
-		System.out.println(firstandlasttwobars[0]);
-		
+	private String normalize(){
+		StringBuffer s = null;
+		if (unNormalized==null){
+			return "No unnormalized data is set";
+		}
+		else {
+			List<Integer> normalized;
+			int lengths = unNormalized.get(0) + unNormalized.get(1) + unNormalized.get(unNormalized.size()-1) + unNormalized.get(unNormalized.size()-2);
+			float division = lengths / 4;
+			
+			for (int i = 0; i < unNormalized.size(); i++){
+				int value = Math.round(unNormalized.get(i)/division);
+				s.append(value);
+			}
+			return s.toString();
+		}
 	}
-
 }
