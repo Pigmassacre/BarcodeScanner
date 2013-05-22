@@ -64,10 +64,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 			
 
-		// read from the cursor to parse a possible Product from teh given ID
+		// read from the cursor to parse a possible Product from the given ID
 		product = new Product(cursor.getString(1),
 				Integer.parseInt(cursor.getString(2)),
-				Integer.parseInt(cursor.getString(0)));
+				(cursor.getString(0)));
 		// return product
 		return product;
 	}
@@ -104,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				Product product = new Product();
 				product.setName(cursor.getString(0));
 				product.setPrice(Integer.parseInt(cursor.getString(1)));
-				product.setBarcode(Integer.parseInt(cursor.getString(2)));
+				product.setBarcode((cursor.getString(2)));
 				// Adding product to list
 				productList.add(product);
 			} while (cursor.moveToNext());

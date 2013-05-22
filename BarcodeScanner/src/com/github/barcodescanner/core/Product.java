@@ -9,14 +9,14 @@ public class Product {
 	
 	private String name;
 	private int price;
-	private int barcode;
+	private String barcode;
 	
 	
 	public Product(){
 		
 	}
 	
-	public Product(String name, int price, int barcode){
+	public Product(String name, int price, String barcode){
 		this.name = name;
 		this.price = price;
 		this.barcode = barcode;
@@ -38,11 +38,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public int getBarcode() {
+	public String getBarcode() {
 		return barcode;
 	}
 
-	public void setBarcode(int barcode) {
+	public void setBarcode(String barcode) {
 		this.barcode = barcode;
 	}
 

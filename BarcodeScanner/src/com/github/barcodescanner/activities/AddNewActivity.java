@@ -51,13 +51,13 @@ public class AddNewActivity extends Activity{
 	public void addProduct(View view) {
 		//String newText = getIntent().getExtras().getString("productID");
 		//Cast the productID to an int
-		int barCode = Integer.parseInt(this.productID);
+		String barcode = this.productID;
 		//Get new Product name from EditText
 		String productName = editName.getText().toString();
 		//Get new Product price from EditText and cast to an int
 		int productPrice = Integer.parseInt(editPrice.getText().toString());
 		//Create instance of Product class for the new Product
-		Product newProduct = new Product(productName,productPrice,barCode);
+		Product newProduct = new Product(productName,productPrice,barcode);
 		//Add the new Product to the database
 		database.addProduct(newProduct);
 		//Change to CameraActivity to be able to scan more products

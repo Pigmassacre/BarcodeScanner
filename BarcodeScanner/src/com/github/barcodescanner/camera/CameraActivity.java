@@ -51,20 +51,14 @@ public class CameraActivity extends Activity {
 	private Camera mCamera;
 	private int numberOfCameras;
 
-	// The first rear facing camera
-	private int defaultCameraId;
-
 	private Handler autoFocusHandler;
-
-	private String barcodeData;
-	private ImageScanner scanner;
 
 	private DatabaseHelper database;
 
 	private BCLocator bcLocator;
 	private BCGenerator bcGenerator;
 
-	private DrawView draw;
+	// private DrawView draw;
 	ImageView imageV;
 
 	// Load zbar library
@@ -89,21 +83,18 @@ public class CameraActivity extends Activity {
 
 		imageV = new ImageView(this);
 
-		// Find the ID of the default camera
-		findDefaultCameraId();
-
 		// Configure the ZBar scanner
 		// setupScanner();
 
-		 //Setup autofocus handler
-		 //setupAutoFocus();
+		// Setup autofocus handler
+		// setupAutoFocus();
 
 		// Setup the database
-		getDatabase();
+		setupDatabase();
 
 		// barcode analyzer
 		bcLocator = new BCLocator();
-		
+
 		bcGenerator = new BCGenerator();
 
 	}
@@ -121,30 +112,12 @@ public class CameraActivity extends Activity {
 		// System.out.println(previewCallback);
 	}
 
-	private void findDefaultCameraId() {
-		numberOfCameras = Camera.getNumberOfCameras();
+	/*
+	 * private void setupAutoFocus() { autoFocusHandler = new Handler();
+	 * mPreview.setAutoFocusCallback(autoFocusCallback); }
+	 */
 
-		CameraInfo cameraInfo = new CameraInfo();
-		for (int i = 0; i < numberOfCameras; i++) {
-			Camera.getCameraInfo(i, cameraInfo);
-			if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
-				defaultCameraId = i;
-			}
-		}
-	}
-
-	private void setupScanner() {
-		scanner = new ImageScanner();
-		scanner.setConfig(0, Config.X_DENSITY, 3);
-		scanner.setConfig(0, Config.Y_DENSITY, 3);
-	}
-
-	/*private void setupAutoFocus() {
-		autoFocusHandler = new Handler();
-		mPreview.setAutoFocusCallback(autoFocusCallback);
-	}*/
-
-	private void getDatabase() {
+	private void setupDatabase() {
 		database = DatabaseHelperFactory.getInstance();
 	}
 
@@ -181,11 +154,11 @@ public class CameraActivity extends Activity {
 		// Because the Camera object is a shared resource, it's very
 		// important to release it when the activity is paused.
 		releaseCamera();
-		
+
 		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
 		// adds the mPreview view to that FrameLayout
 		frameLayout.removeView(mPreview);
-		
+
 		super.onPause();
 	}
 
@@ -194,7 +167,7 @@ public class CameraActivity extends Activity {
 			mPreviewRunning = false;
 			mCamera.stopPreview();
 			mCamera.setPreviewCallback(null);
-			//mPreview.setCamera(null);
+			// mPreview.setCamera(null);
 			mCamera.release();
 			mCamera = null;
 		}
@@ -202,11 +175,10 @@ public class CameraActivity extends Activity {
 
 	private PictureCallback pictureCallback = new PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
-			List<Integer> tempList = new ArrayList<Integer>();
-			String temp = "";
-			
-			/*s
-			 * Size previewSize = camera.getParameters().getPreviewSize();
+			String tempBarcode = null;
+
+			/*
+			 * s Size previewSize = camera.getParameters().getPreviewSize();
 			 * YuvImage yuvimage=new YuvImage(data, ImageFormat.NV21,
 			 * previewSize.width, previewSize.height, null);
 			 * ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -216,19 +188,26 @@ public class CameraActivity extends Activity {
 			 */
 			bcLocator.setData(data);
 			boolean foundBarcode = bcLocator.foundBarcode();
-			
+
 			if (foundBarcode) {
-				tempList = bcGenerator.generate(bcLocator.getSegment());
-				for (int i : tempList) {
-					temp = temp + i;
+				tempBarcode = bcGenerator.normalize();
+				System.err.println("bcGenerator: " + tempBarcode);
+
+				List<Product> products = database.getProducts();
+				Product foundProduct = null;
+				if (products != null) {
+					for (Product p : products) {
+						boolean isSame = bcGenerator.compare(p.getBarcode(),
+								tempBarcode, 10);
+						if (isSame) {
+							foundProduct = p;
+							break;
+						}
+					}
 				}
-				System.err.println("bcGenerator: " + bcGenerator.normalize());
-				
-				System.err.println("compare:" + bcGenerator.compare("1", "2", 1));
-				
-				startBarcodeViewActivity();
+				checkBarcode(foundProduct, tempBarcode);
 			}
-			
+
 			/*
 			 * Integer[] line = bcAnalyzer.getMostPlausible();
 			 * imageV.setImageBitmap(bcAnalyzer.getBitmap());
@@ -254,7 +233,7 @@ public class CameraActivity extends Activity {
 			 */
 		}
 	};
-	
+
 	public void startBarcodeViewActivity() {
 		Intent intent = new Intent(this, BarcodeViewActivity.class);
 		intent.putExtra("barcodeBitmap", bcLocator.getSegmentedBitmap());
@@ -267,32 +246,22 @@ public class CameraActivity extends Activity {
 		mCamera.takePicture(null, null, pictureCallback);
 	}
 
-	private void checkBarcode() {
+	private void checkBarcode(Product matchingProduct, String barcode) {
 		// Initialize the bundle that we will send to the productActivity
 		Bundle productBundle = new Bundle();
 		Intent productIntent;
 
-		// Just for now we make barcode shorter before we change int to long in
-		// database
-		barcodeData = barcodeData.substring(0, 6);
-
-		// Cast scanned barcode to an int
-		int barcode = (int) Integer.parseInt(barcodeData);
-
-		// Try to match the barcode with a product from the database
-		Product product = database.getProduct(barcode);
-
 		// Check if the database contained a matching product
-		if (product != null) {
+		if (matchingProduct != null) {
 			// Get product name
-			String productName = product.getName();
+			String productName = matchingProduct.getName();
 
 			// Get product price
-			int productPrice = product.getPrice();
+			int productPrice = matchingProduct.getPrice();
 
 			// Put product name in bundle
 			productBundle.putString("productName", productName);
-			
+
 			// Put product price in bundle
 			productBundle.putInt("productPrice", productPrice);
 
@@ -300,7 +269,7 @@ public class CameraActivity extends Activity {
 			productIntent = new Intent(this, ProductActivity.class);
 		} else {
 			// Put new product ID in bundle
-			productBundle.putString("productID", barcodeData);
+			productBundle.putString("productID", barcode);
 
 			// Set AddNewActivity as the intent
 			productIntent = new Intent(this, AddNewActivity.class);
