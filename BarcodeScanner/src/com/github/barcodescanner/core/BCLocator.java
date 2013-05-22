@@ -38,10 +38,6 @@ public class BCLocator {
 		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
 		canvas.setBitmap(bitmap);
 		scanLines(30);
-		if (mostPlausibleBarcode[0]!=null){
-			drawRectToBitmap(mostPlausibleBarcode[0],mostPlausibleBarcode[1],mostPlausibleBarcode[2],mostPlausibleBarcode[3]);
-			System.out.println(mostPlausibleBarcode[0] + " : " + mostPlausibleBarcode[2]);
-		}else System.out.println("No barcode exist");
 	}
 
 	public void setData(byte[] bitmapdata){
@@ -50,6 +46,10 @@ public class BCLocator {
 		bitmap = temp.copy(temp.getConfig(), true);
 		canvas.setBitmap(bitmap);
 		scanLines(15);	
+	}
+	
+	public boolean foundBarcode(){
+		return mostPlausibleBarcode[0] != null;
 	}
 
 	public int getWidth() {
@@ -64,7 +64,7 @@ public class BCLocator {
 		return this.bitmap;
 	}
 
-	public Integer[] getMostPlausible(){
+	public List<Integer> getFoundBarcode(){
 		return mostPlausibleBarcode;
 	}
 

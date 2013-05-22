@@ -6,6 +6,7 @@ import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.AddNewActivity;
 import com.github.barcodescanner.activities.DrawView;
 import com.github.barcodescanner.activities.ProductActivity;
+import com.github.barcodescanner.core.BCGenerator;
 import com.github.barcodescanner.core.BCLocator;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
@@ -57,7 +58,8 @@ public class CameraActivity extends Activity {
 
 	private DatabaseHelper database;
 
-	private BCLocator bcAnalyzer;
+	private BCLocator bcLocator;
+	private BCGenerator bcGenerator;
 
 	private DrawView draw;
 	ImageView imageV;
@@ -97,7 +99,9 @@ public class CameraActivity extends Activity {
 		getDatabase();
 
 		// barcode analyzer
-		bcAnalyzer = new BCLocator();
+		bcLocator = new BCLocator();
+		
+		bcGenerator = new BCGenerator();
 
 	}
 
@@ -201,7 +205,9 @@ public class CameraActivity extends Activity {
 			 * previewSize.height), 80, baos); byte[] jdata =
 			 * baos.toByteArray();
 			 */
-			bcAnalyzer.setData(data);
+			bcLocator.setData(data);
+			boolean foundBarcode = bcLocator.foundBarcode();
+			
 			/*
 			 * Integer[] line = bcAnalyzer.getMostPlausible();
 			 * imageV.setImageBitmap(bcAnalyzer.getBitmap());
