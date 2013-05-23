@@ -67,6 +67,7 @@ public class DatabaseActivity extends Activity {
 	}*/
 
 	private TextView generateCell(String text) {
+		// TODO Fix this, it looks ugly on the device
 		TextView nameView = new TextView(this);
 		nameView.setText(text);
 		nameView.setGravity(Gravity.CENTER_HORIZONTAL);
