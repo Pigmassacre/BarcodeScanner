@@ -24,24 +24,42 @@ public class BCGenerator {
 	/**
 	 * Generates a new array repesenting the length of each part in the barcode
 	 * 
-	 * @param line
-	 *            segment of 0s and 1s containing a barcode found in BCLocate
+	 * @param lines segments of 0s and 1s containing a barcode found in BCLocate,
+	 * 
 	 * @return the new array
 	 */
-	public List<Integer> generate(List<Integer> line) {
+	public List<Integer> generate(List<List<Integer>> lines) {
+		List<List<Integer>> lineHolder = new ArrayList<List<Integer>>();
 		List<Integer> unNormalized = new ArrayList<Integer>();
-		int count = 1;
-
-		for (int i = 0; i < line.size() - 1; i++) {
-			if (line.get(i) == line.get(i + 1)) {
-				count++;
-			} else {
-				unNormalized.add(count);
-				count = 1;
+		
+		int width = lines.get(0).size();
+		int heigth = lines.size();
+		
+		for (int j = 0; j < lines.size(); j++){
+			List<Integer> line = lines.get(j);
+			unNormalized.clear();
+			int count = 1;
+			for (int i = 0; i < line.size() - 1; i++) {
+				if (line.get(i) == line.get(i + 1)) {
+					count++;
+				} else {
+					unNormalized.add(count);
+					count = 1;
+				}
 			}
+			unNormalized.add(count);
+			lineHolder.add(unNormalized);
 		}
-		unNormalized.add(count);
-		// this.unNormalized = unNormalized;
+		unNormalized.clear();
+		
+		for (int i = 0; i < width; i++){
+			int sum = 0;
+			for (int j = 0; j < heigth; j++){
+				sum += lineHolder.get(i).get(j);
+			}
+			unNormalized.add(sum/heigth);
+		}
+		
 		return unNormalized;
 	}
 
@@ -60,7 +78,7 @@ public class BCGenerator {
 		int sumEven = 0, sumOdd = 0, checksumValue = 0, checksumDigit = 0;
 
 		if (unNormalized == null) {
-			return "No unnormalized data is set";
+			return "No barcode data is set";
 		} else {
 			// List<Integer> normalized;
 			int lengths = unNormalized.get(0) + unNormalized.get(1)
@@ -139,7 +157,7 @@ public class BCGenerator {
 	}
 
 	/**
-	 * compares two strings and decides if this is the same product
+	 * Compares two strings and decides if this is the same product
 	 * 
 	 * 
 	 * @param one

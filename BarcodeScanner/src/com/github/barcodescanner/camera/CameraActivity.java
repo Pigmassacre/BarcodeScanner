@@ -1,13 +1,11 @@
 package com.github.barcodescanner.camera;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.AddNewActivity;
 import com.github.barcodescanner.activities.BarcodeViewActivity;
-import com.github.barcodescanner.activities.DrawView;
 import com.github.barcodescanner.activities.ProductActivity;
 import com.github.barcodescanner.core.BCGenerator;
 import com.github.barcodescanner.core.BCLocator;
@@ -17,15 +15,9 @@ import com.github.barcodescanner.core.Product;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.ImageFormat;
-import android.graphics.Rect;
-import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
-import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.PictureCallback;
-import android.hardware.Camera.PreviewCallback;
-import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -34,14 +26,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
-import net.sourceforge.zbar.ImageScanner;
-import net.sourceforge.zbar.Image;
-import net.sourceforge.zbar.Symbol;
-import net.sourceforge.zbar.SymbolSet;
-import net.sourceforge.zbar.Config;
-
-// ----------------------------------------------------------------------
 
 public class CameraActivity extends Activity {
 	private static final String TAG = "CameraActivity";
@@ -57,9 +41,6 @@ public class CameraActivity extends Activity {
 
 	private BCLocator bcLocator;
 	private BCGenerator bcGenerator;
-
-	// private DrawView draw;
-	ImageView imageV;
 
 	// Load zbar library
 	static {
@@ -80,8 +61,6 @@ public class CameraActivity extends Activity {
 		// Create a RelativeLayout container that will hold a SurfaceView,
 		// and set it as the content of our activity.
 		// setupPreview();
-
-		imageV = new ImageView(this);
 
 		// Configure the ZBar scanner
 		// setupScanner();
@@ -177,7 +156,7 @@ public class CameraActivity extends Activity {
 	private PictureCallback pictureCallback = new PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
 			String tempBarcode = null;
-			List<Integer> tempList = new ArrayList<Integer>();
+			List<List<Integer>> tempList = new ArrayList<List<Integer>>();
 
 			/*
 			 * s Size previewSize = camera.getParameters().getPreviewSize();

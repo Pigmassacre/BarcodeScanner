@@ -41,7 +41,7 @@ public class BCLocator {
 		canvas.setBitmap(bitmap);
 		scanLines(30);
 	}
-
+	
 	public void setData(byte[] bitmapdata){
 		mostPlausibleBarcode = new Integer[4];
 		Bitmap temp = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata.length);
@@ -66,15 +66,21 @@ public class BCLocator {
 		return this.bitmap;
 	}
 
-	public List<Integer> getSegment(){
+	public List<List<Integer>> getSegment(){
+		List<List<Integer>> segmentMap = new ArrayList<List<Integer>>();
 		List<Integer> segment = null;
-
+		int start = mostPlausibleBarcode[0] -getHeight()/delta;
+		int stop = mostPlausibleBarcode[2] + getHeight()/delta;
+		
 		if (mostPlausibleBarcode[0]!=null){
-			List<Integer> horizontalline = scanHorizontal(mostPlausibleBarcode[1], 0.5f);	
-			segment = horizontalline.subList(mostPlausibleBarcode[0], mostPlausibleBarcode[2]);
+			for (int line = start; line < stop; line++){
+				List<Integer> horizontalline = scanHorizontal(line, 0.5f);	
+				segment = horizontalline.subList(mostPlausibleBarcode[0], mostPlausibleBarcode[2]);
+				segmentMap.add(segment);
+			}
 		}
 
-		return segment;
+		return segmentMap;
 	}
 	/**
 	 * Used for debug purpose
@@ -134,7 +140,7 @@ public class BCLocator {
 	}
 
 	/**
-	 * replaces the value of each pixel with the brightness of this pixel, 
+	 * Replaces the value of each pixel with the brightness of this pixel, 
 	 * 1s represent dark pixel, 0 represent bright pixel, -1 for undefined
 	 * 
 	 * @param heightLine the horizontal line to be scanned
