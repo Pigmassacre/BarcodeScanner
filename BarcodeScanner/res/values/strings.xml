@@ -38,10 +38,10 @@
 
     <!-- activity_database.xml -->
     <string name="title_activity_database">DatabaseActivity</string>
-    <string name="db_table_caption">Products</string>
-    <string name="db_table_name">Name</string>
-    <string name="db_table_price">Price</string>
-    <string name="db_table_id">ID</string>
+    <string name="database_table_caption">Products</string>
+    <string name="database_table_cell_name">Name</string>
+    <string name="database_table_cell_price">Price</string>
+    <string name="database_table_cell_id">ID</string>
     
     <!-- activity_no_product.xml -->
     <string name ="no_product_message_title">No product found</string>
