@@ -1,6 +1,8 @@
 package com.github.barcodescanner.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class BCGenerator {
 	 * @return the new array
 	 */
 	public List<Integer> generate(List<List<Integer>> lines) {
+		System.out.println("lines: " + lines);
 		List<List<Integer>> lineHolder = new ArrayList<List<Integer>>();
 		List<Integer> unNormalized = new ArrayList<Integer>();
 		List<Integer> heightSum = new ArrayList<Integer>();
@@ -52,21 +55,22 @@ public class BCGenerator {
 		}
 
 		int width = lineHolder.get(0).size();
-		//List<Integer> sumList = new ArrayList<Integer>();
+		List<Integer> sumList = new ArrayList<Integer>();
 
 		for (int i = 0; i < width; i++){
 			int sum = 0;
+			sumList.clear();
 			for (int j = 0; j < height; j++){
 				sum += lineHolder.get(j).get(i);
-				//sumList.add(lineHolder.get(j).get(i));
+				sumList.add(lineHolder.get(j).get(i));
 			}
 			//float f = sum/height;
 			//System.out.println("f: " + f);
 			//heightSum.add((int)Math.round(f));
+			System.out.println("sumList: " + sumList);
+			//heightSum.add(mostRepresentedNumber(sumList));
 			heightSum.add(sum/height);
 		}
-		
-		//mostRepresentedNumber(sumList);
 		
 		return heightSum;
 	}
@@ -84,17 +88,23 @@ public class BCGenerator {
 				hashMap.put(numberList.get(i), 1);
 			}
 		}
+		int highestValue = 0, highestKey = 0;
+		for (int i = 0; i < numberList.size(); i++) {
+			if (hashMap.get(numberList.get(i)) > highestValue) {
+				highestValue = hashMap.get(numberList.get(i));
+				highestKey = numberList.get(i);
+			}
+		}
+		System.out.println("numberList: " + numberList);
+		System.out.println("highestKey is " + highestKey + " and it has value " + highestValue);
 		
-		System.out.println("hashMap has: " + hashMap.get(0));
-		
-		return null;
+		return highestKey;
 	}
 
 	/**
 	 * Normalizes the array given in the generate method
 	 * 
-	 * @param the
-	 *            list of integers (the barcode data) to be normalized
+	 * @param unNormalized the list of integers (the barcode data) to be normalized
 	 * @return a string containing the normalized data, this string is used as
 	 *         key in the database
 	 */
@@ -126,8 +136,9 @@ public class BCGenerator {
 				leastDistance = 9999;
 				index = -1;
 				
-				if (tempStringBuffer.length()>=i+4) 
+				if (tempStringBuffer.length()>=i+4) {
 					tempString = tempStringBuffer.substring(i, i + 4);
+<<<<<<< HEAD
 				
 				for (int j = 0; j < barcodeNumbers.length; j++) {
 					int distance = compare(barcodeNumbers[j],tempString);
@@ -139,6 +150,19 @@ public class BCGenerator {
 					
 					finalStringBuffer.append(index);
 
+=======
+					System.out.println("normalize: tempString: " + tempString);
+				}
+				
+				for (int j = 0; j < barcodeNumbers.length; j++) {
+					// does this segment match any barcode number?
+					if (tempString.equals(barcodeNumbers[j])) { 
+						finalStringBuffer.append(j); // then append it to final
+														// string
+						System.out.println("normalize: " + j + " found!");
+						// adds the matching barcode number to the final
+						// string
+>>>>>>> df53807138554794d3ce89b900ca4012e8055034
 					}
 				}
 			}
