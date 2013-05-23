@@ -29,7 +29,6 @@ public class AddNewActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); // hides the title from the camera view
 		setContentView(R.layout.activity_addnew);
 		
 		//Get instance of DatabaseHelper class
@@ -64,7 +63,6 @@ public class AddNewActivity extends Activity{
 		//Intent intent = new Intent(this,CameraActivity.class);
 		//startActivity(intent);
 		finish();
-		System.out.println("addProduct(): Button pressed.");
 	}
 
 }

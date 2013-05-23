@@ -32,15 +32,9 @@
     <!-- activity_product.xml -->
     <string name="title_activity_product">ProductActivity</string>
     <string name="default_image_description">An image of the product</string>
-    <string name="product_info">Product Info
-        Tex. bla blas Mjölk bla bla
-        Mjölk är bra bla bla Mjölk
-        Mjölk Mjölk bla bla bla
-        bla Mjölk bla Mjölk bla
-	</string>
+    <string name="product_info">Product info</string>
     <string name="product_name">Product Name</string>
     <string name="product_price">Product Price</string>
-    <string name="add_to_cart">Add To Cart</string>
 
     <!-- activity_database.xml -->
     <string name="title_activity_database">DatabaseActivity</string>

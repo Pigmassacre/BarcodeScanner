@@ -11,12 +11,12 @@
 
     <ImageView
         android:id="@+id/imageMilk"
-        android:contentDescription="@string/default_image_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/productInfo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
+        android:contentDescription="@string/default_image_description"
         android:gravity="center"
         android:src="@drawable/milk" />
 
@@ -47,15 +47,5 @@
         android:text="@string/product_price"
         android:textSize="20sp"
         android:textStyle="bold|italic" />
-
-    <Button
-        android:id="@+id/addToCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/productPrice"
-        android:layout_below="@+id/productPrice"
-        android:gravity="left|center_vertical"
-        android:onClick="addToCart"
-        android:text="@string/add_to_cart" />
 
 </RelativeLayout>

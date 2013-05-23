@@ -75,8 +75,8 @@ public class BCGenerator {
 		HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
 
 		for (int i = 0; i < numberList.size(); i++) {
-			if (hashMap.containsKey(numberList.get(i))) { // key has already
-															// been mapped
+			if (hashMap.containsKey(numberList.get(i))) { 
+				// key has already been mapped, so
 				// increase value by 1
 				hashMap.put(numberList.get(i),
 						hashMap.get(numberList.get(i)) + 1);
