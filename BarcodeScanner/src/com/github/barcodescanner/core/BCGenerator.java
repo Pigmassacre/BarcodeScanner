@@ -34,7 +34,7 @@ public class BCGenerator {
 		List<Integer> unNormalized = new ArrayList<Integer>();
 		List<Integer> heightSum = new ArrayList<Integer>();
 		
-		int heigth = lines.size();
+		int height = lines.size();
 		for (int j = 0; j < lines.size(); j++){
 			List<Integer> line = lines.get(j);
 			unNormalized.clear();
@@ -52,19 +52,25 @@ public class BCGenerator {
 		}
 
 		int width = lineHolder.get(0).size();
+		//List<Integer> sumList = new ArrayList<Integer>();
 
 		for (int i = 0; i < width; i++){
 			int sum = 0;
-			for (int j = 0; j < heigth; j++){
+			for (int j = 0; j < height; j++){
 				sum += lineHolder.get(j).get(i);
+				//sumList.add(lineHolder.get(j).get(i));
 			}
-			float f = sum/heigth;
-			System.out.println("f: " + f);
-			heightSum.add(Math.round(f));
+			//float f = sum/height;
+			//System.out.println("f: " + f);
+			//heightSum.add((int)Math.round(f));
+			heightSum.add(sum/height);
 		}
+		
+		//mostRepresentedNumber(sumList);
 		
 		return heightSum;
 	}
+	
 	
 	private Integer mostRepresentedNumber(List<Integer> numberList) {
 		HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
@@ -75,11 +81,11 @@ public class BCGenerator {
 				hashMap.put(numberList.get(i), hashMap.get(numberList.get(i)) + 1);
 			} else { // key hasnt been mapped
 				// so set it's value to 1
-				hashMap.put(numberList.get(i), 1); 
+				hashMap.put(numberList.get(i), 1);
 			}
 		}
 		
-		hashMap.values();
+		System.out.println("hashMap has: " + hashMap.get(0));
 		
 		return null;
 	}
