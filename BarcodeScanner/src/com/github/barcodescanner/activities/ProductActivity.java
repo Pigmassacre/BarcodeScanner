@@ -42,7 +42,8 @@ public class ProductActivity extends Activity {
 	public void addToCart(View view) {
 		// TODO
 		// Starts CameraActivity to be able to scan more items
-		Intent intent = new Intent(this, CameraActivity.class);
-		startActivity(intent);
+		//Intent intent = new Intent(this, CameraActivity.class);
+		//startActivity(intent);
+		finish();
 	}
 }

@@ -61,8 +61,9 @@ public class AddNewActivity extends Activity{
 		//Add the new Product to the database
 		database.addProduct(newProduct);
 		//Change to CameraActivity to be able to scan more products
-		Intent intent = new Intent(this,CameraActivity.class);
-		startActivity(intent);
+		//Intent intent = new Intent(this,CameraActivity.class);
+		//startActivity(intent);
+		finish();
 		System.out.println("addProduct(): Button pressed.");
 	}
 

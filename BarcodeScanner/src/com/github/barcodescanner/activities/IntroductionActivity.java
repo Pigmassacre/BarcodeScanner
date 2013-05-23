@@ -37,6 +37,7 @@ public class IntroductionActivity extends Activity {
 		// TODO For now this will start the main activity, but it's supposed to
 		// launch into an admin specific activity
 		Intent intent = new Intent(this, MainActivity.class);
+		intent.putExtra("isOwner", true);
 		startActivity(intent);
 	}
 
@@ -44,6 +45,7 @@ public class IntroductionActivity extends Activity {
 		// TODO For now this will start the main activity, but it's supposed to
 		// launch into a customer specific activity
 		Intent intent = new Intent(this, MainActivity.class);
+		intent.putExtra("isOwner", false);
 		startActivity(intent);
 	}
 

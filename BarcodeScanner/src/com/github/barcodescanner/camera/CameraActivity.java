@@ -50,6 +50,7 @@ public class CameraActivity extends Activity {
 	private boolean mPreviewRunning;
 	private Camera mCamera;
 	private int numberOfCameras;
+	private boolean isOwner;
 
 	private Handler autoFocusHandler;
 
@@ -74,6 +75,7 @@ public class CameraActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_camera);
+		isOwner = getIntent().getExtras().getBoolean("isOwner");
 
 		// Set layout
 
@@ -272,11 +274,17 @@ public class CameraActivity extends Activity {
 
 			// Set ProductActivity as the intent
 			productIntent = new Intent(this, ProductActivity.class);
-		} else {
+		} else if(isOwner) {
 			// Put new product ID in bundle
 			productBundle.putString("productID", barcode);
 
 			// Set AddNewActivity as the intent
+			productIntent = new Intent(this, AddNewActivity.class);
+		}else{
+			// Put new product ID in bundle
+			productBundle.putString("productID", barcode);
+			
+			// Set NoProductActivity as the intent
 			productIntent = new Intent(this, AddNewActivity.class);
 		}
 
