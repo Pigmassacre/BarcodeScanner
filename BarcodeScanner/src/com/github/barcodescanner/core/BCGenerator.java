@@ -65,7 +65,8 @@ public class BCGenerator {
 				sum += lineHolder.get(j).get(i);
 				sumList.add(lineHolder.get(j).get(i));
 			}
-			heightSum.add(mostRepresentedNumber(sumList));
+			heightSum.add(sum/height);	
+			//heightSum.add(mostRepresentedNumber(sumList));
 		}
 
 		return heightSum;
@@ -149,6 +150,7 @@ public class BCGenerator {
 
 					System.out.println("normalize: tempString: " + tempString);
 				}
+				System.out.println("distance is : " + leastDistance);
 				finalStringBuffer.append(index);
 				/*
 				for (int j = 0; j < barcodeNumbers.length; j++) {
