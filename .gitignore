@@ -17,6 +17,7 @@ local.properties
 
 # Latex
 doc/*.log
+doc/*.toc
 doc/*.out
 doc/*.aux
 doc/*.bbl
