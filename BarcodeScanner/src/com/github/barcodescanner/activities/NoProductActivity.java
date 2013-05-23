@@ -23,7 +23,7 @@ public class NoProductActivity extends Activity {
 		productID = getIntent().getExtras().getString("productID");
 		
 		//TextView instance to display product ID for new product
-    	TextView view = (TextView) findViewById(R.id.new_product_id);
+    	TextView view = (TextView) findViewById(R.id.no_product_id);
 		// Set price to be displayed in TextView
 		view.setText(productID);
 	}
