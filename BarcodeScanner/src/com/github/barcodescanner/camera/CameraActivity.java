@@ -243,15 +243,12 @@ public class CameraActivity extends Activity {
 		if (matchingProduct != null) {
 			// Get product name
 			String productName = matchingProduct.getName();
-
+			
 			// Get product price
 			int productPrice = matchingProduct.getPrice();
 
 			// Put product name in bundle
 			productBundle.putString("productName", productName);
-
-			// Put product info in bundle
-			productBundle.putString("productInfo", productInfo);
 			
 			// Put product price in bundle
 			productBundle.putInt("productPrice", productPrice);

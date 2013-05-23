@@ -53,7 +53,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int database_table_row=0x7f090011;
         public static final int database_table_title=0x7f090010;
         public static final int help_button=0x7f09001e;
-        public static final int imageMilk=0x7f090023;
+        public static final int imageMilk=0x7f090026;
         public static final int intro_message=0x7f090016;
         public static final int logotype_image=0x7f090015;
         public static final int main_button_holder=0x7f09001d;
@@ -72,8 +72,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int no_product_message=0x7f090022;
         public static final int no_product_message_title=0x7f090021;
         public static final int productInfo=0x7f090024;
-        public static final int productName=0x7f090025;
-        public static final int productPrice=0x7f090026;
+        public static final int productName=0x7f090023;
+        public static final int productPrice=0x7f090025;
         public static final int products_table=0x7f09000f;
         public static final int start_button=0x7f09001c;
         public static final int take_picture_button=0x7f09000d;
