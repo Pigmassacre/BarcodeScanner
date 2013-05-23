@@ -103,7 +103,9 @@ public class BCGenerator {
 		StringBuffer finalStringBuffer = new StringBuffer();
 		String tempString = "";
 		int sumEven = 0, sumOdd = 0, checksumValue = 0, checksumDigit = 0;
-
+		int leastDistance = 999999;
+		int index = -1;
+		
 		if (unNormalized == null) {
 			return "No barcode data is set";
 		} else {
@@ -117,37 +119,26 @@ public class BCGenerator {
 				int value = Math.round(unNormalized.get(i) / division);
 				tempStringBuffer.append(value);
 			}
-
-			System.out.println("normalize: tempStringBuffer: "
-					+ tempStringBuffer);
-			System.out.println("normalize: length of tempStringBuffer: "
-					+ tempStringBuffer.length());
-
-			// we delete the five middle bars, they are not used for generating
-			// the numbers.
+			
 			tempStringBuffer.delete(28, 33);
 
-			System.out.println("normalize: tempStringBuffer: "
-					+ tempStringBuffer);
-			System.out.println("normalize: length of tempStringBuffer: "
-					+ tempStringBuffer.length());
-
 			for (int i = 3; i < tempStringBuffer.length() - 2; i += 4) {
+				leastDistance = 9999;
+				index = -1;
 				
 				if (tempStringBuffer.length()>=i+4) 
 					tempString = tempStringBuffer.substring(i, i + 4);
-				else break;
 				
 				for (int j = 0; j < barcodeNumbers.length; j++) {
-					if (tempString.equals(barcodeNumbers[j])) { // does this
-																// segment match
-																// any barcode
-																// number?
-						finalStringBuffer.append(j); // then append it to final
-														// string
-						System.out.println("normalize: " + j + " found!");
-						// adds the matching barcode number to the final
-						// string
+					int distance = compare(barcodeNumbers[j],tempString);
+					
+					if (distance < leastDistance){
+						leastDistance = distance;
+						index = j;
+					}
+					
+					finalStringBuffer.append(index);
+
 					}
 				}
 			}
@@ -177,8 +168,8 @@ public class BCGenerator {
 			System.out.println("normalize: finalStringBuffer: "
 					+ finalStringBuffer);
 			return finalStringBuffer.toString();
-		}
 	}
+	
 
 	/**
 	 * Compares two strings and decides if this is the same product
@@ -189,19 +180,17 @@ public class BCGenerator {
 	 * @param threshhold
 	 * @return
 	 */
-	public boolean compare(String one, String two, int threshhold) {
+	public Integer compare(String one, String two) {
+		int distance = 0;
 		if (one.length() == two.length()) {
-			int distance = 0;
 			int current;
 			for (int i = 0; i < one.length(); i++) {
 				current = Integer.parseInt(one.charAt(i) + "")
 						- Integer.parseInt(two.charAt(i) + "");
 				distance += Math.abs(current);
 			}
-			return distance <= threshhold;
-		} else {
-			return false;
 		}
+		return distance;
 	}
 
 }
