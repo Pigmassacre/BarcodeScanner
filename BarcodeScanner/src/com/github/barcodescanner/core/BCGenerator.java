@@ -68,8 +68,8 @@ public class BCGenerator {
 			//System.out.println("f: " + f);
 			//heightSum.add((int)Math.round(f));
 			System.out.println("sumList: " + sumList);
-			heightSum.add(mostRepresentedNumber(sumList));
-			//heightSum.add(sum/height);
+			//heightSum.add(mostRepresentedNumber(sumList));
+			heightSum.add(sum/height);
 		}
 		
 		return heightSum;
@@ -104,8 +104,7 @@ public class BCGenerator {
 	/**
 	 * Normalizes the array given in the generate method
 	 * 
-	 * @param the
-	 *            list of integers (the barcode data) to be normalized
+	 * @param unNormalized the list of integers (the barcode data) to be normalized
 	 * @return a string containing the normalized data, this string is used as
 	 *         key in the database
 	 */
@@ -145,15 +144,14 @@ public class BCGenerator {
 
 			for (int i = 3; i < tempStringBuffer.length() - 2; i += 4) {
 				
-				if (tempStringBuffer.length()>=i+4) 
+				if (tempStringBuffer.length()>=i+4) {
 					tempString = tempStringBuffer.substring(i, i + 4);
-				else break;
+					System.out.println("normalize: tempString: " + tempString);
+				}
 				
 				for (int j = 0; j < barcodeNumbers.length; j++) {
-					if (tempString.equals(barcodeNumbers[j])) { // does this
-																// segment match
-																// any barcode
-																// number?
+					// does this segment match any barcode number?
+					if (tempString.equals(barcodeNumbers[j])) { 
 						finalStringBuffer.append(j); // then append it to final
 														// string
 						System.out.println("normalize: " + j + " found!");
