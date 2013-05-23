@@ -1,6 +1,7 @@
 package com.github.barcodescanner.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BCGenerator {
@@ -31,10 +32,9 @@ public class BCGenerator {
 	public List<Integer> generate(List<List<Integer>> lines) {
 		List<List<Integer>> lineHolder = new ArrayList<List<Integer>>();
 		List<Integer> unNormalized = new ArrayList<Integer>();
+		List<Integer> heightSum = new ArrayList<Integer>();
 		
-		int width = lines.get(0).size();
 		int heigth = lines.size();
-		
 		for (int j = 0; j < lines.size(); j++){
 			List<Integer> line = lines.get(j);
 			unNormalized.clear();
@@ -50,17 +50,38 @@ public class BCGenerator {
 			unNormalized.add(count);
 			lineHolder.add(unNormalized);
 		}
-		unNormalized.clear();
-		
+
+		int width = lineHolder.get(0).size();
+
 		for (int i = 0; i < width; i++){
 			int sum = 0;
 			for (int j = 0; j < heigth; j++){
-				sum += lineHolder.get(i).get(j);
+				sum += lineHolder.get(j).get(i);
 			}
-			unNormalized.add(sum/heigth);
+			float f = sum/heigth;
+			System.out.println("f: " + f);
+			heightSum.add(Math.round(f));
 		}
 		
-		return unNormalized;
+		return heightSum;
+	}
+	
+	private Integer mostRepresentedNumber(List<Integer> numberList) {
+		HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+		
+		for (int i = 0; i < numberList.size(); i++) {
+			if (hashMap.containsKey(numberList.get(i))) { // key has already been mapped
+				// increase value by 1
+				hashMap.put(numberList.get(i), hashMap.get(numberList.get(i)) + 1);
+			} else { // key hasnt been mapped
+				// so set it's value to 1
+				hashMap.put(numberList.get(i), 1); 
+			}
+		}
+		
+		hashMap.values();
+		
+		return null;
 	}
 
 	/**
