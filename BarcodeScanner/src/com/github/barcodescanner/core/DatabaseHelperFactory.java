@@ -1,8 +1,6 @@
 package com.github.barcodescanner.core;
 
-import android.app.Application;
 import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelperFactory{
 	

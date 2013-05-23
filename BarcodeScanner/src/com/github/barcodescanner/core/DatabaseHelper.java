@@ -102,9 +102,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			do {
 				Product product = new Product();
-				product.setName(cursor.getString(0));
-				product.setPrice(Integer.parseInt(cursor.getString(1)));
-				product.setBarcode((cursor.getString(2)));
+				product.setBarcode((cursor.getString(0)));
+				product.setName(cursor.getString(1));
+				product.setPrice(Integer.parseInt(cursor.getString(2)));
 				// Adding product to list
 				productList.add(product);
 			} while (cursor.moveToNext());

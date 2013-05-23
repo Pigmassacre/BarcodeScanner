@@ -1,8 +1,6 @@
 package com.github.barcodescanner.core;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,10 +57,10 @@ public class BCGenerator {
 		List<Integer> sumList = new ArrayList<Integer>();
 
 		for (int i = 0; i < width; i++) {
-			int sum = 0;
+			//int sum = 0;
 			sumList.clear();
 			for (int j = 0; j < height; j++) {
-				sum += lineHolder.get(j).get(i);
+				//sum += lineHolder.get(j).get(i);
 				sumList.add(lineHolder.get(j).get(i));
 			}
 			heightSum.add(sum/height);	
@@ -208,14 +206,17 @@ public class BCGenerator {
 	 * @return
 	 */
 	public Integer compare(String one, String two) {
+		System.out.println("one and two: " + one + " " + two);
 		int distance = 0;
 		if (one.length() == two.length()) {
 			int current;
 			for (int i = 0; i < one.length(); i++) {
-				current = Integer.parseInt(one.charAt(i) + "")
-						- Integer.parseInt(two.charAt(i) + "");
+				current = Integer.parseInt(Integer.toString(one.charAt(i)))
+						- Integer.parseInt(Integer.toString(two.charAt(i)));
 				distance += Math.abs(current);
 			}
+		} else {
+			distance = -1;
 		}
 		return distance;
 	}
