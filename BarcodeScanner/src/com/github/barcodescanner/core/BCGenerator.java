@@ -127,14 +127,11 @@ public class BCGenerator {
 					+ tempStringBuffer.length());
 
 			for (int i = 3; i < tempStringBuffer.length() - 2; i += 4) {
-				tempString = tempStringBuffer.substring(i, i + 4); // each
-																	// barcode
-																	// number is
-																	// composed
-																	// by four
-																	// bars
-				System.out.println("normalize: i: " + i);
-				System.out.println("normalize: tempString: " + tempString);
+				
+				if (tempStringBuffer.length()>=i+4) 
+					tempString = tempStringBuffer.substring(i, i + 4);
+				else break;
+				
 				for (int j = 0; j < barcodeNumbers.length; j++) {
 					if (tempString.equals(barcodeNumbers[j])) { // does this
 																// segment match
