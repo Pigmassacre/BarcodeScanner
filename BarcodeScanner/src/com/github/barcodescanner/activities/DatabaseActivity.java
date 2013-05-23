@@ -25,8 +25,7 @@ public class DatabaseActivity extends Activity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
+		super.onCreate(savedInstanceState);	
 	}
 	
 	private void addRow(List<String> values){

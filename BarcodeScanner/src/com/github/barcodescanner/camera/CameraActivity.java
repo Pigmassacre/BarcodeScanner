@@ -6,6 +6,7 @@ import java.util.List;
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.AddNewActivity;
 import com.github.barcodescanner.activities.BarcodeViewActivity;
+import com.github.barcodescanner.activities.DatabaseActivity;
 import com.github.barcodescanner.activities.NoProductActivity;
 import com.github.barcodescanner.activities.ProductActivity;
 import com.github.barcodescanner.core.BCGenerator;
@@ -183,8 +184,7 @@ public class CameraActivity extends Activity {
 				Product foundProduct = null;
 				if (products != null) {
 					for (Product p : products) {
-						boolean isSame = bcGenerator.compare(p.getBarcode(),
-								tempBarcode, 10);
+						boolean isSame = (bcGenerator.compare(p.getBarcode(),tempBarcode) < 2);
 						if (isSame) {
 							foundProduct = p;
 							break;
@@ -228,8 +228,6 @@ public class CameraActivity extends Activity {
 	}
 
 	public void takePicture(View view) {
-		System.err.println("mCamera is: " + mCamera);
-		//mCamera.autoFocus(autoFocusCallback);
 		mCamera.takePicture(null, null, pictureCallback);
 	}
 
@@ -285,4 +283,9 @@ public class CameraActivity extends Activity {
 			autoFocusHandler.postDelayed(doAutoFocus, 5000);
 		}
 	};
+	
+	public void enterDatabase(View view) {
+		Intent intent = new Intent(this, DatabaseActivity.class);
+		startActivity(intent);
+	}
 }

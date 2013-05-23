@@ -43,14 +43,15 @@
     <string name="add_to_cart">Add To Cart</string>
 
     <!-- activity_database.xml -->
+    <string name="title_activity_database">DatabaseActivity</string>
     <string name="db_table_caption">Products</string>
     <string name="db_table_name">Name</string>
     <string name="db_table_price">Price</string>
     <string name="db_table_id">ID</string>
     
-    <!-- activity_no_product -->
-    <string name ="no_product_title">No product found</string>
-    <string name ="no_product_button">Back</string>
+    <!-- activity_no_product.xml -->
+    <string name ="no_product_message_title">No product found</string>
+    <string name ="no_product_message">No product matching the scanned barcode was found in our database.</string>
 
     <!-- activity_addnew.xml -->
     <string name="title_activity_addnew">AddNewActivity</string>

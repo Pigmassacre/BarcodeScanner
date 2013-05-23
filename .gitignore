@@ -15,6 +15,16 @@ local.properties
 .settings/
 .loadpath
 
+# Latex
+doc/*.log
+doc/*.toc
+doc/*.out
+doc/*.aux
+doc/*.bbl
+doc/*.blg
+doc/*.dvi
+doc/*.pdf
+
 # External tool builders
 .externalToolBuilders/
 
