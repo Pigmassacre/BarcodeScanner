@@ -19,6 +19,7 @@
         android:targetSdkVersion="17" />
 
     <application
+        android:label="Barcode Scanner"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme" >

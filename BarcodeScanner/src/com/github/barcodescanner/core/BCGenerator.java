@@ -204,14 +204,17 @@ public class BCGenerator {
 	 * @return
 	 */
 	public Integer compare(String one, String two) {
+		System.out.println("one and two: " + one + " " + two);
 		int distance = 0;
 		if (one.length() == two.length()) {
 			int current;
 			for (int i = 0; i < one.length(); i++) {
-				current = Integer.parseInt(one.charAt(i) + "")
-						- Integer.parseInt(two.charAt(i) + "");
+				current = Integer.parseInt(Integer.toString(one.charAt(i)))
+						- Integer.parseInt(Integer.toString(two.charAt(i)));
 				distance += Math.abs(current);
 			}
+		} else {
+			distance = -1;
 		}
 		return distance;
 	}
