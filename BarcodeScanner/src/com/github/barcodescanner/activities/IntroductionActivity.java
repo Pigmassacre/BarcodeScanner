@@ -1,8 +1,6 @@
 package com.github.barcodescanner.activities;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.R.layout;
-import com.github.barcodescanner.R.menu;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
 
 import android.os.Bundle;

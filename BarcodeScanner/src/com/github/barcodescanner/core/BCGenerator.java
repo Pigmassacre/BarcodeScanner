@@ -57,10 +57,10 @@ public class BCGenerator {
 		List<Integer> sumList = new ArrayList<Integer>();
 
 		for (int i = 0; i < width; i++) {
-			int sum = 0;
+			//int sum = 0;
 			sumList.clear();
 			for (int j = 0; j < height; j++) {
-				sum += lineHolder.get(j).get(i);
+				//sum += lineHolder.get(j).get(i);
 				sumList.add(lineHolder.get(j).get(i));
 			}
 			heightSum.add(mostRepresentedNumber(sumList));

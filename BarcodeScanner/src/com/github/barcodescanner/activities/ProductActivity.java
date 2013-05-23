@@ -1,14 +1,8 @@
 package com.github.barcodescanner.activities;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.R.id;
-import com.github.barcodescanner.R.layout;
-import com.github.barcodescanner.camera.CameraActivity;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 

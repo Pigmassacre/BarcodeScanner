@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.R.drawable;
-import com.github.barcodescanner.R.layout;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
 import com.github.barcodescanner.core.Product;
@@ -14,7 +12,6 @@ import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -63,10 +60,11 @@ public class DatabaseActivity extends Activity {
 		table.addView(row, new TableLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 	}
-
+	
+	/*
 	private void removeRow() {
 		// TODO
-	}
+	}*/
 
 	private TextView generateCell(String text) {
 		TextView nameView = new TextView(this);

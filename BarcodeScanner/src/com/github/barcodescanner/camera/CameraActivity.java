@@ -27,7 +27,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 public class CameraActivity extends Activity {
 	private static final String TAG = "CameraActivity";
@@ -35,7 +34,6 @@ public class CameraActivity extends Activity {
 	private Preview mPreview;
 	private boolean mPreviewRunning;
 	private Camera mCamera;
-	private int numberOfCameras;
 	private boolean isOwner;
 
 	private Handler autoFocusHandler;
@@ -44,11 +42,6 @@ public class CameraActivity extends Activity {
 
 	private BCLocator bcLocator;
 	private BCGenerator bcGenerator;
-
-	// Load zbar library
-	static {
-		// System.loadLibrary("iconv");
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,45 +53,13 @@ public class CameraActivity extends Activity {
 		setContentView(R.layout.activity_camera);
 		isOwner = getIntent().getExtras().getBoolean("isOwner");
 
-		// Set layout
-
-		// Create a RelativeLayout container that will hold a SurfaceView,
-		// and set it as the content of our activity.
-		// setupPreview();
-
-		// Configure the ZBar scanner
-		// setupScanner();
-
-		// Setup autofocus handler
-		// setupAutoFocus();
-
 		// Setup the database
 		setupDatabase();
 
-		// barcode analyzer
+		// prepare the camera for being able to scan barcodes
 		bcLocator = new BCLocator();
-
 		bcGenerator = new BCGenerator();
-
 	}
-
-	private void setupPreview() {
-		// setContentView(R.layout.activity_camera);
-		// mPreview = new Preview(this);
-
-		// setContentView(mPreview);
-
-		// setContentView(draw);
-		// mPreviewRunning = true;
-		// System.out.println(previewCallback);
-		// mPreview.setPreviewCallback(previewCallback);
-		// System.out.println(previewCallback);
-	}
-
-	/*
-	 * private void setupAutoFocus() { autoFocusHandler = new Handler();
-	 * mPreview.setAutoFocusCallback(autoFocusCallback); }
-	 */
 
 	private void setupDatabase() {
 		DatabaseHelperFactory.init(this);

@@ -129,7 +129,7 @@ public class BCLocator {
 	 * @param x2
 	 * @param y2
 	 */
-	private void drawRectToBitmap(int x1, int y1, int x2, int y2){
+	public void drawRectToBitmap(int x1, int y1, int x2, int y2){
 		Rect r = new Rect(x1,y1,x2,y2);
 		Paint p = new Paint();
 		p.setColor(Color.rgb(255, 0, 0));
