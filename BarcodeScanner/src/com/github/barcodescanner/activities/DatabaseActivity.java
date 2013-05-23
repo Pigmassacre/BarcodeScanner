@@ -71,9 +71,9 @@ public class DatabaseActivity extends Activity {
 	private TextView generateCell(String text) {
 		TextView nameView = new TextView(this);
 		nameView.setText(text);
-		nameView.setBackgroundResource(R.drawable.cell_normal);
 		nameView.setGravity(Gravity.CENTER_HORIZONTAL);
 		nameView.setTypeface(null, Typeface.BOLD);
+		//nameView.setLayoutParams(new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT, 1f));
 		return nameView;
 	}
 }
