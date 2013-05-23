@@ -17,8 +17,6 @@ public class NoProductActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); // hides the title from
-														// the camera view
 		setContentView(R.layout.activity_no_product);
 
 		// Product id to display
@@ -28,10 +26,5 @@ public class NoProductActivity extends Activity {
     	TextView view = (TextView) findViewById(R.id.new_product_id);
 		// Set price to be displayed in TextView
 		view.setText(productID);
-	}
-
-	public void addToCart(View view) {
-		// TODO
-		finish();
 	}
 }

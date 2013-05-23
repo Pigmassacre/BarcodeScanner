@@ -4,7 +4,7 @@ public class Product {
 	
 	/*
 	 * This is the object that represents the objects that each barcode belongs to. 
-	 * The objects will therefor contain the values that are to be saved in the database.
+	 * The objects will therefore contain the values that are to be saved in the database.
 	 * */
 	
 	private String name;

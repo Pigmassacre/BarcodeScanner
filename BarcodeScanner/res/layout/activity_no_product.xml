@@ -8,45 +8,44 @@
     android:paddingTop="@dimen/activity_vertical_margin" >
 
     <TextView
-        android:id="@+id/new_product_id_title"
+        android:id="@+id/no_product_id_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/new_product_title"
-        android:layout_below="@id/new_product_title"
+        android:layout_alignParentLeft="true"
         android:layout_marginTop="15dp"
         android:text="@string/new_product_id_title"
         android:textSize="25sp"
         android:textStyle="bold|italic" />
 
     <TextView
-        android:id="@+id/new_product_id"
+        android:id="@+id/no_product_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/new_product_id_title"
         android:layout_alignParentRight="true"
+        android:layout_alignRight="@id/no_product_id_title"
+        android:layout_alignBaseline="@id/no_product_id_title"
         android:text="@string/new_product_id"
         android:textSize="20sp"
         android:textStyle="italic" />
 
     <TextView
-        android:id="@+id/no_product_title"
+        android:id="@+id/no_product_message_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/new_product_id_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="104dp"
-        android:text="@string/no_product_title"
+        android:layout_centerVertical="true"
+        android:text="@string/no_product_message_title"
         android:textSize="30sp"
         android:textStyle="bold|italic" />
 
-    <Button
-        android:id="@+id/new_product_add_button"
+    <TextView
+        android:id="@+id/no_product_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/no_product_message_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="19dp"
-        android:onClick="backToCamera"
-        android:text="@string/no_product_button" />
+        android:text="@string/no_product_message"
+        android:textSize="15sp"
+        android:textStyle="italic" />
 
 </RelativeLayout>
