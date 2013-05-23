@@ -65,12 +65,7 @@ public class BCGenerator {
 				sum += lineHolder.get(j).get(i);
 				sumList.add(lineHolder.get(j).get(i));
 			}
-			// float f = sum/height;
-			// System.out.println("f: " + f);
-			// heightSum.add((int)Math.round(f));
-			System.out.println("sumList: " + sumList);
-			// heightSum.add(mostRepresentedNumber(sumList));
-			heightSum.add(sum / height);
+			heightSum.add(mostRepresentedNumber(sumList));
 		}
 
 		return heightSum;

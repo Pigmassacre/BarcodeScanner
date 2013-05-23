@@ -47,7 +47,7 @@ public class BCLocator {
 		Bitmap temp = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata.length);
 		bitmap = temp.copy(temp.getConfig(), true);
 		canvas.setBitmap(bitmap);
-		scanLines(15);	
+		scanLines(30);	
 	}
 
 	public boolean foundBarcode(){

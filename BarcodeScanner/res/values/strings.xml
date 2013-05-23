@@ -43,6 +43,7 @@
     <string name="add_to_cart">Add To Cart</string>
 
     <!-- activity_database.xml -->
+    <string name="title_activity_database">DatabaseActivity</string>
     <string name="db_table_caption">Products</string>
     <string name="db_table_name">Name</string>
     <string name="db_table_price">Price</string>

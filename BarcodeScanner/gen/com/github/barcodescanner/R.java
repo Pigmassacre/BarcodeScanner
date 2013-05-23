@@ -98,51 +98,52 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int app_name=0x7f060000;
         /**  activity_barcode_view.xml 
          */
-        public static final int barcode_view_description=0x7f06002c;
-        public static final int barcode_view_image_description=0x7f06002d;
+        public static final int barcode_view_description=0x7f06002d;
+        public static final int barcode_view_image_description=0x7f06002e;
         public static final int camera_button_capture=0x7f06000e;
         public static final int camera_button_database=0x7f06000f;
         public static final int camera_button_help=0x7f060010;
-        /**  activity_database.xml 
-         */
-        public static final int db_table_caption=0x7f060019;
-        public static final int db_table_id=0x7f06001c;
-        public static final int db_table_name=0x7f06001a;
-        public static final int db_table_price=0x7f06001b;
+        public static final int db_table_caption=0x7f06001a;
+        public static final int db_table_id=0x7f06001d;
+        public static final int db_table_name=0x7f06001b;
+        public static final int db_table_price=0x7f06001c;
         public static final int default_image_description=0x7f060014;
-        public static final int hello_world=0x7f06002b;
+        public static final int hello_world=0x7f06002c;
         public static final int introduction_admin_button=0x7f060005;
         public static final int introduction_customer_button=0x7f060006;
         public static final int introduction_intro_message=0x7f060004;
         public static final int introduction_logotype_description=0x7f060003;
-        public static final int new_product_add_button=0x7f060027;
-        public static final int new_product_description_hint=0x7f060026;
-        public static final int new_product_description_title=0x7f060025;
-        public static final int new_product_id=0x7f060022;
-        public static final int new_product_id_title=0x7f060021;
-        public static final int new_product_name_hint=0x7f060024;
-        public static final int new_product_name_title=0x7f060023;
-        public static final int new_product_price_hint=0x7f060029;
-        public static final int new_product_title=0x7f060020;
-        public static final int new_product_title_price=0x7f060028;
-        public static final int no_product_button=0x7f06001e;
+        public static final int new_product_add_button=0x7f060028;
+        public static final int new_product_description_hint=0x7f060027;
+        public static final int new_product_description_title=0x7f060026;
+        public static final int new_product_id=0x7f060023;
+        public static final int new_product_id_title=0x7f060022;
+        public static final int new_product_name_hint=0x7f060025;
+        public static final int new_product_name_title=0x7f060024;
+        public static final int new_product_price_hint=0x7f06002a;
+        public static final int new_product_title=0x7f060021;
+        public static final int new_product_title_price=0x7f060029;
+        public static final int no_product_button=0x7f06001f;
         /**  activity_no_product 
          */
-        public static final int no_product_title=0x7f06001d;
+        public static final int no_product_title=0x7f06001e;
         public static final int product_info=0x7f060015;
         public static final int product_name=0x7f060016;
         public static final int product_price=0x7f060017;
         public static final int take_picture=0x7f060012;
         /**  activity_addnew.xml 
          */
-        public static final int title_activity_addnew=0x7f06001f;
-        public static final int title_activity_barcode_view=0x7f06002a;
+        public static final int title_activity_addnew=0x7f060020;
+        public static final int title_activity_barcode_view=0x7f06002b;
         /**  activity_camera.xml 
          */
         public static final int title_activity_camera=0x7f06000d;
         /**  activity_camera_preview.xml 
          */
         public static final int title_activity_camera_preview=0x7f060011;
+        /**  activity_database.xml 
+         */
+        public static final int title_activity_database=0x7f060019;
         /**  activity_introduction.xml 
          */
         public static final int title_activity_introduction=0x7f060002;
