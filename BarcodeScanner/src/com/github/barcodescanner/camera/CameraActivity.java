@@ -158,7 +158,7 @@ public class CameraActivity extends Activity {
 	private PictureCallback pictureCallback = new PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
 			String tempBarcode = null;
-			List<List<Integer>> tempList = new ArrayList<List<Integer>>();
+			List<Integer> tempList = new ArrayList<Integer>();
 
 			/*
 			 * s Size previewSize = camera.getParameters().getPreviewSize();
