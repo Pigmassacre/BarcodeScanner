@@ -69,8 +69,8 @@ public class BCLocator {
 	public List<List<Integer>> getSegment(){
 		List<List<Integer>> segmentMap = new ArrayList<List<Integer>>();
 		List<Integer> segment = null;
-		int start = mostPlausibleBarcode[0] -getHeight()/delta;
-		int stop = mostPlausibleBarcode[2] + getHeight()/delta;
+		int start = mostPlausibleBarcode[1] -getHeight()/delta;
+		int stop = mostPlausibleBarcode[3] + getHeight()/delta;
 		
 		if (mostPlausibleBarcode[0]!=null){
 			for (int line = start; line < stop; line++){
