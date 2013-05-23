@@ -58,9 +58,9 @@ public class BCGenerator {
 			for (int j = 0; j < heigth; j++){
 				sum += lineHolder.get(j).get(i);
 			}
-			float f = sum/heigth;
-			System.out.println("f: " + f);
-			heightSum.add(Math.round(f));
+			//float f = sum/heigth;
+			//System.out.println("f: " + f);
+			heightSum.add(Math.round(sum/heigth));
 		}
 		
 		return heightSum;
