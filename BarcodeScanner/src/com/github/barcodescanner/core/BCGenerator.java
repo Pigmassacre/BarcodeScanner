@@ -27,7 +27,8 @@ public class BCGenerator {
 	/**
 	 * Generates a new array repesenting the length of each part in the barcode
 	 * 
-	 * @param lines segments of 0s and 1s containing a barcode found in BCLocate,
+	 * @param lines
+	 *            segments of 0s and 1s containing a barcode found in BCLocate,
 	 * 
 	 * @return the new array
 	 */
@@ -36,9 +37,9 @@ public class BCGenerator {
 		List<List<Integer>> lineHolder = new ArrayList<List<Integer>>();
 		List<Integer> unNormalized = new ArrayList<Integer>();
 		List<Integer> heightSum = new ArrayList<Integer>();
-		
+
 		int height = lines.size();
-		for (int j = 0; j < lines.size(); j++){
+		for (int j = 0; j < lines.size(); j++) {
 			List<Integer> line = lines.get(j);
 			unNormalized.clear();
 			int count = 1;
@@ -57,32 +58,33 @@ public class BCGenerator {
 		int width = lineHolder.get(0).size();
 		List<Integer> sumList = new ArrayList<Integer>();
 
-		for (int i = 0; i < width; i++){
+		for (int i = 0; i < width; i++) {
 			int sum = 0;
 			sumList.clear();
-			for (int j = 0; j < height; j++){
+			for (int j = 0; j < height; j++) {
 				sum += lineHolder.get(j).get(i);
 				sumList.add(lineHolder.get(j).get(i));
 			}
-			//float f = sum/height;
-			//System.out.println("f: " + f);
-			//heightSum.add((int)Math.round(f));
+			// float f = sum/height;
+			// System.out.println("f: " + f);
+			// heightSum.add((int)Math.round(f));
 			System.out.println("sumList: " + sumList);
-			//heightSum.add(mostRepresentedNumber(sumList));
-			heightSum.add(sum/height);
+			// heightSum.add(mostRepresentedNumber(sumList));
+			heightSum.add(sum / height);
 		}
-		
+
 		return heightSum;
 	}
-	
-	
+
 	private Integer mostRepresentedNumber(List<Integer> numberList) {
 		HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
-		
+
 		for (int i = 0; i < numberList.size(); i++) {
-			if (hashMap.containsKey(numberList.get(i))) { // key has already been mapped
+			if (hashMap.containsKey(numberList.get(i))) { // key has already
+															// been mapped
 				// increase value by 1
-				hashMap.put(numberList.get(i), hashMap.get(numberList.get(i)) + 1);
+				hashMap.put(numberList.get(i),
+						hashMap.get(numberList.get(i)) + 1);
 			} else { // key hasnt been mapped
 				// so set it's value to 1
 				hashMap.put(numberList.get(i), 1);
@@ -96,15 +98,17 @@ public class BCGenerator {
 			}
 		}
 		System.out.println("numberList: " + numberList);
-		System.out.println("highestKey is " + highestKey + " and it has value " + highestValue);
-		
+		System.out.println("highestKey is " + highestKey + " and it has value "
+				+ highestValue);
+
 		return highestKey;
 	}
 
 	/**
 	 * Normalizes the array given in the generate method
 	 * 
-	 * @param unNormalized the list of integers (the barcode data) to be normalized
+	 * @param unNormalized
+	 *            the list of integers (the barcode data) to be normalized
 	 * @return a string containing the normalized data, this string is used as
 	 *         key in the database
 	 */
@@ -115,7 +119,7 @@ public class BCGenerator {
 		int sumEven = 0, sumOdd = 0, checksumValue = 0, checksumDigit = 0;
 		int leastDistance = 999999;
 		int index = -1;
-		
+
 		if (unNormalized == null) {
 			return "No barcode data is set";
 		} else {
@@ -129,71 +133,73 @@ public class BCGenerator {
 				int value = Math.round(unNormalized.get(i) / division);
 				tempStringBuffer.append(value);
 			}
-			
+
 			tempStringBuffer.delete(28, 33);
 
 			for (int i = 3; i < tempStringBuffer.length() - 2; i += 4) {
 				leastDistance = 9999;
 				index = -1;
-				
-				if (tempStringBuffer.length()>=i+4) {
+
+				if (tempStringBuffer.length() >= i + 4) {
 					tempString = tempStringBuffer.substring(i, i + 4);
-<<<<<<< HEAD
-				
+				}
+
 				for (int j = 0; j < barcodeNumbers.length; j++) {
-					int distance = compare(barcodeNumbers[j],tempString);
-					
-					if (distance < leastDistance){
+					int distance = compare(barcodeNumbers[j], tempString);
+
+					if (distance < leastDistance) {
 						leastDistance = distance;
 						index = j;
 					}
-					
-					finalStringBuffer.append(index);
 
-=======
 					System.out.println("normalize: tempString: " + tempString);
 				}
-				
+				finalStringBuffer.append(index);
+				/*
 				for (int j = 0; j < barcodeNumbers.length; j++) {
 					// does this segment match any barcode number?
-					if (tempString.equals(barcodeNumbers[j])) { 
+					if (tempString.equals(barcodeNumbers[j])) {
 						finalStringBuffer.append(j); // then append it to final
 														// string
 						System.out.println("normalize: " + j + " found!");
 						// adds the matching barcode number to the final
 						// string
->>>>>>> df53807138554794d3ce89b900ca4012e8055034
 					}
-				}
+				}*/
 			}
+		}
+		
+		for (int i = 0; i < finalStringBuffer.length(); i++) {
+			if ((i % 2) == 0) { // even numbers
+				sumEven = sumEven
+						+ Character
+								.getNumericValue(finalStringBuffer.charAt(i));
+			} else {
+				sumOdd = sumOdd
+						+ Character
+								.getNumericValue(finalStringBuffer.charAt(i));
+			}
+		}
 
-			for (int i = 0; i < finalStringBuffer.length(); i++) {
-				if ((i % 2) == 0) { // even numbers
-					sumEven = sumEven + Character.getNumericValue(finalStringBuffer.charAt(i));
-				} else {
-					sumOdd = sumOdd + Character.getNumericValue(finalStringBuffer.charAt(i));
-				}
-			}
-			
-			sumEven = 3 * sumEven;
-			
-			checksumValue = sumEven + sumOdd;
-			System.out.println("normalize: checksumValue: " + checksumValue);
-			checksumDigit = (checksumValue % 10);
-			
-			if (checksumDigit == 10) {
-				checksumDigit = 0;
-			}
-			
-			System.out.println("normalize: checksumDigit is: " + checksumDigit);
+		sumEven = 3 * sumEven;
 
-			// TODO the checksum digit should be used to find the most likely digit sequence that matches the data and satisfies the checksum digit
-			
-			System.out.println("normalize: finalStringBuffer: "
-					+ finalStringBuffer);
-			return finalStringBuffer.toString();
+		checksumValue = sumEven + sumOdd;
+		System.out.println("normalize: checksumValue: " + checksumValue);
+		checksumDigit = (checksumValue % 10);
+
+		if (checksumDigit == 10) {
+			checksumDigit = 0;
+		}
+
+		System.out.println("normalize: checksumDigit is: " + checksumDigit);
+
+		// TODO the checksum digit should be used to find the most likely digit
+		// sequence that matches the data and satisfies the checksum digit
+
+		System.out
+				.println("normalize: finalStringBuffer: " + finalStringBuffer);
+		return finalStringBuffer.toString();
 	}
-	
 
 	/**
 	 * Compares two strings and decides if this is the same product

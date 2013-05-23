@@ -183,7 +183,7 @@ public class CameraActivity extends Activity {
 				Product foundProduct = null;
 				if (products != null) {
 					for (Product p : products) {
-						boolean isSame = (bcGenerator.compare(p.getBarcode(),tempBarcode) < 10);
+						boolean isSame = (bcGenerator.compare(p.getBarcode(),tempBarcode) < 2);
 						if (isSame) {
 							foundProduct = p;
 							break;
