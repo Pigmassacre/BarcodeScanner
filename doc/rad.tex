@@ -1,4 +1,4 @@
-% sdd.tex
+% rad.tex
 
 \documentclass{report}
 \linespread{1.2}
@@ -67,6 +67,7 @@ The application will not be guaranteed to work on every android platform, it wil
     \item{Generator}, class used for analyzing the pattern extracted by the Locator and generating the actual key.
     \item{MVC}, a way of partition an application with a GUI into distinct parts avoiding a mixture of GUI-code, application code and data spread all over.
     \item{ADT}, the Java Runtime Environment. Additional software needed to run an Java application.
+    \item{.apk}, application package file, a file format use to distribute and install application software and middleware onto Android.
 \end{itemize}
 
 \chapter{Requirements}
@@ -83,19 +84,23 @@ The application will not be guaranteed to work on every android platform, it wil
 \section{Non-Functional Requirements}
 
 \subsection{Usability}
-Aim for simplicity! The application should be simple to use, the GUI should be clean and the flow should be straightforward for any user. The scanner should pass tests from users who are not, by any means, an advanced android user. 
+Aim for simplicity! The application should be simple to use, the GUI should be clean and the flow should be straightforward for any user. The scanner should pass tests from users who are not, by any means, an advanced android user.
 
 \subsection{Reliability}
-Each combination of numbers that we generate from each barcode should match the general combination that the barcode represents.
+Each combination of numbers that we generate from each barcode should match the general combination that the barcode represents (as long as the barcode is in the correct EAN format).
+
+\subsection{Supportability}
+The application Gui should be clean and scalable with the screen size of the given device.
+There should be automated test verifying most use cases. Code related to the GUI could be tested manually. GUI test should be recorded and included in the final documentation.
 
 \subsection{Performance}
-The scanning should be quite fast and the application should not weigh down the time for the camera to take and present a picture. 
+The scanning should be quite fast and the application should not weigh down the time for the camera to take and present a picture.
 
 \subsection{Implementation}
-TODO
+The application should be using the standard Android-specific Java environment.
 
 \subsection{Packaging and installation}
-TODO
+Installation should be done using a standard .apk file containing the application, that the user can then install on their Android device.
 
 \subsection{Legal}
 TODO
