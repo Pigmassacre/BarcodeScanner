@@ -45,10 +45,6 @@ public class CameraActivity extends Activity {
 	private BCLocator bcLocator;
 	private BCGenerator bcGenerator;
 
-	// Load zbar library
-	static {
-		// System.loadLibrary("iconv");
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
