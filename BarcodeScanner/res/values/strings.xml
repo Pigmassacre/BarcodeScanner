@@ -72,8 +72,8 @@
     <string name="help_title">How to use the Barcode Scanner</string>
     <string name="help_field_start_scan_activity">In order to scan an barcode, you first have to start the scanning mode. This is done by pressing the big Scan Barcode button in the main scren. </string>
     <string name="help_field_how_to_scan">Once there, center the barcode in your screen, and then press the scan button.</string>
-    <string name="help_field_problems">Sometimes you might get inconsistent results. Our scanning algorithm is not yet super-amazing, so you\'ll have to make sure that the barcode is relatively flat, centered in the screen and not too small.</string>
+    <string name="help_field_problems">Sometimes you might get inconsistent results. Our scanning algorithm is not yet super-amazing, so you\'ll have to make sure that your device is held in landscape mode, as in the normal "bottom" of your device is held by your right hand. You should keep the barcode relatively flat, centered in the screen and not too small.</string>
 	<string name="help_database_title">How to access the database</string>
-	<string name="help_database_field_how_to_enter">While in the scanning activity, touch the database button to enter the database.</string>
-	<string name="help_database_field_in_database">The database shows each stored item and their respective barcode id\'s, names and prices.</string>
+	<string name="help_database_field_how_to_enter">While in the main menu, touch the database button to enter the database.</string>
+	<string name="help_database_field_in_database">The database shows each stored item and their respective barcode id\'s, names and prices. If you are using the app as a shop owner, you can also remove an entry by touching the icon to the right of each product.</string>
 </resources>
