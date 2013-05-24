@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 public class AddNewActivity extends Activity{
 	
+	@SuppressWarnings("unused")
 	private static final String TAG = "AddNewActivity";
 	
 	private DatabaseHelper database;

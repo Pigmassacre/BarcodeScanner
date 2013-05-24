@@ -11,6 +11,7 @@ public class NoProductActivity extends Activity {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "ProductActivity";
+	
 	private String productID;
 
 	@Override
