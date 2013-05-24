@@ -1,9 +1,7 @@
 package com.github.barcodescanner.core;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -12,36 +10,39 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
 
-/*
- * 30 black lines
- * 29 white lines
- * 
- * either 1,2,3 or 4 in width
- * 
- */
-
 public class BCLocator {
+	// the bitmap containing the raw data from camera
 	private Bitmap bitmap;
+	
+	// the canvas in case the bitmap needs to be drawn on
 	private Canvas canvas = new Canvas();
+	
+	// array of x1,y2,x2,y2 representing the resulting barcode if its found
 	private Integer[] mostPlausibleBarcode = new Integer[4];
+	
+	// the number to divide the height on when confirming a line of a possible barcode
 	int delta = 40;
-
 
 	public BCLocator() {}
 
 	/**
-	 * path to image as parameter
+	 * Path to image as parameter
+	 * This constructor is used for testing purposes
 	 * 
 	 * @param path
 	 */
 	public BCLocator(String path) {
-		Log.d("Output", path);
 		Bitmap temp = BitmapFactory.decodeFile(path);
 		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
 		canvas.setBitmap(bitmap);
 		scanLines(30);
 	}
 	
+	/**
+	 * Sets the data in the class, this initiates a line of functions to locate the barcode
+	 * 
+	 * @param bitmapdata
+	 */
 	public void setData(byte[] bitmapdata){
 		mostPlausibleBarcode = new Integer[4];
 		Bitmap temp = BitmapFactory.decodeByteArray(bitmapdata , 0, bitmapdata.length);
@@ -50,22 +51,47 @@ public class BCLocator {
 		scanLines(30);	
 	}
 
+	/**
+	 * Used to check if mostPlausibleBarcode is set
+	 * 
+	 * @return true if it is set, false if its not (eg. if barcode is found)
+	 */
 	public boolean foundBarcode(){
 		return mostPlausibleBarcode[0] != null;
 	}
 
+	/**
+	 * Get width of bitmap
+	 * 
+	 * @return width
+	 */
 	public int getWidth() {
 		return bitmap.getWidth();
 	}
 
+	/**
+	 * Get height of bitmap
+	 * 
+	 * @return height
+	 */
 	public int getHeight() {
 		return bitmap.getHeight();
 	}
 
+	/**
+	 * Get the bitmap
+	 * 
+	 * @return bitmap
+	 */
 	public Bitmap getBitmap(){
 		return this.bitmap;
 	}
 
+	/**
+	 * Gets the segment-matrix of bitmap data converted to 0s and 1s within the mostPlausibleBarcode 
+	 * 
+	 * @return segment
+	 */
 	public List<List<Integer>> getSegment(){
 		List<List<Integer>> segmentMap = new ArrayList<List<Integer>>();
 		List<Integer> segment = null;
@@ -82,6 +108,7 @@ public class BCLocator {
 
 		return segmentMap;
 	}
+	
 	/**
 	 * Used for debug purpose
 	 * 
@@ -110,7 +137,6 @@ public class BCLocator {
 			List<Integer> switchPoints = plausibleBarcode(horizontalline);
 			if (switchPoints.size()>=30){ 
 				found = true;
-				System.out.println(switchPoints.size());
 				Log.d("Value", "true");
 				extendHeightSearch(scanline,switchPoints);
 			} else {
@@ -199,7 +225,6 @@ public class BCLocator {
 		int count = getSimilarPatterns(scanline, switchPoints);
 
 		if (count > 1){
-			Log.d("Output", "Barcode fucking found : " + count);
 			int mostLeft = switchPoints.get(0);
 			int mostRight = switchPoints.get(switchPoints.size()-1);
 
@@ -259,6 +284,7 @@ public class BCLocator {
 
 		return switchPoints;
 	}	
+	
 	/**
 	 * Checks if the line on deltaheight above and under the current scanline has similar patterns
 	 * 
