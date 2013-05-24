@@ -2,6 +2,7 @@ package com.github.barcodescanner.test;
 
 import com.github.barcodescanner.activities.AddNewActivity;
 
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,6 +28,10 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<AddNewA
 	protected void setUp() throws Exception{
 		super.setUp();
 		
+		Intent addEvent = new Intent();
+		addEvent.putExtra("productID", "123456789");
+		setActivityIntent(addEvent);
+		
 		addNew = getActivity();
 		titleText = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_title);
 		productTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_id_title);
@@ -37,7 +42,7 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<AddNewA
 	}
 	
 	public void testTitleText(){
-		assertEquals("Add new product", titleText.getText());
+		assertEquals("Add new product:", titleText.getText());
 	}
 	
 	public void testProductTitle(){
