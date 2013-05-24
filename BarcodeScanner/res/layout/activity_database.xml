@@ -41,7 +41,8 @@
             android:layout_weight="1"
             android:gravity="left"
             android:text="@string/database_table_cell_name"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/database_table_cell_price"
