@@ -36,8 +36,7 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<AddNewA
 		titleText = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_title);
 		productTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_id_title);
 		nameTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_name_title);
-		descriptionTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_description_title);
-		priceTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_description_price);
+		priceTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_title_price);
 		addButton = (Button) addNew.findViewById(com.github.barcodescanner.R.id.new_product_add_button);
 	}
 	
@@ -53,9 +52,6 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<AddNewA
 		assertEquals("Name:", nameTitle.getText());
 	}
 	
-	public void testDesctriptionTitle(){
-		assertEquals("Description:", descriptionTitle.getText());
-	}
 	
 	public void testPriceTitle(){
 		assertEquals("Price:", priceTitle.getText());

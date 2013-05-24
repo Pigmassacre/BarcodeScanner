@@ -24,7 +24,7 @@ public class BCLocatorTest extends TestCase {
 	
 	
 	public BCLocatorTest(){
-		imagePath = "res/drawable-dhpi/barcode.jpg";
+		imagePath = "/barcode.jpg";
 		firstLocator = new BCLocator(imagePath);
 		secondLocator = new BCLocator(imagePath);
 	}
@@ -39,10 +39,6 @@ public class BCLocatorTest extends TestCase {
 
 	public void testBarcodeHeigth(){
 		assertEquals(firstLocator.getHeight(), secondLocator.getHeight());
-	}
-	
-	public void testBarcodeBitmap(){
-		assertEquals(firstLocator.getBitmap(),secondLocator.getBitmap()); // ?? Bitmap assert ??
 	}
 	
 	public void testBarcodeSegment(){
