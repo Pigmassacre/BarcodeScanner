@@ -1,7 +1,5 @@
 package com.github.barcodescanner.test;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.List;
 
 import com.github.barcodescanner.core.BCGenerator;

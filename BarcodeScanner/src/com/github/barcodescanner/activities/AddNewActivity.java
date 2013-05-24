@@ -8,7 +8,6 @@ import com.github.barcodescanner.core.Product;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -25,7 +24,6 @@ public class AddNewActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_addnew);
 		
 		//Get instance of DatabaseHelper class
@@ -40,10 +38,13 @@ public class AddNewActivity extends Activity{
     	editName = (EditText)findViewById(R.id.new_product_name_field);
     	//EditText instance to get new Price for product
     	editPrice = (EditText)findViewById(R.id.new_product_price);
+    	
+    	System.out.println("AddNewActivity: Started, received bundle: " + productID);
 	}
 	
 	public void addProduct(View view) {
-		// Get and store the barcode id in a string
+		//String newText = getIntent().getExtras().getString("productID");
+		//Cast the productID to an int
 		String barcode = this.productID;
 		//Get new Product name from EditText
 		String productName = editName.getText().toString();
@@ -53,7 +54,9 @@ public class AddNewActivity extends Activity{
 		Product newProduct = new Product(productName,productPrice,barcode);
 		//Add the new Product to the database
 		database.addProduct(newProduct);
-		// We're done, so call finish
+		//Change to CameraActivity to be able to scan more products
+		//Intent intent = new Intent(this,CameraActivity.class);
+		//startActivity(intent);
 		finish();
 	}
 
