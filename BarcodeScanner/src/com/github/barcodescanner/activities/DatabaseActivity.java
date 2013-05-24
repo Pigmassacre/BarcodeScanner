@@ -18,7 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -29,7 +32,7 @@ public class DatabaseActivity extends Activity {
 	@SuppressWarnings("unused")
 	private static final String TAG = "DatabaseActivity";
 	DatabaseHelper db;
-	String[] items = { "ExampleName    ExamplePrice   ExampleId", "", "ExampleName    ExamplePrice   ExampleId", "ExampleName    ExamplePrice   ExampleId"};
+	String[] items = { "ExampleName    ExamplePrice   ExampleId", "ExampleName    ExamplePrice   ExampleId", "ExampleName    ExamplePrice   ExampleId", "ExampleName    ExamplePrice   ExampleId"};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,6 +65,14 @@ public class DatabaseActivity extends Activity {
 	static class ViewHolder {
 	    TextView text;
 	}
+	
+	public void deleteClick(View v) {
+	    ImageButton button = (ImageButton) v;
+	    TableRow row = (TableRow)button.getParent();
+	    TextView textChild = (TextView) row.getChildAt(0);
+	    String text = textChild.getText().toString();
+	    text.split("id");
+	}
 
 	private void addRow(List<String> values) {
 		TableLayout table = (TableLayout) findViewById(R.id.list);
@@ -82,7 +93,9 @@ public class DatabaseActivity extends Activity {
 	private void removeRow() {
 		// TODO
 	}*/
-
+	
+	
+	
 	private TextView generateCell(String text) {
 		// TODO Fix this, it looks ugly on the device
 		TextView nameView = new TextView(this);
