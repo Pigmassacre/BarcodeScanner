@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); // hides the title from the camera view
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		isOwner = getIntent().getExtras().getBoolean("isOwner");
 	}
@@ -35,6 +35,11 @@ public class MainActivity extends Activity {
 	public void enterCamera(View view) {
 		Intent intent = new Intent(this, CameraActivity.class);
 		intent.putExtra("isOwner", isOwner);
+		startActivity(intent);
+	}
+	
+	public void enterHelp(View view) {
+		Intent intent = new Intent(this, HelpActivity.class);
 		startActivity(intent);
 	}
 }

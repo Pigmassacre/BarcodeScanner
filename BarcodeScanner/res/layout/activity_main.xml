@@ -37,7 +37,7 @@
         android:id="@+id/start_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/main_button_holder"
+        android:layout_above="@+id/help_button"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:onClick="enterCamera"
@@ -45,20 +45,14 @@
         android:text="@string/welcome_button_start"
         android:textSize="36sp" />
 
-    <LinearLayout
-        android:id="@id/main_button_holder"
+    <Button
+        android:id="@+id/help_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
-
-        <Button
-            android:id="@+id/help_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="6dp"
-            android:text="@string/welcome_button_help"
-            android:textSize="16sp" />
-    </LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:onClick="enterHelp"
+        android:padding="6dp"
+        android:text="@string/welcome_button_help"
+        android:textSize="16sp" />
 
 </RelativeLayout>
