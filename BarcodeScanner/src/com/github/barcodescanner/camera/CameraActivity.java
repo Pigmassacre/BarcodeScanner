@@ -247,9 +247,5 @@ public class CameraActivity extends Activity {
 			autoFocusHandler.postDelayed(doAutoFocus, 5000);
 		}
 	};
-
-	public void enterDatabase(View view) {
-		Intent intent = new Intent(this, DatabaseActivity.class);
-		startActivity(intent);
-	}
+	
 }
