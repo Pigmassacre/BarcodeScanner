@@ -1,5 +1,7 @@
 package com.github.barcodescanner.core;
 
+import java.io.File;
+
 import java.util.ArrayList;
 import java.util.List;
 import android.graphics.Bitmap;
@@ -8,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Environment;
 import android.util.Log;
 
 public class BCLocator {
@@ -32,9 +35,12 @@ public class BCLocator {
 	 * @param path
 	 */
 	public BCLocator(String path) {
-		Bitmap temp = BitmapFactory.decodeFile(path);
+		Log.d("Output", path);
+		File pathFile = Environment.getExternalStorageDirectory();
+
+		Bitmap temp = BitmapFactory.decodeFile(pathFile.toString() + path);
+		//Bitmap temp = BitmapFactory.decodeFile(path);
 		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
-		canvas.setBitmap(bitmap);
 		scanLines(30);
 	}
 	

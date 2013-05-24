@@ -2,6 +2,7 @@ package com.github.barcodescanner.test;
 
 import com.github.barcodescanner.activities.MainActivity;
 
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -20,6 +21,10 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 	protected void setUp() throws Exception{
 		super.setUp();
 		
+		Intent addEvent = new Intent();
+	    addEvent.putExtra("isOwner", true);
+	    setActivityIntent(addEvent);
+		
 		mainActivity = getActivity();
 		
 		startButton = (Button) mainActivity.findViewById(com.github.barcodescanner.R.id.start_button);
@@ -27,8 +32,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 	}
 	
 	public void testStartButton(){
-		assertEquals(startButton,null);
-		//assertEquals("Scan Barcode", startButton.getText());
+		assertEquals("Scan Barcode",startButton.getText());
 	}
 	
 	public void testHelpButton(){

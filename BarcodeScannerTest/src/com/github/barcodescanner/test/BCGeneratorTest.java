@@ -1,5 +1,7 @@
 package com.github.barcodescanner.test;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 import com.github.barcodescanner.core.BCGenerator;
@@ -13,11 +15,22 @@ public class BCGeneratorTest extends TestCase {
 	private BCGenerator firstGenerator;
 	private BCGenerator secondGenerator;
 	
+	
 	public void BCGeneratorTest(){
-		String imagePath = "res/drawable-dhpi/barcode.jpg";
+		String imagePath = "/barcode.jpg";
 		bcLocator = new BCLocator(imagePath);
 		firstGenerator = new BCGenerator();
 		secondGenerator = new BCGenerator();
+	}
+	
+	protected void setUp() throws Exception{
+		super.setUp();
+		String imagePath = "/barcode.jpg";
+		bcLocator = new BCLocator(imagePath);
+		firstGenerator = new BCGenerator();
+		secondGenerator = new BCGenerator();
+		
+		
 	}
 	
 	public void testGenerate(){

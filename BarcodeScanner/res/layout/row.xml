@@ -10,19 +10,44 @@
          <TableRow >
  
              <TextView
-                 android:id="@+id/headline"
+                 android:id="@+id/name"
                  android:layout_width="0px"
                  android:layout_height="wrap_content"
                  android:layout_weight="0.8"
                  android:padding="10dp"
                  android:textSize="16dp"
                  android:textColor="#FFF"/>
- 
-             <ImageView
-                 android:layout_width="wrap_content"
+             
+             <TextView
+                 android:id="@+id/price"
+                 android:layout_width="0px"
                  android:layout_height="wrap_content"
-                 android:layout_gravity="center_vertical|right"
-                 android:layout_marginRight="6dp" />
+                 android:layout_weight="0.8"
+                 android:padding="10dp"
+                 android:textSize="16dp"
+                 android:textColor="#FFF"/>
+             
+             <TextView
+                 android:id="@+id/id"
+                 android:layout_width="0px"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="0.8"
+                 android:padding="10dp"
+                 android:textSize="16dp"
+                 android:textColor="#FFF"/>
+             
+             <ImageButton
+    			android:src="@drawable/cancel_24"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_gravity="center_vertical|right"
+    			android:id="@+id/cancel_button"
+    			android:clickable="true"
+    			android:onClick="clickDelete"
+    			android:layout_marginRight="6dp"
+    			android:background="@null" />
+             
+
          </TableRow>
      </TableLayout>
  </LinearLayout>
