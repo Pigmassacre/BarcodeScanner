@@ -24,6 +24,7 @@ public class AddNewActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_addnew);
 		
 		//Get instance of DatabaseHelper class
@@ -38,25 +39,20 @@ public class AddNewActivity extends Activity{
     	editName = (EditText)findViewById(R.id.new_product_name_field);
     	//EditText instance to get new Price for product
     	editPrice = (EditText)findViewById(R.id.new_product_price);
-    	
-    	System.out.println("AddNewActivity: Started, received bundle: " + productID);
 	}
 	
 	public void addProduct(View view) {
-		//String newText = getIntent().getExtras().getString("productID");
-		//Cast the productID to an int
+		// Get the product id and store it to a string
 		String barcode = this.productID;
-		//Get new Product name from EditText
+		// Get new Product name from EditText
 		String productName = editName.getText().toString();
-		//Get new Product price from EditText and cast to an int
+		// Get new Product price from EditText and cast to an int
 		int productPrice = Integer.parseInt(editPrice.getText().toString());
-		//Create instance of Product class for the new Product
+		// Create instance of Product class for the new Product
 		Product newProduct = new Product(productName,productPrice,barcode);
-		//Add the new Product to the database
+		// Add the new Product to the database
 		database.addProduct(newProduct);
-		//Change to CameraActivity to be able to scan more products
-		//Intent intent = new Intent(this,CameraActivity.class);
-		//startActivity(intent);
+		// We're done, so call finish()
 		finish();
 	}
 
