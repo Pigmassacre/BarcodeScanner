@@ -41,28 +41,29 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int milk=0x7f020005;
     }
     public static final class id {
-        public static final int action_settings=0x7f090029;
-        public static final int admin_button=0x7f09001b;
+        public static final int action_settings=0x7f09002a;
+        public static final int admin_button=0x7f09001c;
         public static final int barcode_bitmap_imageview=0x7f090009;
         public static final int barcode_textview=0x7f090008;
         public static final int camera_preview=0x7f09000a;
-        public static final int customer_button=0x7f09001c;
+        public static final int customer_button=0x7f09001d;
         public static final int database_button=0x7f09000c;
         public static final int database_table_cell_id=0x7f090010;
         public static final int database_table_cell_name=0x7f090011;
         public static final int database_table_cell_price=0x7f090012;
         public static final int database_table_row=0x7f09000f;
         public static final int database_table_title=0x7f09000e;
-        public static final int help_button=0x7f090021;
-        public static final int help_database_field=0x7f090018;
+        public static final int help_button=0x7f090022;
+        public static final int help_database_field_how_to_enter=0x7f090018;
+        public static final int help_database_field_in_database=0x7f090019;
         public static final int help_database_title=0x7f090017;
         public static final int help_field_how_to_scan=0x7f090015;
         public static final int help_field_problems=0x7f090016;
         public static final int help_field_start_scan_activity=0x7f090014;
         public static final int help_title=0x7f090013;
-        public static final int imageMilk=0x7f090028;
-        public static final int intro_message=0x7f09001a;
-        public static final int logotype_image=0x7f090019;
+        public static final int imageMilk=0x7f090029;
+        public static final int intro_message=0x7f09001b;
+        public static final int logotype_image=0x7f09001a;
         public static final int new_product_add_button=0x7f090007;
         public static final int new_product_id=0x7f090002;
         public static final int new_product_id_title=0x7f090001;
@@ -71,18 +72,18 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int new_product_price=0x7f090006;
         public static final int new_product_title=0x7f090000;
         public static final int new_product_title_price=0x7f090005;
-        public static final int no_product_id=0x7f090023;
-        public static final int no_product_id_title=0x7f090022;
-        public static final int no_product_message=0x7f090025;
-        public static final int no_product_message_title=0x7f090024;
-        public static final int productName=0x7f090026;
-        public static final int productPrice=0x7f090027;
+        public static final int no_product_id=0x7f090024;
+        public static final int no_product_id_title=0x7f090023;
+        public static final int no_product_message=0x7f090026;
+        public static final int no_product_message_title=0x7f090025;
+        public static final int productName=0x7f090027;
+        public static final int productPrice=0x7f090028;
         public static final int products_table=0x7f09000d;
-        public static final int start_button=0x7f090020;
+        public static final int start_button=0x7f090021;
         public static final int take_picture_button=0x7f09000b;
-        public static final int title=0x7f09001d;
-        public static final int version=0x7f09001e;
-        public static final int welcome_message=0x7f09001f;
+        public static final int title=0x7f09001e;
+        public static final int version=0x7f09001f;
+        public static final int welcome_message=0x7f090020;
     }
     public static final class layout {
         public static final int activity_addnew=0x7f030000;
@@ -118,7 +119,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int database_table_cell_price=0x7f06001b;
         public static final int default_image_description=0x7f060014;
         public static final int hello_world=0x7f06002c;
-        public static final int help_database_field=0x7f060035;
+        public static final int help_database_field_how_to_enter=0x7f060035;
+        public static final int help_database_field_in_database=0x7f060036;
         public static final int help_database_title=0x7f060034;
         public static final int help_field_how_to_scan=0x7f060032;
         public static final int help_field_problems=0x7f060033;

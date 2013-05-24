@@ -48,10 +48,17 @@
         android:text="@string/help_database_title" />
     
     <TextView
-        android:id="@+id/help_database_field"
+        android:id="@+id/help_database_field_how_to_enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/help_database_field" />
+        android:text="@string/help_database_field_how_to_enter" />
+    
+    <TextView
+        android:id="@+id/help_database_field_in_database"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/help_database_field_in_database" />
     
 </LinearLayout>
