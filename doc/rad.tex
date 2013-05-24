@@ -124,14 +124,32 @@ Here follows the use cases for the barcode scanner project, in order of priority
 \begin{enumerate}
   \item Scan an image containing a barcode. \\
     \textbf{Summary:} This is how the user actually scans a barcode. \\
-    \textbf{Priority:} This is how the user actually scans a barcode. \\
+    \textbf{Priority:} High \\
+    \textbf{Extends:} - \\
+    \textbf{Includes:} - \\
+    \textbf{Priority:} Actual user \\
+    \textbf{Normal flow of events} \\
+    \textbf{Flow 1} \\ A barcode is found in the image. \\
+
     \begin{tabular}{ | l | l | p{3cm} |}
     \hline
       & Actor & System \\ \hline
     1 & Clicks the "Scan" button & \\ \hline
     2 & & Displays the next view, which is dependent on whether or not the barcode corresponds to anything in the database or not. \\
     \hline
-    \end{tabular}
+    \end{tabular} \\
+
+    \textbf{Alternate flow} \\
+    \textbf{Flow 1.1} \\ No barcode is found in the image. \\
+
+    \begin{tabular}{ | l | l | p{3cm} |}
+    \hline
+      & Actor & System \\ \hline
+    2.1.1 & & Nothing happens. \\
+    \hline
+    \end{tabular} \\
+
+    \textbf{Exceptional flow} \\ There is no exceptional flow.
   \item Save a scanned barcode into the database as a new product.
   \item Find a scanned barcode in the database.
   \item View the database.
