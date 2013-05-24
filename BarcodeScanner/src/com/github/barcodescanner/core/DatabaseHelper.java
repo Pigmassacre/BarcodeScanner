@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	// Method for getting a single product from the db
-	public Product getProduct(int ID) {
+	public Product getProduct(String ID) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
 		// Create and place the cursor
@@ -115,10 +115,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	// Method for removing a product
-	public void removeProduct(Product p) {
+	public void removeProduct(String p) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_PRODUCTS, KEY_BCODE + " = ?",
-				new String[] { String.valueOf(p.getBarcode()) });
+				new String[] { String.valueOf(p) });
 		db.close();
 	}
 
