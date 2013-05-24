@@ -9,17 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ProductActivity" >
 
-    <ImageView
-        android:id="@+id/imageMilk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/productInfo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:contentDescription="@string/default_image_description"
-        android:gravity="center"
-        android:src="@drawable/milk" />
-
     <TextView
         android:id="@+id/productName"
         android:layout_width="fill_parent"
@@ -29,23 +18,22 @@
         android:textStyle="bold|italic" />
 
     <TextView
-        android:id="@+id/productInfo"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/productName"
-        android:layout_marginTop="18dp"
-        android:text="@string/product_info"
-        android:textSize="15sp" />
-
-    <TextView
         android:id="@+id/productPrice"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/productInfo"
-        android:layout_below="@+id/imageMilk"
+        android:layout_below="@id/productName"
         android:text="@string/product_price"
         android:textSize="20sp"
         android:textStyle="bold|italic" />
+    
+    <ImageView
+        android:id="@+id/imageMilk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/default_image_description"
+        android:gravity="center"
+        android:src="@drawable/milk" />
 
 </RelativeLayout>

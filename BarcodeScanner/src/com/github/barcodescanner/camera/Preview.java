@@ -1,22 +1,12 @@
 package com.github.barcodescanner.camera;
 
 import java.io.IOException;
-import java.util.List;
-
-import com.github.barcodescanner.R;
-
 import android.content.Context;
-import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
-import android.hardware.Camera.Parameters;
-import android.hardware.Camera.PreviewCallback;
-import android.hardware.Camera.Size;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * A simple wrapper around a Camera and a SurfaceView that renders a centered

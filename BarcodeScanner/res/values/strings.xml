@@ -44,6 +44,7 @@
     <string name="database_table_cell_id">ID</string>
     
     <!-- activity_no_product.xml -->
+    <string name="title_activity_no_product">NoProductActivity</string>
     <string name ="no_product_message_title">No product found</string>
     <string name ="no_product_message">No product matching the scanned barcode was found in our database.</string>
 

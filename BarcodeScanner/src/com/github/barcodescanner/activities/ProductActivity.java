@@ -1,14 +1,8 @@
 package com.github.barcodescanner.activities;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.R.id;
-import com.github.barcodescanner.R.layout;
-import com.github.barcodescanner.camera.CameraActivity;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -31,19 +25,11 @@ public class ProductActivity extends Activity {
 				"productPrice"));
 		// TextView instance to display product name
 		TextView name = (TextView) findViewById(R.id.productName);
-		// TextView instance to display product price
+		// TextView instance to display product price		
 		TextView price = (TextView) findViewById(R.id.productPrice);
 		// Set name to be displayed in TextView
 		name.setText(productName);
 		// Set price to be displayed in TextView
 		price.setText(productPrice);
-	}
-
-	public void addToCart(View view) {
-		// TODO
-		// Starts CameraActivity to be able to scan more items
-		//Intent intent = new Intent(this, CameraActivity.class);
-		//startActivity(intent);
-		finish();
 	}
 }

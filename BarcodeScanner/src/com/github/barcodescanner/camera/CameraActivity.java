@@ -27,7 +27,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 public class CameraActivity extends Activity {
 	private static final String TAG = "CameraActivity";
@@ -35,7 +34,6 @@ public class CameraActivity extends Activity {
 	private Preview mPreview;
 	private boolean mPreviewRunning;
 	private Camera mCamera;
-	private int numberOfCameras;
 	private boolean isOwner;
 
 	private Handler autoFocusHandler;
@@ -44,8 +42,7 @@ public class CameraActivity extends Activity {
 
 	private BCLocator bcLocator;
 	private BCGenerator bcGenerator;
-
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,45 +53,13 @@ public class CameraActivity extends Activity {
 		setContentView(R.layout.activity_camera);
 		isOwner = getIntent().getExtras().getBoolean("isOwner");
 
-		// Set layout
-
-		// Create a RelativeLayout container that will hold a SurfaceView,
-		// and set it as the content of our activity.
-		// setupPreview();
-
-		// Configure the ZBar scanner
-		// setupScanner();
-
-		// Setup autofocus handler
-		// setupAutoFocus();
-
 		// Setup the database
 		setupDatabase();
 
-		// barcode analyzer
+		// prepare the camera for being able to scan barcodes
 		bcLocator = new BCLocator();
-
 		bcGenerator = new BCGenerator();
-
 	}
-
-	private void setupPreview() {
-		// setContentView(R.layout.activity_camera);
-		// mPreview = new Preview(this);
-
-		// setContentView(mPreview);
-
-		// setContentView(draw);
-		// mPreviewRunning = true;
-		// System.out.println(previewCallback);
-		// mPreview.setPreviewCallback(previewCallback);
-		// System.out.println(previewCallback);
-	}
-
-	/*
-	 * private void setupAutoFocus() { autoFocusHandler = new Handler();
-	 * mPreview.setAutoFocusCallback(autoFocusCallback); }
-	 */
 
 	private void setupDatabase() {
 		DatabaseHelperFactory.init(this);
@@ -169,26 +134,29 @@ public class CameraActivity extends Activity {
 			 */
 			bcLocator.setData(data);
 			boolean foundBarcode = bcLocator.foundBarcode();
-			
+
 			if (foundBarcode) {
 				tempList = bcGenerator.generate(bcLocator.getSegment());
 				tempBarcode = bcGenerator.normalize(tempList);
-				
-				System.err.println("bcGenerator: " + tempBarcode);
 
-				List<Product> products = database.getProducts();
-				Product foundProduct = null;
-				if (products != null) {
-					for (Product p : products) {
-						boolean isSame = (bcGenerator.compare(p.getBarcode(),tempBarcode) < 2);
-						if (isSame) {
-							foundProduct = p;
-							break;
+				if (tempBarcode.length() == 12) {
+
+					System.err.println("bcGenerator: " + tempBarcode);
+
+					List<Product> products = database.getProducts();
+					Product foundProduct = null;
+					if (products != null) {
+						for (Product p : products) {
+							boolean isSame = (bcGenerator.compare(p.getBarcode(), tempBarcode) <= 1);
+							if (isSame) {
+								foundProduct = p;
+								break;
+							}
 						}
 					}
+					// startBarcodeViewActivity();
+					checkBarcode(foundProduct, tempBarcode);
 				}
-				//startBarcodeViewActivity();
-				checkBarcode(foundProduct, tempBarcode);
 			}
 
 			/*
@@ -236,28 +204,28 @@ public class CameraActivity extends Activity {
 		if (matchingProduct != null) {
 			// Get product name
 			String productName = matchingProduct.getName();
-
+			
 			// Get product price
 			int productPrice = matchingProduct.getPrice();
 
 			// Put product name in bundle
 			productBundle.putString("productName", productName);
-
+			
 			// Put product price in bundle
 			productBundle.putInt("productPrice", productPrice);
 
 			// Set ProductActivity as the intent
 			productIntent = new Intent(this, ProductActivity.class);
-		} else if(isOwner) {
+		} else if (isOwner) {
 			// Put new product ID in bundle
 			productBundle.putString("productID", barcode);
 
 			// Set AddNewActivity as the intent
 			productIntent = new Intent(this, AddNewActivity.class);
-		}else{
+		} else {
 			// Put new product ID in bundle
 			productBundle.putString("productID", barcode);
-			
+
 			// Set NoProductActivity as the intent
 			productIntent = new Intent(this, NoProductActivity.class);
 		}
@@ -279,7 +247,7 @@ public class CameraActivity extends Activity {
 			autoFocusHandler.postDelayed(doAutoFocus, 5000);
 		}
 	};
-	
+
 	public void enterDatabase(View view) {
 		Intent intent = new Intent(this, DatabaseActivity.class);
 		startActivity(intent);
