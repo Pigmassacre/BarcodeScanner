@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 public class AddNewActivity extends Activity{
 	
-	@SuppressWarnings("unused")
 	private static final String TAG = "AddNewActivity";
 	
 	private DatabaseHelper database;
@@ -38,13 +37,10 @@ public class AddNewActivity extends Activity{
     	editName = (EditText)findViewById(R.id.new_product_name_field);
     	//EditText instance to get new Price for product
     	editPrice = (EditText)findViewById(R.id.new_product_price);
-    	
-    	System.out.println("AddNewActivity: Started, received bundle: " + productID);
 	}
 	
 	public void addProduct(View view) {
-		//String newText = getIntent().getExtras().getString("productID");
-		//Cast the productID to an int
+		// Get and store the barcode id in a string
 		String barcode = this.productID;
 		//Get new Product name from EditText
 		String productName = editName.getText().toString();
@@ -54,9 +50,7 @@ public class AddNewActivity extends Activity{
 		Product newProduct = new Product(productName,productPrice,barcode);
 		//Add the new Product to the database
 		database.addProduct(newProduct);
-		//Change to CameraActivity to be able to scan more products
-		//Intent intent = new Intent(this,CameraActivity.class);
-		//startActivity(intent);
+		// We're done, so call finish
 		finish();
 	}
 

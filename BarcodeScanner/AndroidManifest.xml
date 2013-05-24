@@ -19,9 +19,9 @@
         android:targetSdkVersion="17" />
 
     <application
-        android:label="Barcode Scanner"
         android:allowBackup="true"
         android:icon="@drawable/barcode_analyzer_icon"
+        android:label="Barcode Scanner"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.github.barcodescanner.activities.MainActivity"
@@ -61,13 +61,13 @@
         <activity
             android:name="com.github.barcodescanner.activities.BarcodeViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_barcode_view" 
+            android:label="@string/title_activity_barcode_view"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.github.barcodescanner.activities.DatabaseActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_database" 
+            android:label="@string/title_activity_database"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -75,6 +75,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_no_product"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.github.barcodescanner.activities.HelpActivity"
+            android:label="@string/title_activity_help" >
         </activity>
     </application>
 

@@ -42,11 +42,11 @@
     <string name="database_table_cell_name">Name</string>
     <string name="database_table_cell_price">Price</string>
     <string name="database_table_cell_id">ID</string>
-    
+
     <!-- activity_no_product.xml -->
     <string name="title_activity_no_product">NoProductActivity</string>
-    <string name ="no_product_message_title">No product found</string>
-    <string name ="no_product_message">No product matching the scanned barcode was found in our database.</string>
+    <string name="no_product_message_title">No product found</string>
+    <string name="no_product_message">No product matching the scanned barcode was found in our database.</string>
 
     <!-- activity_addnew.xml -->
     <string name="title_activity_addnew">AddNewActivity</string>
@@ -62,8 +62,17 @@
     <string name="new_product_price_hint">The price of the product</string>
     <string name="title_activity_barcode_view">BarcodeViewActivity</string>
     <string name="hello_world">Hello world!</string>
-    
+
     <!-- activity_barcode_view.xml -->
     <string name="barcode_view_description">Below is a bitmap representing the barcode that our algorithm has found.</string>
     <string name="barcode_view_image_description">There is supposed to be a barcode bitmap here.</string>
+    
+    <!-- activity_help.xml -->
+    <string name="title_activity_help">HelpActivity</string>
+    <string name="help_title">How to use the Barcode Scanner</string>
+    <string name="help_field_start_scan_activity">In order to scan an barcode, you first have to start the scanning mode. This is done by pressing the big Scan Barcode button in the main scren. </string>
+    <string name="help_field_how_to_scan">Once there, center the barcode in your screen, and then press the scan button.</string>
+    <string name="help_field_problems">Sometimes you might get inconsistent results. Our scanning algorithm is not yet super-amazing, so you\'ll have to make sure that the barcode is relatively flat, centered in the screen and not too small.</string>
+	<string name="help_database_title">How to access the database</string>
+	<string name="help_database_field">While in the scanning activity, touch the database button to enter the database.</string>
 </resources>
