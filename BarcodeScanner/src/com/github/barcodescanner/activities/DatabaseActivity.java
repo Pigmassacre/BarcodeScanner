@@ -32,7 +32,7 @@ public class DatabaseActivity extends Activity {
 	@SuppressWarnings("unused")
 	private static final String TAG = "DatabaseActivity";
 	DatabaseHelper db;
-	String[] items = { "ExampleName    ExamplePrice   ExampleId", "ExampleName    ExamplePrice   ExampleId", "ExampleName    ExamplePrice   ExampleId", "ExampleName    ExamplePrice   ExampleId"};
+	List<String[]> items = new ArrayList();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,6 +40,10 @@ public class DatabaseActivity extends Activity {
 		setContentView(R.layout.activity_database);
 		ListView list = (ListView) findViewById(R.id.list);
 		 
+		String[] item = {"item1Name", "item1Price","item1Id"};
+		String[] item2 = {"item2Name", "item2Price","item2Id"};
+		items.add(item);
+		items.add(item2);
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
 		list.setAdapter(adapter);
 
@@ -63,7 +67,7 @@ public class DatabaseActivity extends Activity {
 	}
 	
 	static class ViewHolder {
-	    TextView text;
+	    TextView name, id, price;
 	}
 	
 	public void deleteClick(View v) {
@@ -112,16 +116,16 @@ public class DatabaseActivity extends Activity {
 		private LayoutInflater mInflater;
 		 
 		//The variable that will hold our text data to be tied to list.
-		private String[] data;
+		private List<String[]> data;
 		 
-		public SpecialAdapter(Context context, String[] items) {
+		public SpecialAdapter(Context context, List<String[]> items) {
 		    mInflater = LayoutInflater.from(context);
 		    this.data = items;
 		}
 		 
 		@Override
 		public int getCount() {
-		    return data.length;
+		    return data.size();
 		}
 		 
 		@Override
@@ -146,13 +150,17 @@ public class DatabaseActivity extends Activity {
 		    convertView = mInflater.inflate(R.layout.row, null);
 		 
 		    holder = new ViewHolder();
-		    holder.text = (TextView) convertView.findViewById(R.id.headline);
+		    holder.name = (TextView) convertView.findViewById(R.id.name);
+		    holder.price = (TextView) convertView.findViewById(R.id.price);
+		    holder.id = (TextView) convertView.findViewById(R.id.id);
 		    convertView.setTag(holder);
 		} else {
 		    holder = (ViewHolder) convertView.getTag();
 		}
 		    // Bind the data efficiently with the holder.
-		    holder.text.setText(data[position]);
+		    holder.name.setText(data.get(position)[0]);
+		    holder.price.setText(data.get(position)[1]);
+		    holder.id.setText(data.get(position)[2]);
 		 
 		    //Set the background color depending of  odd/even colorPos result
 		    int colorPos = position % colors.length;

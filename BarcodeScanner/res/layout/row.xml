@@ -10,7 +10,25 @@
          <TableRow >
  
              <TextView
-                 android:id="@+id/headline"
+                 android:id="@+id/name"
+                 android:layout_width="0px"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="0.8"
+                 android:padding="10dp"
+                 android:textSize="16dp"
+                 android:textColor="#FFF"/>
+             
+             <TextView
+                 android:id="@+id/price"
+                 android:layout_width="0px"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="0.8"
+                 android:padding="10dp"
+                 android:textSize="16dp"
+                 android:textColor="#FFF"/>
+             
+             <TextView
+                 android:id="@+id/id"
                  android:layout_width="0px"
                  android:layout_height="wrap_content"
                  android:layout_weight="0.8"

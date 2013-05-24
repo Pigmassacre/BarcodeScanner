@@ -9,11 +9,12 @@
 \contentsline {section}{\numberline {2.2}Non-Functional Requirements}{4}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Usability}{4}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Reliability}{4}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Performance}{4}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Implementation}{4}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Packaging and installation}{5}{subsection.2.2.5}
-\contentsline {subsection}{\numberline {2.2.6}Legal}{5}{subsection.2.2.6}
+\contentsline {subsection}{\numberline {2.2.3}Supportability}{4}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Performance}{5}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Implementation}{5}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}Packaging and installation}{5}{subsection.2.2.6}
+\contentsline {subsection}{\numberline {2.2.7}Legal}{5}{subsection.2.2.7}
 \contentsline {chapter}{\numberline {3}Application models}{6}{chapter.3}
-\contentsline {subsection}{\numberline {3.0.7}Use cases}{6}{subsection.3.0.7}
-\contentsline {subsection}{\numberline {3.0.8}Analysis Model}{6}{subsection.3.0.8}
-\contentsline {subsection}{\numberline {3.0.9}User interface}{6}{subsection.3.0.9}
+\contentsline {subsection}{\numberline {3.0.8}Use cases}{6}{subsection.3.0.8}
+\contentsline {subsection}{\numberline {3.0.9}Analysis Model}{7}{subsection.3.0.9}
+\contentsline {subsection}{\numberline {3.0.10}User interface}{7}{subsection.3.0.10}
