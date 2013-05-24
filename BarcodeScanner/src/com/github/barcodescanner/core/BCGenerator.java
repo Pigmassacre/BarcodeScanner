@@ -63,8 +63,8 @@ public class BCGenerator {
 				//sum += lineHolder.get(j).get(i);
 				sumList.add(lineHolder.get(j).get(i));
 			}
-			heightSum.add(sum/height);	
-			//heightSum.add(mostRepresentedNumber(sumList));
+			//heightSum.add(sum/height);	
+			heightSum.add(mostRepresentedNumber(sumList));
 		}
 
 		return heightSum;

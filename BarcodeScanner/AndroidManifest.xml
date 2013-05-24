@@ -21,7 +21,7 @@
     <application
         android:label="Barcode Scanner"
         android:allowBackup="true"
-        android:icon="@drawable/BarcodeAnalyzer"
+        android:icon="@drawable/barcode_analyzer_icon"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.github.barcodescanner.activities.MainActivity"
