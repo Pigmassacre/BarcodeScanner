@@ -12,27 +12,12 @@
         android:layout_marginBottom="50dp"
         android:layout_marginTop="0dp" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/take_picture_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/take_picture_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="takePicture"
-            android:text="@string/take_picture" />
-
-        <Button
-            android:id="@+id/database_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="enterDatabase"
-            android:text="@string/welcome_button_database" />
-    </LinearLayout>
+        android:onClick="takePicture"
+        android:text="@string/take_picture" />
 
 </RelativeLayout>
