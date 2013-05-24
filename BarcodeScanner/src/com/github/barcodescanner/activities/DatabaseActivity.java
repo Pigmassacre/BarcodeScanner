@@ -94,6 +94,8 @@ public class DatabaseActivity extends Activity {
 	}
 	
 	/*
+	 * 
+	 * 
 	private void removeRow() {
 		// TODO
 	}*/
