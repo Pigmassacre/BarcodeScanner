@@ -26,10 +26,18 @@
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/welcome_message"
+        android:id="@+id/user_message"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/version"
+        android:layout_marginTop="16dp"
+        android:text="@string/welcome_shop_owner" />
+    
+    <TextView
+        android:id="@+id/welcome_message"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_message"
         android:layout_marginTop="16dp"
         android:text="@string/welcome_message" />
 
