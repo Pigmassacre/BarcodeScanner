@@ -33,3 +33,9 @@ The Problems should now be non-existent.
 
 [Barcode Scanner Libraries](http://stackoverflow.com/questions/8009309/how-to-create-barcode-scanner-android)
 
+## Active Members of the Team
+
+- Pigmassacre: Olof Karlsson
+- Oted: Olle Andreasson
+- Rasmus92: Rasmus Letterkrantz
+- Crillesvensson: Christian Svensson
