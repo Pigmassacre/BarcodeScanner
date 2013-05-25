@@ -122,37 +122,140 @@ This is the UML diagram for the project:
 Here follows the use cases for the barcode scanner project, in order of priority: 
 
 \begin{enumerate}
-  \item Scan an image containing a barcode. \\
+
+  \item Scan an image containing a new barcode. \
+
     \textbf{Summary:} This is how the user actually scans a barcode. \\
     \textbf{Priority:} High \\
     \textbf{Extends:} - \\
     \textbf{Includes:} - \\
-    \textbf{Priority:} Actual user \\
+    \textbf{Participators:} Actual user \\
     \textbf{Normal flow of events} \\
     \textbf{Flow 1} \\ A barcode is found in the image. \\
 
-    \begin{tabular}{ | l | l | p{3cm} |}
+    \begin{tabular}{ | p{1cm} | p{3cm} | p{4cm} |}
     \hline
       & Actor & System \\ \hline
-    1 & Clicks the "Scan" button & \\ \hline
-    2 & & Displays the next view, which is dependent on whether or not the barcode corresponds to anything in the database or not. \\
+    1.1 & Clicks the "Scan" button & \\ \hline
+    1.2 & & Displays a view where the user is prompted to input a name and a price for the scanned barcode. \\
     \hline
     \end{tabular} \\
 
     \textbf{Alternate flow} \\
-    \textbf{Flow 1.1} \\ No barcode is found in the image. \\
+    \textbf{Flow 2} \\ No barcode is found in the image. \\
 
-    \begin{tabular}{ | l | l | p{3cm} |}
+    \begin{tabular}{ | p{1cm} | p{3cm} | p{4cm} |}
     \hline
       & Actor & System \\ \hline
-    2.1.1 & & Nothing happens. \\
+    2.1 & & Nothing happens. \\
     \hline
     \end{tabular} \\
 
     \textbf{Exceptional flow} \\ There is no exceptional flow.
-  \item Save a scanned barcode into the database as a new product.
-  \item Find a scanned barcode in the database.
-  \item View the database.
+
+  \item Save a scanned barcode into the database as a new product. \
+
+  \item Find a scanned barcode in the database. \
+
+    \textbf{Summary:} This is how the user scans a barcode that already exists in the database. \\
+    \textbf{Priority:} High \\
+    \textbf{Extends:} Use Case 1 \\
+    \textbf{Includes:} - \\
+    \textbf{Participators:} Actual user \\
+    \textbf{Normal flow of events} \\
+    \textbf{Flow 1} \\ A barcode is found in the image. \\
+
+    \begin{tabular}{ | p{1cm} | p{3cm} | p{4cm} |}
+    \hline
+      & Actor & System \\ \hline
+    1.1 & Clicks the "Scan" button & \\ \hline
+    1.2 & & Displays a view where the user can view the information that the database stores about the matching barcode. \\
+    \hline
+    \end{tabular} \\
+
+    \textbf{Alternate flow} \\
+    \textbf{Flow 2} \\ No barcode is found in the image. \\
+
+    \begin{tabular}{ | p{1cm} | p{3cm} | p{4cm} |}
+    \hline
+      & Actor & System \\ \hline
+    2.1 & & Nothing happens. \\
+    \hline
+    \end{tabular} \\
+
+    \textbf{Exceptional flow} \\ There is no exceptional flow.
+
+  \item The user decides whether or not she is a shop owner or a customer. \
+
+    \textbf{Summary:} This is how the user decides in what way she intends to use the application. \\
+    \textbf{Priority:} High \\
+    \textbf{Extends:} - \\
+    \textbf{Includes:} - \\
+    \textbf{Participators:} Actual user \\
+    \textbf{Normal flow of events} \\
+    \textbf{Flow 1} \\ The user clicks the "Shop Owner" button. \\
+
+    \begin{tabular}{ | p{1cm} | p{3cm} | p{4cm} |}
+    \hline
+      & Actor & System \\ \hline
+    1.1 & Clicks the "Shop Owner" button & \\ \hline
+    1.2 & & Displays the main menu view which greets the user and acknowledges that she is a shop owner. \\
+    \hline
+    \end{tabular} \\
+
+    \textbf{Alternate flow} \\
+    \textbf{Flow 2} \\ The user clicks the "Customer" button. \\
+
+    \begin{tabular}{ | p{1cm} | p{3cm} | p{4cm} |}
+    \hline
+      & Actor & System \\ \hline
+    2.1 & Clicks the "Customer" button & \\ \hline
+    2.2 & & Displays the main menu view which greets the user and acknowledges that she is a customer. \\
+    \hline
+    \end{tabular} \\
+
+    \textbf{Exceptional flow} \\ There is no exceptional flow.
+
+  \item View the database. \
+
+    \textbf{Summary:} This is how the user navigates to the view that shows the database. \\
+    \textbf{Priority:} High \\
+    \textbf{Extends:} - \\
+    \textbf{Includes:} - \\
+    \textbf{Participators:} Actual user \\
+    \textbf{Normal flow of events} \\
+    \textbf{Flow 1} \\ The database view is shown \\
+
+    \begin{tabular}{ | p{1cm} | p{3cm} | p{4cm} |}
+    \hline
+      & Actor & System \\ \hline
+    1.1 & Clicks the "Database" button & \\ \hline
+    1.2 & & Displays a view that shows each stored barcode in the database. \\
+    \hline
+    \end{tabular} \\
+
+    \textbf{Exceptional flow} \\ There is no exceptional flow. \
+
+  \item View the help view. \
+
+    \textbf{Summary:} This is how the user navigates to the view that explains how to use the application. \\
+    \textbf{Priority:} High \\
+    \textbf{Extends:} - \\
+    \textbf{Includes:} - \\
+    \textbf{Participators:} Actual user \\
+    \textbf{Normal flow of events} \\
+    \textbf{Flow 1} \\ The database view is shown \\
+
+    \begin{tabular}{ | p{1cm} | p{3cm} | p{4cm} |}
+    \hline
+      & Actor & System \\ \hline
+    1.1 & Clicks the "Database" button & \\ \hline
+    1.2 & & Displays a view that shows each stored barcode in the database. \\
+    \hline
+    \end{tabular} \\
+
+    \textbf{Exceptional flow} \\ There is no exceptional flow. \
+
 \end{enumerate}
 
 \subsection{Analysis Model}

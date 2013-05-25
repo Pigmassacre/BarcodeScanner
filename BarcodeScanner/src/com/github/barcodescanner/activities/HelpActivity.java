@@ -4,7 +4,6 @@ import com.github.barcodescanner.R;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
 import android.view.Window;
 
 public class HelpActivity extends Activity {

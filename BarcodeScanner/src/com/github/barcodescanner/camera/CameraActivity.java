@@ -6,7 +6,6 @@ import java.util.List;
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.AddNewActivity;
 import com.github.barcodescanner.activities.BarcodeViewActivity;
-import com.github.barcodescanner.activities.DatabaseActivity;
 import com.github.barcodescanner.activities.NoProductActivity;
 import com.github.barcodescanner.activities.ProductActivity;
 import com.github.barcodescanner.core.BCGenerator;
