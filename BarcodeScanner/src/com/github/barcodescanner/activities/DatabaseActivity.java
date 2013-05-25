@@ -125,7 +125,12 @@ public class DatabaseActivity extends Activity {
 			// Set the background color depending of odd/even colorPos result
 			int colorPos = position % colors.length;
 			convertView.setBackgroundColor(colors[colorPos]);
-
+			
+			// if a customer is viewing the database, hide the delete button
+			if (!isOwner) {
+				convertView.findViewById(R.id.cancel_button).setVisibility(View.INVISIBLE);
+			}
+			
 			return convertView;
 		}
 	}

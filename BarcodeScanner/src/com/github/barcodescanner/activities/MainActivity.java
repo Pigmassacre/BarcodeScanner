@@ -22,6 +22,10 @@ public class MainActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		isOwner = getIntent().getExtras().getBoolean("isOwner");
+		
+		if (isOwner) {
+			
+		}
 	}
 
 	public void enterCamera(View view) {
