@@ -18,6 +18,8 @@
     <string name="welcome_button_start">Scan Barcode</string>
     <string name="welcome_button_database">Database</string>
     <string name="welcome_button_help">Help</string>
+    <string name="welcome_shop_owner">Hello there, shop owner!</string>
+    <string name="welcome_customer">Hello there, customer!</string>
 
     <!-- activity_camera.xml -->
     <string name="title_activity_camera">CameraActivity</string>

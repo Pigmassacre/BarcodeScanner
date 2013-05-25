@@ -28,12 +28,14 @@ public class DatabaseActivity extends Activity {
 	DatabaseHelper db;
 	private List<Product> items = new ArrayList<Product>();
 	private ListView list;
+	private boolean isOwner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_database);
+		isOwner = getIntent().getExtras().getBoolean("isOwner");
 
 		// The database
 		DatabaseHelperFactory.init(this);
@@ -52,15 +54,17 @@ public class DatabaseActivity extends Activity {
 	}
 
 	public void clickDelete(View v) {
-		ImageButton button = (ImageButton) v;
-		TableRow row = (TableRow) button.getParent();
-		TextView idView = (TextView) row.getChildAt(2);
-		String id = idView.getText().toString();
-		db.removeProduct(id);
-
-		items = db.getProducts();
-		SpecialAdapter adapter = new SpecialAdapter(this, items);
-		list.setAdapter(adapter);
+		if (isOwner) {
+			ImageButton button = (ImageButton) v;
+			TableRow row = (TableRow) button.getParent();
+			TextView idView = (TextView) row.getChildAt(2);
+			String id = idView.getText().toString();
+			db.removeProduct(id);
+			
+			items = db.getProducts();
+			SpecialAdapter adapter = new SpecialAdapter(this, items);
+			list.setAdapter(adapter);
+		}
 	}
 
 
