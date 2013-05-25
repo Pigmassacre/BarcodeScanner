@@ -15,6 +15,6 @@
 \contentsline {subsection}{\numberline {2.2.6}Packaging and installation}{5}{subsection.2.2.6}
 \contentsline {subsection}{\numberline {2.2.7}Legal}{5}{subsection.2.2.7}
 \contentsline {chapter}{\numberline {3}Application models}{6}{chapter.3}
-\contentsline {subsection}{\numberline {3.0.8}Use cases}{6}{subsection.3.0.8}
-\contentsline {subsection}{\numberline {3.0.9}Analysis Model}{12}{subsection.3.0.9}
-\contentsline {subsection}{\numberline {3.0.10}User interface}{12}{subsection.3.0.10}
+\contentsline {subsection}{\numberline {3.0.8}Use cases}{7}{subsection.3.0.8}
+\contentsline {subsection}{\numberline {3.0.9}Analysis Model}{14}{subsection.3.0.9}
+\contentsline {subsection}{\numberline {3.0.10}User interface}{14}{subsection.3.0.10}
