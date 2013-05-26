@@ -1,6 +1,6 @@
 # Barcode Scanner
 
-Hello!
+Hello! Look at the instructions below to find out how to run the application. Be sure to check out the notes section, too!
 
 ## Barcode Scanner and Eclipse
 
