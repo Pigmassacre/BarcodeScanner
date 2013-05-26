@@ -33,6 +33,8 @@ You may notice that we have no group meeting agendas on our repo. Unfortunately,
 
 We apologize for this.
 
+When we decided on working on a barcode scanner for Android, we figured the real meat of the work would be coming up with a working algorithm. This may have limited the number of SLOC in our project somewhat, as we decided against adding a ton of unneccesary features and instead focused on making a small, but working application.
+
 ### Active Members of the Team
 
 - Pigmassacre: Olof Karlsson
