@@ -3,9 +3,9 @@ package com.github.barcodescanner.activities;
 import java.util.Scanner;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.core.DatabaseHelper;
-import com.github.barcodescanner.core.DatabaseHelperFactory;
 import com.github.barcodescanner.core.Product;
+import com.github.barcodescanner.database.DatabaseHelper;
+import com.github.barcodescanner.database.DatabaseHelperFactory;
 
 import android.app.Activity;
 import android.os.Bundle;

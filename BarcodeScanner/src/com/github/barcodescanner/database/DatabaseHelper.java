@@ -1,7 +1,9 @@
-package com.github.barcodescanner.core;
+package com.github.barcodescanner.database;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.github.barcodescanner.core.Product;
 
 import android.content.ContentValues;
 import android.content.Context;

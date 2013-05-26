@@ -1,4 +1,4 @@
-package com.github.barcodescanner.core;
+package com.github.barcodescanner.database;
 
 import android.database.sqlite.SQLiteDatabase;
 
