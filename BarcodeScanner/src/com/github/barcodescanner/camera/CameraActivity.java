@@ -122,15 +122,6 @@ public class CameraActivity extends Activity {
 			String tempBarcode = null;
 			List<Integer> tempList = new ArrayList<Integer>();
 
-			/*
-			 * s Size previewSize = camera.getParameters().getPreviewSize();
-			 * YuvImage yuvimage=new YuvImage(data, ImageFormat.NV21,
-			 * previewSize.width, previewSize.height, null);
-			 * ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			 * yuvimage.compressToJpeg(new Rect(0, 0, previewSize.width,
-			 * previewSize.height), 80, baos); byte[] jdata =
-			 * baos.toByteArray();
-			 */
 			bcLocator.setData(data);
 			boolean foundBarcode = bcLocator.foundBarcode();
 
@@ -153,34 +144,9 @@ public class CameraActivity extends Activity {
 							}
 						}
 					}
-					// startBarcodeViewActivity();
 					checkBarcode(foundProduct, tempBarcode);
 				}
 			}
-
-			/*
-			 * Integer[] line = bcAnalyzer.getMostPlausible();
-			 * imageV.setImageBitmap(bcAnalyzer.getBitmap());
-			 * setContentView(imageV);
-			 */
-			/*
-			 * if(line[0] != null){
-			 * 
-			 * draw.setLineArray(line); setContentView(draw); }
-			 */
-			/*
-			 * Camera.Parameters parameters = camera.getParameters(); Size size
-			 * = parameters.getPreviewSize();
-			 * 
-			 * Image barcode = new Image(size.width, size.height, "Y800");
-			 * barcode.setData(data);
-			 * 
-			 * int result = scanner.scanImage(barcode);
-			 * 
-			 * if (result != 0) { SymbolSet syms = scanner.getResults(); for
-			 * (Symbol sym : syms) { barcodeData = sym.getData();
-			 * checkBarcode(); } }
-			 */
 		}
 	};
 

@@ -20,6 +20,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	private Camera mCamera;
 	private AutoFocusCallback mAutoFocusCallback;
 
+	@SuppressWarnings("deprecation")
 	public Preview(Context context, Camera camera) {
 		super(context);
 		mCamera = camera;
