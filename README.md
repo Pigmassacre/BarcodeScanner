@@ -31,7 +31,7 @@ The Problems should now be non-existent.
 
 You may notice that we have no group meeting agendas on our repo. Unfortunately, the team member that wrote down all meeting agendas forgot to back them up when he wiped his harddrive a few days ago. As you can imagine, we simply do not remember everything that we talked about in the earliest meetings, so we have no real way to rewrite these agendas. Rest assured that we did meet often and discussed the state of the project.
 
-We apologize greatly for this inconvenience...
+We apologize for this.
 
 ### Active Members of the Team
 
