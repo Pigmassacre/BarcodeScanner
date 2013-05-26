@@ -33,12 +33,6 @@ You may notice that we have no group meeting agendas on our repo. Unfortunately,
 
 We apologize greatly for this inconvenience...
 
-### Informative Stuff
-
-[Android Camera Tutorial](http://manijshrestha.wordpress.com/2011/11/10/working-with-camera-on-android-sdk/)
-
-[Barcode Scanner Libraries](http://stackoverflow.com/questions/8009309/how-to-create-barcode-scanner-android)
-
 ### Active Members of the Team
 
 - Pigmassacre: Olof Karlsson
