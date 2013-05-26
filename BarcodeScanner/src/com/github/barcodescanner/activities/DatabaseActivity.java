@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.core.Product;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
+import com.github.barcodescanner.database.Product;
 
 import android.app.Activity;
 import android.content.Context;
