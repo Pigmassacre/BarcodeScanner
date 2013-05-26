@@ -1,5 +1,7 @@
 package com.github.barcodescanner.activities;
 
+import java.util.Scanner;
+
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.core.DatabaseHelper;
 import com.github.barcodescanner.core.DatabaseHelperFactory;
@@ -48,7 +50,15 @@ public class AddNewActivity extends Activity{
 		// Get new Product name from EditText
 		String productName = editName.getText().toString();
 		// Get new Product price from EditText and cast to an int
-		int productPrice = Integer.parseInt(editPrice.getText().toString());
+		Scanner scanner = new Scanner(editPrice.getText().toString());
+		int productPrice;
+		if (scanner.hasNextInt()) {
+			// If the string is an int, we accept it.
+			productPrice = scanner.nextInt();
+		} else {
+			// If the price isn't an integer, we set the price to max int value
+			productPrice = Integer.MAX_VALUE;
+		}
 		// Create instance of Product class for the new Product
 		Product newProduct = new Product(productName,productPrice,barcode);
 		// Add the new Product to the database
@@ -56,5 +66,5 @@ public class AddNewActivity extends Activity{
 		// We're done, so call finish()
 		finish();
 	}
-
+	
 }
