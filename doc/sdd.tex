@@ -76,8 +76,8 @@ The application is decomposed into the following parts:
 \begin{itemize}
   \item{camera}, contains the CameraActivity and a helper class to the camera.
   \item{activities}, contains all the other activities.
-  \item{core}, contains all of our logic (the barcode scanning algorithm)
-  \item{util}, any utility class needed by the project/application.
+  \item{core}, contains all of our logic (the barcode scanning algorithm).
+  \item{database}, contains all classes that handle the database.
 \end{itemize}
 
 \subsection{Decomposition into subsystems}
@@ -87,7 +87,21 @@ The only subsystems in the application is the DatabaseHandle which writes and re
 On our highest level we have the views that are displayed on the screen. Following those we have the activities which are controlling what the views are going to display. On our lowest layer we have the core logic (analyzer, DatabaseHelper, etc) which is read by the activities.
 
 \subsection{Dependency analysis}
-The only dependency that exists is the one between Activity -> View and Activity -> Model; in other words the fact that the Activity needs the data from the model and the view to display the data on from the interface.
+The dependencies that exists are shown in diagram below. All other dependencies not listed are the ones between Activity -> View and Activity -> Model; in other words the fact that the Activity needs the data from the model and the view to display the data on from the interface.
+
+\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{dependencydiagram.png}
+		\caption{Dependency Diagram}
+		\label{fig:Dependency Diagram}
+\end{figure}
+
+\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{packagediagram.png}
+		\caption{Package Diagram}
+		\label{fig:Package Diagram}
+\end{figure}
 
 \pagebreak
 
@@ -104,17 +118,15 @@ The application can only be run on mobile units running Android 4.0+.
 \bibliographystyle{plain}
 \bibliography{referencessdd.bib}
 
-
 \appendix
 
-Class diagram for packages:
+\pagebreak
 
 \begin{figure}[H]
 		\centering
-		\includegraphics[width=\textwidth]{packagediagram.png}
-		\caption{Package Diagram}
-		\label{fig:Package Diagram}
+		\includegraphics[width=\textwidth]{classdiagramcore.png}
+		\caption{Class Diagram}
+		\label{fig:Class Diagram for Core package.}
 \end{figure}
-
 
 \end{document}
