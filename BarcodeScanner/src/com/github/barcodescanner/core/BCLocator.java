@@ -24,7 +24,7 @@ public class BCLocator {
 	private Integer[] mostPlausibleBarcode = new Integer[4];
 	
 	// the number to divide the height on when confirming a line of a possible barcode
-	int delta = 40;
+	private int delta = 40;
 
 	public BCLocator() {}
 

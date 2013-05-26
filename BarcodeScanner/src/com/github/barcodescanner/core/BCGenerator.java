@@ -33,7 +33,7 @@ public class BCGenerator {
 	public List<Integer> generate(List<List<Integer>> lines) {
 		List<List<Integer>> lineHolder = new ArrayList<List<Integer>>();
 		List<Integer> unNormalized = new ArrayList<Integer>();
-		List<Integer> heightSum = new ArrayList<Integer>();
+		List<Integer> newSumList = new ArrayList<Integer>();
 
 		int height = lines.size();
 		for (int j = 0; j < lines.size(); j++) {
@@ -60,10 +60,10 @@ public class BCGenerator {
 			for (int j = 0; j < height; j++) {
 				sumList.add(lineHolder.get(j).get(i));
 			}
-			heightSum.add(mostRepresentedNumber(sumList));
+			newSumList.add(mostRepresentedNumber(sumList));
 		}
 
-		return heightSum;
+		return newSumList;
 	}
 	/**
 	 * Used to see what number is represented most in an array
@@ -105,7 +105,6 @@ public class BCGenerator {
 		StringBuffer tempStringBuffer = new StringBuffer();
 		StringBuffer finalStringBuffer = new StringBuffer();
 		String tempString = "";
-		int sumEven = 0, sumOdd = 0, checksumValue = 0, checksumDigit = 0;
 		int leastDistance = 999999;
 		int index = -1;
 
@@ -144,29 +143,7 @@ public class BCGenerator {
 				finalStringBuffer.append(index);
 			}
 		}
-		
-		for (int i = 0; i < finalStringBuffer.length(); i++) {
-			if ((i % 2) == 0) { // even numbers
-				sumEven = sumEven
-						+ Character
-								.getNumericValue(finalStringBuffer.charAt(i));
-			} else {
-				sumOdd = sumOdd
-						+ Character
-								.getNumericValue(finalStringBuffer.charAt(i));
-			}
-		}
 
-		sumEven = 3 * sumEven;
-		checksumValue = sumEven + sumOdd;
-		checksumDigit = (checksumValue % 10);
-
-		if (checksumDigit == 10) {
-			checksumDigit = 0;
-		}
-
-		// TODO the checksum digit should be used to find the most likely digit
-		// sequence that matches the data and satisfies the checksum digit
 		return finalStringBuffer.toString();
 	}
 
