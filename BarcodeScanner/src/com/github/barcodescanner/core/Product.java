@@ -1,5 +1,5 @@
 package com.github.barcodescanner.core;
-//TODO
+
 public class Product {
 	
 	/*
