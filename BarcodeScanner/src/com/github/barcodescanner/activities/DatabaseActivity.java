@@ -99,11 +99,21 @@ public class DatabaseActivity extends Activity {
 		if (isOwner) {
 			ImageButton button = (ImageButton) v;
 			TableRow row = (TableRow) button.getParent();
+			// Get the name, price and id views and then store them in strings
+			TextView nameView = (TextView) row.getChildAt(0);
+			TextView priceView = (TextView) row.getChildAt(1);
 			TextView idView = (TextView) row.getChildAt(2);
+			
+			String productName = nameView.getText().toString();
+			String productPrice = priceView.getText().toString();
 			String productID = idView.getText().toString();
 			
+			// Store the name, price and id in a bundle and send that bundle to EditProductActivity
 			Bundle editBundle = new Bundle();
+			editBundle.putString("productName", productName);
+			editBundle.putString("productPrice", productPrice);
 			editBundle.putString("productID", productID);
+			
 			Intent editIntent = new Intent(this, EditProductActivity.class);
 			
 			editIntent.putExtras(editBundle);

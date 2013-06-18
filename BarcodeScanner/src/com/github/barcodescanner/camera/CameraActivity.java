@@ -3,7 +3,6 @@ package com.github.barcodescanner.camera;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.barcode.BCGenerator;
 import com.github.barcodescanner.barcode.BCLocator;
@@ -163,33 +162,25 @@ public class CameraActivity extends Activity {
 		Bundle productBundle = new Bundle();
 		Intent productIntent;
 
-		// Check if the database contained a matching product
+		/*
+		 * If the database contains a matching product, package the products
+		 * info in a bundle and then send that info to the requested activity
+		 */
 		if (matchingProduct != null) {
-			// Get product name
 			String productName = matchingProduct.getName();
-
-			// Get product price
 			int productPrice = matchingProduct.getPrice();
 
-			// Put product name in bundle
 			productBundle.putString("productName", productName);
-
-			// Put product price in bundle
 			productBundle.putInt("productPrice", productPrice);
 
-			// Set ProductActivity as the intent
 			productIntent = new Intent(this, ProductActivity.class);
 		} else if (isOwner) {
-			// Put new product ID in bundle
 			productBundle.putString("productID", barcode);
 
-			// Set AddNewActivity as the intent
 			productIntent = new Intent(this, AddNewProductActivity.class);
 		} else {
-			// Put new product ID in bundle
 			productBundle.putString("productID", barcode);
 
-			// Set NoProductActivity as the intent
 			productIntent = new Intent(this, NoProductActivity.class);
 		}
 
