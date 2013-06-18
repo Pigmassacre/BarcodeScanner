@@ -31,7 +31,7 @@ public class CameraActivity extends Activity {
 
 	// TODO Fix aspect ratio
 	// TODO If possible, fix so it scans like 10 times per second, instead of
-	// pressing a button to scan1
+	// pressing a button to scan
 
 	private static final String TAG = "CameraActivity";
 
