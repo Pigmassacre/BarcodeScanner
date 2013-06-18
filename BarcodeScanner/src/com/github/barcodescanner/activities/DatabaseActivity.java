@@ -6,10 +6,10 @@ import java.util.List;
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
-import com.github.barcodescanner.database.Product;
 import com.github.barcodescanner.libraries.selv.ActionSlideExpandableListView;
 import com.github.barcodescanner.libraries.selv.SlideExpandableListAdapter;
 import com.github.barcodescanner.product.EditProductActivity;
+import com.github.barcodescanner.product.Product;
 
 import android.app.Activity;
 import android.content.Context;

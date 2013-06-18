@@ -1,4 +1,4 @@
-package com.github.barcodescanner.database;
+package com.github.barcodescanner.product;
 
 public class Product {
 	

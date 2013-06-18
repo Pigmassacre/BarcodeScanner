@@ -5,7 +5,6 @@ import java.util.Scanner;
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
-import com.github.barcodescanner.database.Product;
 
 import android.app.Activity;
 import android.content.Context;

@@ -8,10 +8,10 @@ import com.github.barcodescanner.barcode.BCGenerator;
 import com.github.barcodescanner.barcode.BCLocator;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
-import com.github.barcodescanner.database.Product;
 import com.github.barcodescanner.debug.BarcodeViewActivity;
 import com.github.barcodescanner.product.AddNewProductActivity;
 import com.github.barcodescanner.product.NoProductActivity;
+import com.github.barcodescanner.product.Product;
 import com.github.barcodescanner.product.ProductActivity;
 
 import android.app.Activity;
@@ -28,10 +28,11 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 public class CameraActivity extends Activity {
-	
+
 	// TODO Fix aspect ratio
-	// TODO If possible, fix so it scans like 10 times per second, instead of pressing a button to scan1
-	
+	// TODO If possible, fix so it scans like 10 times per second, instead of
+	// pressing a button to scan1
+
 	private static final String TAG = "CameraActivity";
 
 	private Preview mPreview;
@@ -55,7 +56,7 @@ public class CameraActivity extends Activity {
 		isOwner = getIntent().getExtras().getBoolean("isOwner");
 
 		setupDatabase();
-		prepareScanning();
+		prepareScanner();
 	}
 
 	private void setupDatabase() {
@@ -63,7 +64,7 @@ public class CameraActivity extends Activity {
 		database = DatabaseHelperFactory.getInstance();
 	}
 
-	private void prepareScanning() {
+	private void prepareScanner() {
 		// instantiates the necessary classes needed to scan barcodes
 		bcLocator = new BCLocator();
 		bcGenerator = new BCGenerator();
@@ -132,7 +133,7 @@ public class CameraActivity extends Activity {
 
 				if (tempBarcode.length() == 12) {
 
-					System.err.println("bcGenerator: " + tempBarcode);
+					System.out.println("bcGenerator: " + tempBarcode);
 
 					List<Product> products = database.getProducts();
 					Product foundProduct = null;
@@ -167,8 +168,10 @@ public class CameraActivity extends Activity {
 		Intent productIntent;
 
 		/*
-		 * If the database contains a matching product, package the products
-		 * info in a bundle and then send that info to the requested activity
+		 * If the database contains a matching product, package that products
+		 * info in a bundle and then send that info to the requested activity.
+		 * else, either let the owner add a new product or show a no product
+		 * activity
 		 */
 		if (matchingProduct != null) {
 			String productName = matchingProduct.getName();

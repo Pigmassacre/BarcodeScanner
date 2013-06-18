@@ -35,6 +35,7 @@
     <string name="default_image_description">An image of the product</string>
     <string name="product_name">Product Name</string>
     <string name="product_price">Product Price</string>
+    <string name="product_edit_button">Edit Product</string>
 
     <!-- activity_database.xml -->
     <string name="title_activity_database">DatabaseActivity</string>
