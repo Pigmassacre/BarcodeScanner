@@ -50,9 +50,14 @@ public class DatabaseActivity extends Activity {
 	
 	@Override
 	protected void onResume() {
+		super.onResume();
 		updateSpecialAdapter();
 	}
 	
+	/**
+	 * Updates the SpecialAdapter, which in turn updates the view of the list of
+	 * all the items in the database.
+	 */
 	private void updateSpecialAdapter() {
 		items = db.getProducts();
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
