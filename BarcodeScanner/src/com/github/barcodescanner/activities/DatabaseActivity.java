@@ -45,10 +45,18 @@ public class DatabaseActivity extends Activity {
 		db = DatabaseHelperFactory.getInstance();
 
 		list = (ListView) findViewById(R.id.list);
+		updateSpecialAdapter();
+	}
+	
+	@Override
+	protected void onResume() {
+		updateSpecialAdapter();
+	}
+	
+	private void updateSpecialAdapter() {
 		items = db.getProducts();
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
 		list.setAdapter(adapter);
-
 	}
 
 	/** 
@@ -72,9 +80,7 @@ public class DatabaseActivity extends Activity {
 			String id = idView.getText().toString();
 			db.removeProduct(id);
 			
-			items = db.getProducts();
-			SpecialAdapter adapter = new SpecialAdapter(this, items);
-			list.setAdapter(adapter);
+			updateSpecialAdapter();
 			// TODO Get better delete button graphic from the android resources.
 		}
 	}
