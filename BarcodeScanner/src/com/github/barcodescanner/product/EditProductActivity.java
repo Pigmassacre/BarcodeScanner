@@ -35,15 +35,14 @@ public class EditProductActivity extends Activity{
 		productID = getIntent().getExtras().getString("productID");
 		
     	TextView view = (TextView) findViewById(R.id.new_product_id);
-    	view.setText(this.productID);
+    	view.setText(productID);
 
     	editName = (EditText) findViewById(R.id.new_product_name_field);
     	editPrice = (EditText) findViewById(R.id.new_product_price);
 	}
 	
-	public void addProduct(View view) {
-
-		String barcode = this.productID;
+	public void editProduct(View view) {
+		String productID = this.productID;
 		String productName = editName.getText().toString();
 
 		Scanner scanner = new Scanner(editPrice.getText().toString());
@@ -56,9 +55,9 @@ public class EditProductActivity extends Activity{
 			productPrice = Integer.MAX_VALUE;
 		}
 
-		Product newProduct = new Product(productName, productPrice, barcode);
+		Product updatedProduct = new Product(productName, productPrice, productID);
 
-		database.addProduct(newProduct);
+		database.updateProduct(updatedProduct);
 
 		finish();
 	}

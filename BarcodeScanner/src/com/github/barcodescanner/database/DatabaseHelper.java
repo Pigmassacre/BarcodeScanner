@@ -63,8 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}else{
 			return product;
 		}
-			
-
+		
 		// read from the cursor to parse a possible Product from the given ID
 		product = new Product(cursor.getString(1),
 				Integer.parseInt(cursor.getString(2)),
@@ -118,8 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	// Method for removing a product
 	public void removeProduct(String p) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_PRODUCTS, KEY_BCODE + " = ?",
-				new String[] { String.valueOf(p) });
+		db.delete(TABLE_PRODUCTS, KEY_BCODE + " = ?", new String[] { String.valueOf(p) });
 		db.close();
 	}
 
@@ -144,8 +142,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put(KEY_BCODE, p.getBarcode()); // Product barcode
 
 		// updating row
-		return db.update(TABLE_PRODUCTS, values, KEY_BCODE + " = ?",
-				new String[] { String.valueOf(p.getBarcode()) });
+		return db.update(TABLE_PRODUCTS, values, KEY_BCODE + " = ?", new String[] { String.valueOf(p.getBarcode()) });
 	}
 
 }
