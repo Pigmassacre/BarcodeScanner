@@ -25,6 +25,8 @@ import android.widget.TextView;
 
 public class DatabaseActivity extends Activity {
 
+	// TODO Change to SlideExpandableListView
+	
 	@SuppressWarnings("unused")
 	private static final String TAG = "DatabaseActivity";
 	

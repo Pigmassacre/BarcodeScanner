@@ -28,6 +28,10 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 public class CameraActivity extends Activity {
+	
+	// TODO Fix aspect ratio
+	// TODO If possible, fix so it scans like 10 times per second, instead of pressing a button to scan1
+	
 	private static final String TAG = "CameraActivity";
 
 	private Preview mPreview;
