@@ -29,8 +29,8 @@ public class BCLocator {
 	public BCLocator() {}
 
 	/**
-	 * Path to image as parameter
-	 * This constructor is used for testing purposes
+	 * Path to image as parameter.
+	 * This constructor is used for testing purposes.
 	 * 
 	 * @param path
 	 */
@@ -39,13 +39,13 @@ public class BCLocator {
 		File pathFile = Environment.getExternalStorageDirectory();
 
 		Bitmap temp = BitmapFactory.decodeFile(pathFile.toString() + path);
-		//Bitmap temp = BitmapFactory.decodeFile(path);
+		
 		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
 		scanLines(30);
 	}
 	
 	/**
-	 * Sets the data in the class, this initiates a line of functions to locate the barcode
+	 * Sets the data in the class, this initiates a line of functions to locate the barcode.
 	 * 
 	 * @param bitmapdata
 	 */
@@ -58,7 +58,7 @@ public class BCLocator {
 	}
 
 	/**
-	 * Used to check if mostPlausibleBarcode is set
+	 * Used to check if mostPlausibleBarcode is set.
 	 * 
 	 * @return true if it is set, false if its not (eg. if barcode is found)
 	 */
@@ -67,7 +67,7 @@ public class BCLocator {
 	}
 
 	/**
-	 * Get width of bitmap
+	 * Gets the width of the bitmap.
 	 * 
 	 * @return width
 	 */
@@ -76,7 +76,7 @@ public class BCLocator {
 	}
 
 	/**
-	 * Get height of bitmap
+	 * Gets the height of the bitmap.
 	 * 
 	 * @return height
 	 */
@@ -85,7 +85,7 @@ public class BCLocator {
 	}
 
 	/**
-	 * Get the bitmap
+	 * Gets the bitmap.
 	 * 
 	 * @return bitmap
 	 */
@@ -94,7 +94,7 @@ public class BCLocator {
 	}
 
 	/**
-	 * Gets the segment-matrix of bitmap data converted to 0s and 1s within the mostPlausibleBarcode 
+	 * Gets the segment-matrix of bitmap data converted to 0s and 1s within the mostPlausibleBarcode.
 	 * 
 	 * @return segment
 	 */
@@ -116,7 +116,8 @@ public class BCLocator {
 	}
 	
 	/**
-	 * Used for debug purpose
+	 * Returns a segmented bitmap according to the mostPlausibleBarcode indexes.
+	 * Only used for debug purposes.
 	 * 
 	 * @return a segmented bitmap according to mostPlausibleBarcode indexes
 	 */
@@ -131,7 +132,7 @@ public class BCLocator {
 	 * This method is the first in the chain of methods when locating a barcode.
 	 * 
 	 * @param iteration how many lines that should be scanned over the height
-	 * @return if any scanline had over 30 "swaps" 
+	 * @return true if any scanline had over 30 "swaps", otherwise false 
 	 */
 	private boolean scanLines(int iteration){
 		boolean found = false;
@@ -154,7 +155,7 @@ public class BCLocator {
 	}
 
 	/**
-	 * Draws a red rect around target position, used to debug result of the algorithm
+	 * Draws a red rectangle around target position, used to debug result of the algorithm.
 	 * 
 	 * @param x1
 	 * @param y1
@@ -178,7 +179,6 @@ public class BCLocator {
 	 * @param heightLine the horizontal line to be scanned
 	 * @param threshold the threshold for accepting bright and dark
 	 * @return array of line data
-	 *  
 	 */
 	private List<Integer> scanHorizontal(int heightLine, float threshold){
 		List<Integer> lineData = new ArrayList<Integer>();
@@ -204,7 +204,6 @@ public class BCLocator {
 	 * 
 	 * @param horizontalline line to be scanned for barcode
 	 * @return switches array of indexes where the pixels shift from light to dark
-	 * 
 	 */
 	private List<Integer> plausibleBarcode(List<Integer> horizontalline){
 		List<Integer> switches = new ArrayList<Integer>();
@@ -292,11 +291,11 @@ public class BCLocator {
 	}	
 	
 	/**
-	 * Checks if the line on deltaheight above and under the current scanline has similar patterns
+	 * Checks if the line on delta height above and under the current scanline has similar patterns
 	 * 
 	 * @param scanline
 	 * @param switchPointsMain
-	 * @return integer representing if above and below did or did not contain somilar patterns
+	 * @return integer representing if above and below did or did not contain similar patterns
 	 */
 	private int getSimilarPatterns(Integer scanline,List<Integer> switchPointsMain){
 		int distDelta = getHeight() / delta;

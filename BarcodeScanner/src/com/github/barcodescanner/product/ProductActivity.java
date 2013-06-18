@@ -1,4 +1,4 @@
-package com.github.barcodescanner.activities;
+package com.github.barcodescanner.product;
 
 import com.github.barcodescanner.R;
 import android.app.Activity;
@@ -17,18 +17,13 @@ public class ProductActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_product);
 
-		// Product name to display
 		String productName = getIntent().getExtras().getString("productName");
-		// Price to be displayed
-		String productPrice = Integer.toString(getIntent().getExtras().getInt(
-				"productPrice"));
-		// TextView instance to display product name
+		String productPrice = Integer.toString(getIntent().getExtras().getInt("productPrice"));
+
 		TextView name = (TextView) findViewById(R.id.productName);
-		// TextView instance to display product price		
 		TextView price = (TextView) findViewById(R.id.productPrice);
-		// Set name to be displayed in TextView
+
 		name.setText(productName);
-		// Set price to be displayed in TextView
 		price.setText(productPrice);
 	}
 }

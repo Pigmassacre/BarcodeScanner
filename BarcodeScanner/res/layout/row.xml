@@ -1,52 +1,59 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
 
-    <TableLayout
-        android:id="@+id/tableLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    <TableRow>
 
-        <TableRow>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:padding="10dp"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:padding="10dp"
-                android:textColor="#FFF"
-                android:textSize="16dp" />
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:padding="10dp"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:padding="10dp"
-                android:textColor="#FFF"
-                android:textSize="16dp" />
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:padding="10dp"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/id"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:padding="10dp"
-                android:textColor="#FFF"
-                android:textSize="16dp" />
+        <ImageButton
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="6dp"
+            android:background="@null"
+            android:clickable="true"
+            android:contentDescription="@string/row_edit_button"
+            android:onClick="deleteItem"
+            android:src="@drawable/cancel_24" />
 
-            <ImageButton
-                android:id="@+id/cancel_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginRight="6dp"
-                android:background="@null"
-                android:clickable="true"
-                android:onClick="clickDelete"
-                android:src="@drawable/cancel_24" />
-        </TableRow>
-    </TableLayout>
+        <ImageButton
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="6dp"
+            android:background="@null"
+            android:clickable="true"
+            android:contentDescription="@string/row_delete_button"
+            android:onClick="deleteItem"
+            android:src="@drawable/cancel_24" />
+    </TableRow>
 
-</LinearLayout>
+</TableLayout>

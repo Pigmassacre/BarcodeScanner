@@ -1,4 +1,4 @@
-package com.github.barcodescanner.activities;
+package com.github.barcodescanner.product;
 
 import com.github.barcodescanner.R;
 
@@ -11,7 +11,7 @@ public class NoProductActivity extends Activity {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "ProductActivity";
-	
+
 	private String productID;
 
 	@Override
@@ -20,12 +20,10 @@ public class NoProductActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_no_product);
 
-		// Get the product id to display
 		productID = getIntent().getExtras().getString("productID");
-		
-		// TextView instance to display product ID for new product
-    	TextView view = (TextView) findViewById(R.id.no_product_id);
-		// Set price to be displayed in TextView
+
+		TextView view = (TextView) findViewById(R.id.no_product_id);
+
 		view.setText(productID);
 	}
 }

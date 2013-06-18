@@ -3,16 +3,17 @@ package com.github.barcodescanner.camera;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.activities.AddNewActivity;
 import com.github.barcodescanner.activities.BarcodeViewActivity;
-import com.github.barcodescanner.activities.NoProductActivity;
-import com.github.barcodescanner.activities.ProductActivity;
 import com.github.barcodescanner.core.BCGenerator;
 import com.github.barcodescanner.core.BCLocator;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 import com.github.barcodescanner.database.Product;
+import com.github.barcodescanner.product.AddNewProductActivity;
+import com.github.barcodescanner.product.NoProductActivity;
+import com.github.barcodescanner.product.ProductActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -41,23 +42,17 @@ public class CameraActivity extends Activity {
 
 	private BCLocator bcLocator;
 	private BCGenerator bcGenerator;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		// Hide the window title.
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_camera);
 		isOwner = getIntent().getExtras().getBoolean("isOwner");
 
-		// Setup the database
 		setupDatabase();
-
-		// prepare the camera for being able to scan barcodes
-		bcLocator = new BCLocator();
-		bcGenerator = new BCGenerator();
+		prepareScanning();
 	}
 
 	private void setupDatabase() {
@@ -65,20 +60,25 @@ public class CameraActivity extends Activity {
 		database = DatabaseHelperFactory.getInstance();
 	}
 
+	private void prepareScanning() {
+		// instantiates the necessary classes needed to scan barcodes
+		bcLocator = new BCLocator();
+		bcGenerator = new BCGenerator();
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 
-		// Open the default i.e. the first rear facing camera.
 		mCamera = getCameraInstance();
-		System.err.println("mCamera is: " + mCamera);
+
 		mPreview = new Preview(this, mCamera);
 		mPreviewRunning = true;
+
 		autoFocusHandler = new Handler();
 		mPreview.setAutoFocusCallback(autoFocusCallback);
-		// gets the FrameLayout camera_preview in activity_camera.xml
+
 		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
-		// adds the mPreview view to that FrameLayout
 		frameLayout.addView(mPreview);
 	}
 
@@ -88,7 +88,7 @@ public class CameraActivity extends Activity {
 		try {
 			camera = Camera.open();
 		} catch (Exception e) {
-			Log.e(TAG, "Exception when opening the camera", e);
+			Log.e(TAG, "Exception when opening camera: ", e);
 		}
 		return camera;
 	}
@@ -100,7 +100,6 @@ public class CameraActivity extends Activity {
 		releaseCamera();
 
 		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
-		// adds the mPreview view to that FrameLayout
 		frameLayout.removeView(mPreview);
 
 		super.onPause();
@@ -111,7 +110,6 @@ public class CameraActivity extends Activity {
 			mPreviewRunning = false;
 			mCamera.stopPreview();
 			mCamera.setPreviewCallback(null);
-			// mPreview.setCamera(null);
 			mCamera.release();
 			mCamera = null;
 		}
@@ -169,13 +167,13 @@ public class CameraActivity extends Activity {
 		if (matchingProduct != null) {
 			// Get product name
 			String productName = matchingProduct.getName();
-			
+
 			// Get product price
 			int productPrice = matchingProduct.getPrice();
 
 			// Put product name in bundle
 			productBundle.putString("productName", productName);
-			
+
 			// Put product price in bundle
 			productBundle.putInt("productPrice", productPrice);
 
@@ -186,7 +184,7 @@ public class CameraActivity extends Activity {
 			productBundle.putString("productID", barcode);
 
 			// Set AddNewActivity as the intent
-			productIntent = new Intent(this, AddNewActivity.class);
+			productIntent = new Intent(this, AddNewProductActivity.class);
 		} else {
 			// Put new product ID in bundle
 			productBundle.putString("productID", barcode);
@@ -212,5 +210,5 @@ public class CameraActivity extends Activity {
 			autoFocusHandler.postDelayed(doAutoFocus, 5000);
 		}
 	};
-	
+
 }

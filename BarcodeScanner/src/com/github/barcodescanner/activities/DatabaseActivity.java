@@ -25,6 +25,7 @@ public class DatabaseActivity extends Activity {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "DatabaseActivity";
+	
 	DatabaseHelper db;
 	private List<Product> items = new ArrayList<Product>();
 	private ListView list;
@@ -35,13 +36,12 @@ public class DatabaseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_database);
+		
 		isOwner = getIntent().getExtras().getBoolean("isOwner");
 
-		// The database
 		DatabaseHelperFactory.init(this);
 		db = DatabaseHelperFactory.getInstance();
 
-		// set the ListView of items
 		list = (ListView) findViewById(R.id.list);
 		items = db.getProducts();
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
@@ -53,7 +53,13 @@ public class DatabaseActivity extends Activity {
 		TextView name, id, price;
 	}
 
-	public void clickDelete(View v) {
+	/**
+	 * When called, this function deletes an item given from a view from the database
+	 * and the SpecialAdapter generated view.
+	 * 
+	 * @param v The view that shows the item in the database
+	 */
+	public void deleteItem(View v) {
 		if (isOwner) {
 			ImageButton button = (ImageButton) v;
 			TableRow row = (TableRow) button.getParent();
@@ -66,8 +72,16 @@ public class DatabaseActivity extends Activity {
 			list.setAdapter(adapter);
 		}
 	}
+	
+	public void editItem(View v) {
+		if (isOwner) {
+			
+		}
+	}
 
-
+	/**
+	 * A special adapter that generates the view that shows the items in the database.
+	 */
 	private class SpecialAdapter extends BaseAdapter {
 		// Defining the background color of rows. The row will alternate between
 		// grey light and grey dark.
@@ -97,13 +111,22 @@ public class DatabaseActivity extends Activity {
 			return position;
 		}
 
-		// A view to hold each row in the list
+		/**
+		 * Given a view, this function returns a view that shows each item in the database in a top-down fashion.
+		 * Every other item has a darker gray background, in order to more easily differentiate
+		 * between each item.
+		 * 
+		 * @param int position 
+		 * @param View convertView The view to add all the items to.
+		 * @param ViewGroup parent Not used, but this function overrides another function so it stays
+		 *  
+		 * @return The finished view that shows all the items in the database. 
+		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 
 			// A ViewHolder keeps references to children views to avoid
-			// unneccessary calls
-			// to findViewById() on each row.
+			// unnecessary calls to findViewById() on each row.
 			ViewHolder holder;
 
 			if (convertView == null) {
@@ -117,6 +140,7 @@ public class DatabaseActivity extends Activity {
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
+			
 			// Bind the data efficiently with the holder.
 			holder.name.setText(data.get(position).getName());
 			holder.price.setText("" + data.get(position).getPrice());
@@ -128,7 +152,7 @@ public class DatabaseActivity extends Activity {
 			
 			// if a customer is viewing the database, hide the delete button
 			if (!isOwner) {
-				convertView.findViewById(R.id.cancel_button).setVisibility(View.INVISIBLE);
+				convertView.findViewById(R.id.delete_button).setVisibility(View.INVISIBLE);
 			}
 			
 			return convertView;

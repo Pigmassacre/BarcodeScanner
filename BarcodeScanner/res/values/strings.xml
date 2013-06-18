@@ -42,6 +42,10 @@
     <string name="database_table_cell_name">Name</string>
     <string name="database_table_cell_price">Price</string>
     <string name="database_table_cell_id">ID</string>
+    
+    <!-- row.xml -->
+    <string name="row_delete_button">Delete</string>
+    <string name="row_edit_button">Edit</string>
 
     <!-- activity_no_product.xml -->
     <string name="title_activity_no_product">NoProductActivity</string>
@@ -58,6 +62,8 @@
     <string name="new_product_add_button">Add product</string>
     <string name="new_product_title_price">Price:</string>
     <string name="new_product_price_hint">The price of the product</string>
+    
+    <!-- activity_edit.xml -->
 
     <!-- activity_barcode_view.xml -->
     <string name="title_activity_barcode_view">BarcodeViewActivity</string>
