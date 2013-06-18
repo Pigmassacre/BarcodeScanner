@@ -16,55 +16,56 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EditProductActivity extends Activity{
-	
+public class EditProductActivity extends Activity {
+
 	@SuppressWarnings("unused")
 	private static final String TAG = "EditProductActivity";
-	
+
 	private DatabaseHelper database;
 	private EditText editPrice;
 	private EditText editName;
 	private String productID;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_edit_product);
-		
-		database = DatabaseHelperFactory.getInstance();
-		
-		productID = getIntent().getExtras().getString("productID");
-		
-    	TextView view = (TextView) findViewById(R.id.new_product_id);
-    	view.setText(productID);
 
-    	editName = (EditText) findViewById(R.id.new_product_name_field);
-    	editPrice = (EditText) findViewById(R.id.new_product_price);
+		database = DatabaseHelperFactory.getInstance();
+
+		productID = getIntent().getExtras().getString("productID");
+
+		TextView view = (TextView) findViewById(R.id.new_product_id);
+		view.setText(productID);
+
+		editName = (EditText) findViewById(R.id.new_product_name_field);
+		editPrice = (EditText) findViewById(R.id.new_product_price);
 	}
-	
+
 	public void editProduct(View view) {
 		String productID = this.productID;
 		String productName = editName.getText().toString();
 
-		Scanner scanner = new Scanner(editPrice.getText().toString());
 		int productPrice;
+
+		Scanner scanner = new Scanner(editPrice.getText().toString());
 		if (scanner.hasNextInt()) {
 			// If the price is an integer, we accept it.
 			productPrice = scanner.nextInt();
+
+			Product updatedProduct = new Product(productName, productPrice, productID);
+			database.updateProduct(updatedProduct);
+
+			finish();
 		} else {
 			Context context = getApplicationContext();
-			CharSequence text = getString(R.string.new_product_toast);
+			CharSequence text = getString(R.string.edit_product_toast);
 			int duration = Toast.LENGTH_SHORT;
-			
+
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
 		}
-
-		Product updatedProduct = new Product(productName, productPrice, productID);
-		database.updateProduct(updatedProduct);
-
-		finish();
 	}
 
 }

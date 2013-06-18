@@ -78,7 +78,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return product;
 	}
 
-	// Method for adding a single product to the database
+	/**
+	 * Given a product, adds that product to the database.
+	 * 
+	 * @param p the product to be added to the database.
+	 */
 	public void addProduct(Product p) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
@@ -91,7 +95,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	// Method for getting all the products in the database
+	/**
+	 * Returns all the products that are in the database in the form
+	 * of a list.
+	 * 
+	 * @return a list containing all the products in the database.
+	 */
 	public List<Product> getProducts() {
 		List<Product> productList = new ArrayList<Product>();
 
@@ -106,26 +115,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (cursor.moveToFirst()) {
 			do {
 				Product product = new Product();
+				
 				product.setBarcode((cursor.getString(0)));
 				product.setName(cursor.getString(1));
 				product.setPrice(Integer.parseInt(cursor.getString(2)));
-				// Adding product to list
+
 				productList.add(product);
 			} while (cursor.moveToNext());
 		}
 
-		// return product list
 		return productList;
 	}
 
-	// Method for removing a product
+	/**
+	 * Given a barcode id in the form of a string, removes any product that matches
+	 * this barcode id from the database.
+	 * 
+	 * @param p the barcode id that matches the product to be removed
+	 */
 	public void removeProduct(String p) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_PRODUCTS, KEY_BCODE + " = ?", new String[] { String.valueOf(p) });
 		db.close();
 	}
 
-	// method for getting the products count
+	/**
+	 * Returns the number of products in the database.
+	 * 
+	 * @return an int representing the number of products in the database
+	 */
 	public int getProductsCount() {
 		String countQuery = "SELECT  * FROM " + TABLE_PRODUCTS;
 		SQLiteDatabase db = this.getReadableDatabase();
