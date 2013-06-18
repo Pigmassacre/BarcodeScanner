@@ -7,6 +7,7 @@ import com.github.barcodescanner.R;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 import com.github.barcodescanner.database.Product;
+import com.github.barcodescanner.libraries.selv.ActionSlideExpandableListView;
 import com.github.barcodescanner.libraries.selv.SlideExpandableListAdapter;
 import com.github.barcodescanner.product.EditProductActivity;
 
@@ -19,21 +20,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 public class DatabaseActivity extends Activity {
 
-	// TODO Change to SlideExpandableListView
-	
 	@SuppressWarnings("unused")
 	private static final String TAG = "DatabaseActivity";
-	
+
 	DatabaseHelper db;
 	private List<Product> items = new ArrayList<Product>();
-	private ListView list;
+	private ActionSlideExpandableListView list;
 	private boolean isOwner;
 
 	@Override
@@ -41,92 +37,112 @@ public class DatabaseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_database);
-		
+
 		isOwner = getIntent().getExtras().getBoolean("isOwner");
 
 		DatabaseHelperFactory.init(this);
 		db = DatabaseHelperFactory.getInstance();
 
-		list = (ListView) findViewById(R.id.list);
+		list = (ActionSlideExpandableListView) findViewById(R.id.list);
 		updateSpecialAdapter();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		updateSpecialAdapter();
 	}
-	
+
 	/**
 	 * Updates the SpecialAdapter, which in turn updates the view of the list of
-	 * all the items in the database.
+	 * all the items in the database. Uses the SlideExpandableListView library, to
+	 * allow for a view to slide out from under a view.
 	 */
 	private void updateSpecialAdapter() {
 		items = db.getProducts();
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
-		list.setAdapter(new SlideExpandableListAdapter(adapter, R.id.more_button, R.id.expandable));
+		list.setAdapter(new SlideExpandableListAdapter(adapter, R.id.expandable_toggle_button, R.id.expandable));
+		list.setItemActionListener(new ActionSlideExpandableListView.OnActionClickListener() {
+			
+			@Override
+			public void onClick(View listView, View buttonView, int position) {
+				System.out.println("Something clicked!");
+				if (buttonView.getId() == R.id.edit_button) {
+					editItem((ViewGroup) listView);
+				} else if (buttonView.getId() == R.id.delete_button) {
+					deleteItem((ViewGroup) listView);
+				}
+			}
+
+		}, R.id.edit_button, R.id.delete_button);
 	}
 
-	/** 
-	 * A static class that helps the SpecialAdapter generate the database view. 
+	/**
+	 * A static class that helps the SpecialAdapter generate the database view.
 	 */
 	static class ViewHolder {
 		TextView name, id, price;
 	}
 
 	/**
-	 * Deletes an item, given from a view, from the database
-	 * and the SpecialAdapter generated view.
+	 * Given a listView containing product information and the edit and delete buttons,
+	 * this function takes the product information and asks the database to remove the
+	 * corresponding product, and then updates the Special Adapter that handles the database
+	 * view.
 	 * 
-	 * @param v The view that shows the item in the database
+	 * @param listView the view containing the information of the product to be removed
 	 */
-	public void deleteItem(View v) {
+	private void deleteItem(ViewGroup listView) {
 		if (isOwner) {
-			ImageButton button = (ImageButton) v;
-			TableRow row = (TableRow) button.getParent();
-			TextView idView = (TextView) row.getChildAt(2);
+			ViewGroup currentRow = (ViewGroup) listView.getChildAt(0);
+			
+			TextView idView = (TextView) currentRow.getChildAt(2);
+			
 			String id = idView.getText().toString();
 			db.removeProduct(id);
-			
+
 			updateSpecialAdapter();
-			// TODO Get better delete button graphic from the android resources.
 		}
 	}
+
 	
 	/**
-	 * Enters the EditProductActivity, where the user can edit the specific product.
+	 * Given a listView containing product information and the edit and delete buttons,
+	 * this function takes the product information and passes it along to the EditProductActivity,
+	 * where the user can edit the products information.
 	 * 
-	 * @param v the view of the product to be edited
+	 * @param listView the view containing the information of the product to be edited
 	 */
-	public void editItem(View v) {
+	private void editItem(ViewGroup listView) {
 		if (isOwner) {
-			ImageButton button = (ImageButton) v;
-			TableRow row = (TableRow) button.getParent();
+			ViewGroup row = (ViewGroup) listView.getChildAt(0);
+			
 			// Get the name, price and id views and then store them in strings
 			TextView nameView = (TextView) row.getChildAt(0);
 			TextView priceView = (TextView) row.getChildAt(1);
 			TextView idView = (TextView) row.getChildAt(2);
-			
+
 			String productName = nameView.getText().toString();
 			String productPrice = priceView.getText().toString();
 			String productID = idView.getText().toString();
-			
-			// Store the name, price and id in a bundle and send that bundle to EditProductActivity
+
+			// Store the name, price and id in a bundle and send that bundle to
+			// EditProductActivity
 			Bundle editBundle = new Bundle();
 			editBundle.putString("productName", productName);
 			editBundle.putString("productPrice", productPrice);
 			editBundle.putString("productID", productID);
-			
+
 			Intent editIntent = new Intent(this, EditProductActivity.class);
-			
+
 			editIntent.putExtras(editBundle);
 			startActivity(editIntent);
-			// TODO Get a matching edit button graphic from the android resources.
 		}
 	}
 
 	/**
-	 * A special adapter that generates the view that shows the items in the database.
+	 * A special adapter that generates the view that shows the items in the
+	 * database.
 	 */
 	private class SpecialAdapter extends BaseAdapter {
 		// Defining the background color of rows. The row will alternate between
@@ -158,15 +174,19 @@ public class DatabaseActivity extends Activity {
 		}
 
 		/**
-		 * Given a view, this function returns a view that shows each item in the database in a top-down fashion.
-		 * Every other item has a darker gray background, in order to more easily differentiate
-		 * between each item.
+		 * Given a view, this function returns a view that shows each item in
+		 * the database in a top-down fashion. Every other item has a darker
+		 * gray background, in order to more easily differentiate between each
+		 * item.
 		 * 
-		 * @param int position 
-		 * @param View convertView The view to add all the items to.
-		 * @param ViewGroup parent Not used, but this function overrides another function so it stays
-		 *  
-		 * @return The finished view that shows all the items in the database. 
+		 * @param int position
+		 * @param View
+		 *            convertView The view to add all the items to.
+		 * @param ViewGroup
+		 *            parent Not used, but this function overrides another
+		 *            function so it stays
+		 * 
+		 * @return The finished view that shows all the items in the database.
 		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -186,7 +206,7 @@ public class DatabaseActivity extends Activity {
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			// Bind the data efficiently with the holder.
 			holder.name.setText(data.get(position).getName());
 			holder.price.setText("" + data.get(position).getPrice());
@@ -195,13 +215,13 @@ public class DatabaseActivity extends Activity {
 			// Set the background color depending of odd/even colorPos result
 			int colorPos = position % colors.length;
 			convertView.setBackgroundColor(colors[colorPos]);
-			
+
 			// if a customer is viewing the database, hide the delete button
 			if (!isOwner) {
 				convertView.findViewById(R.id.edit_button).setVisibility(View.INVISIBLE);
 				convertView.findViewById(R.id.delete_button).setVisibility(View.INVISIBLE);
 			}
-			
+
 			return convertView;
 		}
 	}
