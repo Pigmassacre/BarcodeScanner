@@ -53,7 +53,7 @@
     <string name="no_product_message">No product matching the scanned barcode was found in our database.</string>
 
     <!-- activity_addnew.xml -->
-    <string name="title_activity_addnew">AddNewActivity</string>
+    <string name="title_activity_add_new">AddNewActivity</string>
     <string name="new_product_title">Add new product:</string>
     <string name="new_product_id_title">Product ID - </string>
     <string name="new_product_id">123456</string>
@@ -64,6 +64,8 @@
     <string name="new_product_price_hint">The price of the product</string>
     
     <!-- activity_edit.xml -->
+    <string name="title_activity_edit_product">EditProductActivity</string>
+    <string name="edit_product_add_button">Edit product</string>
 
     <!-- activity_barcode_view.xml -->
     <string name="title_activity_barcode_view">BarcodeViewActivity</string>
