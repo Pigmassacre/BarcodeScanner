@@ -62,10 +62,12 @@
     <string name="new_product_add_button">Add product</string>
     <string name="new_product_title_price">Price:</string>
     <string name="new_product_price_hint">The price of the product</string>
+    <string name="new_product_toast">The price has to be an integer.</string>
     
     <!-- activity_edit.xml -->
     <string name="title_activity_edit_product">EditProductActivity</string>
     <string name="edit_product_add_button">Edit product</string>
+    <string name="edit_product_toast">The new price has to be an integer.</string>
 
     <!-- activity_barcode_view.xml -->
     <string name="title_activity_barcode_view">BarcodeViewActivity</string>

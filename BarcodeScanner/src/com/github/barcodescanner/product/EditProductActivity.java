@@ -8,11 +8,13 @@ import com.github.barcodescanner.database.DatabaseHelperFactory;
 import com.github.barcodescanner.database.Product;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EditProductActivity extends Activity{
 	
@@ -51,9 +53,12 @@ public class EditProductActivity extends Activity{
 			// If the price is an integer, we accept it.
 			productPrice = scanner.nextInt();
 		} else {
-			// If the price isn't an integer, we set the price to the max integer value.
-			// TODO Change so user cannot enter anything but integer instead.
-			productPrice = Integer.MAX_VALUE;
+			Context context = getApplicationContext();
+			CharSequence text = getString(R.string.new_product_toast);
+			int duration = Toast.LENGTH_SHORT;
+			
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
 		}
 
 		Product updatedProduct = new Product(productName, productPrice, productID);

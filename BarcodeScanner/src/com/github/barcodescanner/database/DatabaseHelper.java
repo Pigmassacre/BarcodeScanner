@@ -74,31 +74,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		product = new Product(cursor.getString(1),
 				Integer.parseInt(cursor.getString(2)),
 				(cursor.getString(0)));
-		// return product
+
 		return product;
 	}
 
-	// Method for adding a single product to teh db
+	// Method for adding a single product to the database
 	public void addProduct(Product p) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(KEY_NAME, p.getName()); // Product name
-		values.put(KEY_PRICE, p.getPrice()); // Product price
-		values.put(KEY_BCODE, p.getBarcode()); // Product barcode
+		values.put(KEY_NAME, p.getName());
+		values.put(KEY_PRICE, p.getPrice());
+		values.put(KEY_BCODE, p.getBarcode());
 
-		// Inserting Row
 		db.insert(TABLE_PRODUCTS, null, values);
-		db.close(); // Closing database connection
+		db.close();
 	}
 
-	// Method for getting all the products in the db
+	// Method for getting all the products in the database
 	public List<Product> getProducts() {
 		List<Product> productList = new ArrayList<Product>();
-		// Select All Query
+
 		String selectQuery = "SELECT  * FROM " + TABLE_PRODUCTS;
 
-		// Fetch the db
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		// Create the cursor (works like an Iterator)
