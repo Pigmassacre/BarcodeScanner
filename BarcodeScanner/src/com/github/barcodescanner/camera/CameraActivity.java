@@ -5,12 +5,12 @@ import java.util.List;
 
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.activities.BarcodeViewActivity;
-import com.github.barcodescanner.core.BCGenerator;
-import com.github.barcodescanner.core.BCLocator;
+import com.github.barcodescanner.barcode.BCGenerator;
+import com.github.barcodescanner.barcode.BCLocator;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 import com.github.barcodescanner.database.Product;
+import com.github.barcodescanner.debug.BarcodeViewActivity;
 import com.github.barcodescanner.product.AddNewProductActivity;
 import com.github.barcodescanner.product.NoProductActivity;
 import com.github.barcodescanner.product.ProductActivity;

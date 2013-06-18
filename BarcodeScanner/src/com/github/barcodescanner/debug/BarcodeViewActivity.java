@@ -1,4 +1,4 @@
-package com.github.barcodescanner.activities;
+package com.github.barcodescanner.debug;
 
 import com.github.barcodescanner.R;
 import android.os.Bundle;
