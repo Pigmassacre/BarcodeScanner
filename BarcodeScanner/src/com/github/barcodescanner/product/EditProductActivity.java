@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class EditProductActivity extends Activity{
 	
 	@SuppressWarnings("unused")
-	private static final String TAG = "AddNewActivity";
+	private static final String TAG = "EditProductActivity";
 	
 	private DatabaseHelper database;
 	private EditText editPrice;
@@ -56,7 +56,6 @@ public class EditProductActivity extends Activity{
 		}
 
 		Product updatedProduct = new Product(productName, productPrice, productID);
-
 		database.updateProduct(updatedProduct);
 
 		finish();

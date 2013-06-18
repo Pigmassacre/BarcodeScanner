@@ -56,7 +56,6 @@ public class AddNewProductActivity extends Activity{
 		}
 
 		Product newProduct = new Product(productName, productPrice, barcode);
-
 		database.addProduct(newProduct);
 
 		finish();

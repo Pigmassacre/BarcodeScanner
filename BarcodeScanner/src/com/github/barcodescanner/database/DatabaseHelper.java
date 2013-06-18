@@ -132,16 +132,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return cursor.getCount();
 	}
 
-	// Method for updating single product
+	/**
+	 * Given a product, this function updates the item in the database that has a matching
+	 * barcode id to the id in the given product. 
+	 * 
+	 * @param p the product to be updated
+	 * @return the row in the database that was updated
+	 */
 	public int updateProduct(Product p) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(KEY_NAME, p.getName()); // Product name
-		values.put(KEY_PRICE, p.getPrice()); // Product price
-		values.put(KEY_BCODE, p.getBarcode()); // Product barcode
+		values.put(KEY_NAME, p.getName());
+		values.put(KEY_PRICE, p.getPrice());
+		values.put(KEY_BCODE, p.getBarcode());
 
-		// updating row
+		// updates the corresponding row in the database
 		return db.update(TABLE_PRODUCTS, values, KEY_BCODE + " = ?", new String[] { String.valueOf(p.getBarcode()) });
 	}
 
