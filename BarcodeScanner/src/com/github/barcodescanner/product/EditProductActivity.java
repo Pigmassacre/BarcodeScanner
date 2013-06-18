@@ -36,11 +36,11 @@ public class EditProductActivity extends Activity {
 
 		productID = getIntent().getExtras().getString("productID");
 
-		TextView view = (TextView) findViewById(R.id.new_product_id);
+		TextView view = (TextView) findViewById(R.id.edit_product_id);
 		view.setText(productID);
 
-		editName = (EditText) findViewById(R.id.new_product_name_field);
-		editPrice = (EditText) findViewById(R.id.new_product_price);
+		editName = (EditText) findViewById(R.id.edit_product_name_field);
+		editPrice = (EditText) findViewById(R.id.edit_product_price_field);
 	}
 
 	public void editProduct(View view) {
@@ -59,6 +59,7 @@ public class EditProductActivity extends Activity {
 
 			finish();
 		} else {
+			// otherwise, we show a toast.
 			Context context = getApplicationContext();
 			CharSequence text = getString(R.string.edit_product_toast);
 			int duration = Toast.LENGTH_SHORT;

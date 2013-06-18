@@ -6,14 +6,89 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
-    
+
+    <TextView
+        android:id="@+id/edit_product_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="34dp"
+        android:text="@string/edit_product_title"
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/edit_product_id_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/edit_product_title"
+        android:layout_below="@id/edit_product_title"
+        android:layout_marginTop="15dp"
+        android:text="@string/edit_product_id_title"
+        android:textSize="25sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/edit_product_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/edit_product_id_title"
+        android:layout_alignParentRight="true"
+        android:text="@string/edit_product_default_id"
+        android:textSize="20sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/edit_product_name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/edit_product_id_title"
+        android:layout_below="@id/edit_product_id_title"
+        android:layout_marginTop="15dp"
+        android:text="@string/edit_product_name_title"
+        android:textSize="25sp"
+        android:textStyle="bold|italic" />
+
+    <EditText
+        android:id="@+id/edit_product_name_field"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/edit_product_name_title"
+        android:layout_below="@id/edit_product_name_title"
+        android:ems="10"
+        android:hint="@string/edit_product_name_hint"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/edit_product_price_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_product_name_field"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/edit_product_price_title"
+        android:textSize="25sp"
+        android:textStyle="bold|italic" />
+
+    <EditText
+        android:id="@+id/edit_product_price_field"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@id/edit_product_price_title"
+        android:layout_below="@id/edit_product_price_title"
+        android:ems="10"
+        android:hint="@string/edit_product_price_hint"
+        android:inputType="number" />
+
     <Button
         android:id="@+id/edit_product_add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:onClick="addProduct"
+        android:onClick="editProduct"
         android:text="@string/edit_product_add_button" />
 
 </RelativeLayout>

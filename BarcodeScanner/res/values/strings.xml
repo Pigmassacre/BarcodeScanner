@@ -49,23 +49,32 @@
 
     <!-- activity_no_product.xml -->
     <string name="title_activity_no_product">NoProductActivity</string>
+    <string name="no_product_id_title">Product ID - </string>
+    <string name="no_product_default_id">N/A</string>
     <string name="no_product_message_title">No product found</string>
-    <string name="no_product_message">No product matching the scanned barcode was found in our database.</string>
+    <string name="no_product_message">No product matching the scanned barcode was found in the database.</string>
 
     <!-- activity_addnew.xml -->
     <string name="title_activity_add_new">AddNewActivity</string>
     <string name="new_product_title">Add new product:</string>
     <string name="new_product_id_title">Product ID - </string>
-    <string name="new_product_id">123456</string>
+    <string name="new_product_default_id">N/A</string>
     <string name="new_product_name_title">Name:</string>
     <string name="new_product_name_hint">The name of the product.</string>
+    <string name="new_product_price_title">Price:</string>
+    <string name="new_product_price_hint">The price of the product.</string>
     <string name="new_product_add_button">Add product</string>
-    <string name="new_product_title_price">Price:</string>
-    <string name="new_product_price_hint">The price of the product</string>
     <string name="new_product_toast">The price has to be an integer.</string>
     
     <!-- activity_edit.xml -->
     <string name="title_activity_edit_product">EditProductActivity</string>
+    <string name="edit_product_title">Edit product:</string>
+    <string name="edit_product_id_title">Product ID - </string>
+    <string name="edit_product_default_id">N/A</string>
+    <string name="edit_product_name_title">Name:</string>
+    <string name="edit_product_name_hint">The new name of the product.</string>
+    <string name="edit_product_price_title">Price:</string>
+    <string name="edit_product_price_hint">The new price of the product.</string>
     <string name="edit_product_add_button">Edit product</string>
     <string name="edit_product_toast">The new price has to be an integer.</string>
 

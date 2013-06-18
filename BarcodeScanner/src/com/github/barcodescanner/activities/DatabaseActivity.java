@@ -7,9 +7,11 @@ import com.github.barcodescanner.R;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 import com.github.barcodescanner.database.Product;
+import com.github.barcodescanner.product.EditProductActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,29 +75,29 @@ public class DatabaseActivity extends Activity {
 			items = db.getProducts();
 			SpecialAdapter adapter = new SpecialAdapter(this, items);
 			list.setAdapter(adapter);
+			// TODO Get better delete button graphic from the android resources.
 		}
 	}
 	
 	/**
-	 * Edits an item, given from a view, in the database and then updates the
-	 * SpecialAdapter.
+	 * Enters the EditProductActivity, where the user can edit the specific product.
 	 * 
-	 * @param v
+	 * @param v the view of the product to be edited
 	 */
 	public void editItem(View v) {
 		if (isOwner) {
 			ImageButton button = (ImageButton) v;
 			TableRow row = (TableRow) button.getParent();
 			TextView idView = (TextView) row.getChildAt(2);
-			String id = idView.getText().toString();
-			Product editedProduct = db.getProduct(id);
-			db.updateProduct(editedProduct);
+			String productID = idView.getText().toString();
 			
-			items = db.getProducts();
-			SpecialAdapter adapter = new SpecialAdapter(this, items);
-			list.setAdapter(adapter);
+			Bundle editBundle = new Bundle();
+			editBundle.putString("productID", productID);
+			Intent editIntent = new Intent(this, EditProductActivity.class);
+			
+			editIntent.putExtras(editBundle);
+			startActivity(editIntent);
 			// TODO Get a matching edit button graphic from the android resources.
-			// Also do that for the delete button.
 		}
 	}
 
@@ -172,6 +174,7 @@ public class DatabaseActivity extends Activity {
 			
 			// if a customer is viewing the database, hide the delete button
 			if (!isOwner) {
+				convertView.findViewById(R.id.edit_button).setVisibility(View.INVISIBLE);
 				convertView.findViewById(R.id.delete_button).setVisibility(View.INVISIBLE);
 			}
 			

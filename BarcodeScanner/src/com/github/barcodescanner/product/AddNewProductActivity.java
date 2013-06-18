@@ -40,7 +40,7 @@ public class AddNewProductActivity extends Activity {
 		view.setText(productID);
 
 		editName = (EditText) findViewById(R.id.new_product_name_field);
-		editPrice = (EditText) findViewById(R.id.new_product_price);
+		editPrice = (EditText) findViewById(R.id.new_product_price_field);
 	}
 
 	public void addProduct(View view) {

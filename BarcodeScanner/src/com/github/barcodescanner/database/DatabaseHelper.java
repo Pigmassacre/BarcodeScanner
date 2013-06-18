@@ -12,6 +12,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+	// TODO Possibly change price from INTEGER to FLOAT
+	
 	// The name of the database and its tables, views and columns
 	static final String DB_NAME = "BarcodeDB";
 	static final String TABLE_PRODUCTS = "Products";
