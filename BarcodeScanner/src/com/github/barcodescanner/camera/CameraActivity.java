@@ -179,6 +179,7 @@ public class CameraActivity extends Activity {
 
 			productBundle.putString("productName", productName);
 			productBundle.putInt("productPrice", productPrice);
+			productBundle.putBoolean("isOwner", isOwner);
 
 			productIntent = new Intent(this, ProductActivity.class);
 		} else if (isOwner) {

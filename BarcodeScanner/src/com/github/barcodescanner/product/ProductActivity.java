@@ -12,11 +12,13 @@ public class ProductActivity extends Activity {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "ProductActivity";
-	
-	Bundle productBundle;
-	
-	String productName;
-	String productPrice;
+
+	private Bundle productBundle;
+
+	private String productName;
+	private String productPrice;
+
+	private boolean isOwner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,10 @@ public class ProductActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_product);
 
+		isOwner = getIntent().getExtras().getBoolean("isOwner");
+
 		productBundle = getIntent().getExtras();
-		
+
 		productName = productBundle.getString("productName");
 		productPrice = Integer.toString(productBundle.getInt("productPrice"));
 
@@ -34,11 +38,18 @@ public class ProductActivity extends Activity {
 
 		name.setText(productName);
 		price.setText(productPrice);
+		
+		// only the owner can see and use the edit button
+		if (!isOwner) {
+			findViewById(R.id.product_edit_button).setVisibility(View.INVISIBLE);
+		}
 	}
-	
+
 	public void editProduct(View v) {
-		Intent editProductIntent = new Intent(this, EditProductActivity.class);
-		editProductIntent.putExtras(productBundle);
-		startActivity(editProductIntent);
+		if (isOwner) {
+			Intent editProductIntent = new Intent(this, EditProductActivity.class);
+			editProductIntent.putExtras(productBundle);
+			startActivity(editProductIntent);
+		}
 	}
 }
