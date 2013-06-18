@@ -75,7 +75,8 @@ public class DatabaseActivity extends Activity {
 	
 	public void editItem(View v) {
 		if (isOwner) {
-			
+			// TODO Code this, and get a matching edit button graphic from the android resources.
+			// Also do that for the delete button.
 		}
 	}
 
