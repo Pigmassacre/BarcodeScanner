@@ -49,12 +49,15 @@ public class DatabaseActivity extends Activity {
 
 	}
 
+	/** 
+	 * A static class that helps the SpecialAdapter generate the database view. 
+	 */
 	static class ViewHolder {
 		TextView name, id, price;
 	}
 
 	/**
-	 * When called, this function deletes an item given from a view from the database
+	 * Deletes an item, given from a view, from the database
 	 * and the SpecialAdapter generated view.
 	 * 
 	 * @param v The view that shows the item in the database
@@ -73,6 +76,12 @@ public class DatabaseActivity extends Activity {
 		}
 	}
 	
+	/**
+	 * Edits an item, given from a view, in the database and then updates the
+	 * SpecialAdapter.
+	 * 
+	 * @param v
+	 */
 	public void editItem(View v) {
 		if (isOwner) {
 			ImageButton button = (ImageButton) v;

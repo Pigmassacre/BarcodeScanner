@@ -48,7 +48,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	// Method for getting a single product from the db
+	/**
+	 * Given an id in the form of a string, returns a matching Product from
+	 * the database, if there is any. Otherwise returns a null Product.
+	 * 
+	 * @param ID the id (barcode data) of the item
+	 * @return the matching product if there is any, otherwise null
+	 */
 	public Product getProduct(String ID) {
 		SQLiteDatabase db = this.getReadableDatabase();
 

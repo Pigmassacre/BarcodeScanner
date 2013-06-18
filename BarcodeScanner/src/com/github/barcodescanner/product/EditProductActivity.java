@@ -51,7 +51,8 @@ public class EditProductActivity extends Activity{
 			// If the price is an integer, we accept it.
 			productPrice = scanner.nextInt();
 		} else {
-			// If the price isn't an integer, we set the price to the max integer value
+			// If the price isn't an integer, we set the price to the max integer value.
+			// TODO Change so user cannot enter anything but integer instead.
 			productPrice = Integer.MAX_VALUE;
 		}
 

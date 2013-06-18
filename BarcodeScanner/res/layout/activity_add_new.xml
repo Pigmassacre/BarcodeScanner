@@ -78,6 +78,7 @@
         android:layout_height="40dp"
         android:layout_alignLeft="@id/new_product_title_price"
         android:layout_below="@id/new_product_title_price"
+        android:inputType="number"
         android:ems="10"
         android:hint="@string/new_product_price_hint" />
     
