@@ -57,11 +57,17 @@ public class AddNewProductActivity extends Activity {
 			Product newProduct = new Product(productName, productPrice, barcode);
 			database.addProduct(newProduct);
 
+			Context context = getApplicationContext();
+			CharSequence text = getString(R.string.new_product_toast_done, productName);
+			
+			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+			toast.show();
+			
 			finish();
 		} else {
 			// otherwise, we show a toast
 			Context context = getApplicationContext();
-			CharSequence text = getString(R.string.new_product_toast);
+			CharSequence text = getString(R.string.new_product_toast_failed);
 			int duration = Toast.LENGTH_SHORT;
 
 			Toast toast = Toast.makeText(context, text, duration);

@@ -65,14 +65,19 @@ public class EditProductActivity extends Activity {
 			Product updatedProduct = new Product(productName, productPrice, productID);
 			database.updateProduct(updatedProduct);
 
+			Context context = getApplicationContext();
+			CharSequence text = getString(R.string.edit_product_toast_done, productName);
+			
+			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+			toast.show();
+			
 			finish();
 		} else {
 			// otherwise, we show a toast.
 			Context context = getApplicationContext();
-			CharSequence text = getString(R.string.edit_product_toast);
-			int duration = Toast.LENGTH_SHORT;
+			CharSequence text = getString(R.string.edit_product_toast_failed);
 
-			Toast toast = Toast.makeText(context, text, duration);
+			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
 			toast.show();
 		}
 	}

@@ -42,6 +42,7 @@
     <string name="database_table_cell_name">Name</string>
     <string name="database_table_cell_price">Price</string>
     <string name="database_table_cell_id">ID</string>
+    <string name="database_toast_deleted">%1$s has been removed from the database.</string>
     
     <!-- row.xml -->
     <string name="row_delete_button">Delete</string>
@@ -65,7 +66,8 @@
     <string name="new_product_price_title">Price:</string>
     <string name="new_product_price_hint">The price of the product.</string>
     <string name="new_product_add_button">Add product</string>
-    <string name="new_product_toast">The price has to be an integer.</string>
+    <string name="new_product_toast_done">%1$s has been added.</string>
+    <string name="new_product_toast_failed">The price has to be an integer.</string>
     
     <!-- activity_edit.xml -->
     <string name="title_activity_edit_product">EditProductActivity</string>
@@ -77,7 +79,8 @@
     <string name="edit_product_price_title">Price:</string>
     <string name="edit_product_price_hint">The new price of the product.</string>
     <string name="edit_product_add_button">Edit product</string>
-    <string name="edit_product_toast">The new price has to be an integer.</string>
+    <string name="edit_product_toast_done">%1$s has been updated.</string>
+    <string name="edit_product_toast_failed">The new price has to be an integer.</string>
 
     <!-- activity_barcode_view.xml -->
     <string name="title_activity_barcode_view">BarcodeViewActivity</string>

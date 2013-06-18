@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DatabaseActivity extends Activity {
 
@@ -96,10 +97,18 @@ public class DatabaseActivity extends Activity {
 		if (isOwner) {
 			ViewGroup currentRow = (ViewGroup) listView.getChildAt(0);
 			
+			TextView nameView = (TextView) currentRow.getChildAt(0);
 			TextView idView = (TextView) currentRow.getChildAt(2);
 			
+			String name = nameView.getText().toString();
 			String id = idView.getText().toString();
 			db.removeProduct(id);
+			
+			Context context = getApplicationContext();
+			CharSequence text = getString(R.string.database_toast_deleted, name);
+			
+			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+			toast.show();
 
 			updateSpecialAdapter();
 		}
