@@ -46,6 +46,7 @@
     <!-- row.xml -->
     <string name="row_delete_button">Delete</string>
     <string name="row_edit_button">Edit</string>
+    <string name="row_more_button">More</string>
 
     <!-- activity_no_product.xml -->
     <string name="title_activity_no_product">NoProductActivity</string>

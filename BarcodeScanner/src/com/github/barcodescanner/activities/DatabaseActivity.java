@@ -7,6 +7,7 @@ import com.github.barcodescanner.R;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 import com.github.barcodescanner.database.Product;
+import com.github.barcodescanner.libraries.selv.SlideExpandableListAdapter;
 import com.github.barcodescanner.product.EditProductActivity;
 
 import android.app.Activity;
@@ -63,7 +64,7 @@ public class DatabaseActivity extends Activity {
 	private void updateSpecialAdapter() {
 		items = db.getProducts();
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
-		list.setAdapter(adapter);
+		list.setAdapter(new SlideExpandableListAdapter(adapter, R.id.more_button, R.id.expandable));
 	}
 
 	/** 

@@ -1,5 +1,7 @@
 package com.github.barcodescanner.libraries.selv;
 
+import com.github.barcodescanner.R;
+
 import android.view.View;
 import android.widget.ListAdapter;
 
