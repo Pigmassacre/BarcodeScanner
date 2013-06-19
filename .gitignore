@@ -24,7 +24,6 @@ doc/*.aux
 doc/*.bbl
 doc/*.blg
 doc/*.dvi
-doc/*.pdf
 doc/rad.toc
 doc/ssd.toc
 
