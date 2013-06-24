@@ -20,15 +20,15 @@ public class IntroductionActivity extends Activity {
 		setContentView(R.layout.activity_introduction);
 	}
 
-	public void enterAdmin(View view) {
+	public void enterAsScanMode(View view) {
 		Intent intent = new Intent(this, MainActivity.class);
-		intent.putExtra("isOwner", true);
+		intent.putExtra("isOwner", false);
 		startActivity(intent);
 	}
 
-	public void enterCustomer(View view) {
+	public void enterAsAdminMode(View view) {
 		Intent intent = new Intent(this, MainActivity.class);
-		intent.putExtra("isOwner", false);
+		intent.putExtra("isOwner", true);
 		startActivity(intent);
 	}
 
