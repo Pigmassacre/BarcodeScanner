@@ -6,11 +6,12 @@
     <!-- activity_introduction.xml -->
     <string name="title_activity_introduction">IntroductionActivity</string>
     <string name="introduction_logotype_description">Barcode Scanner Logotype</string>
-    <string name="introduction_intro_message">Welcome! Please choose what type of user you are.</string>
-    <string name="introduction_admin_button">Shop Owner</string>
-    <string name="introduction_customer_button">Customer</string>
+    <string name="introduction_intro_message">Welcome! Please choose in what way you wish to use the Barcode Scanner.</string>
+    <string name="introduction_admin_button">Scan Mode</string>
+    <string name="introduction_customer_button">Admin Mode</string>
 
     <!-- activity_main.xml -->
+    <string name="title_activity_main">MainActivity</string>
     <string name="welcome_title">Barcode Scanner</string>
     <string name="version_number">PRE ALPHA</string>
     <string name="welcome_message">Welcome to our Barcode Scanner. Touch the button below to start scanning! If you need any help with how to use this app, press the "Help" button below.</string>
@@ -27,7 +28,7 @@
     <string name="camera_button_help">Help</string>
 
     <!-- activity_camera_preview.xml -->
-    <string name="title_activity_camera_preview">Camera Preview</string>
+    <string name="title_activity_camera_preview">CameraPreview</string>
     <string name="take_picture">Scan Barcode</string>
 
     <!-- activity_product.xml -->
