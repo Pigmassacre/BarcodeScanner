@@ -33,7 +33,7 @@
         android:layout_above="@+id/customer_button"
         android:layout_alignLeft="@+id/customer_button"
         android:onClick="enterAdmin"
-        android:text="@string/introduction_admin_button" />
+        android:text="@string/introduction_scan_mode_button" />
 
     <Button
         android:id="@+id/customer_button"
@@ -41,6 +41,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:onClick="enterCustomer"
-        android:text="@string/introduction_customer_button" />
+        android:text="@string/introduction_admin_mode_button" />
 
 </RelativeLayout>

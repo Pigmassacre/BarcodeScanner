@@ -25,9 +25,9 @@ public class MainActivity extends Activity {
 		isOwner = getIntent().getExtras().getBoolean("isOwner");
 		
 		if (isOwner) {
-			((TextView) findViewById(R.id.user_message)).setText(R.string.welcome_shop_owner);
+			((TextView) findViewById(R.id.user_message)).setText(R.string.welcome_scan_mode);
 		} else {
-			((TextView) findViewById(R.id.user_message)).setText(R.string.welcome_customer);
+			((TextView) findViewById(R.id.user_message)).setText(R.string.welcome_admin_mode);
 		}
 	}
 

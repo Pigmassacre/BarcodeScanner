@@ -7,8 +7,8 @@
     <string name="title_activity_introduction">IntroductionActivity</string>
     <string name="introduction_logotype_description">Barcode Scanner Logotype</string>
     <string name="introduction_intro_message">Welcome! Please choose in what way you wish to use the Barcode Scanner.</string>
-    <string name="introduction_admin_button">Scan Mode</string>
-    <string name="introduction_customer_button">Admin Mode</string>
+    <string name="introduction_scan_mode_button">Scan Mode</string>
+    <string name="introduction_admin_mode_button">Admin Mode</string>
 
     <!-- activity_main.xml -->
     <string name="title_activity_main">MainActivity</string>
@@ -18,8 +18,8 @@
     <string name="welcome_button_start">Scan Barcode</string>
     <string name="welcome_button_database">Database</string>
     <string name="welcome_button_help">Help</string>
-    <string name="welcome_shop_owner">Hello there, shop owner!</string>
-    <string name="welcome_customer">Hello there, customer!</string>
+    <string name="welcome_scan_mode">The barcode scanner is currently in scan mode.</string>
+    <string name="welcome_admin_mode">The barcode scanner is currently in admin mode.</string>
 
     <!-- activity_camera.xml -->
     <string name="title_activity_camera">CameraActivity</string>
