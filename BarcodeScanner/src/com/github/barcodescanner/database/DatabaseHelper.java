@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String VIEW_PRODUCTS = "ProductsView";
 
 	/*
-	 * change the number in the superconstructor to invoke the onUpgrade method;
+	 * change the number in the super constructor to invoke the onUpgrade method;
 	 * I/E you change the version number
 	 */
 	public DatabaseHelper(Context context) {

@@ -22,13 +22,13 @@ public class IntroductionActivity extends Activity {
 
 	public void enterAsScanMode(View view) {
 		Intent intent = new Intent(this, MainActivity.class);
-		intent.putExtra("isOwner", false);
+		intent.putExtra("adminMode", false);
 		startActivity(intent);
 	}
 
 	public void enterAsAdminMode(View view) {
 		Intent intent = new Intent(this, MainActivity.class);
-		intent.putExtra("isOwner", true);
+		intent.putExtra("adminMode", true);
 		startActivity(intent);
 	}
 

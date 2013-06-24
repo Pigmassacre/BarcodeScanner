@@ -31,7 +31,7 @@ public class DatabaseActivity extends Activity {
 	DatabaseHelper db;
 	private List<Product> items = new ArrayList<Product>();
 	private ActionSlideExpandableListView list;
-	private boolean isOwner;
+	private boolean adminMode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class DatabaseActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_database);
 
-		isOwner = getIntent().getExtras().getBoolean("isOwner");
+		adminMode = getIntent().getExtras().getBoolean("adminMode");
 
 		DatabaseHelperFactory.init(this);
 		db = DatabaseHelperFactory.getInstance();
@@ -94,7 +94,7 @@ public class DatabaseActivity extends Activity {
 	 * @param listView the view containing the information of the product to be removed
 	 */
 	private void deleteItem(ViewGroup listView) {
-		if (isOwner) {
+		if (adminMode) {
 			ViewGroup currentRow = (ViewGroup) listView.getChildAt(0);
 			
 			TextView nameView = (TextView) currentRow.getChildAt(0);
@@ -123,7 +123,7 @@ public class DatabaseActivity extends Activity {
 	 * @param listView the view containing the information of the product to be edited
 	 */
 	private void editItem(ViewGroup listView) {
-		if (isOwner) {
+		if (adminMode) {
 			ViewGroup row = (ViewGroup) listView.getChildAt(0);
 			
 			// Get the name, price and id views and then store them in strings
@@ -226,7 +226,7 @@ public class DatabaseActivity extends Activity {
 			convertView.setBackgroundColor(colors[colorPos]);
 
 			// if a customer is viewing the database, hide the delete button
-			if (!isOwner) {
+			if (!adminMode) {
 				convertView.findViewById(R.id.edit_button).setVisibility(View.INVISIBLE);
 				convertView.findViewById(R.id.delete_button).setVisibility(View.INVISIBLE);
 			}

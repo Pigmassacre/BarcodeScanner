@@ -18,7 +18,7 @@ public class ProductActivity extends Activity {
 	private String productName;
 	private String productPrice;
 
-	private boolean isOwner;
+	private boolean adminMode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class ProductActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_product);
 
-		isOwner = getIntent().getExtras().getBoolean("isOwner");
+		adminMode = getIntent().getExtras().getBoolean("adminMode");
 
 		productBundle = getIntent().getExtras();
 
@@ -40,13 +40,13 @@ public class ProductActivity extends Activity {
 		price.setText(productPrice);
 		
 		// only the owner can see and use the edit button
-		if (!isOwner) {
+		if (!adminMode) {
 			findViewById(R.id.product_edit_button).setVisibility(View.INVISIBLE);
 		}
 	}
 
 	public void editProduct(View v) {
-		if (isOwner) {
+		if (adminMode) {
 			Intent editProductIntent = new Intent(this, EditProductActivity.class);
 			editProductIntent.putExtras(productBundle);
 			startActivity(editProductIntent);

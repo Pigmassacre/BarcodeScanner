@@ -38,7 +38,7 @@ public class CameraActivity extends Activity {
 	private Preview mPreview;
 	private boolean mPreviewRunning;
 	private Camera mCamera;
-	private boolean isOwner;
+	private boolean adminMode;
 
 	private Handler autoFocusHandler;
 
@@ -53,7 +53,7 @@ public class CameraActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_camera);
-		isOwner = getIntent().getExtras().getBoolean("isOwner");
+		adminMode = getIntent().getExtras().getBoolean("adminMode");
 
 		setupDatabase();
 		prepareScanner();
@@ -179,10 +179,10 @@ public class CameraActivity extends Activity {
 
 			productBundle.putString("productName", productName);
 			productBundle.putInt("productPrice", productPrice);
-			productBundle.putBoolean("isOwner", isOwner);
+			productBundle.putBoolean("isOwner", adminMode);
 
 			productIntent = new Intent(this, ProductActivity.class);
-		} else if (isOwner) {
+		} else if (adminMode) {
 			productBundle.putString("productID", barcode);
 
 			productIntent = new Intent(this, AddNewProductActivity.class);
