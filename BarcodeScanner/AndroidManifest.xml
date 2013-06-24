@@ -59,7 +59,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.github.barcodescanner.activities.DatabaseActivity"
+            android:name="com.github.barcodescanner.database.DatabaseActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_database"
             android:screenOrientation="portrait" >

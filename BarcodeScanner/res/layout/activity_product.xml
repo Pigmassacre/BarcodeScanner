@@ -12,26 +12,38 @@
         android:id="@+id/product_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/product_name"
-        android:textSize="25sp"
-        android:textStyle="bold|italic" />
+        android:text="@string/product_name" />
 
     <TextView
         android:id="@+id/product_price"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/product_name"
-        android:text="@string/product_price"
-        android:textSize="20sp"
-        android:textStyle="bold|italic" />
+        android:text="@string/product_price" />
+
+    <TextView
+        android:id="@+id/product_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_price"
+        android:text="@string/product_id" />
 
     <Button
         android:id="@+id/product_edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/product_delete_button"
         android:onClick="editProduct"
         android:text="@string/product_edit_button" />
+
+    <Button
+        android:id="@id/product_delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="deleteProduct"
+        android:text="@string/product_delete_button" />
 
 </RelativeLayout>

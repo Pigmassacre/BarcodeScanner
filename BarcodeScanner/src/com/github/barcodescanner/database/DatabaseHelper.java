@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String TABLE_PRODUCTS = "Products";
 	static final String KEY_BCODE = "ProductBarcode";
 	static final String KEY_NAME = "ProductName";
-	static final String KEY_PRICE = "Price";
+	static final String KEY_PRICE = "ProductPrice";
 	static final String VIEW_PRODUCTS = "ProductsView";
 
 	/*
@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 * I/E you change the version number
 	 */
 	public DatabaseHelper(Context context) {
-		super(context, DB_NAME, null, 1);
+		super(context, DB_NAME, null, 2);
 	}
 
 	@Override
@@ -49,6 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS);
+		db.execSQL("DROP VIEW IF EXISTS " + VIEW_PRODUCTS);
 		onCreate(db);
 	}
 

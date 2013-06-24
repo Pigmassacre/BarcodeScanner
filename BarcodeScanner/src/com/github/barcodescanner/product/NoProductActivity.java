@@ -12,7 +12,7 @@ public class NoProductActivity extends Activity {
 	@SuppressWarnings("unused")
 	private static final String TAG = "ProductActivity";
 
-	private String productID;
+	private String productId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +20,10 @@ public class NoProductActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_no_product);
 
-		productID = getIntent().getExtras().getString("productID");
+		productId = getIntent().getExtras().getString("productId");
 
 		TextView view = (TextView) findViewById(R.id.no_product_id);
 
-		view.setText(productID);
+		view.setText(productId);
 	}
 }

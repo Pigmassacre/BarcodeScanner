@@ -59,13 +59,18 @@ public class CameraActivity extends Activity {
 		prepareScanner();
 	}
 
+	/**
+	 * Gives the class access to the database.
+	 */
 	private void setupDatabase() {
 		DatabaseHelperFactory.init(this);
 		database = DatabaseHelperFactory.getInstance();
 	}
 
+	/**
+	 * Instantiates the necessary classes needed to scan barcodes.
+	 */
 	private void prepareScanner() {
-		// instantiates the necessary classes needed to scan barcodes
 		bcLocator = new BCLocator();
 		bcGenerator = new BCGenerator();
 	}
@@ -99,8 +104,6 @@ public class CameraActivity extends Activity {
 
 	@Override
 	protected void onPause() {
-		// Because the Camera object is a shared resource, it's very
-		// important to release it when the activity is paused.
 		releaseCamera();
 
 		FrameLayout frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
@@ -132,13 +135,11 @@ public class CameraActivity extends Activity {
 				tempBarcode = bcGenerator.normalize(tempList);
 
 				if (tempBarcode.length() == 12) {
-
-					System.out.println("bcGenerator: " + tempBarcode);
-
 					List<Product> products = database.getProducts();
 					Product foundProduct = null;
 					if (products != null) {
 						for (Product p : products) {
+							System.out.println("onPictureTaken: p.getBarcode() gives: " + p.getBarcode());
 							boolean isSame = (bcGenerator.compare(p.getBarcode(), tempBarcode) <= 1);
 							if (isSame) {
 								foundProduct = p;
@@ -173,22 +174,19 @@ public class CameraActivity extends Activity {
 		 * else, either let the owner add a new product or show a no product
 		 * activity
 		 */
+		productBundle.putString("productId", barcode);
 		if (matchingProduct != null) {
 			String productName = matchingProduct.getName();
 			int productPrice = matchingProduct.getPrice();
 
 			productBundle.putString("productName", productName);
 			productBundle.putInt("productPrice", productPrice);
-			productBundle.putBoolean("isOwner", adminMode);
+			productBundle.putBoolean("adminMode", adminMode);
 
 			productIntent = new Intent(this, ProductActivity.class);
 		} else if (adminMode) {
-			productBundle.putString("productID", barcode);
-
 			productIntent = new Intent(this, AddNewProductActivity.class);
 		} else {
-			productBundle.putString("productID", barcode);
-
 			productIntent = new Intent(this, NoProductActivity.class);
 		}
 

@@ -24,9 +24,9 @@ public class BCGenerator {
 	}
 
 	/**
-	 * Generates a new array repesenting the length of each part in the barcode
+	 * Generates a new array representing the length of each part in the barcode
 	 * 
-	 * @param lines segments of 0s and 1s containing a barcode found in BCLocate,
+	 * @param lines segments of 0s and 1s containing a barcode found in BCLocator,
 	 * 
 	 * @return the new array
 	 */
@@ -60,27 +60,29 @@ public class BCGenerator {
 			for (int j = 0; j < height; j++) {
 				sumList.add(lineHolder.get(j).get(i));
 			}
-			newSumList.add(mostRepresentedNumber(sumList));
+			newSumList.add(mostOccuringNumber(sumList));
 		}
 
 		return newSumList;
 	}
 	/**
-	 * Used to see what number is represented most in an array
+	 * Given an ArrayList of Integers, returns the Integer that is occurs most
+	 * often in the given ArrayList.
 	 * 
 	 * @param numberList
 	 * @return most represented number
 	 */
 	@SuppressLint("UseSparseArrays")
-	private Integer mostRepresentedNumber(List<Integer> numberList) {
+	private Integer mostOccuringNumber(List<Integer> numberList) {
 		HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+		
 		for (int i = 0; i < numberList.size(); i++) {
 			if (hashMap.containsKey(numberList.get(i))) { 
-				// key has already been mapped, increase value by 1
+				// key has already been mapped, so increase value by 1
 				hashMap.put(numberList.get(i),
 						hashMap.get(numberList.get(i)) + 1);
 			} else { 
-				// key hasnt been mapped so set it's value to 1
+				// key hasn't been mapped, so set it's value to 1
 				hashMap.put(numberList.get(i), 1);
 			}
 		}
@@ -92,6 +94,7 @@ public class BCGenerator {
 				highestKey = numberList.get(i);
 			}
 		}
+		
 		return highestKey;
 	}
 

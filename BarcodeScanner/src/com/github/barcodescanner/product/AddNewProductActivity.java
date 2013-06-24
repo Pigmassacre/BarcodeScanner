@@ -23,7 +23,7 @@ public class AddNewProductActivity extends Activity {
 	private DatabaseHelper database;
 	private EditText editPrice;
 	private EditText editName;
-	private String productID;
+	private String productId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +33,16 @@ public class AddNewProductActivity extends Activity {
 
 		database = DatabaseHelperFactory.getInstance();
 
-		productID = getIntent().getExtras().getString("productID");
+		productId = getIntent().getExtras().getString("productId");
 
 		TextView view = (TextView) findViewById(R.id.new_product_id);
-		view.setText(productID);
+		view.setText(productId);
 
 		editName = (EditText) findViewById(R.id.new_product_name_field);
 		editPrice = (EditText) findViewById(R.id.new_product_price_field);
 	}
 
 	public void addProduct(View view) {
-		String barcode = this.productID;
 		String productName = editName.getText().toString();
 
 		int productPrice;
@@ -53,7 +52,7 @@ public class AddNewProductActivity extends Activity {
 			// If the price is an integer, we accept it.
 			productPrice = scanner.nextInt();
 
-			Product newProduct = new Product(productName, productPrice, barcode);
+			Product newProduct = new Product(productName, productPrice, productId);
 			database.addProduct(newProduct);
 
 			Context context = getApplicationContext();

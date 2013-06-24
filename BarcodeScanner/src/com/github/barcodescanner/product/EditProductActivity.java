@@ -21,11 +21,13 @@ public class EditProductActivity extends Activity {
 	private static final String TAG = "EditProductActivity";
 
 	private DatabaseHelper database;
+	
 	private EditText editPrice;
 	private EditText editName;
+	
 	private String productName;
 	private String productPrice;
-	private String productID;
+	private String productId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,10 @@ public class EditProductActivity extends Activity {
 		// Get all the info needed from the bundle we received
 		productName = getIntent().getExtras().getString("productName");
 		productPrice = getIntent().getExtras().getString("productPrice");
-		productID = getIntent().getExtras().getString("productID");
+		productId = getIntent().getExtras().getString("productId");
 
 		TextView view = (TextView) findViewById(R.id.edit_product_id);
-		view.setText(productID);
+		view.setText(productId);
 
 		// Use the bundle data to fill in the EditText fields in the view.
 		editName = (EditText) findViewById(R.id.edit_product_name_field);
@@ -51,7 +53,6 @@ public class EditProductActivity extends Activity {
 	}
 
 	public void editProduct(View view) {
-		String productID = this.productID;
 		String productName = editName.getText().toString();
 
 		int productPrice;
@@ -61,7 +62,7 @@ public class EditProductActivity extends Activity {
 			// If the price is an integer, we accept it.
 			productPrice = scanner.nextInt();
 
-			Product updatedProduct = new Product(productName, productPrice, productID);
+			Product updatedProduct = new Product(productName, productPrice, productId);
 			database.updateProduct(updatedProduct);
 
 			Context context = getApplicationContext();
