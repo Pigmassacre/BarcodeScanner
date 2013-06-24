@@ -12,11 +12,10 @@
     <ImageView
         android:id="@+id/logotype_image"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:contentDescription="@string/introduction_logotype_description"
-        android:src="@drawable/barcode_analyzer_icon" />
+        android:src="@drawable/barcode_scanner_border" />
 
     <TextView
         android:id="@+id/intro_message"

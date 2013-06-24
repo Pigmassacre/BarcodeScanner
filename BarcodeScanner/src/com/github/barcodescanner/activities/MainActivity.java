@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		isOwner = getIntent().getExtras().getBoolean("isOwner");
 		
-		if (isOwner) {
+		if (!isOwner) {
 			((TextView) findViewById(R.id.user_message)).setText(R.string.welcome_scan_mode);
 		} else {
 			((TextView) findViewById(R.id.user_message)).setText(R.string.welcome_admin_mode);
