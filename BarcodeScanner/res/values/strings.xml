@@ -20,7 +20,6 @@
     <string name="welcome_button_help">Help</string>
     <string name="welcome_admin_mode">The barcode scanner is currently in admin mode.</string>
     <string name="welcome_scan_mode">The barcode scanner is currently in scan mode.</string>
-    <string name="add_manually">Add product manually</string>
 
     <!-- activity_camera.xml -->
     <string name="title_activity_camera">CameraActivity</string>
@@ -60,13 +59,7 @@
     <string name="no_product_default_id">N/A</string>
     <string name="no_product_message_title">No product found</string>
     <string name="no_product_message">No product matching the scanned barcode was found in the database.</string>
-    
-    <!-- activity_add_manually.xml -->
-    <string name="title_activity_add_manually">AddManuallyActivity</string>
-    <string name="manually_product_id">Product ID:</string>
-	<string name="manually_product_id_hint">The ID of the product.</string>
-	<string name="add_manually_title">Add new product manually:</string>
-    
+
     <!-- activity_addnew.xml -->
     <string name="title_activity_add_new">AddNewActivity</string>
     <string name="new_product_title">Add new product:</string>
