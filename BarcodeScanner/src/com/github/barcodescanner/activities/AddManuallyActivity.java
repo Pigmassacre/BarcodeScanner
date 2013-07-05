@@ -54,13 +54,13 @@ public class AddManuallyActivity extends Activity{
 		boolean idExist = checkId(productId);
 		
 		if(idExist){
+			// If the ID already exists, notify the user and then do nothing.
 			Context context = getApplicationContext();
 			String text = productId + " ID already exists in database";
 			Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
 			
 			toast.show();
-			
-			finish();
+		} else if (productId.length() > 12)
 		} else if (scanner.hasNextInt()) {
 			// If the price is an integer, we accept it.
 			productPrice = scanner.nextInt();

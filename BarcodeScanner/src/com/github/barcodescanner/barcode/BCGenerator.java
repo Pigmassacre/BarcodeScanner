@@ -114,7 +114,6 @@ public class BCGenerator {
 		if (unNormalized == null) {
 			return "No barcode data is set";
 		} else {
-			// List<Integer> normalized;
 			int lengths = unNormalized.get(0) + unNormalized.get(1)
 					+ unNormalized.get(unNormalized.size() - 1)
 					+ unNormalized.get(unNormalized.size() - 2);
@@ -125,6 +124,7 @@ public class BCGenerator {
 				tempStringBuffer.append(value);
 			}
 
+			// Delete the middle "guard" bars.
 			tempStringBuffer.delete(28, 33);
 
 			for (int i = 3; i < tempStringBuffer.length() - 2; i += 4) {
