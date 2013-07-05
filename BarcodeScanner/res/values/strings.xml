@@ -20,12 +20,19 @@
     <string name="welcome_button_help">Help</string>
     <string name="welcome_admin_mode">The barcode scanner is currently in admin mode.</string>
     <string name="welcome_scan_mode">The barcode scanner is currently in scan mode.</string>
+    <string name="add_manually">Add product manually</string>
 
     <!-- activity_camera.xml -->
     <string name="title_activity_camera">CameraActivity</string>
     <string name="camera_button_capture">Scan</string>
     <string name="camera_button_database">Database</string>
     <string name="camera_button_help">Help</string>
+    
+    <!-- activity_add_manually.xml -->
+    <string name="title_activity_add_manually">AddManuallyActivity</string>
+    <string name="manually_product_id">Product ID:</string>
+ 	<string name="manually_product_id_hint">The ID of the product.</string>
+    <string name="add_manually_title">Add new product manually:</string>
 
     <!-- activity_camera_preview.xml -->
     <string name="title_activity_camera_preview">CameraPreview</string>
