@@ -34,6 +34,7 @@ public class DatabaseActivity extends Activity {
 	private boolean adminMode;
 	private EditText searchBar;
 	private String searchQuery;
+	private String emptyDB;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class DatabaseActivity extends Activity {
 
 		DatabaseHelperFactory.init(this);
 		db = DatabaseHelperFactory.getInstance();
+		emptyDB = "The database is empty.";
 
 		list = (ActionSlideExpandableListView) findViewById(R.id.list);
 		searchBar = (EditText)findViewById(R.id.search_product);
@@ -90,6 +92,11 @@ public class DatabaseActivity extends Activity {
 	 * allow for a view to slide out from under a view.
 	 */
 	private void updateSpecialAdapter() {
+		
+		if(db.getProducts().size() == 0){
+			searchBar.setHint(emptyDB);
+			searchBar.setFocusableInTouchMode(false);
+		}
 		items = filterList(db.getProducts(), searchQuery);
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
 		list.setAdapter(new SlideExpandableListAdapter(adapter, R.id.expandable_toggle_button, R.id.expandable));
