@@ -13,10 +13,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,8 @@ public class DatabaseActivity extends Activity {
 	private List<Product> items = new ArrayList<Product>();
 	private ActionSlideExpandableListView list;
 	private boolean adminMode;
+	private EditText searchBar;
+	private String searchQuery;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +46,41 @@ public class DatabaseActivity extends Activity {
 		db = DatabaseHelperFactory.getInstance();
 
 		list = (ActionSlideExpandableListView) findViewById(R.id.list);
+		searchBar = (EditText)findViewById(R.id.search_product);
+		searchQuery = "";
 		updateSpecialAdapter();
+		
+		
+        /**
+         * Enabling Search Filter
+         * */
+        searchBar.addTextChangedListener(new TextWatcher() {
+             
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                searchQuery = cs.toString();
+                updateSpecialAdapter();
+            }
+             
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                    int arg3) {
+                // TODO Auto-generated method stub
+                 
+            }
+             
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub                          
+            }
+        });
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		searchQuery = "";
 		updateSpecialAdapter();
 	}
 
@@ -56,7 +90,7 @@ public class DatabaseActivity extends Activity {
 	 * allow for a view to slide out from under a view.
 	 */
 	private void updateSpecialAdapter() {
-		items = db.getProducts();
+		items = filterList(db.getProducts(), searchQuery);
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
 		list.setAdapter(new SlideExpandableListAdapter(adapter, R.id.expandable_toggle_button, R.id.expandable));
 		list.setItemActionListener(new ActionSlideExpandableListView.OnActionClickListener() {
@@ -231,5 +265,19 @@ public class DatabaseActivity extends Activity {
 
 			return convertView;
 		}
+	}
+	
+	
+	private List<Product> filterList(List<Product> list, String s){
+		if(s.equals("")){
+			return list;
+		}
+		List<Product> newList = new ArrayList<Product>();
+		for(Product p : list){
+			if(p.getName().toLowerCase().contains(s.toLowerCase())){
+				newList.add(p);
+			}
+		}
+		return newList;
 	}
 }
