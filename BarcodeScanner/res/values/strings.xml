@@ -93,6 +93,11 @@
     <string name="edit_product_add_button">Edit product</string>
     <string name="edit_product_toast_done">%1$s has been updated.</string>
     <string name="edit_product_toast_failed">The new price has to be an integer.</string>
+    
+    <!-- activity_database_empty.xml -->
+    <string name="empty_database_text">The database is currently empty.\n Please choose option below:</string>
+    <string name="back_button">Back</string>
+    <string name="scan_new_button">Scan new barcode</string>
 
     <!-- activity_barcode_view.xml -->
     <string name="title_activity_barcode_view">BarcodeViewActivity</string>

@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.github.barcodescanner.R;
+import com.github.barcodescanner.database.DatabaseActivity;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 import com.github.barcodescanner.product.Product;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -23,13 +25,14 @@ public class AddManuallyActivity extends Activity{
 	private EditText editPrice;
 	private EditText editName;
 	private EditText editId;
+	private boolean adminMode;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_add_manually);
-		
+		adminMode = getIntent().getExtras().getBoolean("adminMode");
 		setupDatabase();
 
 		editName = (EditText) findViewById(R.id.manual_product_name_field);
@@ -74,6 +77,10 @@ public class AddManuallyActivity extends Activity{
 			
 			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
 			toast.show();
+			
+			Intent intent = new Intent(this, MainActivity.class);
+			intent.putExtra("adminMode", adminMode);
+			startActivity(intent);
 			
 			finish();
 		} else {

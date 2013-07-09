@@ -3,6 +3,8 @@ package com.github.barcodescanner.activities;
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.camera.CameraActivity;
 import com.github.barcodescanner.database.DatabaseActivity;
+import com.github.barcodescanner.database.DatabaseHelper;
+import com.github.barcodescanner.database.DatabaseHelperFactory;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -19,6 +21,7 @@ public class MainActivity extends Activity {
 
 	private boolean adminMode;
 	private Button addManually;
+	private DatabaseHelper database;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,9 @@ public class MainActivity extends Activity {
 			((TextView) findViewById(R.id.user_message)).setText(R.string.welcome_admin_mode);
 			addManually.setVisibility(View.VISIBLE);
 		}
+		
+		DatabaseHelperFactory.init(this);
+		database = DatabaseHelperFactory.getInstance();
 	}
 
 	public void enterCamera(View view) {
@@ -48,7 +54,12 @@ public class MainActivity extends Activity {
 	}
 
 	public void enterDatabase(View view) {
-		Intent intent = new Intent(this, DatabaseActivity.class);
+		Intent intent;
+		if(database.getProducts().size() == 0){
+			intent = new Intent(this, EmptyDatabaseActivity.class);
+		}else{
+			intent = new Intent(this, DatabaseActivity.class);
+		}
 		intent.putExtra("adminMode", adminMode);
 		startActivity(intent);
 	}
@@ -56,6 +67,7 @@ public class MainActivity extends Activity {
 	public void addManually(View view){
 		if(adminMode){
 			Intent intent = new Intent(this, AddManuallyActivity.class);
+			intent.putExtra("adminMode", adminMode);
 		    startActivity(intent);
 		}
 	}

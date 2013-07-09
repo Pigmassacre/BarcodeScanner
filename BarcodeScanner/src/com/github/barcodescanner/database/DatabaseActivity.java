@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.barcodescanner.R;
+import com.github.barcodescanner.activities.EmptyDatabaseActivity;
 import com.github.barcodescanner.libraries.selv.ActionSlideExpandableListView;
 import com.github.barcodescanner.libraries.selv.SlideExpandableListAdapter;
 import com.github.barcodescanner.product.EditProductActivity;
@@ -95,7 +96,13 @@ public class DatabaseActivity extends Activity {
 		
 		if(db.getProducts().size() == 0){
 			searchBar.setHint(emptyDB);
+			searchBar.clearFocus();
 			searchBar.setFocusableInTouchMode(false);
+			searchBar.setFocusable(false);
+			Intent intent = new Intent(this, EmptyDatabaseActivity.class);
+			intent.putExtra("adminMode", adminMode);
+			startActivity(intent);
+			finish();
 		}
 		items = filterList(db.getProducts(), searchQuery);
 		SpecialAdapter adapter = new SpecialAdapter(this, items);

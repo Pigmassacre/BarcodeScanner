@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/empty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:text="@string/empty_database_text"
+            android:textSize="24sp" />
+        
+        <Button
+            android:id="@+id/manually_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/scan_new"
+            android:layout_alignParentLeft="true"
+            android:onClick="addProductManually"
+            android:text="@string/add_manually"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+        
+        <Button
+            android:id="@+id/scan_new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/empty_button_holder"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="1dp"
+            android:text="@string/scan_new_button" 
+            android:onClick="scanNewBarcode"
+            android:textSize="36sp" 
+            android:visibility="invisible" />
+            
+    <LinearLayout
+        android:id="@+id/empty_button_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="23dp"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:onClick="backToMain"
+            android:text="@string/back_button" />
+
+
+        <Button
+            android:id="@+id/help_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:onClick="helpView"
+            android:text="@string/welcome_button_help" />
+    </LinearLayout>
+    
+</RelativeLayout>

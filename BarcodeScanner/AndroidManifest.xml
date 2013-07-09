@@ -95,6 +95,12 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.github.barcodescanner.activities.EmptyDatabaseActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_edit_product"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.github.barcodescanner.activities.HelpActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_help"
