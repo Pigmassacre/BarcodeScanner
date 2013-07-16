@@ -29,7 +29,7 @@
     <string name="camera_button_help">Help</string>
 
     <!-- activity_add_manually.xml -->
-    <string name="title_activity_add_manually">New product</string>
+    <string name="title_activity_add_manually">Create product</string>
     <string name="manual_product_id_hint">ID</string>
     <string name="manual_product_name_hint">Name</string>
     <string name="manual_product_price_hint">Price</string>

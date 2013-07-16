@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,16 +24,14 @@ public class ProductActivity extends Activity {
 	private static final String TAG = "ProductActivity";
 
 	private DatabaseHelper database;
-	
+
 	private Bundle productBundle;
 
 	private String productName;
 	private Integer productPrice;
 	private String productId;
-	
-	private AlertDialog dialog;
 
-	private boolean adminMode;
+	private AlertDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +41,19 @@ public class ProductActivity extends Activity {
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
-		adminMode = getIntent().getExtras().getBoolean("adminMode");
-
 		productBundle = getIntent().getExtras();
+		setupValues();
 
+		setupDatabase();
+
+		setupDialog();
+	}
+	
+	private void setupValues() {
 		productName = productBundle.getString("productName");
 		productPrice = productBundle.getInt("productPrice");
 		productId = productBundle.getString("productId");
-		
+
 		TextView name = (TextView) findViewById(R.id.product_name);
 		TextView price = (TextView) findViewById(R.id.product_price);
 		TextView id = (TextView) findViewById(R.id.product_id);
@@ -59,18 +61,8 @@ public class ProductActivity extends Activity {
 		name.setText(productName);
 		price.setText(Integer.toString(productPrice));
 		id.setText(productId);
-		
-		setupDatabase();
-		
-		setupDialog();
-		
-		// Only show the buttons in admin mode.
-		if (!adminMode) {
-			findViewById(R.id.product_menu_edit).setVisibility(View.INVISIBLE);
-			findViewById(R.id.product_menu_delete).setVisibility(View.INVISIBLE);
-		}
 	}
-	
+
 	/**
 	 * Gives the class access to the database.
 	 */
@@ -78,34 +70,34 @@ public class ProductActivity extends Activity {
 		DatabaseHelperFactory.init(this);
 		database = DatabaseHelperFactory.getInstance();
 	}
-	
+
 	private void setupDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 		builder.setTitle(R.string.product_dialog_title);
 		builder.setMessage(R.string.product_dialog_message);
-		
+
 		builder.setPositiveButton(R.string.product_dialog_ok, new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		               deleteProduct();
-		           }
-		       });
+			public void onClick(DialogInterface dialog, int id) {
+				deleteProduct();
+			}
+		});
 		builder.setNegativeButton(R.string.product_dialog_cancel, new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		               // User cancelled the dialog, so we do nothing.
-		           }
-		       });
-		
+			public void onClick(DialogInterface dialog, int id) {
+				// User cancelled the dialog, so we do nothing.
+			}
+		});
+
 		dialog = builder.create();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_product, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;
@@ -118,7 +110,6 @@ public class ProductActivity extends Activity {
 			return true;
 		case android.R.id.home:
 			intent = new Intent(this, DatabaseActivity.class);
-			intent.putExtra("adminMode", adminMode);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			return true;
@@ -128,24 +119,33 @@ public class ProductActivity extends Activity {
 	}
 
 	public void editProduct() {
-		if (adminMode) {
-			Intent editProductIntent = new Intent(this, EditProductActivity.class);
-			editProductIntent.putExtras(productBundle);
-			startActivity(editProductIntent);
+		Intent editProductIntent = new Intent(this, EditProductActivity.class);
+		editProductIntent.putExtras(productBundle);
+		startActivityForResult(editProductIntent, 5);
+	}
+
+	@Override
+	protected void onActivityResult(int requestedCode, int resultCode, Intent data) {
+		if (requestedCode == resultCode) {
+			productBundle = data.getExtras();
+			setupValues();
+			System.out.println("RESULT GOT!");
+			Context context = getApplicationContext();
+			CharSequence text = getString(R.string.edit_product_toast_done, productName);
+			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+			toast.show();
 		}
 	}
 	
 	public void deleteProduct() {
-		if (adminMode) {
-			database.removeProduct(productId);
-			
-			Context context = getApplicationContext();
-			CharSequence text = getString(R.string.database_toast_deleted, productName);
-			
-			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-			toast.show();
-			
-			finish();
-		}
+		database.removeProduct(productId);
+
+		Context context = getApplicationContext();
+		CharSequence text = getString(R.string.database_toast_deleted, productName);
+
+		Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+		toast.show();
+
+		finish();
 	}
 }

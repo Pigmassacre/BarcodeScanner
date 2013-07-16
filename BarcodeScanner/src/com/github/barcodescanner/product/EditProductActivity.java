@@ -35,6 +35,7 @@ public class EditProductActivity extends Activity {
 	private EditText editName;
 	private EditText editPrice;
 
+	private String oldId;
 	private String productId;
 	private String productName;
 	private Integer productPrice;
@@ -55,6 +56,7 @@ public class EditProductActivity extends Activity {
 		productName = productBundle.getString("productName");
 		productPrice = productBundle.getInt("productPrice");
 		productId = productBundle.getString("productId");
+		oldId = productId;
 
 		// Use the bundle data to fill in the EditText fields in the view.
 		editId = (EditText) findViewById(R.id.edit_product_id);
@@ -65,8 +67,7 @@ public class EditProductActivity extends Activity {
 		editPrice.setText(Integer.toString(productPrice));
 
 		// This "hack" is to make sure that the keyboard shows up when the
-		// search bar gains focus. Oh, the things we have to do when we roll
-		// with our own widgets!
+		// TextView gains focus.
 		(new Handler()).postDelayed(new Runnable() {
 
 			public void run() {
@@ -122,14 +123,17 @@ public class EditProductActivity extends Activity {
 			productPrice = scanner.nextInt();
 
 			Product updatedProduct = new Product(productName, productPrice, productId);
-			database.updateProduct(updatedProduct);
+			database.updateProduct(oldId, updatedProduct);
 
-			Context context = getApplicationContext();
-			CharSequence text = getString(R.string.edit_product_toast_done, productName);
+			Bundle productBundle = new Bundle();
 
-			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-			toast.show();
-
+			productBundle.putString("productName", productName);
+			productBundle.putInt("productPrice", productPrice);
+			productBundle.putString("productId", productId);
+			System.out.println("RESULT SEND!");
+			Intent intent = new Intent();
+			intent.putExtras(productBundle);
+			setResult(5, intent);
 			finish();
 		} else {
 			// otherwise, we show a toast.

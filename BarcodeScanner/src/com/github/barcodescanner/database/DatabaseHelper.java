@@ -166,16 +166,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 * @param p the product to be updated
 	 * @return the row in the database that was updated
 	 */
-	public int updateProduct(Product p) {
+	public int updateProduct(String oldId, Product updatedProduct) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(KEY_NAME, p.getName());
-		values.put(KEY_PRICE, p.getPrice());
-		values.put(KEY_BCODE, p.getBarcode());
+		values.put(KEY_NAME, updatedProduct.getName());
+		values.put(KEY_PRICE, updatedProduct.getPrice());
+		values.put(KEY_BCODE, updatedProduct.getBarcode());
 
 		// updates the corresponding row in the database
-		return db.update(TABLE_PRODUCTS, values, KEY_BCODE + " = ?", new String[] { String.valueOf(p.getBarcode()) });
+		return db.update(TABLE_PRODUCTS, values, KEY_BCODE + " = ?", new String[] { String.valueOf(oldId) });
 	}
 
 }
