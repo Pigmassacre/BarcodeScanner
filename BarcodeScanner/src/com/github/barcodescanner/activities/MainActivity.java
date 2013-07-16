@@ -48,12 +48,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void enterDatabase(View view) {
-		Intent intent;
-		if (database.getProducts().size() == 0) {
-			intent = new Intent(this, EmptyDatabaseActivity.class);
-		} else {
-			intent = new Intent(this, DatabaseActivity.class);
-		}
+		Intent intent = new Intent(this, DatabaseActivity.class);
 		intent.putExtra("adminMode", adminMode);
 		startActivity(intent);
 	}

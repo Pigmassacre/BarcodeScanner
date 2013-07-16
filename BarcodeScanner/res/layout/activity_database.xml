@@ -11,4 +11,12 @@
         android:layout_alignParentRight="true" >
     </ListView>
 
+    <TextView
+            android:id="@android:id/empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/database_empty_text" />
+    
 </RelativeLayout>

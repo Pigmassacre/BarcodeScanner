@@ -27,13 +27,13 @@
     <string name="camera_button_capture">Scan</string>
     <string name="camera_button_database">Database</string>
     <string name="camera_button_help">Help</string>
-    
+
     <!-- activity_add_manually.xml -->
     <string name="title_activity_add_manually">New product</string>
- 	<string name="manual_product_id_hint">ID</string>
- 	<string name="manual_product_name_hint">Name</string>
- 	<string name="manual_product_price_hint">Price</string>
- 	<string name="manual_product_menu_accept">Accept</string>
+    <string name="manual_product_id_hint">ID</string>
+    <string name="manual_product_name_hint">Name</string>
+    <string name="manual_product_price_hint">Price</string>
+    <string name="manual_product_menu_accept">Accept</string>
 
     <!-- activity_camera_preview.xml -->
     <string name="title_activity_camera_preview"></string>
@@ -56,8 +56,10 @@
     <string name="database_toast_deleted">%1$s has been removed from the database.</string>
     <string name="database_search_hint">Type to search for a product.</string>
     <string name="database_empty">The database is empty.</string>
+    <string name="database_empty_text">The database is currently empty.\nYou can add products by pressing the "Add Product" button on the Action Bar.</string>
     <string name="database_menu_search">Search Database</string>
     <string name="database_menu_create">Create Product</string>
+    <string name="database_search_result_empty">No product found matching your search query.</string>
     <string name="database_currency">kr</string>
 
     <!-- activity_no_product.xml -->
@@ -79,7 +81,7 @@
     <string name="new_product_add_button">Add product</string>
     <string name="new_product_toast_done">%1$s has been added.</string>
     <string name="new_product_toast_failed">The price has to be an integer.</string>
-    
+
     <!-- activity_edit.xml -->
     <string name="title_activity_edit_product"></string>
     <string name="edit_product_default_id">N/A</string>
@@ -89,24 +91,20 @@
     <string name="edit_product_toast_done">%1$s has been updated.</string>
     <string name="edit_product_toast_failed">The new price has to be an integer.</string>
     <string name="edit_product_menu_accept">Accept</string>
-    
-    <!-- activity_database_empty.xml -->
-    <string name="empty_database_text">The database is currently empty.\n Please choose option below:</string>
-    <string name="back_button">Back</string>
-    <string name="scan_new_button">Scan new barcode</string>
 
     <!-- activity_barcode_view.xml -->
     <string name="title_activity_barcode_view"></string>
     <string name="barcode_view_description">Below is a bitmap representing the barcode that our algorithm has found.</string>
     <string name="barcode_view_image_description">There is supposed to be a barcode bitmap here, but it seems to have gotten lost! Where can it be?</string>
-    
+
     <!-- activity_help.xml -->
     <string name="title_activity_help"></string>
     <string name="help_title">How to use the Barcode Scanner</string>
     <string name="help_field_start_scan_activity">In order to scan an barcode, you first have to start the scanning mode. This is done by pressing the big Scan Barcode button in the main screen. </string>
     <string name="help_field_how_to_scan">Once there, center the barcode in your screen, and then press the scan button.</string>
     <string name="help_field_problems">Sometimes you might get inconsistent results. Our scanning algorithm is not yet super-amazing, so you\'ll have to make sure that your device is held in landscape mode, as in the normal "bottom" of your device is held by your right hand. You should keep the barcode relatively flat, centered in the screen and not too small.</string>
-	<string name="help_database_title">How to access the database</string>
-	<string name="help_database_field_how_to_enter">While in the main menu, touch the database button to enter the database.</string>
-	<string name="help_database_field_in_database">The database shows each stored item and their respective barcode id\'s, names and prices. If you are using the app as a shop owner, you can also remove an entry by touching the icon to the right of each product.</string>
+    <string name="help_database_title">How to access the database</string>
+    <string name="help_database_field_how_to_enter">While in the main menu, touch the database button to enter the database.</string>
+    <string name="help_database_field_in_database">The database shows each stored item and their respective barcode id\'s, names and prices. If you are using the app as a shop owner, you can also remove an entry by touching the icon to the right of each product.</string>
+
 </resources>

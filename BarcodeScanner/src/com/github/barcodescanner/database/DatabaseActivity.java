@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Locale;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.activities.EmptyDatabaseActivity;
 import com.github.barcodescanner.activities.MainActivity;
 import com.github.barcodescanner.product.AddManuallyActivity;
 import com.github.barcodescanner.product.Product;
@@ -62,7 +61,7 @@ public class DatabaseActivity extends ListActivity {
 		
 		list = (ListView) findViewById(android.R.id.list);
 
-		// User only create a product as the admin.
+		// User can only create a product as the admin.
 		if (!adminMode) {
 			findViewById(R.id.database_menu_create).setVisibility(View.INVISIBLE);
 		}
@@ -98,7 +97,6 @@ public class DatabaseActivity extends ListActivity {
 		searchBar.setHint(R.string.database_search_hint);
 		searchBar.setCompoundDrawablesWithIntrinsicBounds(R.drawable.action_search, 0, 0, 0);
 		searchQuery = "";
-		updateSpecialAdapter();
 
 		/**
 		 * Enabling Search Filter
@@ -189,17 +187,14 @@ public class DatabaseActivity extends ListActivity {
 	 * all the items in the database.
 	 */
 	private void updateSpecialAdapter() {
+		TextView emptyView = (TextView) findViewById(android.R.id.empty);
+		
 		if (database.getProducts().size() == 0) {
-			searchBar.setHint(R.string.database_empty);
-			searchBar.clearFocus();
-			searchBar.setFocusableInTouchMode(false);
-			searchBar.setFocusable(false);
-			Intent intent = new Intent(this, EmptyDatabaseActivity.class);
-			intent.putExtra("adminMode", adminMode);
-			startActivity(intent);
-			finish();
+			emptyView.setText(R.string.database_empty_text);
+		} else {
+			emptyView.setText(R.string.database_search_result_empty);
 		}
-
+		
 		items = filterList(database.getProducts(), searchQuery);
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
 		list.setAdapter(adapter);
@@ -250,9 +245,6 @@ public class DatabaseActivity extends ListActivity {
 	 * database.
 	 */
 	private class SpecialAdapter extends BaseAdapter {
-		// Defining the background color of rows. The row will alternate between
-		// grey light and grey dark.
-		//private int[] colors = new int[] { 0xAA999999, 0xAA7d7d7d };
 		private int color = 0xFFFFFFFF;
 		private LayoutInflater mInflater;
 
@@ -318,9 +310,6 @@ public class DatabaseActivity extends ListActivity {
 			holder.price.setText("" + data.get(position).getPrice());
 			holder.id.setText(data.get(position).getBarcode());
 
-			// Set the background color depending of odd/even colorPos result
-			//int colorPos = position % colors.length;
-			//convertView.setBackgroundColor(colors[colorPos]);
 			convertView.setBackgroundColor(color);
 
 			return convertView;
