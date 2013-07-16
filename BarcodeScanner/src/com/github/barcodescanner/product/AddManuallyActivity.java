@@ -4,12 +4,18 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.github.barcodescanner.R;
+import com.github.barcodescanner.database.DatabaseActivity;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,7 +33,12 @@ public class AddManuallyActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_manually);
+		
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		
 		adminMode = getIntent().getExtras().getBoolean("adminMode");
+		
 		setupDatabase();
 
 		editName = (EditText) findViewById(R.id.manual_product_name_field);
@@ -44,8 +55,32 @@ public class AddManuallyActivity extends Activity{
 		database = DatabaseHelperFactory.getInstance();
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_product_manual, menu);
+		return true;
+	}
 	
-	public void addProductManually(View view) {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		switch (item.getItemId()) {
+		case R.id.manual_product_menu_accept:
+			addProductManually();
+			return true;
+		case android.R.id.home:
+			intent = new Intent(this, DatabaseActivity.class);
+			intent.putExtra("adminMode", adminMode);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	public void addProductManually() {
 		String productName = editName.getText().toString();
 		String productId = editId.getText().toString();
 		int productPrice;

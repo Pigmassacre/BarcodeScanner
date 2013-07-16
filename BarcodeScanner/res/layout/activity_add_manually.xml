@@ -1,97 +1,39 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <TextView
-        android:id="@+id/new_product_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="34dp"
-        android:text="@string/add_manually_title"
-        android:textSize="30sp"
-        android:textStyle="bold|italic" />
-
-    <TextView
-        android:id="@+id/new_product_id_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/new_product_title"
-        android:layout_below="@id/new_product_title"
-        android:layout_marginTop="15dp"
-        android:text="@string/manually_product_id"
-        android:textSize="25sp"
-        android:textStyle="bold|italic" />
-    
-   <EditText
+    <EditText
         android:id="@+id/manual_product_id_field"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/new_product_id_title"
-        android:layout_below="@id/new_product_id_title"
         android:ems="10"
-        android:inputType="text"
-        android:hint="@string/manually_product_id_hint" >
+        android:hint="@string/manual_product_id_hint"
+        android:inputType="text" >
 
         <requestFocus />
     </EditText>
-    
-    
-
-    <TextView
-        android:id="@+id/new_product_name_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/new_product_id_title"
-        android:layout_below="@id/manual_product_id_field"
-        android:layout_marginTop="15dp"
-        android:text="@string/new_product_name_title"
-        android:textSize="25sp"
-        android:textStyle="bold|italic" />
 
     <EditText
         android:id="@+id/manual_product_name_field"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/new_product_name_title"
-        android:layout_below="@id/new_product_name_title"
         android:ems="10"
-        android:inputType="text"
-        android:hint="@string/new_product_name_hint" >
+        android:hint="@string/manual_product_name_hint"
+        android:inputType="text" >
     </EditText>
-    
-    <TextView
-        android:id="@+id/new_product_price_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:text="@string/new_product_price_title"
-        android:layout_below="@id/manual_product_name_field"
-        android:layout_marginTop="15dp"
-        android:textSize="25sp"
-        android:textStyle="bold|italic" />
-    
-    <EditText
-       	android:id="@+id/manual_product_price_field"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_alignLeft="@id/new_product_price_title"
-        android:layout_below="@id/new_product_price_title"
-        android:inputType="number"
-        android:ems="10"
-        android:hint="@string/new_product_price_hint" />
-    
-    <Button
-        android:id="@+id/manual_product_add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="addProductManually"
-        android:text="@string/new_product_add_button" />
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/manual_product_price_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/manual_product_price_hint"
+        android:inputType="number" />
+
+</LinearLayout>

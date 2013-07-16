@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/manual_product_menu_accept"
+        android:icon="@drawable/navigation_accept"
+        android:showAsAction="ifRoom"
+        android:title="@string/manual_product_menu_accept"/>
+
+</menu>

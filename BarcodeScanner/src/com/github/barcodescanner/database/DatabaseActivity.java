@@ -41,7 +41,7 @@ public class DatabaseActivity extends ListActivity {
 	@SuppressWarnings("unused")
 	private static final String TAG = "DatabaseActivity";
 
-	private DatabaseHelper db;
+	private DatabaseHelper database;
 	private List<Product> items = new ArrayList<Product>();
 	private ListView list;
 	private boolean adminMode;
@@ -57,9 +57,8 @@ public class DatabaseActivity extends ListActivity {
 
 		adminMode = getIntent().getExtras().getBoolean("adminMode");
 
-		DatabaseHelperFactory.init(this);
-		db = DatabaseHelperFactory.getInstance();
-
+		setupDatabase();
+		
 		list = (ListView) findViewById(android.R.id.list);
 
 		// only the owner can see and use the edit and delete buttons
@@ -67,6 +66,14 @@ public class DatabaseActivity extends ListActivity {
 			findViewById(R.id.database_menu_search).setVisibility(View.INVISIBLE);
 			findViewById(R.id.database_menu_create).setVisibility(View.INVISIBLE);
 		}
+	}
+	
+	/**
+	 * Gives the class access to the database.
+	 */
+	private void setupDatabase() {
+		DatabaseHelperFactory.init(this);
+		database = DatabaseHelperFactory.getInstance();
 	}
 
 	@Override
@@ -182,7 +189,7 @@ public class DatabaseActivity extends ListActivity {
 	 * all the items in the database.
 	 */
 	private void updateSpecialAdapter() {
-		if (db.getProducts().size() == 0) {
+		if (database.getProducts().size() == 0) {
 			searchBar.setHint(R.string.database_empty);
 			searchBar.clearFocus();
 			searchBar.setFocusableInTouchMode(false);
@@ -193,7 +200,7 @@ public class DatabaseActivity extends ListActivity {
 			finish();
 		}
 
-		items = filterList(db.getProducts(), searchQuery);
+		items = filterList(database.getProducts(), searchQuery);
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
 		list.setAdapter(adapter);
 	}
@@ -224,7 +231,7 @@ public class DatabaseActivity extends ListActivity {
 
 			String name = nameView.getText().toString();
 			String id = idView.getText().toString();
-			db.removeProduct(id);
+			database.removeProduct(id);
 
 			Context context = getApplicationContext();
 			CharSequence text = getString(R.string.database_toast_deleted, name);

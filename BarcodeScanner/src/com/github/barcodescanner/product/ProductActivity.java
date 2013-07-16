@@ -60,8 +60,7 @@ public class ProductActivity extends Activity {
 		price.setText(productPrice);
 		id.setText(productId);
 		
-		DatabaseHelperFactory.init(this);
-		database = DatabaseHelperFactory.getInstance();
+		setupDatabase();
 		
 		setupDialog();
 		
@@ -70,6 +69,14 @@ public class ProductActivity extends Activity {
 			findViewById(R.id.product_menu_edit).setVisibility(View.INVISIBLE);
 			findViewById(R.id.product_menu_delete).setVisibility(View.INVISIBLE);
 		}
+	}
+	
+	/**
+	 * Gives the class access to the database.
+	 */
+	private void setupDatabase() {
+		DatabaseHelperFactory.init(this);
+		database = DatabaseHelperFactory.getInstance();
 	}
 	
 	private void setupDialog() {
