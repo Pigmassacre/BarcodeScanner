@@ -5,6 +5,7 @@ import com.github.barcodescanner.camera.CameraActivity;
 import com.github.barcodescanner.database.DatabaseActivity;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
+import com.github.barcodescanner.product.AddManuallyActivity;
 
 import android.os.Bundle;
 import android.app.Activity;

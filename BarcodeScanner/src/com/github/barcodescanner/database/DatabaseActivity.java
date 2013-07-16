@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.EmptyDatabaseActivity;
+import com.github.barcodescanner.product.AddManuallyActivity;
 import com.github.barcodescanner.product.EditProductActivity;
 import com.github.barcodescanner.product.Product;
 import com.github.barcodescanner.product.ProductActivity;
@@ -18,6 +19,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -85,6 +89,26 @@ public class DatabaseActivity extends ListActivity {
 		super.onResume();
 		searchQuery = "";
 		updateSpecialAdapter();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.database, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.database_menu_create:
+				Intent intent = new Intent(this, AddManuallyActivity.class);
+				intent.putExtra("adminMode", adminMode);
+				startActivity(intent);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override

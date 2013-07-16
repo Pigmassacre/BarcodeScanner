@@ -2,6 +2,7 @@ package com.github.barcodescanner.activities;
 
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.camera.CameraActivity;
+import com.github.barcodescanner.product.AddManuallyActivity;
 
 import android.app.Activity;
 import android.content.Intent;

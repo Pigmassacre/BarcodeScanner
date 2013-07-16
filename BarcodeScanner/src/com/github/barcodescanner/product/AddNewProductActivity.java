@@ -29,12 +29,13 @@ public class AddNewProductActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new);
 
-		database = DatabaseHelperFactory.getInstance();
-
-		productId = getIntent().getExtras().getString("productId");
-
 		TextView view = (TextView) findViewById(R.id.new_product_id);
-		view.setText(productId);
+		
+		database = DatabaseHelperFactory.getInstance();
+		if (getIntent().hasExtra("productId")) {
+			productId = getIntent().getExtras().getString("productId");
+			view.setText(productId);
+		}
 
 		editName = (EditText) findViewById(R.id.new_product_name_field);
 		editPrice = (EditText) findViewById(R.id.new_product_price_field);
