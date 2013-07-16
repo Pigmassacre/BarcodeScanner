@@ -25,21 +25,6 @@
         android:text="@string/version_number"
         android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/user_message"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/version"
-        android:layout_marginTop="16dp"
-        android:text="@string/welcome_scan_mode" />
-
-    <TextView
-        android:id="@+id/welcome_message"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/user_message"
-        android:text="@string/welcome_message" />
-
     <Button
         android:id="@+id/start_button"
         android:layout_width="match_parent"

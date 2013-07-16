@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/main_menu_scan"
+        android:icon="@drawable/device_access_camera"
+        android:title="@string/main_menu_scan"
+        android:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/main_menu_help"
+        android:icon="@drawable/action_help"
+        android:title="@string/main_menu_help"/>
+
+</menu>

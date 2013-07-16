@@ -13,14 +13,12 @@
     <!-- activity_main.xml -->
     <string name="title_activity_main"></string>
     <string name="welcome_title">Barcode Scanner</string>
-    <string name="version_number">PRE ALPHA</string>
-    <string name="welcome_message">Welcome to our Barcode Scanner. Touch the button below to start scanning! If you need any help with how to use this app, press the "Help" button below.</string>
+    <string name="version_number">Alpha 0.2</string>
     <string name="welcome_button_start">Scan Barcode</string>
     <string name="welcome_button_database">Database</string>
     <string name="welcome_button_help">Help</string>
-    <string name="welcome_admin_mode">The barcode scanner is currently in admin mode.</string>
-    <string name="welcome_scan_mode">The barcode scanner is currently in scan mode.</string>
-    <string name="add_manually">Add product manually</string>
+    <string name="main_menu_scan">Scan Barcode</string>
+    <string name="main_menu_help">Help</string>
 
     <!-- activity_camera.xml -->
     <string name="title_activity_camera"></string>
