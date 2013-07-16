@@ -2,6 +2,7 @@ package com.github.barcodescanner.database;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.EmptyDatabaseActivity;
@@ -10,6 +11,7 @@ import com.github.barcodescanner.product.AddManuallyActivity;
 import com.github.barcodescanner.product.Product;
 import com.github.barcodescanner.product.ProductActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Context;
@@ -27,14 +29,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressLint("Recycle")
 public class DatabaseActivity extends ListActivity {
 
 	@SuppressWarnings("unused")
@@ -306,12 +307,6 @@ public class DatabaseActivity extends ListActivity {
 			int colorPos = position % colors.length;
 			convertView.setBackgroundColor(colors[colorPos]);
 
-			// if a customer is viewing the database, hide the delete button
-			if (!adminMode) {
-				// convertView.findViewById(R.id.edit_button).setVisibility(View.INVISIBLE);
-				// convertView.findViewById(R.id.delete_button).setVisibility(View.INVISIBLE);
-			}
-
 			return convertView;
 		}
 	}
@@ -322,7 +317,7 @@ public class DatabaseActivity extends ListActivity {
 		}
 		List<Product> newList = new ArrayList<Product>();
 		for (Product p : list) {
-			if (p.getName().toLowerCase().contains(s.toLowerCase())) {
+			if (p.getName().toLowerCase(Locale.ENGLISH).contains(s.toLowerCase(Locale.ENGLISH))) {
 				newList.add(p);
 			}
 		}
