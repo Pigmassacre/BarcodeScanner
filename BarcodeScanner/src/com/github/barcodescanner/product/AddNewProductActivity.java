@@ -31,7 +31,8 @@ public class AddNewProductActivity extends Activity {
 
 		TextView view = (TextView) findViewById(R.id.new_product_id);
 		
-		database = DatabaseHelperFactory.getInstance();
+		setupDatabase();
+		
 		if (getIntent().hasExtra("productId")) {
 			productId = getIntent().getExtras().getString("productId");
 			view.setText(productId);
@@ -41,6 +42,14 @@ public class AddNewProductActivity extends Activity {
 		editPrice = (EditText) findViewById(R.id.new_product_price_field);
 	}
 
+	/**
+	 * Gives the class access to the database.
+	 */
+	private void setupDatabase() {
+		DatabaseHelperFactory.init(this);
+		database = DatabaseHelperFactory.getInstance();
+	}
+	
 	public void addProduct(View view) {
 		String productName = editName.getText().toString();
 

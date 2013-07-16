@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,8 +30,6 @@ public class AddManuallyActivity extends Activity {
 	private EditText editPrice;
 	private EditText editName;
 	private EditText editId;
-	@SuppressWarnings("unused")
-	private boolean adminMode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +38,6 @@ public class AddManuallyActivity extends Activity {
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-
-		adminMode = getIntent().getExtras().getBoolean("adminMode");
 
 		setupDatabase();
 
@@ -88,7 +83,6 @@ public class AddManuallyActivity extends Activity {
 			return true;
 		case android.R.id.home:
 			intent = new Intent(this, DatabaseActivity.class);
-			intent.putExtra("adminMode", adminMode);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			return true;

@@ -43,7 +43,6 @@ public class DatabaseActivity extends ListActivity {
 	private DatabaseHelper database;
 	private List<Product> items = new ArrayList<Product>();
 	private ListView list;
-	private boolean adminMode;
 	private EditText searchBar;
 	private String searchQuery;
 
@@ -51,22 +50,15 @@ public class DatabaseActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_database);
-		
+
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
-		adminMode = getIntent().getExtras().getBoolean("adminMode");
-
 		setupDatabase();
-		
-		list = (ListView) findViewById(android.R.id.list);
 
-		// User can only create a product as the admin.
-		if (!adminMode) {
-			findViewById(R.id.database_menu_create).setVisibility(View.INVISIBLE);
-		}
+		list = (ListView) findViewById(android.R.id.list);
 	}
-	
+
 	/**
 	 * Gives the class access to the database.
 	 */
@@ -97,7 +89,7 @@ public class DatabaseActivity extends ListActivity {
 		searchBar.setHint(R.string.database_search_hint);
 		searchBar.setCompoundDrawablesWithIntrinsicBounds(R.drawable.action_search, 0, 0, 0);
 		searchQuery = "";
-
+		System.out.println("searchBar: " + searchBar);
 		/**
 		 * Enabling Search Filter
 		 * */
@@ -143,12 +135,10 @@ public class DatabaseActivity extends ListActivity {
 			return true;
 		case R.id.database_menu_create:
 			intent = new Intent(this, AddManuallyActivity.class);
-			intent.putExtra("adminMode", adminMode);
 			startActivity(intent);
 			return true;
 		case android.R.id.home:
 			intent = new Intent(this, MainActivity.class);
-			intent.putExtra("adminMode", adminMode);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			return true;
@@ -164,18 +154,16 @@ public class DatabaseActivity extends ListActivity {
 		TextView nameView = (TextView) currentRow.getChildAt(0);
 		TextView priceView = (TextView) currentRow.getChildAt(1);
 		TextView idView = (TextView) currentRow.getChildAt(3);
-		
+
 		String productName = nameView.getText().toString();
 		Integer productPrice = Integer.parseInt(priceView.getText().toString());
 		String productId = idView.getText().toString();
-		
+
 		Bundle productBundle = new Bundle();
 
 		productBundle.putString("productName", productName);
 		productBundle.putInt("productPrice", productPrice);
 		productBundle.putString("productId", productId);
-
-		productBundle.putBoolean("adminMode", adminMode);
 
 		Intent intent = new Intent(this, ProductActivity.class);
 		intent.putExtras(productBundle);
@@ -188,13 +176,13 @@ public class DatabaseActivity extends ListActivity {
 	 */
 	private void updateSpecialAdapter() {
 		TextView emptyView = (TextView) findViewById(android.R.id.empty);
-		
+
 		if (database.getProducts().size() == 0) {
 			emptyView.setText(R.string.database_empty_text);
 		} else {
 			emptyView.setText(R.string.database_search_result_empty);
 		}
-		
+
 		items = filterList(database.getProducts(), searchQuery);
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
 		list.setAdapter(adapter);
@@ -218,26 +206,24 @@ public class DatabaseActivity extends ListActivity {
 	 *            removed
 	 */
 	private void deleteItem(ViewGroup listView) {
-		if (adminMode) {
-			ViewGroup currentRow = (ViewGroup) listView.getChildAt(0);
+		ViewGroup currentRow = (ViewGroup) listView.getChildAt(0);
 
-			TextView nameView = (TextView) currentRow.getChildAt(0);
-			TextView idView = (TextView) currentRow.getChildAt(3);
+		TextView nameView = (TextView) currentRow.getChildAt(0);
+		TextView idView = (TextView) currentRow.getChildAt(3);
 
-			String name = nameView.getText().toString();
-			String id = idView.getText().toString();
-			database.removeProduct(id);
+		String name = nameView.getText().toString();
+		String id = idView.getText().toString();
+		database.removeProduct(id);
 
-			Context context = getApplicationContext();
-			CharSequence text = getString(R.string.database_toast_deleted, name);
+		Context context = getApplicationContext();
+		CharSequence text = getString(R.string.database_toast_deleted, name);
 
-			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-			toast.show();
+		Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+		toast.show();
 
-			// TODO Add confirmation dialog?
+		// TODO Add confirmation dialog?
 
-			updateSpecialAdapter();
-		}
+		updateSpecialAdapter();
 	}
 
 	/**

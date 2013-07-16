@@ -3,7 +3,6 @@ package com.github.barcodescanner.product;
 import java.util.Scanner;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.activities.MainActivity;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 
@@ -19,9 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("Recycle")
@@ -42,8 +39,6 @@ public class EditProductActivity extends Activity {
 	private String productName;
 	private Integer productPrice;
 
-	private boolean adminMode;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,8 +48,6 @@ public class EditProductActivity extends Activity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		setupDatabase();
-
-		adminMode = getIntent().getExtras().getBoolean("adminMode");
 
 		productBundle = getIntent().getExtras();
 

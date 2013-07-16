@@ -10,7 +10,6 @@ import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 import com.github.barcodescanner.debug.BarcodeViewActivity;
 import com.github.barcodescanner.product.AddNewProductActivity;
-import com.github.barcodescanner.product.NoProductActivity;
 import com.github.barcodescanner.product.Product;
 import com.github.barcodescanner.product.ProductActivity;
 
@@ -38,7 +37,6 @@ public class CameraActivity extends Activity {
 	private Preview mPreview;
 	private boolean mPreviewRunning;
 	private Camera mCamera;
-	private boolean adminMode;
 
 	private Handler autoFocusHandler;
 
@@ -53,7 +51,6 @@ public class CameraActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_camera);
-		adminMode = getIntent().getExtras().getBoolean("adminMode");
 
 		setupDatabase();
 		prepareScanner();
@@ -181,13 +178,10 @@ public class CameraActivity extends Activity {
 
 			productBundle.putString("productName", productName);
 			productBundle.putInt("productPrice", productPrice);
-			productBundle.putBoolean("adminMode", adminMode);
 
 			productIntent = new Intent(this, ProductActivity.class);
-		} else if (adminMode) {
-			productIntent = new Intent(this, AddNewProductActivity.class);
 		} else {
-			productIntent = new Intent(this, NoProductActivity.class);
+			productIntent = new Intent(this, AddNewProductActivity.class);
 		}
 
 		// Add the bundle to the intent, and start the requested activity
