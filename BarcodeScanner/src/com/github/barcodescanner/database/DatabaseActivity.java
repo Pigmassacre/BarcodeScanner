@@ -6,15 +6,13 @@ import java.util.List;
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.EmptyDatabaseActivity;
 import com.github.barcodescanner.product.AddManuallyActivity;
-import com.github.barcodescanner.product.EditProductActivity;
 import com.github.barcodescanner.product.Product;
 import com.github.barcodescanner.product.ProductActivity;
 
-import android.app.Activity;
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,6 +44,8 @@ public class DatabaseActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_database);
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		adminMode = getIntent().getExtras().getBoolean("adminMode");
 
@@ -53,35 +53,33 @@ public class DatabaseActivity extends ListActivity {
 		db = DatabaseHelperFactory.getInstance();
 
 		list = (ListView) findViewById(android.R.id.list);
-		searchBar = (EditText)findViewById(R.id.search_product);
+		searchBar = (EditText) findViewById(R.id.search_product);
 		searchQuery = "";
 		updateSpecialAdapter();
-		
-		
-        /**
-         * Enabling Search Filter
-         * */
-        searchBar.addTextChangedListener(new TextWatcher() {
-             
-            @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                searchQuery = cs.toString();
-                updateSpecialAdapter();
-            }
-             
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                    int arg3) {
-                // TODO Auto-generated method stub
-                 
-            }
-             
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub                          
-            }
-        });
+
+		/**
+		 * Enabling Search Filter
+		 * */
+		searchBar.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+				// When a user has changed the text in the search widget, we
+				// update the search query and the special adapter.
+				searchQuery = cs.toString();
+				updateSpecialAdapter();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+				// Not used, but must be implemented.
+			}
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// Not used, but must be implemented.
+			}
+		});
 	}
 
 	@Override
@@ -90,59 +88,58 @@ public class DatabaseActivity extends ListActivity {
 		searchQuery = "";
 		updateSpecialAdapter();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.database, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.database_menu_create:
-				Intent intent = new Intent(this, AddManuallyActivity.class);
-				intent.putExtra("adminMode", adminMode);
-				startActivity(intent);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+		case R.id.database_menu_create:
+			Intent intent = new Intent(this, AddManuallyActivity.class);
+			intent.putExtra("adminMode", adminMode);
+			startActivity(intent);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		ViewGroup currentRow = (ViewGroup) getListView().getChildAt(position);
-		
+
 		TextView nameView = (TextView) currentRow.getChildAt(0);
 		TextView priceView = (TextView) currentRow.getChildAt(1);
 		TextView idView = (TextView) currentRow.getChildAt(2);
-		
+
 		String productName = nameView.getText().toString();
 		Integer productPrice = Integer.parseInt(priceView.getText().toString());
 		String productId = idView.getText().toString();
-		
+
 		Bundle productBundle = new Bundle();
-		
+
 		productBundle.putString("productName", productName);
 		productBundle.putInt("productPrice", productPrice);
 		productBundle.putString("productId", productId);
-		
+
 		productBundle.putBoolean("adminMode", adminMode);
-		
+
 		Intent intent = new Intent(this, ProductActivity.class);
 		intent.putExtras(productBundle);
 		startActivity(intent);
 	}
-	
+
 	/**
 	 * Updates the SpecialAdapter, which in turn updates the view of the list of
-	 * all the items in the database. Uses the SlideExpandableListView library, to
-	 * allow for a view to slide out from under a view.
+	 * all the items in the database.
 	 */
 	private void updateSpecialAdapter() {
-		if(db.getProducts().size() == 0){
+		if (db.getProducts().size() == 0) {
 			searchBar.setHint(R.string.database_empty);
 			searchBar.clearFocus();
 			searchBar.setFocusableInTouchMode(false);
@@ -152,7 +149,7 @@ public class DatabaseActivity extends ListActivity {
 			startActivity(intent);
 			finish();
 		}
-		
+
 		items = filterList(db.getProducts(), searchQuery);
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
 		list.setAdapter(adapter);
@@ -162,34 +159,36 @@ public class DatabaseActivity extends ListActivity {
 	 * A static class that helps the SpecialAdapter generate the database view.
 	 */
 	static class ViewHolder {
-		TextView name, id, price;
+		TextView name, price, id;
 	}
 
 	/**
-	 * Given a listView containing product information and the edit and delete buttons,
-	 * this function takes the product information and asks the database to remove the
-	 * corresponding product, and then updates the Special Adapter that handles the database
-	 * view.
+	 * Given a listView containing product information and the edit and delete
+	 * buttons, this function takes the product information and asks the
+	 * database to remove the corresponding product, and then updates the
+	 * Special Adapter that handles the database view.
 	 * 
-	 * @param listView the view containing the information of the product to be removed
+	 * @param listView
+	 *            the view containing the information of the product to be
+	 *            removed
 	 */
 	private void deleteItem(ViewGroup listView) {
 		if (adminMode) {
 			ViewGroup currentRow = (ViewGroup) listView.getChildAt(0);
-			
+
 			TextView nameView = (TextView) currentRow.getChildAt(0);
 			TextView idView = (TextView) currentRow.getChildAt(2);
-			
+
 			String name = nameView.getText().toString();
 			String id = idView.getText().toString();
 			db.removeProduct(id);
-			
+
 			Context context = getApplicationContext();
 			CharSequence text = getString(R.string.database_toast_deleted, name);
-			
+
 			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
 			toast.show();
-			
+
 			// TODO Add confirmation dialog?
 
 			updateSpecialAdapter();
@@ -274,22 +273,21 @@ public class DatabaseActivity extends ListActivity {
 
 			// if a customer is viewing the database, hide the delete button
 			if (!adminMode) {
-				//convertView.findViewById(R.id.edit_button).setVisibility(View.INVISIBLE);
-				//convertView.findViewById(R.id.delete_button).setVisibility(View.INVISIBLE);
+				// convertView.findViewById(R.id.edit_button).setVisibility(View.INVISIBLE);
+				// convertView.findViewById(R.id.delete_button).setVisibility(View.INVISIBLE);
 			}
 
 			return convertView;
 		}
 	}
-	
-	
-	private List<Product> filterList(List<Product> list, String s){
-		if(s.equals("")){
+
+	private List<Product> filterList(List<Product> list, String s) {
+		if (s.equals("")) {
 			return list;
 		}
 		List<Product> newList = new ArrayList<Product>();
-		for(Product p : list){
-			if(p.getName().toLowerCase().contains(s.toLowerCase())){
+		for (Product p : list) {
+			if (p.getName().toLowerCase().contains(s.toLowerCase())) {
 				newList.add(p);
 			}
 		}

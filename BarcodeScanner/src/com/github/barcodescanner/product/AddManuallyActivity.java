@@ -28,7 +28,6 @@ public class AddManuallyActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_add_manually);
 		adminMode = getIntent().getExtras().getBoolean("adminMode");
 		setupDatabase();
@@ -79,8 +78,6 @@ public class AddManuallyActivity extends Activity{
 			Intent intent = new Intent(this, MainActivity.class);
 			intent.putExtra("adminMode", adminMode);
 			startActivity(intent);
-			
-			finish();
 		} else {
 			// otherwise, we show a toast
 			Context context = getApplicationContext();
