@@ -3,17 +3,13 @@ package com.github.barcodescanner.activities;
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.camera.CameraActivity;
 import com.github.barcodescanner.database.DatabaseActivity;
-import com.github.barcodescanner.product.AddManuallyActivity;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 public class MainActivity extends Activity {
 
