@@ -172,41 +172,6 @@ public class DatabaseActivity extends ListActivity {
 		}
 	}
 
-	
-	/**
-	 * Given a listView containing product information and the edit and delete buttons,
-	 * this function takes the product information and passes it along to the EditProductActivity,
-	 * where the user can edit the products information.
-	 * 
-	 * @param listView the view containing the information of the product to be edited
-	 */
-	private void editItem(ViewGroup listView) {
-		if (adminMode) {
-			ViewGroup row = (ViewGroup) listView.getChildAt(0);
-			
-			// Get the name, price and id views and then store them in strings
-			TextView nameView = (TextView) row.getChildAt(0);
-			TextView priceView = (TextView) row.getChildAt(1);
-			TextView idView = (TextView) row.getChildAt(2);
-
-			String productName = nameView.getText().toString();
-			String productPrice = priceView.getText().toString();
-			String productId = idView.getText().toString();
-
-			// Store the name, price and id in a bundle and send that bundle to
-			// EditProductActivity
-			Bundle editBundle = new Bundle();
-			editBundle.putString("productName", productName);
-			editBundle.putString("productPrice", productPrice);
-			editBundle.putString("productId", productId);
-
-			Intent editIntent = new Intent(this, EditProductActivity.class);
-
-			editIntent.putExtras(editBundle);
-			startActivity(editIntent);
-		}
-	}
-
 	/**
 	 * A special adapter that generates the view that shows the items in the
 	 * database.
