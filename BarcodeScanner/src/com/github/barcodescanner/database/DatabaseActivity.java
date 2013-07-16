@@ -52,6 +52,7 @@ public class DatabaseActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_database);
+		
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -61,9 +62,8 @@ public class DatabaseActivity extends ListActivity {
 		
 		list = (ListView) findViewById(android.R.id.list);
 
-		// only the owner can see and use the edit and delete buttons
+		// User only create a product as the admin.
 		if (!adminMode) {
-			findViewById(R.id.database_menu_search).setVisibility(View.INVISIBLE);
 			findViewById(R.id.database_menu_create).setVisibility(View.INVISIBLE);
 		}
 	}

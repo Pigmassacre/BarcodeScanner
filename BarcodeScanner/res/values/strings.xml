@@ -82,16 +82,13 @@
     
     <!-- activity_edit.xml -->
     <string name="title_activity_edit_product"></string>
-    <string name="edit_product_title">Edit product:</string>
-    <string name="edit_product_id_title">Product ID - </string>
     <string name="edit_product_default_id">N/A</string>
-    <string name="edit_product_name_title">Name:</string>
-    <string name="edit_product_name_hint">The new name of the product.</string>
-    <string name="edit_product_price_title">Price:</string>
-    <string name="edit_product_price_hint">The new price of the product.</string>
-    <string name="edit_product_add_button">Edit product</string>
+    <string name="edit_product_id_hint">ID</string>
+    <string name="edit_product_name_hint">Name</string>
+    <string name="edit_product_price_hint">Price</string>
     <string name="edit_product_toast_done">%1$s has been updated.</string>
     <string name="edit_product_toast_failed">The new price has to be an integer.</string>
+    <string name="edit_product_menu_accept">Accept</string>
     
     <!-- activity_database_empty.xml -->
     <string name="empty_database_text">The database is currently empty.\n Please choose option below:</string>

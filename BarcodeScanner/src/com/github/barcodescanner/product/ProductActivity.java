@@ -29,7 +29,7 @@ public class ProductActivity extends Activity {
 	private Bundle productBundle;
 
 	private String productName;
-	private String productPrice;
+	private Integer productPrice;
 	private String productId;
 	
 	private AlertDialog dialog;
@@ -49,15 +49,15 @@ public class ProductActivity extends Activity {
 		productBundle = getIntent().getExtras();
 
 		productName = productBundle.getString("productName");
-		productPrice = Integer.toString(productBundle.getInt("productPrice"));
+		productPrice = productBundle.getInt("productPrice");
 		productId = productBundle.getString("productId");
-
+		
 		TextView name = (TextView) findViewById(R.id.product_name);
 		TextView price = (TextView) findViewById(R.id.product_price);
 		TextView id = (TextView) findViewById(R.id.product_id);
 
 		name.setText(productName);
-		price.setText(productPrice);
+		price.setText(Integer.toString(productPrice));
 		id.setText(productId);
 		
 		setupDatabase();

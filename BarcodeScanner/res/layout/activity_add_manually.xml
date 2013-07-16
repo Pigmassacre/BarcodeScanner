@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/manual_product_id_hint"
-        android:inputType="text" >
+        android:inputType="number" >
 
         <requestFocus />
     </EditText>
