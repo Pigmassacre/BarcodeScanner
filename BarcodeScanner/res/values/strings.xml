@@ -43,8 +43,12 @@
     <string name="product_name">Product Name</string>
     <string name="product_price">Product Price</string>
     <string name="product_id">Product Id</string>
-    <string name="product_menu_edit">Edit Product</string>
-    <string name="product_menu_delete">Delete Product</string>
+    <string name="product_menu_edit">Edit</string>
+    <string name="product_menu_delete">Delete</string>
+    <string name="product_dialog_title">Delete this product?</string>
+    <string name="product_dialog_message">This will remove the product from the database. This cannot be undone.</string>
+    <string name="product_dialog_ok">Delete</string>
+    <string name="product_dialog_cancel">Cancel</string>
 
     <!-- activity_database.xml -->
     <string name="title_activity_database"></string>

@@ -4,13 +4,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.activities.MainActivity;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +20,7 @@ public class AddManuallyActivity extends Activity{
 	private EditText editPrice;
 	private EditText editName;
 	private EditText editId;
+	@SuppressWarnings("unused")
 	private boolean adminMode;
 	
 	@Override

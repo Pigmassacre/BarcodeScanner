@@ -1,21 +1,20 @@
 package com.github.barcodescanner.product;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.activities.MainActivity;
+import com.github.barcodescanner.database.DatabaseActivity;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +31,8 @@ public class ProductActivity extends Activity {
 	private String productName;
 	private String productPrice;
 	private String productId;
+	
+	private AlertDialog dialog;
 
 	private boolean adminMode;
 
@@ -62,11 +63,33 @@ public class ProductActivity extends Activity {
 		DatabaseHelperFactory.init(this);
 		database = DatabaseHelperFactory.getInstance();
 		
-		// only the owner can see and use the edit and delete buttons
+		setupDialog();
+		
+		// Only show the buttons in admin mode.
 		if (!adminMode) {
 			findViewById(R.id.product_menu_edit).setVisibility(View.INVISIBLE);
 			findViewById(R.id.product_menu_delete).setVisibility(View.INVISIBLE);
 		}
+	}
+	
+	private void setupDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setTitle(R.string.product_dialog_title);
+		builder.setMessage(R.string.product_dialog_message);
+		
+		builder.setPositiveButton(R.string.product_dialog_ok, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		               deleteProduct();
+		           }
+		       });
+		builder.setNegativeButton(R.string.product_dialog_cancel, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		               // User cancelled the dialog, so we do nothing.
+		           }
+		       });
+		
+		dialog = builder.create();
 	}
 	
 	@Override
@@ -84,10 +107,10 @@ public class ProductActivity extends Activity {
 			editProduct();
 			return true;
 		case R.id.product_menu_delete:
-			deleteProduct();
+			dialog.show();
 			return true;
 		case android.R.id.home:
-			intent = new Intent(this, MainActivity.class);
+			intent = new Intent(this, DatabaseActivity.class);
 			intent.putExtra("adminMode", adminMode);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
