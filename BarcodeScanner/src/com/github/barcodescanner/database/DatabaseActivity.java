@@ -165,7 +165,7 @@ public class DatabaseActivity extends ListActivity {
 
 		TextView nameView = (TextView) currentRow.getChildAt(0);
 		TextView priceView = (TextView) currentRow.getChildAt(1);
-		TextView idView = (TextView) currentRow.getChildAt(2);
+		TextView idView = (TextView) currentRow.getChildAt(3);
 		
 		String productName = nameView.getText().toString();
 		Integer productPrice = Integer.parseInt(priceView.getText().toString());
@@ -227,7 +227,7 @@ public class DatabaseActivity extends ListActivity {
 			ViewGroup currentRow = (ViewGroup) listView.getChildAt(0);
 
 			TextView nameView = (TextView) currentRow.getChildAt(0);
-			TextView idView = (TextView) currentRow.getChildAt(2);
+			TextView idView = (TextView) currentRow.getChildAt(3);
 
 			String name = nameView.getText().toString();
 			String id = idView.getText().toString();
@@ -252,7 +252,8 @@ public class DatabaseActivity extends ListActivity {
 	private class SpecialAdapter extends BaseAdapter {
 		// Defining the background color of rows. The row will alternate between
 		// grey light and grey dark.
-		private int[] colors = new int[] { 0xAA999999, 0xAA7d7d7d };
+		//private int[] colors = new int[] { 0xAA999999, 0xAA7d7d7d };
+		private int color = 0xFFFFFFFF;
 		private LayoutInflater mInflater;
 
 		// The variable that will hold our text data to be tied to list.
@@ -318,8 +319,9 @@ public class DatabaseActivity extends ListActivity {
 			holder.id.setText(data.get(position).getBarcode());
 
 			// Set the background color depending of odd/even colorPos result
-			int colorPos = position % colors.length;
-			convertView.setBackgroundColor(colors[colorPos]);
+			//int colorPos = position % colors.length;
+			//convertView.setBackgroundColor(colors[colorPos]);
+			convertView.setBackgroundColor(color);
 
 			return convertView;
 		}

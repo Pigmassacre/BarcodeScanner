@@ -53,15 +53,12 @@
 
     <!-- activity_database.xml -->
     <string name="title_activity_database">Database</string>
-    <string name="database_table_caption">Products</string>
-    <string name="database_table_cell_name">Name</string>
-    <string name="database_table_cell_price">Price</string>
-    <string name="database_table_cell_id">ID</string>
     <string name="database_toast_deleted">%1$s has been removed from the database.</string>
     <string name="database_search_hint">Type to search for a product.</string>
     <string name="database_empty">The database is empty.</string>
     <string name="database_menu_search">Search Database</string>
     <string name="database_menu_create">Create Product</string>
+    <string name="database_currency">kr</string>
 
     <!-- activity_no_product.xml -->
     <string name="title_activity_no_product"></string>
