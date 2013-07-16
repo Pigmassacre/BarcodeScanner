@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.github.barcodescanner.R;
+import com.github.barcodescanner.activities.HelpActivity;
 import com.github.barcodescanner.activities.MainActivity;
 import com.github.barcodescanner.product.AddManuallyActivity;
 import com.github.barcodescanner.product.Product;
@@ -135,6 +136,10 @@ public class DatabaseActivity extends ListActivity {
 			return true;
 		case R.id.database_menu_create:
 			intent = new Intent(this, AddManuallyActivity.class);
+			startActivity(intent);
+			return true;
+		case R.id.database_menu_help:
+			intent = new Intent(this, HelpActivity.class);
 			startActivity(intent);
 			return true;
 		case android.R.id.home:

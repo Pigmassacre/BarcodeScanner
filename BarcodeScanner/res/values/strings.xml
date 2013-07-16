@@ -59,6 +59,7 @@
     <string name="database_empty_text">The database is currently empty.\nYou can add products by pressing the "Add Product" button on the Action Bar.</string>
     <string name="database_menu_search">Search Database</string>
     <string name="database_menu_create">Create Product</string>
+    <string name="database_menu_help">Help</string>
     <string name="database_search_result_empty">No product found matching your search query.</string>
     <string name="database_currency">kr</string>
 
@@ -98,13 +99,13 @@
     <string name="barcode_view_image_description">There is supposed to be a barcode bitmap here, but it seems to have gotten lost! Where can it be?</string>
 
     <!-- activity_help.xml -->
-    <string name="title_activity_help"></string>
+    <string name="title_activity_help">Help</string>
     <string name="help_title">How to use the Barcode Scanner</string>
     <string name="help_field_start_scan_activity">In order to scan an barcode, you first have to start the scanning mode. This is done by pressing the big Scan Barcode button in the main screen. </string>
     <string name="help_field_how_to_scan">Once there, center the barcode in your screen, and then press the scan button.</string>
     <string name="help_field_problems">Sometimes you might get inconsistent results. Our scanning algorithm is not yet super-amazing, so you\'ll have to make sure that your device is held in landscape mode, as in the normal "bottom" of your device is held by your right hand. You should keep the barcode relatively flat, centered in the screen and not too small.</string>
     <string name="help_database_title">How to access the database</string>
     <string name="help_database_field_how_to_enter">While in the main menu, touch the database button to enter the database.</string>
-    <string name="help_database_field_in_database">The database shows each stored item and their respective barcode id\'s, names and prices. If you are using the app as a shop owner, you can also remove an entry by touching the icon to the right of each product.</string>
+    <string name="help_database_field_in_database">The database shows each stored item and their respective barcode id\'s, names and prices. You can search the database by pressing the search button in the action bar. You can also add products manually by pressing the "plus" sign in the action bar.</string>
 
 </resources>
