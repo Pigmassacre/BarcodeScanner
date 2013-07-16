@@ -83,6 +83,7 @@ public class DatabaseActivity extends ListActivity {
 		searchBar.setEms(10);
 		searchBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		searchBar.setHint(R.string.database_search_hint);
+		searchBar.setCompoundDrawablesWithIntrinsicBounds(R.drawable.action_search, 0, 0, 0);
 		searchQuery = "";
 		updateSpecialAdapter();
 
