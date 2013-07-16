@@ -74,9 +74,7 @@ public class AddManuallyActivity extends Activity{
 			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
 			toast.show();
 			
-			Intent intent = new Intent(this, MainActivity.class);
-			intent.putExtra("adminMode", adminMode);
-			startActivity(intent);
+			finish();
 		} else {
 			// otherwise, we show a toast
 			Context context = getApplicationContext();

@@ -40,12 +40,11 @@
 
     <!-- activity_product.xml -->
     <string name="title_activity_product"></string>
-    <string name="default_image_description">An image of the product</string>
     <string name="product_name">Product Name</string>
     <string name="product_price">Product Price</string>
     <string name="product_id">Product Id</string>
-    <string name="product_edit_button">Edit Product</string>
-    <string name="product_delete_button">Delete Product</string>
+    <string name="product_menu_edit">Edit Product</string>
+    <string name="product_menu_delete">Delete Product</string>
 
     <!-- activity_database.xml -->
     <string name="title_activity_database"></string>

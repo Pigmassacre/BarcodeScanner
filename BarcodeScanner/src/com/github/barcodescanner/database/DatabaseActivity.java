@@ -61,6 +61,12 @@ public class DatabaseActivity extends ListActivity {
 		db = DatabaseHelperFactory.getInstance();
 
 		list = (ListView) findViewById(android.R.id.list);
+
+		// only the owner can see and use the edit and delete buttons
+		if (!adminMode) {
+			findViewById(R.id.database_menu_search).setVisibility(View.INVISIBLE);
+			findViewById(R.id.database_menu_create).setVisibility(View.INVISIBLE);
+		}
 	}
 
 	@Override
@@ -73,7 +79,7 @@ public class DatabaseActivity extends ListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.database, menu);
+		inflater.inflate(R.menu.menu_database, menu);
 		setupSearch(menu);
 		return true;
 	}
@@ -153,11 +159,11 @@ public class DatabaseActivity extends ListActivity {
 		TextView nameView = (TextView) currentRow.getChildAt(0);
 		TextView priceView = (TextView) currentRow.getChildAt(1);
 		TextView idView = (TextView) currentRow.getChildAt(2);
-
+		
 		String productName = nameView.getText().toString();
 		Integer productPrice = Integer.parseInt(priceView.getText().toString());
 		String productId = idView.getText().toString();
-
+		
 		Bundle productBundle = new Bundle();
 
 		productBundle.putString("productName", productName);
