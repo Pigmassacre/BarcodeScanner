@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.github.barcodescanner.R;
-import com.github.barcodescanner.database.DatabaseActivity;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 import com.github.barcodescanner.product.Product;
@@ -16,7 +15,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddManuallyActivity extends Activity{
@@ -96,7 +94,6 @@ public class AddManuallyActivity extends Activity{
 	
 	private boolean checkId(String id){
 		List<Product> productList = database.getProducts();
-		//Integer productId = Integer.parseInt(id);
 		boolean exists = false;
 		
 		for(Product p : productList){

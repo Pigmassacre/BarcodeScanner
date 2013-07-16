@@ -5,14 +5,15 @@ import java.util.List;
 
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.EmptyDatabaseActivity;
-import com.github.barcodescanner.libraries.selv.ActionSlideExpandableListView;
-import com.github.barcodescanner.libraries.selv.SlideExpandableListAdapter;
 import com.github.barcodescanner.product.EditProductActivity;
 import com.github.barcodescanner.product.Product;
+import com.github.barcodescanner.product.ProductActivity;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,21 +22,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DatabaseActivity extends Activity {
+public class DatabaseActivity extends ListActivity {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "DatabaseActivity";
 
 	private DatabaseHelper db;
 	private List<Product> items = new ArrayList<Product>();
-	private ActionSlideExpandableListView list;
+	private ListView list;
 	private boolean adminMode;
 	private EditText searchBar;
 	private String searchQuery;
-	private String emptyDB;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +47,8 @@ public class DatabaseActivity extends Activity {
 
 		DatabaseHelperFactory.init(this);
 		db = DatabaseHelperFactory.getInstance();
-		emptyDB = "The database is empty.";
 
-		list = (ActionSlideExpandableListView) findViewById(R.id.list);
+		list = (ListView) findViewById(android.R.id.list);
 		searchBar = (EditText)findViewById(R.id.search_product);
 		searchQuery = "";
 		updateSpecialAdapter();
@@ -87,15 +87,39 @@ public class DatabaseActivity extends Activity {
 		updateSpecialAdapter();
 	}
 
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		ViewGroup currentRow = (ViewGroup) getListView().getChildAt(position);
+		
+		TextView nameView = (TextView) currentRow.getChildAt(0);
+		TextView priceView = (TextView) currentRow.getChildAt(1);
+		TextView idView = (TextView) currentRow.getChildAt(2);
+		
+		String productName = nameView.getText().toString();
+		Integer productPrice = Integer.parseInt(priceView.getText().toString());
+		String productId = idView.getText().toString();
+		
+		Bundle productBundle = new Bundle();
+		
+		productBundle.putString("productName", productName);
+		productBundle.putInt("productPrice", productPrice);
+		productBundle.putString("productId", productId);
+		
+		productBundle.putBoolean("adminMode", adminMode);
+		
+		Intent intent = new Intent(this, ProductActivity.class);
+		intent.putExtras(productBundle);
+		startActivity(intent);
+	}
+	
 	/**
 	 * Updates the SpecialAdapter, which in turn updates the view of the list of
 	 * all the items in the database. Uses the SlideExpandableListView library, to
 	 * allow for a view to slide out from under a view.
 	 */
 	private void updateSpecialAdapter() {
-		
 		if(db.getProducts().size() == 0){
-			searchBar.setHint(emptyDB);
+			searchBar.setHint(R.string.database_empty);
 			searchBar.clearFocus();
 			searchBar.setFocusableInTouchMode(false);
 			searchBar.setFocusable(false);
@@ -104,22 +128,10 @@ public class DatabaseActivity extends Activity {
 			startActivity(intent);
 			finish();
 		}
+		
 		items = filterList(db.getProducts(), searchQuery);
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
-		list.setAdapter(new SlideExpandableListAdapter(adapter, R.id.expandable_toggle_button, R.id.expandable));
-		list.setItemActionListener(new ActionSlideExpandableListView.OnActionClickListener() {
-			
-			@Override
-			public void onClick(View listView, View buttonView, int position) {
-				System.out.println("Something clicked!");
-				if (buttonView.getId() == R.id.edit_button) {
-					editItem((ViewGroup) listView);
-				} else if (buttonView.getId() == R.id.delete_button) {
-					deleteItem((ViewGroup) listView);
-				}
-			}
-
-		}, R.id.edit_button, R.id.delete_button);
+		list.setAdapter(adapter);
 	}
 
 	/**
@@ -273,8 +285,8 @@ public class DatabaseActivity extends Activity {
 
 			// if a customer is viewing the database, hide the delete button
 			if (!adminMode) {
-				convertView.findViewById(R.id.edit_button).setVisibility(View.INVISIBLE);
-				convertView.findViewById(R.id.delete_button).setVisibility(View.INVISIBLE);
+				//convertView.findViewById(R.id.edit_button).setVisibility(View.INVISIBLE);
+				//convertView.findViewById(R.id.delete_button).setVisibility(View.INVISIBLE);
 			}
 
 			return convertView;

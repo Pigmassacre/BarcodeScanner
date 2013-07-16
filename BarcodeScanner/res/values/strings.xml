@@ -4,14 +4,14 @@
     <string name="app_name">Barcode Scanner</string>
 
     <!-- activity_introduction.xml -->
-    <string name="title_activity_introduction">IntroductionActivity</string>
+    <string name="title_activity_introduction">Introduction</string>
     <string name="introduction_logotype_description">Barcode Scanner Logotype</string>
     <string name="introduction_intro_message">Welcome! Please choose in what way you wish to use the Barcode Scanner.</string>
     <string name="introduction_admin_mode_button">Admin Mode</string>
     <string name="introduction_scan_mode_button">Scan Mode</string>
 
     <!-- activity_main.xml -->
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Main</string>
     <string name="welcome_title">Barcode Scanner</string>
     <string name="version_number">PRE ALPHA</string>
     <string name="welcome_message">Welcome to our Barcode Scanner. Touch the button below to start scanning! If you need any help with how to use this app, press the "Help" button below.</string>
@@ -23,23 +23,23 @@
     <string name="add_manually">Add product manually</string>
 
     <!-- activity_camera.xml -->
-    <string name="title_activity_camera">CameraActivity</string>
+    <string name="title_activity_camera">Camera</string>
     <string name="camera_button_capture">Scan</string>
     <string name="camera_button_database">Database</string>
     <string name="camera_button_help">Help</string>
     
     <!-- activity_add_manually.xml -->
-    <string name="title_activity_add_manually">AddManuallyActivity</string>
+    <string name="title_activity_add_manually">Add Product Manually</string>
     <string name="manually_product_id">Product ID:</string>
  	<string name="manually_product_id_hint">The ID of the product.</string>
     <string name="add_manually_title">Add new product manually:</string>
 
     <!-- activity_camera_preview.xml -->
-    <string name="title_activity_camera_preview">CameraPreview</string>
+    <string name="title_activity_camera_preview">Camera</string>
     <string name="take_picture">Scan Barcode</string>
 
     <!-- activity_product.xml -->
-    <string name="title_activity_product">ProductActivity</string>
+    <string name="title_activity_product">Product</string>
     <string name="default_image_description">An image of the product</string>
     <string name="product_name">Product Name</string>
     <string name="product_price">Product Price</string>
@@ -48,13 +48,14 @@
     <string name="product_delete_button">Delete Product</string>
 
     <!-- activity_database.xml -->
-    <string name="title_activity_database">DatabaseActivity</string>
+    <string name="title_activity_database">Database</string>
     <string name="database_table_caption">Products</string>
     <string name="database_table_cell_name">Name</string>
     <string name="database_table_cell_price">Price</string>
     <string name="database_table_cell_id">ID</string>
     <string name="database_toast_deleted">%1$s has been removed from the database.</string>
-    <string name="database_search">Search product here</string>
+    <string name="database_search">Type to search for a product.</string>
+    <string name="database_empty">The database is empty.</string>
     
     <!-- row.xml -->
     <string name="row_delete_button">Delete</string>
@@ -62,14 +63,14 @@
     <string name="row_more_button">More</string>
 
     <!-- activity_no_product.xml -->
-    <string name="title_activity_no_product">NoProductActivity</string>
+    <string name="title_activity_no_product">No Product</string>
     <string name="no_product_id_title">Product ID - </string>
     <string name="no_product_default_id">N/A</string>
     <string name="no_product_message_title">No product found</string>
     <string name="no_product_message">No product matching the scanned barcode was found in the database.</string>
 
     <!-- activity_addnew.xml -->
-    <string name="title_activity_add_new">AddNewActivity</string>
+    <string name="title_activity_add_new">Add New Product</string>
     <string name="new_product_title">Add new product:</string>
     <string name="new_product_id_title">Product ID - </string>
     <string name="new_product_default_id">N/A</string>
@@ -82,7 +83,7 @@
     <string name="new_product_toast_failed">The price has to be an integer.</string>
     
     <!-- activity_edit.xml -->
-    <string name="title_activity_edit_product">EditProductActivity</string>
+    <string name="title_activity_edit_product">Edit Product</string>
     <string name="edit_product_title">Edit product:</string>
     <string name="edit_product_id_title">Product ID - </string>
     <string name="edit_product_default_id">N/A</string>
@@ -100,12 +101,12 @@
     <string name="scan_new_button">Scan new barcode</string>
 
     <!-- activity_barcode_view.xml -->
-    <string name="title_activity_barcode_view">BarcodeViewActivity</string>
+    <string name="title_activity_barcode_view">Barcode View</string>
     <string name="barcode_view_description">Below is a bitmap representing the barcode that our algorithm has found.</string>
     <string name="barcode_view_image_description">There is supposed to be a barcode bitmap here, but it seems to have gotten lost! Where can it be?</string>
     
     <!-- activity_help.xml -->
-    <string name="title_activity_help">HelpActivity</string>
+    <string name="title_activity_help">Help</string>
     <string name="help_title">How to use the Barcode Scanner</string>
     <string name="help_field_start_scan_activity">In order to scan an barcode, you first have to start the scanning mode. This is done by pressing the big Scan Barcode button in the main screen. </string>
     <string name="help_field_how_to_scan">Once there, center the barcode in your screen, and then press the scan button.</string>

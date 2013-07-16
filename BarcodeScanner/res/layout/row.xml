@@ -1,82 +1,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
 
-    <LinearLayout
-        android:id="@+id/item"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:textColor="#FFF"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:padding="10dp"
-            android:textColor="#FFF"
-            android:textSize="16sp" />
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:textColor="#FFF"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:padding="10dp"
-            android:textColor="#FFF"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:padding="10dp"
-            android:textColor="#FFF"
-            android:textSize="16sp" />
-
-        <ImageButton
-            android:id="@+id/expandable_toggle_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:layout_marginRight="8dp"
-            android:background="@null"
-            android:clickable="true"
-            android:contentDescription="@string/row_more_button"
-            android:src="@drawable/ic_btn_round_more_normal" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/expandable"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="horizontal" >
-
-        <ImageButton
-            android:id="@+id/edit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:clickable="true"
-            android:contentDescription="@string/row_edit_button"
-            android:src="@drawable/ic_menu_edit" />
-
-        <ImageButton
-            android:id="@+id/delete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:clickable="true"
-            android:contentDescription="@string/row_delete_button"
-            android:src="@drawable/ic_menu_close_clear_cancel" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:textColor="#FFF"
+        android:textSize="16sp" />
 
 </LinearLayout>

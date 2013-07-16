@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -26,10 +25,9 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		adminMode = getIntent().getExtras().getBoolean("adminMode");
-		addManually = (Button)findViewById(R.id.manually_add);
+		addManually = (Button) findViewById(R.id.manually_add);
 
 		if (!adminMode) {
 			((TextView) findViewById(R.id.user_message)).setText(R.string.welcome_scan_mode);
@@ -37,7 +35,7 @@ public class MainActivity extends Activity {
 			((TextView) findViewById(R.id.user_message)).setText(R.string.welcome_admin_mode);
 			addManually.setVisibility(View.VISIBLE);
 		}
-		
+
 		DatabaseHelperFactory.init(this);
 		database = DatabaseHelperFactory.getInstance();
 	}
@@ -55,20 +53,20 @@ public class MainActivity extends Activity {
 
 	public void enterDatabase(View view) {
 		Intent intent;
-		if(database.getProducts().size() == 0){
+		if (database.getProducts().size() == 0) {
 			intent = new Intent(this, EmptyDatabaseActivity.class);
-		}else{
+		} else {
 			intent = new Intent(this, DatabaseActivity.class);
 		}
 		intent.putExtra("adminMode", adminMode);
 		startActivity(intent);
 	}
-	
-	public void addManually(View view){
-		if(adminMode){
+
+	public void addManually(View view) {
+		if (adminMode) {
 			Intent intent = new Intent(this, AddManuallyActivity.class);
 			intent.putExtra("adminMode", adminMode);
-		    startActivity(intent);
+			startActivity(intent);
 		}
 	}
 
