@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.EmptyDatabaseActivity;
+import com.github.barcodescanner.activities.MainActivity;
 import com.github.barcodescanner.product.AddManuallyActivity;
 import com.github.barcodescanner.product.Product;
 import com.github.barcodescanner.product.ProductActivity;
@@ -14,14 +15,20 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -53,7 +60,28 @@ public class DatabaseActivity extends ListActivity {
 		db = DatabaseHelperFactory.getInstance();
 
 		list = (ListView) findViewById(android.R.id.list);
-		searchBar = (EditText) findViewById(R.id.search_product);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		searchQuery = "";
+		updateSpecialAdapter();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.database, menu);
+		setupSearch(menu);
+		return true;
+	}
+
+	private void setupSearch(Menu menu) {
+		searchBar = (EditText) menu.findItem(R.id.database_menu_search).getActionView();
+		searchBar.setEms(10);
+		searchBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		searchBar.setHint(R.string.database_search_hint);
 		searchQuery = "";
 		updateSpecialAdapter();
 
@@ -83,25 +111,32 @@ public class DatabaseActivity extends ListActivity {
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		searchQuery = "";
-		updateSpecialAdapter();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.database, menu);
-		return true;
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
 		switch (item.getItemId()) {
+		case R.id.database_menu_search:
+			// This "hack" is to make sure that the keyboard shows up when the
+			// search bar gains focus. Oh, the things we have to do when we roll
+			// with our own widgets!
+			(new Handler()).postDelayed(new Runnable() {
+
+				public void run() {
+					searchBar.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+							MotionEvent.ACTION_DOWN, 0, 0, 0));
+					searchBar.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+							MotionEvent.ACTION_UP, 0, 0, 0));
+				}
+			}, 50);
+			return true;
 		case R.id.database_menu_create:
-			Intent intent = new Intent(this, AddManuallyActivity.class);
+			intent = new Intent(this, AddManuallyActivity.class);
 			intent.putExtra("adminMode", adminMode);
+			startActivity(intent);
+			return true;
+		case android.R.id.home:
+			intent = new Intent(this, MainActivity.class);
+			intent.putExtra("adminMode", adminMode);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			return true;
 		default:

@@ -60,6 +60,7 @@
         <activity
             android:name="com.github.barcodescanner.database.DatabaseActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_database"
             android:screenOrientation="portrait" >
         </activity>

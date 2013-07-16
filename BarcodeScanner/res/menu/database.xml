@@ -5,7 +5,8 @@
         android:id="@+id/database_menu_search"
         android:icon="@drawable/action_search"
         android:title="@string/database_menu_search"
-        android:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom|collapseActionView"
+        android:actionViewClass="android.widget.EditText" />
     
     <item
         android:id="@+id/database_menu_create"

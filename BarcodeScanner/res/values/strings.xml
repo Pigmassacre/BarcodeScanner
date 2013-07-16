@@ -54,7 +54,7 @@
     <string name="database_table_cell_price">Price</string>
     <string name="database_table_cell_id">ID</string>
     <string name="database_toast_deleted">%1$s has been removed from the database.</string>
-    <string name="database_search">Type to search for a product.</string>
+    <string name="database_search_hint">Type to search for a product.</string>
     <string name="database_empty">The database is empty.</string>
     <string name="database_menu_search">Search Database</string>
     <string name="database_menu_create">Create Product</string>
