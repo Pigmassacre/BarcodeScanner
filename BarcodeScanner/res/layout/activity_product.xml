@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/product_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:textSize="16sp"
@@ -22,14 +22,14 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/product_name"
         android:textSize="16sp" />
-    
+
     <TextView
         android:id="@+id/currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/product_price"
         android:layout_below="@id/product_name"
         android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@id/product_price"
         android:text="@string/database_currency"
         android:textSize="16sp" />
 
