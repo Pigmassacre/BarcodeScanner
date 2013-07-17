@@ -3,13 +3,19 @@ package com.github.barcodescanner.product;
 import java.util.Scanner;
 
 import com.github.barcodescanner.R;
+import com.github.barcodescanner.activities.HelpActivity;
+import com.github.barcodescanner.camera.CameraActivity;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +35,9 @@ public class AddNewProductActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_new);
 
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		
 		TextView view = (TextView) findViewById(R.id.new_product_id);
 		
 		setupDatabase();
@@ -38,8 +47,8 @@ public class AddNewProductActivity extends Activity {
 			view.setText(productId);
 		}
 
-		editName = (EditText) findViewById(R.id.new_product_name_field);
-		editPrice = (EditText) findViewById(R.id.new_product_price_field);
+		editName = (EditText) findViewById(R.id.new_product_name);
+		editPrice = (EditText) findViewById(R.id.new_product_price);
 	}
 
 	/**
@@ -50,7 +59,35 @@ public class AddNewProductActivity extends Activity {
 		database = DatabaseHelperFactory.getInstance();
 	}
 	
-	public void addProduct(View view) {
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_product_new, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		switch (item.getItemId()) {
+		case R.id.new_product_menu_accept:
+			addProduct();
+			return true;
+		case R.id.new_product_menu_help:
+			intent = new Intent(this, HelpActivity.class);
+			startActivity(intent);
+			return true;
+		case android.R.id.home:
+			intent = new Intent(this, CameraActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	public void addProduct() {
 		String productName = editName.getText().toString();
 
 		int productPrice;

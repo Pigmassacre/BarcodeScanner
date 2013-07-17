@@ -54,10 +54,10 @@
     <string name="database_search_hint">Type to search for a product.</string>
     <string name="database_empty">The database is empty.</string>
     <string name="database_empty_text">The database is currently empty.\nYou can add products by pressing the "Add Product" button on the Action Bar.</string>
-    <string name="database_menu_search">Search Database</string>
-    <string name="database_menu_create">Create Product</string>
     <string name="database_search_result_empty">No product found matching your search query.</string>
     <string name="database_currency">kr</string>
+    <string name="database_menu_search">Search Database</string>
+    <string name="database_menu_create">Create Product</string>
 
     <!-- activity_no_product.xml -->
     <string name="title_activity_no_product"></string>
@@ -68,16 +68,13 @@
 
     <!-- activity_addnew.xml -->
     <string name="title_activity_add_new">New product</string>
-    <string name="new_product_title">Add new product:</string>
-    <string name="new_product_id_title">Product ID - </string>
     <string name="new_product_default_id">N/A</string>
-    <string name="new_product_name_title">Name:</string>
-    <string name="new_product_name_hint">The name of the product.</string>
-    <string name="new_product_price_title">Price:</string>
-    <string name="new_product_price_hint">The price of the product.</string>
-    <string name="new_product_add_button">Add product</string>
+    <string name="new_product_id_hint">ID</string>
+    <string name="new_product_name_hint">Name</string>
+    <string name="new_product_price_hint">Price</string>
     <string name="new_product_toast_done">%1$s has been added.</string>
     <string name="new_product_toast_failed">The price has to be an integer.</string>
+    <string name="new_product_menu_accept">Accept</string>
 
     <!-- activity_edit.xml -->
     <string name="title_activity_edit_product"></string>
