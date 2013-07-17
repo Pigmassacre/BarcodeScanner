@@ -102,7 +102,15 @@
 
     <!-- activity_about.xml -->
     <string name="title_activity_about">About</string>
-    
+    <string name="about_title">WHO MADE THIS APPLICATION?</string>
+    <string name="about_coder_one">Christian Svensson</string>
+    <string name="about_coder_one_nick">Crillesvensson</string>
+    <string name="about_coder_two">Rasmus Letterkrantz</string>
+    <string name="about_coder_two_nick">Rasmus92</string>
+    <string name="about_coder_three">Olle Andreasson</string>
+    <string name="about_coder_three_nick">Oted</string>
+    <string name="about_coder_four">Olof Karlsson</string>
+    <string name="about_coder_four_nick">Pigmassacre</string>
     
     <!-- Standard Menu Strings -->
     <string name="menu_help">Help</string>
