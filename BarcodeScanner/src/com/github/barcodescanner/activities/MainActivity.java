@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
 	private static final String TAG = "MainActivity";
 
 	public static final String SETTINGS = "settingsFile";
-	private boolean showIntroOverlay;
+	private boolean showMainIntroOverlay;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +30,13 @@ public class MainActivity extends Activity {
 		titleView.setText(getString(R.string.main_news_title, getString(R.string.version_number)));
 
 		SharedPreferences settings = getSharedPreferences(SETTINGS, 0);
-		showIntroOverlay = settings.getBoolean("showIntroOverlay", true);
+		showMainIntroOverlay = settings.getBoolean("showMainIntroOverlay", true);
 
 		// Start the MainIntroActivity which is displayed on top of this activity.
-		if (showIntroOverlay) {
+		if (showMainIntroOverlay) {
 			// Save settings to not show MainIntroActivity overlay next time MainActivity is started.
 			SharedPreferences.Editor editor = settings.edit();
-			editor.putBoolean("showIntroOverlay", false);
+			editor.putBoolean("showMainIntroOverlay", false);
 			editor.commit();
 			Intent intent = new Intent(this, MainIntroActivity.class);
 			startActivity(intent);

@@ -20,9 +20,7 @@
 
     <!-- activity_camera.xml -->
     <string name="title_activity_camera"></string>
-    <string name="camera_button_capture">Scan</string>
-    <string name="camera_button_database">Database</string>
-    <string name="camera_button_help">Help</string>
+    <string name="camera_scan_button_description">Scan</string>
 
     <!-- activity_add_manually.xml -->
     <string name="title_activity_add_manually">Create product</string>
@@ -102,7 +100,7 @@
 
     <!-- activity_about.xml -->
     <string name="title_activity_about">About</string>
-    <string name="about_title">WHO MADE THIS APPLICATION?</string>
+    <string name="about_title">APPLICATION AUTHORS</string>
     <string name="about_coder_one">Christian Svensson</string>
     <string name="about_coder_one_nick">Crillesvensson</string>
     <string name="about_coder_two">Rasmus Letterkrantz</string>

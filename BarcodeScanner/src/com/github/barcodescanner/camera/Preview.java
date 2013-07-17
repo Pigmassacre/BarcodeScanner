@@ -1,6 +1,8 @@
 package com.github.barcodescanner.camera;
 
 import java.io.IOException;
+import java.util.List;
+
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
@@ -15,7 +17,7 @@ import android.view.SurfaceView;
 public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 
 	private static final String TAG = "Preview";
-	
+
 	private SurfaceHolder mHolder;
 	private Camera mCamera;
 	private AutoFocusCallback mAutoFocusCallback;
@@ -29,7 +31,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 		// underlying surface is created and destroyed.
 		mHolder = getHolder();
 		mHolder.addCallback(this);
-		
+
 		// deprecated setting, but required on Android versions prior to 3.0
 		mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		surfaceCreated(mHolder);
@@ -48,14 +50,13 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 		}
 	}
 
-	/** Automatically called whenever the preview surface is destroyed.*/
+	/** Automatically called whenever the preview surface is destroyed. */
 	public void surfaceDestroyed(SurfaceHolder holder) {
 
 	}
 
 	/** Automatically called whenever the preview surface changes */
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 		if (mHolder.getSurface() == null) {
 			return;
 		}
@@ -66,15 +67,37 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 			Log.e(TAG, "Exception when stopping camera: " + e);
 		}
 
+		Camera.Parameters parameters = mCamera.getParameters();
+		Camera.Size bestSize = getBestPreviewSize(width, height, parameters);
+		
 		mCamera.setDisplayOrientation(90);
 
 		try {
+			if (bestSize != null) {
+				parameters.setPreviewSize(bestSize.width, bestSize.height);
+				mCamera.setParameters(parameters);
+			}
 			mCamera.setPreviewDisplay(mHolder);
 			mCamera.startPreview();
 			mCamera.autoFocus(this.mAutoFocusCallback);
 		} catch (Exception e) {
 			Log.e(TAG, "Error starting camera preview: " + e.getMessage());
 		}
+	}
+
+	private Camera.Size getBestPreviewSize(int width, int height, Camera.Parameters parameters) {
+		Camera.Size bestSize = null;
+		List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();
+
+		bestSize = sizeList.get(0);
+
+		for (int i = 1; i < sizeList.size(); i++) {
+			if ((sizeList.get(i).width * sizeList.get(i).height) > (bestSize.width * bestSize.height)) {
+				bestSize = sizeList.get(i);
+			}
+		}
+
+		return bestSize;
 	}
 
 	public void setAutoFocusCallback(AutoFocusCallback autoFocusCallback) {
