@@ -88,6 +88,11 @@
             android:name="com.github.barcodescanner.activities.AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        <activity
+            android:name="com.github.barcodescanner.activities.MainIntroActivity"
+            android:label="@string/title_activity_main_intro"
+            android:theme="@style/Theme.Transparent" >
+        </activity>
     </application>
 
 </manifest>

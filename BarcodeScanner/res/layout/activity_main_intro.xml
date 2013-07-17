@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_intro_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainIntroActivity" >
+
+    <ImageView
+        android:id="@+id/intro_database_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="36dp"
+        android:contentDescription="@string/intro_database_arrow"
+        android:src="@drawable/intro_arrow_up_long" />
+
+    <TextView
+        android:id="@+id/intro_database"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/intro_database_arrow"
+        android:layout_toLeftOf="@id/intro_database_arrow"
+        android:text="@string/intro_database"
+        android:textColor="@android:color/holo_blue_light"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/intro_scan_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="36dp"
+        android:layout_toLeftOf="@id/intro_database_arrow"
+        android:contentDescription="@string/intro_scan_arrow"
+        android:src="@drawable/intro_arrow_up_short" />
+
+    <TextView
+        android:id="@+id/intro_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/intro_scan_arrow"
+        android:layout_toLeftOf="@id/intro_scan_arrow"
+        android:text="@string/intro_scan"
+        android:textColor="@android:color/holo_blue_light"
+        android:textStyle="bold" />
+
+</RelativeLayout>

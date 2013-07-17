@@ -23,6 +23,10 @@ public class MainActivity extends Activity {
 		
 		TextView titleView = (TextView) findViewById(R.id.main_news_title);
 		titleView.setText(getString(R.string.main_news_title, getString(R.string.version_number)));
+		
+		// Start the introactivity which is displayed on top of this activity.
+		Intent intent = new Intent(this, MainIntroActivity.class);
+		startActivity(intent);
 	}
 	
 	@Override
