@@ -84,6 +84,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_help" >
         </activity>
+        <activity
+            android:name="com.github.barcodescanner.activities.AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
     </application>
 
 </manifest>

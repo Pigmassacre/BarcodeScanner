@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Barcode Scanner</string>
-     <string name="version_number">ALPHA 0.2</string>
+    <string name="version_number">ALPHA 0.2</string>
 
     <!-- activity_introduction.xml -->
     <string name="title_activity_introduction"></string>
@@ -100,7 +100,12 @@
     <string name="help_database_field_how_to_enter">While in the main menu, touch the database button to enter the database.</string>
     <string name="help_database_field_in_database">The database shows each stored item and their respective barcode id\'s, names and prices. You can search the database by pressing the search button in the action bar. You can also add products manually by pressing the "plus" sign in the action bar.</string>
 
+    <!-- activity_about.xml -->
+    <string name="title_activity_about">About</string>
+    
+    
     <!-- Standard Menu Strings -->
     <string name="menu_help">Help</string>
-    
+    <string name="menu_about">About</string>
+
 </resources>

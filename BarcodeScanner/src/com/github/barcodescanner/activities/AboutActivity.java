@@ -3,20 +3,20 @@ package com.github.barcodescanner.activities;
 import com.github.barcodescanner.R;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-public class HelpActivity extends Activity {
+public class AboutActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_help);
-
+		setContentView(R.layout.activity_about);
+		
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
@@ -24,7 +24,7 @@ public class HelpActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_help, menu);
+		inflater.inflate(R.menu.menu_about, menu);
 		return true;
 	}
 
@@ -32,12 +32,8 @@ public class HelpActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;
 		switch (item.getItemId()) {
-		case R.id.help_menu_about:
-			intent = new Intent(this, AboutActivity.class);
-			startActivity(intent);
-			return true;
 		case android.R.id.home:
-			intent = new Intent(this, MainActivity.class);
+			intent = new Intent(this, HelpActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			return true;
@@ -45,5 +41,5 @@ public class HelpActivity extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
+	
 }
