@@ -18,7 +18,6 @@
     <string name="welcome_button_database">Database</string>
     <string name="welcome_button_help">Help</string>
     <string name="main_menu_scan">Scan Barcode</string>
-    <string name="main_menu_help">Help</string>
 
     <!-- activity_camera.xml -->
     <string name="title_activity_camera"></string>
@@ -57,7 +56,6 @@
     <string name="database_empty_text">The database is currently empty.\nYou can add products by pressing the "Add Product" button on the Action Bar.</string>
     <string name="database_menu_search">Search Database</string>
     <string name="database_menu_create">Create Product</string>
-    <string name="database_menu_help">Help</string>
     <string name="database_search_result_empty">No product found matching your search query.</string>
     <string name="database_currency">kr</string>
 
@@ -106,4 +104,7 @@
     <string name="help_database_field_how_to_enter">While in the main menu, touch the database button to enter the database.</string>
     <string name="help_database_field_in_database">The database shows each stored item and their respective barcode id\'s, names and prices. You can search the database by pressing the search button in the action bar. You can also add products manually by pressing the "plus" sign in the action bar.</string>
 
+    <!-- Standard Menu Strings -->
+    <string name="menu_help">Help</string>
+    
 </resources>

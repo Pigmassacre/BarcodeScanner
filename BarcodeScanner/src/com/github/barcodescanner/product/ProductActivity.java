@@ -1,6 +1,7 @@
 package com.github.barcodescanner.product;
 
 import com.github.barcodescanner.R;
+import com.github.barcodescanner.activities.HelpActivity;
 import com.github.barcodescanner.database.DatabaseActivity;
 import com.github.barcodescanner.database.DatabaseHelper;
 import com.github.barcodescanner.database.DatabaseHelperFactory;
@@ -107,6 +108,10 @@ public class ProductActivity extends Activity {
 			return true;
 		case R.id.product_menu_delete:
 			dialog.show();
+			return true;
+		case R.id.product_menu_help:
+			intent = new Intent(this, HelpActivity.class);
+			startActivity(intent);
 			return true;
 		case android.R.id.home:
 			intent = new Intent(this, DatabaseActivity.class);

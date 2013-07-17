@@ -11,5 +11,9 @@
         android:icon="@drawable/content_discard"
         android:showAsAction="ifRoom"
         android:title="@string/product_menu_delete"/>
+    <item
+        android:id="@+id/product_menu_help"
+        android:icon="@drawable/action_help"
+        android:title="@string/menu_help"/>
 
 </menu>
