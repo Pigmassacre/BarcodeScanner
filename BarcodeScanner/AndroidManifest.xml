@@ -42,56 +42,47 @@
         <activity
             android:name="product.ProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_product"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_product" >
         </activity>
         <activity
             android:name="com.github.barcodescanner.debug.BarcodeViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_barcode_view"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_barcode_view" >
         </activity>
         <activity
             android:name="com.github.barcodescanner.database.DatabaseActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_database"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_database" >
         </activity>
         <activity
             android:name="com.github.barcodescanner.product.ProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_product"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_product" >
         </activity>
         <activity
             android:name="com.github.barcodescanner.product.NoProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_no_product"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_no_product" >
         </activity>
         <activity
             android:name="com.github.barcodescanner.product.AddNewProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_add_new"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_add_new" >
         </activity>
         <activity
             android:name="com.github.barcodescanner.product.AddManuallyActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_add_manually"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_add_manually" >
         </activity>
         <activity
             android:name="com.github.barcodescanner.product.EditProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_edit_product"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_edit_product" >
         </activity>
         <activity
             android:name="com.github.barcodescanner.activities.HelpActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_help"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_help" >
         </activity>
     </application>
 
