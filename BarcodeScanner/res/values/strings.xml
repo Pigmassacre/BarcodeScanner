@@ -38,9 +38,9 @@
 
     <!-- activity_product.xml -->
     <string name="title_activity_product">Product</string>
-    <string name="product_name">Product Name</string>
-    <string name="product_price">Product Price</string>
-    <string name="product_id">Product Id</string>
+    <string name="product_id_title">ID</string>
+    <string name="product_name_title">NAME</string>
+    <string name="product_price_title">PRICE</string>
     <string name="product_menu_edit">Edit</string>
     <string name="product_menu_delete">Delete</string>
     <string name="product_dialog_title">Delete this product?</string>
