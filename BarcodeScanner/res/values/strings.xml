@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Barcode Scanner</string>
-     <string name="version_number">Alpha 0.2</string>
+     <string name="version_number">ALPHA 0.2</string>
 
     <!-- activity_introduction.xml -->
     <string name="title_activity_introduction"></string>

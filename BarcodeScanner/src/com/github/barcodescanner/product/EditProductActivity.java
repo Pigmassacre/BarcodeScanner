@@ -135,7 +135,7 @@ public class EditProductActivity extends Activity {
 			productBundle.putString("productName", productName);
 			productBundle.putInt("productPrice", productPrice);
 			productBundle.putString("productId", productId);
-			System.out.println("RESULT SEND!");
+			
 			Intent intent = new Intent();
 			intent.putExtras(productBundle);
 			setResult(5, intent);

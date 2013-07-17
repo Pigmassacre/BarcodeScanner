@@ -134,7 +134,7 @@ public class ProductActivity extends Activity {
 		if (requestedCode == resultCode) {
 			productBundle = data.getExtras();
 			setupValues();
-			System.out.println("RESULT GOT!");
+			
 			Context context = getApplicationContext();
 			CharSequence text = getString(R.string.edit_product_toast_done, productName);
 			Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
