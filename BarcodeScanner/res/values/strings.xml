@@ -56,6 +56,14 @@
     <string name="database_menu_search">Search Database</string>
     <string name="database_menu_create">Create Product</string>
     <string name="context_menu_delete">Delete Product(s)</string>
+    <string name="context_menu_toast_one_deleted">%1$s has been deleted.</string>
+    <string name="context_menu_toast_several_deleted">%1$s products have been deleted.</string>
+    <string name="context_menu_dialog_title_one">Delete this product?</string>
+    <string name="context_menu_dialog_title_several">Delete %1$s products?</string>
+    <string name="context_menu_dialog_message_one">This will remove the product from the database. This cannot be undone.</string>
+    <string name="context_menu_dialog_message_several">This will remove these products from the database. This cannot be undone.</string>
+    <string name="context_menu_dialog_ok">Delete</string>
+    <string name="context_menu_dialog_cancel">Cancel</string>
 
     <!-- activity_no_product.xml -->
     <string name="title_activity_no_product"></string>

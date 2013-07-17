@@ -13,14 +13,17 @@ import com.github.barcodescanner.product.ProductActivity;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,8 +34,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView.MultiChoiceModeListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -51,6 +52,12 @@ public class DatabaseActivity extends ListActivity {
 	private EditText searchBar;
 	private String searchQuery;
 
+	private AlertDialog dialog;
+	
+	// These variables are a sort of "hack" to allow a dialog to "return" data.
+	private List<Product> productsToDelete;
+	private Integer productCount = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,47 +68,44 @@ public class DatabaseActivity extends ListActivity {
 
 		setupDatabase();
 
+		setupDialogs();
+
 		list = (ListView) findViewById(android.R.id.list);
-		
+
 		list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 		list.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 
-		    @Override
-		    public void onItemCheckedStateChanged(ActionMode mode, int position,
-		                                          long id, boolean checked) {
-		    	
-		    }
+			@Override
+			public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+			}
 
-		    @Override
-		    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-		        switch (item.getItemId()) {
-		            case R.id.context_menu_delete:
-		                mode.finish();
-		                return true;
-		            default:
-		                return false;
-		        }
-		    }
+			@Override
+			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+				switch (item.getItemId()) {
+				case R.id.context_menu_delete:
+					deleteSelectedItems();
+					mode.finish();
+					return true;
+				default:
+					return false;
+				}
+			}
 
-		    @Override
-		    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-		        MenuInflater inflater = mode.getMenuInflater();
-		        inflater.inflate(R.menu.menu_context, menu);
-		        return true;
-		    }
+			@Override
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+				MenuInflater inflater = mode.getMenuInflater();
+				inflater.inflate(R.menu.menu_context, menu);
+				return true;
+			}
 
-		    @Override
-		    public void onDestroyActionMode(ActionMode mode) {
-		        // Here you can make any necessary updates to the activity when
-		        // the CAB is removed. By default, selected items are deselected/unchecked.
-		    }
+			@Override
+			public void onDestroyActionMode(ActionMode mode) {
+			}
 
-		    @Override
-		    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-		        // Here you can perform updates to the CAB due to
-		        // an invalidate() request
-		        return false;
-		    }
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false;
+			}
 		});
 	}
 
@@ -113,10 +117,80 @@ public class DatabaseActivity extends ListActivity {
 		database = DatabaseHelperFactory.getInstance();
 	}
 
+	private void setupDialogs() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setPositiveButton(R.string.context_menu_dialog_ok, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				deleteItems();
+			}
+		});
+		builder.setNegativeButton(R.string.context_menu_dialog_cancel, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// User cancelled the dialog, so we do nothing.
+			}
+		});
+
+		dialog = builder.create();
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		searchQuery = "";
+		updateSpecialAdapter();
+	}
+
+	private void deleteSelectedItems() {
+		productsToDelete = new ArrayList<Product>();
+
+		SparseBooleanArray checkedItems = list.getCheckedItemPositions();
+		if (checkedItems != null) {
+			for (int i = 0; i < checkedItems.size(); i++) {
+				if (checkedItems.valueAt(i) == true) {
+					productsToDelete.add((Product) list.getAdapter().getItem(checkedItems.keyAt(i)));
+					productCount++;
+				}
+			}
+			
+			// Display a different message depending on how many items we are deleting.
+			if (productCount > 1) {
+				dialog.setTitle(getString(R.string.context_menu_dialog_title_several, productCount));
+				dialog.setMessage(getString(R.string.context_menu_dialog_message_several));
+			} else {
+				dialog.setTitle(getString(R.string.context_menu_dialog_title_one));
+				dialog.setMessage(getString(R.string.context_menu_dialog_message_one));
+			}
+			
+			dialog.show();
+		}
+	}
+
+	private void deleteItems() {
+		String id = "";
+		String lastProductName = "";
+
+		for (Product product : productsToDelete) {
+			id = product.getBarcode();
+			lastProductName = product.getName();
+			database.removeProduct(id);
+		}
+
+		// Setup and show a toast to confirm for the user that the
+		// action succeeded.
+		Context context = getApplicationContext();
+		CharSequence text;
+		if (productCount > 1) {
+			text = getString(R.string.context_menu_toast_several_deleted, productCount);
+		} else {
+			text = getString(R.string.context_menu_toast_one_deleted, lastProductName);
+		}
+		Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+		toast.show();
+
+		// We have to remember to clear and reset our "hack" values. If only we could pass and return data from dialogs...
+		productsToDelete.clear();
+		productCount = 0;
 		updateSpecialAdapter();
 	}
 
@@ -135,7 +209,7 @@ public class DatabaseActivity extends ListActivity {
 		searchBar.setHint(R.string.database_search_hint);
 		searchBar.setCompoundDrawablesWithIntrinsicBounds(R.drawable.action_search, 0, 0, 0);
 		searchQuery = "";
-		System.out.println("searchBar: " + searchBar);
+
 		/**
 		 * Enabling Search Filter
 		 * */
@@ -200,7 +274,7 @@ public class DatabaseActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		ViewGroup currentRow = (ViewGroup) getListView().getChildAt(position);
-		
+
 		TextView nameView = (TextView) currentRow.getChildAt(0);
 		TextView priceView = (TextView) currentRow.getChildAt(1);
 		TextView idView = (TextView) currentRow.getChildAt(3);
@@ -244,37 +318,6 @@ public class DatabaseActivity extends ListActivity {
 	static class ViewHolder {
 		TextView name, price, id;
 	}
-	
-	/**
-	 * Given a listView containing product information and the edit and delete
-	 * buttons, this function takes the product information and asks the
-	 * database to remove the corresponding product, and then updates the
-	 * Special Adapter that handles the database view.
-	 * 
-	 * @param listView
-	 *            the view containing the information of the product to be
-	 *            removed
-	 */
-	private void deleteItem(ViewGroup listView) {
-		ViewGroup currentRow = (ViewGroup) listView.getChildAt(0);
-
-		TextView nameView = (TextView) currentRow.getChildAt(0);
-		TextView idView = (TextView) currentRow.getChildAt(3);
-
-		String name = nameView.getText().toString();
-		String id = idView.getText().toString();
-		database.removeProduct(id);
-
-		Context context = getApplicationContext();
-		CharSequence text = getString(R.string.database_toast_deleted, name);
-
-		Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-		toast.show();
-
-		// TODO Add confirmation dialog?
-
-		updateSpecialAdapter();
-	}
 
 	/**
 	 * A special adapter that generates the view that shows the items in the
@@ -298,7 +341,7 @@ public class DatabaseActivity extends ListActivity {
 
 		@Override
 		public Object getItem(int position) {
-			return position;
+			return data.get(position);
 		}
 
 		@Override
@@ -324,7 +367,7 @@ public class DatabaseActivity extends ListActivity {
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			// Bind the data efficiently with the holder.
 			holder.name.setText(data.get(position).getName());
 			holder.price.setText("" + data.get(position).getPrice());
