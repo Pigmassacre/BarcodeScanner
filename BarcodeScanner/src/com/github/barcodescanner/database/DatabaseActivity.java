@@ -21,6 +21,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +30,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AbsListView.MultiChoiceModeListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -58,6 +62,47 @@ public class DatabaseActivity extends ListActivity {
 		setupDatabase();
 
 		list = (ListView) findViewById(android.R.id.list);
+		
+		list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+		list.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+
+		    @Override
+		    public void onItemCheckedStateChanged(ActionMode mode, int position,
+		                                          long id, boolean checked) {
+		    	
+		    }
+
+		    @Override
+		    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+		        switch (item.getItemId()) {
+		            case R.id.context_menu_delete:
+		                mode.finish();
+		                return true;
+		            default:
+		                return false;
+		        }
+		    }
+
+		    @Override
+		    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+		        MenuInflater inflater = mode.getMenuInflater();
+		        inflater.inflate(R.menu.menu_context, menu);
+		        return true;
+		    }
+
+		    @Override
+		    public void onDestroyActionMode(ActionMode mode) {
+		        // Here you can make any necessary updates to the activity when
+		        // the CAB is removed. By default, selected items are deselected/unchecked.
+		    }
+
+		    @Override
+		    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+		        // Here you can perform updates to the CAB due to
+		        // an invalidate() request
+		        return false;
+		    }
+		});
 	}
 
 	/**
@@ -155,7 +200,7 @@ public class DatabaseActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		ViewGroup currentRow = (ViewGroup) getListView().getChildAt(position);
-
+		
 		TextView nameView = (TextView) currentRow.getChildAt(0);
 		TextView priceView = (TextView) currentRow.getChildAt(1);
 		TextView idView = (TextView) currentRow.getChildAt(3);
@@ -199,7 +244,7 @@ public class DatabaseActivity extends ListActivity {
 	static class ViewHolder {
 		TextView name, price, id;
 	}
-
+	
 	/**
 	 * Given a listView containing product information and the edit and delete
 	 * buttons, this function takes the product information and asks the
@@ -236,7 +281,6 @@ public class DatabaseActivity extends ListActivity {
 	 * database.
 	 */
 	private class SpecialAdapter extends BaseAdapter {
-		private int color = 0xFFFFFFFF;
 		private LayoutInflater mInflater;
 
 		// The variable that will hold our text data to be tied to list.
@@ -262,21 +306,6 @@ public class DatabaseActivity extends ListActivity {
 			return position;
 		}
 
-		/**
-		 * Given a view, this function returns a view that shows each item in
-		 * the database in a top-down fashion. Every other item has a darker
-		 * gray background, in order to more easily differentiate between each
-		 * item.
-		 * 
-		 * @param int position
-		 * @param View
-		 *            convertView The view to add all the items to.
-		 * @param ViewGroup
-		 *            parent Not used, but this function overrides another
-		 *            function so it stays
-		 * 
-		 * @return The finished view that shows all the items in the database.
-		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -295,13 +324,11 @@ public class DatabaseActivity extends ListActivity {
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-
+			
 			// Bind the data efficiently with the holder.
 			holder.name.setText(data.get(position).getName());
 			holder.price.setText("" + data.get(position).getPrice());
 			holder.id.setText(data.get(position).getBarcode());
-
-			convertView.setBackgroundColor(color);
 
 			return convertView;
 		}

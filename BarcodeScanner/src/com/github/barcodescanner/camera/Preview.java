@@ -3,6 +3,7 @@ package com.github.barcodescanner.camera;
 import java.io.IOException;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
@@ -14,6 +15,7 @@ import android.view.SurfaceView;
  * A simple wrapper around a Camera and a SurfaceView that renders a centered
  * preview of the Camera to the surface.
  */
+@SuppressLint("ViewConstructor")
 public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 
 	private static final String TAG = "Preview";
@@ -22,7 +24,6 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	private Camera mCamera;
 	private AutoFocusCallback mAutoFocusCallback;
 
-	@SuppressWarnings("deprecation")
 	public Preview(Context context, Camera camera) {
 		super(context);
 		mCamera = camera;
@@ -31,10 +32,6 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 		// underlying surface is created and destroyed.
 		mHolder = getHolder();
 		mHolder.addCallback(this);
-
-		// deprecated setting, but required on Android versions prior to 3.0
-		mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-		surfaceCreated(mHolder);
 	}
 
 	/** Automatically called whenever the preview surface is created */
