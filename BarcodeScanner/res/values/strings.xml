@@ -111,6 +111,8 @@
     <string name="about_coder_three_nick">Oted</string>
     <string name="about_coder_four">Olof Karlsson</string>
     <string name="about_coder_four_nick">Pigmassacre</string>
+    <string name="about_copyright_title">COPYRIGHT INFORMATION</string>
+    <string name="about_copyright">Copyright © 2013. All Rights Reserved.</string>
     
     <!-- Standard Menu Strings -->
     <string name="menu_help">Help</string>

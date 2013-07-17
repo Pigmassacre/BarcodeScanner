@@ -61,7 +61,7 @@
         android:layout_alignTop="@id/about_coder_two"
         android:text="@string/about_coder_two_nick"
         android:textStyle="bold" />
-    
+
     <TextView
         android:id="@+id/about_coder_three"
         android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
         android:layout_alignTop="@id/about_coder_three"
         android:text="@string/about_coder_three_nick"
         android:textStyle="bold" />
-    
+
     <TextView
         android:id="@+id/about_coder_four"
         android:layout_width="wrap_content"
@@ -95,5 +95,34 @@
         android:layout_alignTop="@id/about_coder_four"
         android:text="@string/about_coder_four_nick"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/about_copyright_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/about_coder_four"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:paddingLeft="5dp"
+        android:text="@string/about_copyright_title"
+        android:textColor="@android:color/holo_blue_light"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/about_copyright_title_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/about_copyright_title"
+        android:background="@android:color/holo_blue_light" />
+    
+    <TextView
+        android:id="@+id/about_copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_copyright_title_divider"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/about_copyright" />
 
 </RelativeLayout>
