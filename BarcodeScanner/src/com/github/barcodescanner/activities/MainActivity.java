@@ -37,6 +37,10 @@ public class MainActivity extends Activity {
 			intent = new Intent(this, CameraActivity.class);
 			startActivity(intent);
 			return true;
+		case R.id.main_menu_access_database:
+			intent = new Intent(this, DatabaseActivity.class);
+			startActivity(intent);
+			return true;
 		case R.id.main_menu_help:
 			intent = new Intent(this, HelpActivity.class);
 			startActivity(intent);
@@ -44,21 +48,6 @@ public class MainActivity extends Activity {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-	}
-
-	public void enterCamera(View view) {
-		Intent intent = new Intent(this, CameraActivity.class);
-		startActivity(intent);
-	}
-
-	public void enterHelp(View view) {
-		Intent intent = new Intent(this, HelpActivity.class);
-		startActivity(intent);
-	}
-
-	public void enterDatabase(View view) {
-		Intent intent = new Intent(this, DatabaseActivity.class);
-		startActivity(intent);
 	}
 
 }

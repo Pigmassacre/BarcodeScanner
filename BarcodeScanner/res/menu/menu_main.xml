@@ -6,6 +6,12 @@
         android:icon="@drawable/device_access_camera"
         android:title="@string/main_menu_scan"
         android:showAsAction="ifRoom" />
+    
+    <item
+        android:id="@+id/main_menu_access_database"
+        android:icon="@drawable/device_access_storage"
+        android:title="@string/main_menu_access_database"
+        android:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/main_menu_help"

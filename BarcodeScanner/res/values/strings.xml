@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Barcode Scanner</string>
+     <string name="version_number">Alpha 0.2</string>
 
     <!-- activity_introduction.xml -->
     <string name="title_activity_introduction"></string>
@@ -12,12 +13,10 @@
 
     <!-- activity_main.xml -->
     <string name="title_activity_main"></string>
-    <string name="welcome_title">Barcode Scanner</string>
-    <string name="version_number">Alpha 0.2</string>
-    <string name="welcome_button_start">Scan Barcode</string>
-    <string name="welcome_button_database">Database</string>
-    <string name="welcome_button_help">Help</string>
+    <string name="main_news_title">WHAT\'S NEW IN %1$s?</string>
+    <string name="main_news">Several new features have been implemented:\n  • Adding products manually.\n  • Searching the database.\n  • A look that is more in line with standard Android design guidelines.\n  • Tons of bugfixes!</string>
     <string name="main_menu_scan">Scan Barcode</string>
+    <string name="main_menu_access_database">Access Database</string>
 
     <!-- activity_camera.xml -->
     <string name="title_activity_camera"></string>
