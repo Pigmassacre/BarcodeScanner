@@ -11,11 +11,19 @@
 
     <TextView
         android:id="@+id/help_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="19sp"
-        android:textStyle="bold"
-        android:text="@string/help_title" />
+        android:ems="10"
+        android:paddingLeft="5dp"
+        android:text="@string/help_title"
+        android:textColor="@android:color/holo_blue_light"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/help_title_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/holo_blue_light" />
 
     <TextView
         android:id="@+id/help_field_start_scan_activity"
@@ -23,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/help_field_start_scan_activity" />
-    
+
     <TextView
         android:id="@+id/help_field_how_to_scan"
         android:layout_width="wrap_content"
@@ -37,23 +45,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/help_field_problems" />
-    
+
     <TextView
         android:id="@+id/help_database_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="19sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:text="@string/help_database_title" />
-    
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:paddingLeft="5dp"
+        android:text="@string/help_database_title"
+        android:textColor="@android:color/holo_blue_light"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/help_database_title_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/holo_blue_light" />
+
     <TextView
         android:id="@+id/help_database_field_how_to_enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/help_database_field_how_to_enter" />
-    
+
     <TextView
         android:id="@+id/help_database_field_in_database"
         android:layout_width="wrap_content"
@@ -61,4 +77,18 @@
         android:layout_marginTop="10dp"
         android:text="@string/help_database_field_in_database" />
     
+    <TextView
+        android:id="@+id/help_database_field_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/help_database_field_product" />
+    
+    <TextView
+        android:id="@+id/help_database_field_multiple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/help_database_field_multiple" />
+
 </LinearLayout>

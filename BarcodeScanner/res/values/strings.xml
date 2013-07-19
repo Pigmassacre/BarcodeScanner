@@ -103,9 +103,11 @@
     <string name="help_field_start_scan_activity">In order to scan an barcode, you first have to start the scanning mode. This is done by pressing the scan button in the action bar in the main screen.</string>
     <string name="help_field_how_to_scan">Once there, center the barcode in your screen, and then press the scan button.</string>
     <string name="help_field_problems">Sometimes you might get inconsistent results. Our scanning algorithm is not yet super-amazing, so you\'ll have to make sure that your device is held in landscape mode, as in the normal "bottom" of your device is held by your right hand. You should keep the barcode relatively flat, centered in the screen and not too small.</string>
-    <string name="help_database_title">How to access the database</string>
-    <string name="help_database_field_how_to_enter">While in the main menu, touch the database button to enter the database.</string>
+    <string name="help_database_title">How to access and edit the database</string>
+    <string name="help_database_field_how_to_enter">While in the main menu, press the database button to enter the database.</string>
     <string name="help_database_field_in_database">The database shows each stored item and their respective barcode id\'s, names and prices. You can search the database by pressing the search button in the action bar. You can also add products manually by pressing the "plus" sign in the action bar.</string>
+    <string name="help_database_field_product">Touching a product takes you to a separate product screen, where you can edit and delete that specific product.</string>
+    <string name="help_database_field_multiple">Touching and holding on an item lets you select multiple items. Once you\'ve long-touched one item, a simple touch on any other item will add that item to your selection.\nYou can then delete selected items by touching the Delete Items button in the contexual action bar that pops up over the standard action bar.</string>
 
     <!-- activity_about.xml -->
     <string name="title_activity_about">About</string>
