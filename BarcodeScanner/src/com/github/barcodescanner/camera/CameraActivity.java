@@ -168,8 +168,7 @@ public class CameraActivity extends Activity {
 		/*
 		 * If the database contains a matching product, package that products
 		 * info in a bundle and then send that info to the requested activity.
-		 * else, either let the owner add a new product or show a no product
-		 * activity
+		 * Else, let the owner create a product with the found id.
 		 */
 		productBundle.putString("productId", barcode);
 		if (matchingProduct != null) {
