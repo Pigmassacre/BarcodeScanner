@@ -404,7 +404,13 @@ public class DatabaseActivity extends ListActivity {
 		}
 		List<Product> newList = new ArrayList<Product>();
 		for (Product p : list) {
+			// Filter by name.
 			if (p.getName().toLowerCase(Locale.ENGLISH).contains(s.toLowerCase(Locale.ENGLISH))) {
+				newList.add(p);
+			}
+			
+			// Filter by ID.
+			if (p.getBarcode().toLowerCase(Locale.ENGLISH).contains(s.toLowerCase(Locale.ENGLISH))) {
 				newList.add(p);
 			}
 		}
