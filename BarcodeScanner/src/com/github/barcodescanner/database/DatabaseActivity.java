@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Locale;
 
 import com.github.barcodescanner.R;
+import com.github.barcodescanner.activities.DatabaseIntroActivity;
 import com.github.barcodescanner.activities.HelpActivity;
 import com.github.barcodescanner.activities.MainActivity;
+import com.github.barcodescanner.activities.MainIntroActivity;
 import com.github.barcodescanner.product.AddManuallyActivity;
 import com.github.barcodescanner.product.Product;
 import com.github.barcodescanner.product.ProductActivity;
@@ -18,6 +20,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -45,6 +48,9 @@ public class DatabaseActivity extends ListActivity {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "DatabaseActivity";
+	
+	public static final String SETTINGS = "settingsFile";
+	private boolean showDatabaseIntroOverlay;
 
 	private DatabaseHelper database;
 	private List<Product> items = new ArrayList<Product>();
@@ -141,6 +147,19 @@ public class DatabaseActivity extends ListActivity {
 		super.onResume();
 		searchQuery = "";
 		updateSpecialAdapter();
+		
+		SharedPreferences settings = getSharedPreferences(SETTINGS, 0);
+		showDatabaseIntroOverlay = settings.getBoolean("showDatabaseIntroOverlay", true);
+
+		// Start the DatabaseIntroActivity which is displayed on top of this activity.
+		if (showDatabaseIntroOverlay) {
+			// Save settings to not show DatabaseIntroActivity overlay next time DatabaseActivity is started.
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putBoolean("showDatabaseIntroOverlay", false);
+			editor.commit();
+			Intent intent = new Intent(this, DatabaseIntroActivity.class);
+			startActivity(intent);
+		}
 	}
 
 	private void deleteSelectedItems() {

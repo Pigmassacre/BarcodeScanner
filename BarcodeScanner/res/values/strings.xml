@@ -122,13 +122,20 @@
     <string name="about_coder_four_nick">Pigmassacre</string>
     <string name="about_copyright_title">COPYRIGHT INFORMATION</string>
     <string name="about_copyright">Copyright © 2013. All Rights Reserved.</string>
-    
+
     <!-- activity_main_intro.xml -->
     <string name="title_activity_main_intro"></string>
     <string name="intro_database_arrow">Arrow pointing to database button</string>
     <string name="intro_database">Click here to view and edit the database</string>
-     <string name="intro_scan_arrow">Arrow pointing to scan button</string>
+    <string name="intro_scan_arrow">Arrow pointing to scan button</string>
     <string name="intro_scan">Click here to scan a barcode</string>
+    
+    <!--  activity_database_intro.xml -->
+    <string name="title_activity_database_intro"></string>
+    <string name="intro_product_arrow">Arrow pointing to Create Product button</string>
+    <string name="intro_product">Click here to create a product</string>
+    <string name="intro_search_arrow">Arrow pointing to Search button</string>
+    <string name="intro_search">Click here to search the database</string>
 
     <!-- Standard Menu Strings -->
     <string name="menu_help">Help</string>

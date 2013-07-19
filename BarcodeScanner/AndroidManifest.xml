@@ -93,6 +93,10 @@
             android:label="@string/title_activity_main_intro"
             android:theme="@style/Theme.Transparent" >
         </activity>
+        <activity
+            android:name="com.github.barcodescanner.activities.DatabaseIntroActivity"
+            android:label="@string/title_activity_database_intro" >
+        </activity>
     </application>
 
 </manifest>

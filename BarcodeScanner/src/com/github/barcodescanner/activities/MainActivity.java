@@ -28,7 +28,12 @@ public class MainActivity extends Activity {
 
 		TextView titleView = (TextView) findViewById(R.id.main_news_title);
 		titleView.setText(getString(R.string.main_news_title, getString(R.string.version_number)));
+	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
 		SharedPreferences settings = getSharedPreferences(SETTINGS, 0);
 		showMainIntroOverlay = settings.getBoolean("showMainIntroOverlay", true);
 
@@ -42,7 +47,7 @@ public class MainActivity extends Activity {
 			startActivity(intent);
 		}
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
