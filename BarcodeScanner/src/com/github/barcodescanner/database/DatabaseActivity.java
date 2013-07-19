@@ -127,7 +127,9 @@ public class DatabaseActivity extends ListActivity {
 		});
 		builder.setNegativeButton(R.string.context_menu_dialog_cancel, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				// User cancelled the dialog, so we do nothing.
+				// We have to remember to clear and reset our "hack" values.
+				productsToDelete.clear();
+				productCount = 0;
 			}
 		});
 
