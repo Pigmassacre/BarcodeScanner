@@ -70,6 +70,11 @@
             android:label="@string/title_activity_add_new" >
         </activity>
         <activity
+            android:name="com.github.barcodescanner.product.AddManuallyActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_add_manually" >
+        </activity>
+        <activity
             android:name="com.github.barcodescanner.product.EditProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_edit_product" >

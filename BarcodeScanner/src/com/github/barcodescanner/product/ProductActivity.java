@@ -80,6 +80,7 @@ public class ProductActivity extends Activity {
 
 		builder.setPositiveButton(R.string.product_dialog_ok, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
+				deleteProduct();
 			}
 		});
 		builder.setNegativeButton(R.string.product_dialog_cancel, new DialogInterface.OnClickListener() {
@@ -103,6 +104,7 @@ public class ProductActivity extends Activity {
 		Intent intent;
 		switch (item.getItemId()) {
 		case R.id.product_menu_edit:
+			editProduct();
 			return true;
 		case R.id.product_menu_delete:
 			dialog.show();
@@ -133,4 +135,22 @@ public class ProductActivity extends Activity {
 			toast.show();
 		}
 	}
+	
+	public void editProduct() {
+		    Intent editProductIntent = new Intent(this, EditProductActivity.class);
+		    editProductIntent.putExtras(productBundle);
+		    startActivityForResult(editProductIntent, 5);
+	}
+	
+	public void deleteProduct() {
+		    database.removeProduct(productId);
+		
+		    Context context = getApplicationContext();
+		    CharSequence text = getString(R.string.database_toast_deleted, productName);
+		
+		    Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+		    toast.show();
+		
+		    finish();
+		  }
 }

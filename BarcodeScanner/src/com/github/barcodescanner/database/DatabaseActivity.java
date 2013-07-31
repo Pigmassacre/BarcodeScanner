@@ -8,6 +8,7 @@ import com.github.barcodescanner.R;
 import com.github.barcodescanner.activities.DatabaseIntroActivity;
 import com.github.barcodescanner.activities.HelpActivity;
 import com.github.barcodescanner.activities.MainActivity;
+import com.github.barcodescanner.product.AddManuallyActivity;
 import com.github.barcodescanner.product.Product;
 import com.github.barcodescanner.product.ProductActivity;
 
@@ -21,16 +22,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +54,8 @@ public class DatabaseActivity extends ListActivity {
 	private DatabaseHelper database;
 	private List<Product> items = new ArrayList<Product>();
 	private ListView list;
+	private EditText searchBar;
+	private String searchQuery;
 
 	private AlertDialog dialog;
 	
@@ -135,6 +144,7 @@ public class DatabaseActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		searchQuery = "";
 		updateSpecialAdapter();
 		
 		SharedPreferences settings = getSharedPreferences(SETTINGS, 0);
@@ -208,8 +218,42 @@ public class DatabaseActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_database, menu);
+		setupSearch(menu);
 		return true;
 	}
+	
+	private void setupSearch(Menu menu) {
+		    searchBar = (EditText) menu.findItem(R.id.database_menu_search).getActionView();
+		    searchBar.setEms(10);
+		    searchBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		    searchBar.setHint(R.string.database_search_hint);
+		    searchBar.setCompoundDrawablesWithIntrinsicBounds(R.drawable.action_search, 0, 0, 0);
+		    searchQuery = "";
+		
+		    /**
+		     * Enabling Search Filter
+		     * */
+		    searchBar.addTextChangedListener(new TextWatcher() {
+		
+		      @Override
+		      public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+		        // When a user has changed the text in the search widget, we
+		        // update the search query and the special adapter.
+		        searchQuery = cs.toString();
+		        updateSpecialAdapter();
+		      }
+		
+		      @Override
+		      public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+		        // Not used, but must be implemented.
+		      }
+		
+		      @Override
+		      public void afterTextChanged(Editable arg0) {
+		        // Not used, but must be implemented.
+		      }
+		    });
+		  }
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -222,10 +266,16 @@ public class DatabaseActivity extends ListActivity {
 			(new Handler()).postDelayed(new Runnable() {
 
 				public void run() {
+					searchBar.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+							MotionEvent.ACTION_DOWN, 0, 0, 0));
+					searchBar.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+							MotionEvent.ACTION_UP, 0, 0, 0));
 				}
 			}, 50);
 			return true;
 		case R.id.database_menu_create:
+			intent = new Intent(this, AddManuallyActivity.class);
+			startActivity(intent);
 			return true;
 		case R.id.database_menu_help:
 			intent = new Intent(this, HelpActivity.class);
@@ -276,10 +326,30 @@ public class DatabaseActivity extends ListActivity {
 		} else {
 			emptyView.setText(R.string.database_search_result_empty);
 		}
-
+		
+		items = filterList(database.getProducts(), searchQuery);
 		SpecialAdapter adapter = new SpecialAdapter(this, items);
 		list.setAdapter(adapter);
 	}
+	
+	private List<Product> filterList(List<Product> list, String s) {
+		    if (s.equals("")) {
+		      return list;
+		    }
+		    List<Product> newList = new ArrayList<Product>();
+		    for (Product p : list) {
+		      // Filter by name.
+		      if (p.getName().toLowerCase(Locale.ENGLISH).contains(s.toLowerCase(Locale.ENGLISH))) {
+		        newList.add(p);
+		      }
+		      
+		      // Filter by ID.
+		      if (p.getBarcode().toLowerCase(Locale.ENGLISH).contains(s.toLowerCase(Locale.ENGLISH))) {
+		        newList.add(p);
+		      }
+		    }
+		    return newList;
+		  }
 
 	/**
 	 * A static class that helps the SpecialAdapter generate the database view.
