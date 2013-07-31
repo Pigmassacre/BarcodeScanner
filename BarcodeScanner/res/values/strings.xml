@@ -15,13 +15,6 @@
     <string name="title_activity_camera"></string>
     <string name="camera_scan_button_description">Scan</string>
 
-    <!-- activity_add_manually.xml -->
-    <string name="title_activity_add_manually">Create product</string>
-    <string name="manual_product_id_hint">ID</string>
-    <string name="manual_product_name_hint">Name</string>
-    <string name="manual_product_price_hint">Price</string>
-    <string name="manual_product_menu_accept">Accept</string>
-
     <!-- activity_camera_preview.xml -->
     <string name="title_activity_camera_preview"></string>
     <string name="take_picture">Scan Barcode</string>
@@ -41,12 +34,6 @@
     <!-- activity_database.xml -->
     <string name="title_activity_database">Database</string>
     <string name="database_toast_deleted">%1$s has been removed from the database.</string>
-    <string name="database_search_hint">Type to search for a product.</string>
-    <string name="database_empty">The database is empty.</string>
-    <string name="database_empty_text">The database is currently empty.\nYou can add products by pressing the "Create Product" button on the Action Bar.</string>
-    <string name="database_search_result_empty">No product found matching your search query.</string>
-    <string name="database_currency">kr</string>
-    <string name="database_menu_search">Search Database</string>
     <string name="database_menu_create">Create Product</string>
     <string name="context_menu_delete">Delete Product(s)</string>
     <string name="context_menu_toast_one_deleted">%1$s has been deleted.</string>
