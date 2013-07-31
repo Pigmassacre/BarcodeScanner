@@ -129,10 +129,14 @@
     <string name="intro_product">Click here to create a product</string>
     <string name="intro_search_arrow">Arrow pointing to Search button</string>
     <string name="intro_search">Click here to search the database</string>
+    
+    <!-- activity_page_view -->
+    <string name="title_activity_page_view"></string>
 
     <!-- Standard Menu Strings -->
     <string name="menu_help">Help</string>
     <string name="menu_about">About</string>
+    <string name="picture_slide">Help Slide</string>
     
 
 </resources>

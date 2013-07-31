@@ -1,4 +1,4 @@
-package com.github.barcodescanner.activities;
+	package com.github.barcodescanner.activities;
 
 import com.github.barcodescanner.R;
 
@@ -34,6 +34,10 @@ public class HelpActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.help_menu_about:
 			intent = new Intent(this, AboutActivity.class);
+			startActivity(intent);
+			return true;
+		case R.id.help_slide:
+			intent = new Intent(this,PageViewActivity.class);
 			startActivity(intent);
 			return true;
 		case android.R.id.home:

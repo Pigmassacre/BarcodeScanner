@@ -97,6 +97,10 @@
             android:name="com.github.barcodescanner.activities.DatabaseIntroActivity"
             android:label="@string/title_activity_database_intro" >
         </activity>
+        <activity
+            android:name="com.github.barcodescanner.activities.PageViewActivity"
+            android:label="@string/title_activity_page_view">
+        </activity>
     </application>
 
 </manifest>
