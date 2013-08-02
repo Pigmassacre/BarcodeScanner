@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class BSPageAdapter extends FragmentPagerAdapter {
 	
 	private List<Fragment> fragments;
+	private int fragmentPosition;
 	
 	public BSPageAdapter(FragmentManager fragmentManager, List<Fragment> fragments){
 		super(fragmentManager);
@@ -18,6 +19,7 @@ public class BSPageAdapter extends FragmentPagerAdapter {
 	
 	@Override
 	public Fragment getItem(int positionInFragments){
+		this.fragmentPosition = positionInFragments;
 		return this.fragments.get(positionInFragments);
 	}
 	
@@ -25,5 +27,10 @@ public class BSPageAdapter extends FragmentPagerAdapter {
 	public int getCount(){
 		return this.fragments.size();
 	}
+	
+	@Override
+    public CharSequence getPageTitle (int position) {
+        return "Slideshow";
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.github.barcodescanner.activities;
+		package com.github.barcodescanner.activities;
 
 import com.github.barcodescanner.R;
 
