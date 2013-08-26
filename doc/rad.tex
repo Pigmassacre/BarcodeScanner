@@ -38,13 +38,13 @@
 The Barcode Scanner is an android application that is meant to be used by small-time shop owners, potentially replacing conventional barcode scanners. Since most people own a smartphone, we believe this could also be useful for anyone wanting to keep track of items that carry conventional barcodes, and store them in a database.
 
 \section{Purpose of Application}
-The project aims towards creating an application for scanning and analyzing barcodes with android devices.
+The project aims towards creating an application that can scan barcode and store product information related to each barcode in a database, and provide methods for handling and accessing these products, for Android devices (with a camera) running Android 4.0+.
 
 \section{General Characteristics of Application}
 The application will be an Android application with a graphical user interface. It will take use of the camera to take snapshots. Once the application have an image containing a barcode, it will be analyzed to generate an identification number. This will be compared to a database to result in a product as output.\cite{website:barcodescanner}\cite{website:barcodehowto}
 
 \section{Scope of Application}
-The application will not be guaranteed to work on every android platform, it will be tested on version 4.1.1 and this will be the only version that is guaranteed to work. The application will not necessarily generate standard barcode ids.
+The application will not be guaranteed to work on every android platform, it will be tested on version 4.1.1 and this will be the only version that is guaranteed to work. The application will not necessarily generate standard barcode IDs, as barcode scanning is a very complex problem that we cannot reasonably solve completely in the given time.
 
 \section{Objectives and Success Criteria of the Project}
 
@@ -52,7 +52,7 @@ The application will not be guaranteed to work on every android platform, it wil
   \item The application will be able to take a picture using the back-facing camera on your phone.
   \item The application will then scan that image for a possible barcode.
   \item The application will be able to generate a unique id from that barcode.
-  \item The application will be able when given an id, compare it to the database content, and if the id exists, return a product.
+  \item The application will be able when given an id, compare it to the database content, and if the id exists, return a product. If no product matches the given barcode, the user shall then be given the ability to create a product to match that barcode ID.
 \end{enumerate}
 
 \section{Definitions, Acronyms and Abbreviations}
@@ -84,7 +84,7 @@ The application will not be guaranteed to work on every android platform, it wil
 \section{Non-Functional Requirements}
 
 \subsection{Usability}
-Aim for simplicity! The application should be simple to use, the GUI should be clean and the flow should be straightforward for any user. The scanner should pass tests from users who are not, by any means, an advanced android user.
+Aim for simplicity! The application should be simple to use, the GUI should be clean and follow the standard Android design guidelines\cite{website:androiddesign} and the flow should be straightforward for any user. The scanner should pass tests from users who are not, by any means, an advanced android user.
 
 \subsection{Reliability}
 Each combination of numbers that we generate from each barcode should match the general combination that the barcode represents (as long as the barcode is in the correct EAN format).
@@ -224,7 +224,7 @@ Here follows the use cases for the barcode scanner project:
     \textbf{Includes:} - \\
     \textbf{Participators:} Actual user \\
     \textbf{Normal flow of events} \\
-    \textbf{Flow 1} \\ The user clicks the delete button to the right of a database entry. \\
+    \textbf{Flow 1} \\ The user long-presses the given item she wants to remove and then clicks the "Delete" button in the top-right of the application.. \\
 
     \begin{tabular}{ | l | p{4cm} | p{4cm} |}
     \hline
@@ -270,32 +270,21 @@ Here follows the use cases for the barcode scanner project:
 
 \pagebreak
 
-  \item The user decides whether or not she is a shop owner or a customer. \
+  \item The user edits a product in the database view. \
 
-    \textbf{Summary:} This is how the user decides in what way she intends to use the application. She can choose to be either a shop owner or a customer. \\
+    \textbf{Summary:} This is how the user edits an already existing product in the database. \\
     \textbf{Priority:} High \\
     \textbf{Extends:} - \\
     \textbf{Includes:} - \\
     \textbf{Participators:} Actual user \\
     \textbf{Normal flow of events} \\
-    \textbf{Flow 1} \\ The user clicks the "Shop Owner" button. \\
+    \textbf{Flow 1} \\ The user clicks on an item in the database and is taken to a product view for that item. Here the user clicks the "Edit" button in the actionbar at the top of the screen. \\
 
     \begin{tabular}{ | l | p{4cm} | p{4cm} |}
     \hline
       & Actor & System \\ \hline
-    1.1 & Clicks the "Shop Owner" button & \\ \hline
-    1.2 & & Displays the main menu view which greets the user and acknowledges that she is a shop owner. \\
-    \hline
-    \end{tabular} \\
-
-    \textbf{Alternate flow} \\
-    \textbf{Flow 2} \\ The user clicks the "Customer" button. \\
-
-    \begin{tabular}{ | l | p{4cm} | p{4cm} |}
-    \hline
-      & Actor & System \\ \hline
-    2.1 & Clicks the "Customer" button & \\ \hline
-    2.2 & & Displays the main menu view which greets the user and acknowledges that she is a customer. \\
+    1.1 & Clicks the "Edit" button & \\ \hline
+    1.2 & & Takes the user to a separate edit view where the user can edit whatever aspect of the product she wants. \\
     \hline
     \end{tabular} \\
 

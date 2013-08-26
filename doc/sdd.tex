@@ -63,7 +63,7 @@ The application will strive to keep a MVC way of structuring the code but as the
 CameraActivity's interface will be the main entry for our model functionality. From there the different functionality parts of our model can be called and then presented in other, separated views.
 
 \subsection{Storage}
-Each barcode will be stored in a SQLite database as a product. The barcode itself will be used as the identifier of the product and the price, description and name of the product will be stored along with it. The database will be using a single table and view called Products and ProductsView, respectively.
+Each barcode will be stored in a SQLite database as a product. The barcode data (the ID number below the barcode) itself will be used as the identifier of the product and the price and name of the product will be stored along with it. The database will be using a single table and view called Products and ProductsView, respectively.
 
 \pagebreak
 
@@ -74,14 +74,16 @@ Each barcode will be stored in a SQLite database as a product. The barcode itsel
 The application is decomposed into the following parts:
 
 \begin{itemize}
+  \item{activities}, contains all activities that do not fit in another category.
+  \item{barcode}, contains the classes related our barcode scanning algorithm.
   \item{camera}, contains the CameraActivity and a helper class to the camera.
-  \item{activities}, contains all the other activities.
-  \item{core}, contains all of our logic (the barcode scanning algorithm).
   \item{database}, contains all classes that handle the database.
+  \item{debug}, contains debug classes only used when debugging the application.
+  \item{product}, contains the classes and activites that have to do with the products.
 \end{itemize}
 
 \subsection{Decomposition into subsystems}
-The only subsystems in the application is the DatabaseHandle which writes and reads to/from the database, and the camera which is used to take an image. 
+The only subsystems in the application is the DatabaseHandler which writes and reads to/from the database, and the camera which is used to take an image. 
 
 \subsection{Layering}
 On our highest level we have the views that are displayed on the screen. Following those we have the activities which are controlling what the views are going to display. On our lowest layer we have the core logic (analyzer, DatabaseHelper, etc) which is read by the activities.
@@ -107,7 +109,6 @@ The dependencies that exists are shown in diagram below. All other dependencies 
 
 \section{Concurrency Issues}
 NA. The application is only tied to one mobile unit, meaning that only one instance of the application will run at once and each activity uses distinct, separate instructions for performing a task. The database is also only tied to one mobile unit. All together the application never performs any concurrent task that can interfere with another instruction in a harmful way. 
-
 
 \section{Access control and security}
 NA

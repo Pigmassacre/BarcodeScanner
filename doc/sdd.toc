@@ -10,6 +10,6 @@
 \contentsline {subsection}{\numberline {2.2.2}Decomposition into subsystems}{5}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}Layering}{5}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}Dependency analysis}{5}{subsection.2.2.4}
-\contentsline {section}{\numberline {2.3}Concurrency Issues}{7}{section.2.3}
-\contentsline {section}{\numberline {2.4}Access control and security}{7}{section.2.4}
-\contentsline {section}{\numberline {2.5}Boundary conditions}{7}{section.2.5}
+\contentsline {section}{\numberline {2.3}Concurrency Issues}{8}{section.2.3}
+\contentsline {section}{\numberline {2.4}Access control and security}{8}{section.2.4}
+\contentsline {section}{\numberline {2.5}Boundary conditions}{8}{section.2.5}

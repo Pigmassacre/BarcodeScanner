@@ -2,7 +2,7 @@
 \contentsline {section}{\numberline {1.1}Purpose of Application}{2}{section.1.1}
 \contentsline {section}{\numberline {1.2}General Characteristics of Application}{2}{section.1.2}
 \contentsline {section}{\numberline {1.3}Scope of Application}{2}{section.1.3}
-\contentsline {section}{\numberline {1.4}Objectives and Success Criteria of the Project}{2}{section.1.4}
+\contentsline {section}{\numberline {1.4}Objectives and Success Criteria of the Project}{3}{section.1.4}
 \contentsline {section}{\numberline {1.5}Definitions, Acronyms and Abbreviations}{3}{section.1.5}
 \contentsline {chapter}{\numberline {2}Requirements}{4}{chapter.2}
 \contentsline {section}{\numberline {2.1}Functional Requirements}{4}{section.2.1}
