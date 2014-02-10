@@ -2,8 +2,8 @@ package com.github.barcodescanner.test;
 
 import java.util.List;
 
-import com.github.barcodescanner.core.BCGenerator;
-import com.github.barcodescanner.core.BCLocator;
+import com.github.barcodescanner.barcode.BCGenerator;
+import com.github.barcodescanner.barcode.BCLocator;
 
 import junit.framework.TestCase;
 
@@ -16,7 +16,7 @@ public class BCGeneratorTest extends TestCase {
 	
 	public void BCGeneratorTest(){
 		String imagePath = "/barcode.jpg";
-		bcLocator = new BCLocator(imagePath);
+		bcLocator = new BCLocator(imagePath, false);
 		firstGenerator = new BCGenerator();
 		secondGenerator = new BCGenerator();
 	}
@@ -24,7 +24,7 @@ public class BCGeneratorTest extends TestCase {
 	protected void setUp() throws Exception{
 		super.setUp();
 		String imagePath = "/barcode.jpg";
-		bcLocator = new BCLocator(imagePath);
+		bcLocator = new BCLocator(imagePath, false);
 		firstGenerator = new BCGenerator();
 		secondGenerator = new BCGenerator();
 		

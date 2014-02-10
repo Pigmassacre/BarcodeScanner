@@ -1,6 +1,6 @@
 package com.github.barcodescanner.test;
 
-import com.github.barcodescanner.activities.BarcodeViewActivity;
+import com.github.barcodescanner.debug.BarcodeViewActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -9,7 +9,7 @@ public class BarcodeViewActivityTest extends
 	
 	@SuppressWarnings("deprecation")
 	public BarcodeViewActivityTest(){
-		super("com.github.barcodescanner.activities", BarcodeViewActivity.class);
+		super("com.github.barcodescanner.debug", BarcodeViewActivity.class);
 	}
 	
 	

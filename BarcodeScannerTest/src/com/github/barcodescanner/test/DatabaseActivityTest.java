@@ -1,6 +1,6 @@
 package com.github.barcodescanner.test;
 
-import com.github.barcodescanner.activities.DatabaseActivity;
+import com.github.barcodescanner.database.DatabaseActivity;
 
 import android.test.ActivityInstrumentationTestCase2;
 

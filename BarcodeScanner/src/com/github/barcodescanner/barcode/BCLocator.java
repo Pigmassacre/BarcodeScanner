@@ -1,9 +1,11 @@
 package com.github.barcodescanner.barcode;
 
 import java.io.File;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.github.barcodescanner.barcode.filter.NoiceReducer;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -34,13 +36,17 @@ public class BCLocator {
 	 * 
 	 * @param path
 	 */
-	public BCLocator(String path) {
+	public BCLocator(String path, Boolean medianFilter) {
 		Log.d("Output", path);
-		File pathFile = Environment.getExternalStorageDirectory();
 
-		Bitmap temp = BitmapFactory.decodeFile(pathFile.toString() + path);
+		Bitmap temp = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + path);		
 		
-		bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(), null, temp.hasAlpha());		
+		bitmap = temp.copy(temp.getConfig(), true);
+		
+		if(medianFilter){
+			NoiceReducer nr = new NoiceReducer(bitmap);
+			nr.ApplyMedianFilter();
+		}
 		scanLines(30);
 	}
 	

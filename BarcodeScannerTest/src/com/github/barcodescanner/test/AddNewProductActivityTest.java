@@ -1,15 +1,15 @@
 package com.github.barcodescanner.test;
 
-import com.github.barcodescanner.activities.AddNewActivity;
+import com.github.barcodescanner.product.AddNewProductActivity;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class AddNewActivityTest extends ActivityInstrumentationTestCase2<AddNewActivity> {
+public class AddNewProductActivityTest extends ActivityInstrumentationTestCase2<AddNewProductActivity> {
 	
-	private AddNewActivity addNew;
+	private AddNewProductActivity addNew;
 	private TextView titleText;
 	private TextView productTitle;
 	private TextView nameTitle;
@@ -20,8 +20,8 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<AddNewA
 	
 	
 	@SuppressWarnings("deprecation")
-	public AddNewActivityTest(){
-		super("com.github.barcodescanner.activities", AddNewActivity.class);
+	public AddNewProductActivityTest(){
+		super("com.github.barcodescanner.activities", AddNewProductActivity.class);
 	}
 	
 	
@@ -33,11 +33,11 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<AddNewA
 		setActivityIntent(addEvent);
 		
 		addNew = getActivity();
-		titleText = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_title);
-		productTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_id_title);
-		nameTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_name_title);
-		priceTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_title_price);
-		addButton = (Button) addNew.findViewById(com.github.barcodescanner.R.id.new_product_add_button);
+		titleText = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_name);
+		productTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_id);
+		nameTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_name);
+		priceTitle = (TextView) addNew.findViewById(com.github.barcodescanner.R.id.new_product_price);
+		addButton = (Button) addNew.findViewById(com.github.barcodescanner.R.id.new_product_menu_accept);
 	}
 	
 	public void testTitleText(){

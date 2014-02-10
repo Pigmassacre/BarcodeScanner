@@ -3,9 +3,8 @@ package com.github.barcodescanner.test;
 import java.util.List;
 
 import junit.framework.TestCase;
-import android.graphics.Bitmap;
 
-import com.github.barcodescanner.core.*;
+import com.github.barcodescanner.barcode.*;
 
 
 public class BCLocatorTest extends TestCase {
@@ -13,11 +12,7 @@ public class BCLocatorTest extends TestCase {
 	private BCLocator firstLocator;
 	private BCLocator secondLocator;
 	private String imagePath;
-	private boolean foundBC;
-	private int bcWidth;
-	private int bcHeight;
-	private Bitmap bcBitmap;
-	private List<List<Integer>> bcSegment;
+
 	
 	
 	
@@ -25,8 +20,8 @@ public class BCLocatorTest extends TestCase {
 	
 	public BCLocatorTest(){
 		imagePath = "/barcode.jpg";
-		firstLocator = new BCLocator(imagePath);
-		secondLocator = new BCLocator(imagePath);
+		firstLocator = new BCLocator(imagePath, false);
+		secondLocator = new BCLocator(imagePath, false);
 	}
 	
 	public void testFoundBarcode(){
@@ -50,5 +45,15 @@ public class BCLocatorTest extends TestCase {
 				assertEquals(firstInnerList.get(j), secondList.get(i).get(j));
 			}
 		}
+	}
+	
+	public void testMedianFilter(){
+		System.out.println("STARTING THE MEDIAN TEST");
+		imagePath = "/ean13_barcode_sample.jpg";
+		BCLocator bcLocator = new BCLocator(imagePath, true);
+		BCGenerator bcGenerator = new BCGenerator();
+		List<Integer> tempList = bcGenerator .generate(bcLocator.getSegment());
+		String tempBarcode = bcGenerator.normalize(tempList);
+		System.out.println("THE BARCODE: " + tempBarcode);
 	}
 }
